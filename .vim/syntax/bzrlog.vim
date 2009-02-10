@@ -1,0 +1,1 @@
+/home/chris/downloads/bzr-vim/syntax/bzrlog.vim

@@ -1,0 +1,1 @@
+/home/chris/downloads/bzr-vim/ftplugin/bzrlog.vim

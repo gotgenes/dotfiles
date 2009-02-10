@@ -1,0 +1,22 @@
+*vim-java-complete*
+
+
+Java Code Completion
+********************
+
+Java code completion uses the standard Vim code completion mechanism
+(|vim-code-completion|) like so:
+
+>
+
+   System.o<Ctrl-X><Ctrl-U>
+   System.out.pri<Ctrl-X><Ctrl-U>
+
+<
+
+
+Screenshot of completion in action:
+
+[image]
+
+vim:ft=eclimhelp
