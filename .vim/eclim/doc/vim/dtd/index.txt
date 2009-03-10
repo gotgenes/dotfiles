@@ -1,9 +1,0 @@
-*vim-dtd-index*
-
-
-Dtd
-***
-
-- Css Validation (|vim-css-validate|)
-
-vim:ft=eclimhelp

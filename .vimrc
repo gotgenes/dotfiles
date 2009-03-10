@@ -1,6 +1,6 @@
 " Easy access keystrokes for editing your Vim configuration
-:nmap ,s :source $MYVIMRC<CR>
-:nmap ,v :tabe $MYVIMRC<CR>
+:nmap <Leader>s :source $MYVIMRC<CR>
+:nmap <Leader>v :tabe $MYVIMRC<CR>
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
@@ -50,7 +50,10 @@ if has("autocmd")
   autocmd FileType python,perl,c setlocal tags+=tags;$HOME
   autocmd FileType python,perl,c,cpp,sh,vim setlocal number expandtab smarttab softtabstop=4 shiftwidth=4 textwidth=72
   " Use my Python template if this is a new Python file
-  autocmd FileType python nmap ,pyt :0r ~/.vim/templates/python.py<CR>
+  autocmd FileType python nmap <Leader>pyt :0r ~/.vim/templates/python.py<CR>
+  if strlen(globpath(&rtp, '$HOME/.vim/plugin/pydoc.vim'))
+    autocmd FileType python source $HOME/.vim/plugin/pydoc.vim
+  endif
   " this removes trailing extra whitespace from end of lines
   autocmd BufWritePre *.py,*.pl,*.c,*.cpp,*.h,*.tex,*.sh call DeleteTrailingWhitespace()
   " Python cTags
@@ -77,7 +80,7 @@ endif
 inoremap <C-space> <C-x><C-o>
 
 " Remap SnippetsEmu key from tab to Shift-Tab
-let g:snippetsEmu_key = "<S-Tab>"
+"let g:snippetsEmu_key = "<S-Tab>"
 
 
 " Placed in here for LaTeX Suite
@@ -102,4 +105,7 @@ if strlen(globpath(&rtp, 'colors/peaksea.vim'))
 endif
 
 " I want to quickly switch to text settings sometimes.
-nmap ,ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
+nmap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
+
+" UTL browser configuration
+let g:utl_rc_app_browser = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u' &"
