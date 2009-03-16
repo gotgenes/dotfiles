@@ -1,6 +1,6 @@
 " Easy access keystrokes for editing your Vim configuration
-:nmap <Leader>s :source $MYVIMRC<CR>
-:nmap <Leader>v :tabe $MYVIMRC<CR>
+:nmap <Leader>svrc :source $MYVIMRC<CR>
+:nmap <Leader>vrc :tabe $MYVIMRC<CR>
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
@@ -48,7 +48,8 @@ if has("autocmd")
   autocmd BufEnter * lcd %:p:h
   " This setting looks for tags files, recursively upwards
   autocmd FileType python,perl,c setlocal tags+=tags;$HOME
-  autocmd FileType python,perl,c,cpp,sh,vim setlocal number expandtab smarttab softtabstop=4 shiftwidth=4 textwidth=72
+  autocmd FileType python,perl,c,cpp,sh setlocal number expandtab smarttab softtabstop=4 shiftwidth=4 textwidth=72
+  autocmd FileType vim setlocal expandtab smarttab softtabstop=2 shiftwidth=2
   " Use my Python template if this is a new Python file
   autocmd FileType python nmap <Leader>pyt :0r ~/.vim/templates/python.py<CR>
   if strlen(globpath(&rtp, '$HOME/.vim/plugin/pydoc.vim'))
@@ -80,7 +81,7 @@ endif
 inoremap <C-space> <C-x><C-o>
 
 " Remap SnippetsEmu key from tab to Shift-Tab
-"let g:snippetsEmu_key = "<S-Tab>"
+let g:snippetsEmu_key = "<S-Tab>"
 
 
 " Placed in here for LaTeX Suite
