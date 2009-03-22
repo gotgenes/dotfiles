@@ -1,0 +1,13 @@
+*.a
+*.o
+*.py[co]
+*.so
+*.sw[nop]
+*~
+.#*
+[#]*#
+*.aux
+*.log
+*.blg
+*.bbl
+*.dvi

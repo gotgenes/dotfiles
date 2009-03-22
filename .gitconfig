@@ -1,0 +1,12 @@
+[user]
+	email = chris.lasher@gmail.com
+	name = Chris Lasher
+[color]
+	ui = auto
+[core]
+	excludesfile = /home/chris/.gitignore
+[github]
+	user = gotgenes
+	token = fef2f9ef106f8c88bab039b4c5dcb4b1
+[alias]
+	ci = commit
