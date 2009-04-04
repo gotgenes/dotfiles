@@ -56,6 +56,12 @@ alias llar='ls -lAR'
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+    # I hate tilde expansion, so I'm overriding the stupid expand
+    # function for it
+    _expand()
+    {
+        return 0
+    }
 fi
 
 # append history, don't overwrite it--very handy when working with multiple
