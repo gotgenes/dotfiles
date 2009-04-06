@@ -7,13 +7,12 @@
 while getopts "f" OPTION; do
     case $OPTION in
         "f" )
-            echo "Found option f"
             flags="-sf"
         ;;
     esac
 done
 
-if [[ ! -n "$FLAGS" ]]; then
+if [[ ! -n "$flags" ]]; then
     flags="-s"
 fi
 
