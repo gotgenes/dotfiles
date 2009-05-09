@@ -49,6 +49,7 @@ if has("autocmd")
   " This setting looks for tags files, recursively upwards
   autocmd FileType python,perl,c setlocal tags+=tags;$HOME
   autocmd FileType python,perl,c,cpp,sh setlocal number expandtab smarttab softtabstop=4 shiftwidth=4 textwidth=72
+  autocmd FileType rst setlocal expandtab smarttab softtabstop=4 shiftwidth=4 textwidth=78 spell smartindent
   autocmd FileType vim setlocal expandtab smarttab softtabstop=2 shiftwidth=2
   " Use my Python template if this is a new Python file
   autocmd FileType python nmap <Leader>pyt :0r ~/.vim/templates/python.py<CR>
@@ -56,7 +57,7 @@ if has("autocmd")
     autocmd FileType python source $HOME/.vim/plugin/pydoc.vim
   endif
   " this removes trailing extra whitespace from end of lines
-  autocmd BufWritePre *.py,*.pl,*.c,*.cpp,*.h,*.tex,*.sh call DeleteTrailingWhitespace()
+  autocmd BufWritePre *.py,*.pl,*.c,*.cpp,*.h,*.tex,*.sh,*.rst call DeleteTrailingWhitespace()
   " Python cTags
   " Make sure to have run
   " ctags -R -f ~/.vim/tags/python.ctags /usr/lib/pythonX.Y/
