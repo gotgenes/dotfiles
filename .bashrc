@@ -122,7 +122,7 @@ bind -m vi-insert "\C-\e[C":backward-word
 bind -m vi-insert "\C-\e[D":forward-word
 
 # I have custom Python modules installed in the following path
-export PYTHONPATH="$HOME/lib/python"
+export PYTHONPATH=".:$HOME/lib/python"
 
 # Custom executables
 export PATH="$HOME/bin:$PATH"
