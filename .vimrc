@@ -111,3 +111,6 @@ nmap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
 
 " UTL browser configuration
 let g:utl_rc_app_browser = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u' &"
+
+" LaTeX suite default output
+let g:Tex_DefaultTargetFormat = "pdf"
