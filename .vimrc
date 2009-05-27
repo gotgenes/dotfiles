@@ -69,6 +69,7 @@ if has("autocmd")
   autocmd FileType tex setlocal expandtab smarttab softtabstop=4 shiftwidth=4 tabstop=4 tw=78 spell spelllang=en
   autocmd FileType html,xml,css setlocal autoindent expandtab smarttab softtabstop=2 tabstop=2 shiftwidth=2 tw=78
   autocmd FileType dot setlocal tabstop=4 shiftwidth=4 tw=78 autoindent
+  autocmd FileType wikipedia setlocal linebreak
 
   " If you prefer the Omni-Completion tip window to close when a selection is
   " made, these lines close it on movement in insert mode or when leaving
