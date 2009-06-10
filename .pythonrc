@@ -42,6 +42,3 @@ if os.path.isfile(history_path):
     readline.read_history_file(history_path)
 atexit.register(lambda x=history_path: readline.write_history_file(x))
 
-# tidy up the main namespace a bit
-del atexit
-del os.path
