@@ -1,0 +1,9 @@
+[ui]
+username = Chris Lasher <chris.lasher@gmail.com>
+editor=gvim
+
+[extensions]
+hgext.gpg=
+
+[gpg]
+key=D7981A71
