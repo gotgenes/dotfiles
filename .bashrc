@@ -124,6 +124,9 @@ bind -m vi-insert "\C-\e[D":forward-word
 # I have custom Python modules installed in the following path
 export PYTHONPATH=".:$HOME/lib/python"
 
+# Custom Perl modules installed in the following
+export PERL5LIB="$HOME/lib/perl5"
+
 # Custom executables
 export PATH="$HOME/bin:$PATH"
 
