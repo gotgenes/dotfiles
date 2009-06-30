@@ -30,7 +30,7 @@ pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
 # set every new windows hardstatus line to something descriptive
 # defhstatus "screen: ^En (^Et)"
 
-defscrollback 1000
+defscrollback 5000
 
 # don't kill window after the process died
 # zombie "^["
