@@ -128,7 +128,7 @@ export PYTHONPATH=".:$HOME/lib/python"
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
 # Custom Perl modules installed in the following
-export PERL5LIB="$HOME/lib/perl5"
+export PERL5LIB="$HOME/lib/perl5:$HOME/lib/murali_modules"
 
 # Custom executables
 export PATH="$HOME/bin:$PATH"
