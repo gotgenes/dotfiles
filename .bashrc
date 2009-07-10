@@ -134,7 +134,7 @@ export PERL5LIB="$HOME/lib/perl5:$HOME/lib/murali_modules"
 export PATH="$HOME/bin:$PATH"
 
 # Custom man pages
-export MANPATH="$HOME/share/man"
+export MANPATH="$MANPATH:$HOME/share/man"
 
 # Amazon Web Services shizzle
 export EC2_PRIVATE_KEY=$HOME/.ec2/pk-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
