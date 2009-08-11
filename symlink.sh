@@ -18,7 +18,7 @@ fi
 
 for file in `ls -A`; do
     case $file in
-        ".bzr" | "symlink.sh" )
+        ".bzr" | "symlink.sh" | ".bzrignore")
             echo "Skipping $file"
         ;;
 	* )
