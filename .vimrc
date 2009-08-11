@@ -69,7 +69,7 @@ if has("autocmd")
   autocmd FileType tex setlocal expandtab smarttab softtabstop=4 shiftwidth=4 tabstop=4 tw=78 spell spelllang=en
   autocmd FileType html,xml,css setlocal autoindent expandtab smarttab softtabstop=2 tabstop=2 shiftwidth=2 tw=78
   autocmd FileType dot setlocal tabstop=4 shiftwidth=4 tw=78 autoindent
-  autocmd FileType wikipedia setlocal linebreak
+  autocmd FileType Wikipedia setlocal linebreak
 
   " If you prefer the Omni-Completion tip window to close when a selection is
   " made, these lines close it on movement in insert mode or when leaving
@@ -102,10 +102,13 @@ nnoremap <F2> <C-W>]<C-W>T
 " filetype; this keeps it from bitching.
 let NERDShutUp=1
 
-" I like the peaksea theme.
+" Choose my favorite color scheme
 if strlen(globpath(&rtp, 'colors/peaksea.vim'))
     colorscheme peaksea
 endif
+
+" Uncomment below to get a dark background.
+set background=dark
 
 " I want to quickly switch to text settings sometimes.
 nmap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
