@@ -140,3 +140,11 @@ export MANPATH="$MANPATH:$HOME/share/man"
 export EC2_PRIVATE_KEY=$HOME/.ec2/pk-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
 export EC2_CERT=$HOME/.ec2/cert-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
 export JAVA_HOME=/usr/lib/jvm/java-6-openjdk/
+
+# virtualenvwrapper customization
+export WORKON_HOME=$HOME/.virtualenvs
+source $HOME/.virtualenvwrapper_bashrc
+
+# let pip know about virtualenvwrapper
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+
