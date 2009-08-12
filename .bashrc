@@ -121,20 +121,17 @@ bind -m vi-insert "\C-\e[C":backward-word
 # ^f forward a word
 bind -m vi-insert "\C-\e[D":forward-word
 
-# I have custom Python modules installed in the following path
-export PYTHONPATH=".:$HOME/lib/python"
-
 # Custom Python interactive session configuration.
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
 # Custom Perl modules installed in the following
-export PERL5LIB="$HOME/lib/perl5:$HOME/lib/murali_modules"
+export PERL5LIB="$HOME/.local/lib/perl5:$HOME/.local/lib/murali_modules"
 
 # Custom executables
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Custom man pages
-export MANPATH="$MANPATH:$HOME/share/man"
+export MANPATH="$HOME/.local/share/man:$MANPATH"
 
 # Amazon Web Services shizzle
 export EC2_PRIVATE_KEY=$HOME/.ec2/pk-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
