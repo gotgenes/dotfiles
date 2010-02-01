@@ -125,7 +125,7 @@ bind -m vi-insert "\C-\e[D":forward-word
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
 # Custom Perl modules installed in the following
-export PERL5LIB="$HOME/.local/lib/perl5:$HOME/.local/lib/murali_modules"
+export PERL5LIB="$HOME/.local/lib/perl5:$HOME/.local/lib/murali_perl_modules"
 
 # Custom executables
 export PATH="$HOME/.local/bin:$PATH"
