@@ -77,7 +77,7 @@ export HISTSIZE=2500
 # Locally installed LaTeX junk goes in your ~/texmf directory
 export TEXMFHOME=$HOME/texmf
 
-export LC_TIME="en_DK.UTF8"
+export LC_TIME="en_DK.UTF-8"
 
 # I like to use Vim as my default editor. Replace with your editor of
 # preference.
