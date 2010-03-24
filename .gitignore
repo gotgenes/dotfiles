@@ -3,3 +3,11 @@
 *.pyo
 *.o
 tags
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+*.pdf
+*.snm
+*.toc
