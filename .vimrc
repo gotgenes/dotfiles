@@ -118,6 +118,9 @@ let g:utl_rc_app_browser = "silent !firefox -remote 'ping()' && firefox -remote 
 
 " LaTeX suite default output
 let g:Tex_DefaultTargetFormat = "pdf"
+let g:Tex_ViewRule_dvi = "evince"
+let g:Tex_ViewRule_pdf = "evince"
+let g:Tex_ViewRule_ps = "evince"
 
 " Vim R plugin
 let g:vimrplugin_term_cmd = "gnome-terminal -t R -x"
