@@ -1,10 +1,12 @@
 [ui]
 username = Chris Lasher <chris.lasher@gmail.com>
-editor=gvim
 ssh = ssh -C
 
 [extensions]
+hgext.color=
 hgext.gpg=
+hgext.hgk=
+hgext.rebase=
 
 [gpg]
 key=D7981A71
