@@ -1,7 +1,3 @@
-#
-# Example of a user's .screenrc file
-#
-
 # This is how one can set a reattach password:
 # password ODSJQf.4IJN7E    # "1234"
 
@@ -30,7 +26,7 @@ pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
 # set every new windows hardstatus line to something descriptive
 # defhstatus "screen: ^En (^Et)"
 
-defscrollback 5000
+defscrollback 50000
 
 # don't kill window after the process died
 # zombie "^["
