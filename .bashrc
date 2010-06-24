@@ -5,9 +5,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=erasedups
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -64,14 +61,21 @@ if [ -f /etc/bash_completion ]; then
     }
 fi
 
-# append history, don't overwrite it--very handy when working with multiple
-# shells, as closing the last one won't blow away the history of the previous
-# session.
+# Don't put duplicate lines in the history. See bash(1) for more
+# options.
+export HISTCONTROL=erasedups
+
+# Append history, don't overwrite it--very handy when working with
+# multiple shells, as closing the last one won't blow away the history
+# of the previous session.
 shopt -s histappend
-# set the number of lines to be recorded in the history; monitor your activity
-# and adjust periodically; right now this seems no get me enough for a month
-# of history provided the 'histcontrol=ignoredups' is set (see above) and more
-# if 'histcontrol=erasedups' is set.
+
+# Set the number of lines to be recorded in the history; monitor your
+# activity and adjust periodically.
+#
+# Right now this seems to get me enough for a month of history provided
+# the 'histcontrol=ignoredups' is set (see above) and more if
+# 'histcontrol=erasedups' is set.
 export HISTSIZE=2500
 
 # Locally installed LaTeX junk goes in your ~/texmf directory
