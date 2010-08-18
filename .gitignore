@@ -5,6 +5,7 @@
 tags
 *.aux
 *.bbl
+*-blx.bib
 *.blg
 *.dvi
 *.log
