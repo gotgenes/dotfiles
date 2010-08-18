@@ -9,6 +9,7 @@ tags
 *.blg
 *.dvi
 *.log
+*.nav
 *.pdf
 *.snm
 *.toc
