@@ -11,3 +11,6 @@ set keymap vi
 
 "\e[C": forward-char
 "\e[D": backward-char
+
+# Disable expanding ~ into home directory
+set expand-tilde off

@@ -51,15 +51,15 @@ alias llar='ls -lAR'
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-    # I hate tilde expansion, so I'm overriding the stupid expand
-    # function for it
-    _expand()
-    {
-        return 0
-    }
-fi
+#if [ -f /etc/bash_completion ]; then
+    #. /etc/bash_completion
+    ## I hate tilde expansion, so I'm overriding the stupid expand
+    ## function for it
+    #_expand()
+    #{
+        #return 0
+    #}
+#fi
 
 # Don't put duplicate lines in the history. See bash(1) for more
 # options.
