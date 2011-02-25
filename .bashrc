@@ -149,7 +149,9 @@ export JAVA_HOME=/usr/lib/jvm/java-6-openjdk/
 
 # virtualenvwrapper customization
 export WORKON_HOME=$HOME/.virtualenvs
-source $HOME/.virtualenvwrapper_bashrc
+if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
+    source $HOME/.local/bin/virtualenvwrapper.sh
+fi
 
 # let pip know about virtualenvwrapper
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
