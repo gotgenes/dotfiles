@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-"""
+# Copyright (c) 2011 Christopher D. Lasher
+#
+# This software is released under the MIT License. Please see
+# LICENSE.txt for details.
 
-"""
 
-__author__ = 'Chris Lasher'
-__email__ = 'chris DOT lasher <AT> gmail DOT com'
-
+"""Description."""
 
 import sys
 
@@ -18,3 +18,4 @@ def main(argv):
 
 if __name__ == '__main__':
     main(sys.argv[1:])
+
