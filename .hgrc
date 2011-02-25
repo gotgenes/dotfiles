@@ -5,9 +5,10 @@ ssh = ssh -C
 [extensions]
 hgext.color=
 hgext.gpg=
-hgext.hgk=
-hgext.rebase=
 hgext.graphlog=
+hgext.hgk=
+hgext.mq=
+hgext.rebase=
 
 [gpg]
 key=D7981A71
