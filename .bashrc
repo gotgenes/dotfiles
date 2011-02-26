@@ -31,11 +31,15 @@ esac
 #fi
 
 # enable color support of ls and also add handy aliases
-if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='ls --color=auto --format=vertical'
-    #alias vdir='ls --color=auto --format=long'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 # some more ls aliases
@@ -54,38 +58,33 @@ alias llar='ls -lAR'
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
     # I hate tilde expansion, so I'm overriding the stupid expand
-    # function for it
-    # NOTE: This first one doesn't seem to be necessary anymore.
-    #_expand()
-    #{
-        #return 0
-    #}
+    # functions for it.
+    _expand()
+    {
+        return 0
+    }
     __expand_tilde_by_ref()
     {
         return 0
     }
 fi
 
-# Don't put duplicate lines in the history. See bash(1) for more
-# options.
-export HISTCONTROL=erasedups
+# Remove duplicate lines in the history, and ignore any lines that begin
+# with a space. See bash(1) for more options.
+export HISTCONTROL=erasedups:ignorespace
 
 # Append history, don't overwrite it--very handy when working with
 # multiple shells, as closing the last one won't blow away the history
 # of the previous session.
 shopt -s histappend
 
-# Set the number of lines to be recorded in the history; monitor your
-# activity and adjust periodically.
-#
-# Right now this seems to get me enough for a month of history provided
-# the 'histcontrol=ignoredups' is set (see above) and more if
-# 'histcontrol=erasedups' is set.
-export HISTSIZE=2500
+# Set the number of lines to be recorded in the history
+export HISTSIZE=5000
 
 # Locally installed LaTeX junk goes in your ~/texmf directory
 export TEXMFHOME=$HOME/texmf
 
+# I prefer 24-hour clocks and YYYY-MM-DD date format.
 export LC_TIME="en_DK.UTF-8"
 
 # I like to use Vim as my default editor. Replace with your editor of
