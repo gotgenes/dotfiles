@@ -52,8 +52,8 @@ if has("autocmd")
   autocmd FileType vim setlocal expandtab smarttab softtabstop=2 shiftwidth=2
   " Use my Python template if this is a new Python file
   autocmd FileType python nmap <Leader>pyt :0r ~/.vim/templates/python.py<CR>
-  if strlen(globpath(&rtp, '$HOME/.vim/plugin/pydoc.vim'))
-    autocmd FileType python source $HOME/.vim/plugin/pydoc.vim
+  if filereadable($HOME . '/.local/ropevim.vim')
+    autocmd FileType python source $HOME/.local/ropevim.vim
   endif
   " this removes trailing extra whitespace from end of lines
   autocmd BufWritePre *.py,*.pl,*.c,*.cpp,*.h,*.tex,*.sh,*.rst call DeleteTrailingWhitespace()
@@ -86,12 +86,6 @@ inoremap <C-space> <C-x><C-o>
 let g:snippetsEmu_key = "<S-Tab>"
 
 
-" Placed in here for LaTeX Suite
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to alway generate a file-name.
-set grepprg=grep\ -nH\ $*
-
 " Set our Django version
 let django_version = 1
 
@@ -116,6 +110,12 @@ nmap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
 " UTL browser configuration
 let g:utl_rc_app_browser = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u' &"
 
+" Placed in here for LaTeX Suite
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to alway generate a file-name.
+set grepprg=grep\ -nH\ $*
+
 " LaTeX suite default output
 let g:Tex_DefaultTargetFormat = "pdf"
 let g:Tex_ViewRule_dvi = "evince"
@@ -124,3 +124,4 @@ let g:Tex_ViewRule_ps = "evince"
 
 " Vim R plugin
 let g:vimrplugin_term_cmd = "gnome-terminal -t R -x"
+
