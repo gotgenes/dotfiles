@@ -90,7 +90,7 @@ vmap ]f   :call PythonDec("function", 1)<CR>
 nmenu <silent> &Python.Update\ IM-Python\ Menu 
     \:call UpdateMenu()<CR>
 nmenu &Python.-Sep1- :
-nmenu <silent> &Python.Beginning\ of\ Block<Tab>[t 
+nmenu <silent> &Python.Beginning\ of\ Block<Tab>]t 
     \]t
 nmenu <silent> &Python.End\ of\ Block<Tab>]e 
     \]e
