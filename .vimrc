@@ -1,6 +1,8 @@
+" Set the leader
+let mapleader = ','
 " Easy access keystrokes for editing your Vim configuration
 :nmap <Leader>svrc :source $MYVIMRC<CR>
-:nmap <Leader>vrc :tabe $MYVIMRC<CR>
+:nmap <Leader>vrc :e $MYVIMRC<CR>
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
@@ -25,6 +27,11 @@ set sessionoptions+=resize " Allow resizing of the window on session restore
 " This moves nicely among unbroken text
 noremap j gj
 noremap k gk
+
+" Quickly switch buffers
+nnoremap <unique> <silent> <leader>nn :bn<CR>
+nnoremap <unique> <silent> <leader>pp :bp<CR>
+nnoremap <unique> <silent> <leader>bd :bd<CR>
 
 " My personal programming options
 
