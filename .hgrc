@@ -8,8 +8,11 @@ hgext.gpg=
 hgext.graphlog=
 hgext.hgk=
 hgext.mq=
+hgext.pager=
 hgext.rebase=
 
 [gpg]
 key=D7981A71
 
+[pager]
+pager = LESS='FSRX' less
