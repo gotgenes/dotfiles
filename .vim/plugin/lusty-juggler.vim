@@ -586,7 +586,7 @@ class LustyJuggler
       map_key("<Tab>", ":call <SID>LustyJugglerKeyPressed('TAB')<CR>")
 
       # Cancel keys.
-      map_key("i", ":call <SID>LustyJugglerCancel()<CR>")
+      map_key("c", ":call <SID>LustyJugglerCancel()<CR>")
       map_key("q", ":call <SID>LustyJugglerCancel()<CR>")
       map_key("<Esc>", ":call <SID>LustyJugglerCancel()<CR>")
       map_key("<C-c>", ":call <SID>LustyJugglerCancel()<CR>")
@@ -627,7 +627,7 @@ class LustyJuggler
       unmap_key("<CR>")
       unmap_key("<Tab>")
 
-      unmap_key("i")
+      unmap_key("c")
       unmap_key("q")
       unmap_key("<Esc>")
       unmap_key("<C-c>")
