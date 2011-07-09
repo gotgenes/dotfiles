@@ -142,8 +142,8 @@ export PATH="$HOME/.local/bin:$PATH"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
 
 # Amazon Web Services shizzle
-export EC2_PRIVATE_KEY=$HOME/.ec2/pk-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
-export EC2_CERT=$HOME/.ec2/cert-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
+export EC2_PRIVATE_KEY=$HOME/.aws/pk-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
+export EC2_CERT=$HOME/.aws/cert-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
 export JAVA_HOME=/usr/lib/jvm/java-6-openjdk/
 
 # virtualenvwrapper customization
