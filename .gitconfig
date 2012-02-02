@@ -4,7 +4,7 @@
 [color]
 	ui = auto
 [core]
-	excludesfile = /home/chris/.gitignore
+	excludesfile = ~/.gitignore
 [github]
 	user = gotgenes
 	token = fef2f9ef106f8c88bab039b4c5dcb4b1
