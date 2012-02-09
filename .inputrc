@@ -2,8 +2,9 @@
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 
-set editing-mode vi
-set keymap vi
+# Set command line interfaces to vi editing mode (default is emacs)
+#set editing-mode vi
+#set keymap vi
 #set convert-meta on
 
 # glob patterns without executing, eg: 'rm *x'

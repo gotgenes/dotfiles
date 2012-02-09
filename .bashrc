@@ -113,7 +113,7 @@ esac
 
 # I like to use Vim type editing of the command line, comment out
 # everything below if you prefer the default Emacs-style editing.
-set -o vi
+#set -o vi
 # ^p check for partial match in history
 bind -m vi-insert "\C-p":dynamic-complete-history
 
