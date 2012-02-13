@@ -5,6 +5,7 @@
 	ui = auto
 [core]
 	excludesfile = ~/.gitignore_global
+	pager = less -RX
 [github]
 	user = gotgenes
 	token = fef2f9ef106f8c88bab039b4c5dcb4b1
