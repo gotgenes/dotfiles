@@ -85,19 +85,12 @@ endif
 " Control + Space bar
 inoremap <C-space> <C-x><C-o>
 
-" Remap SnippetsEmu key from tab to Shift-Tab
-let g:snippetsEmu_key = "<S-Tab>"
-
 
 " Set our Django version
 let django_version = 1
 
 " awesome remapping to open tags in new tab
 nnoremap <F2> <C-W>]<C-W>T
-
-" I use NERDCommenter, which complains when it doesn't recognize a
-" filetype; this keeps it from bitching.
-let NERDShutUp=1
 
 " Choose my favorite color scheme
 if strlen(globpath(&rtp, 'colors/peaksea.vim'))
@@ -110,18 +103,30 @@ set background=dark
 " I want to quickly switch to text settings sometimes.
 nmap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
 
-" UTL browser configuration
-let g:utl_rc_app_browser = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u' &"
 
-" Placed in here for LaTeX Suite
+" PLUGINS CONFIGURATIONS
+
+" vim-addon-manager support
+set runtimepath+=$HOME/.vim/vim-addons/vim-addon-manager
+call vam#ActivateAddons(['utl'], {'auto_install' : 0})
+
+" utl configuration
+let g:utl_cfg_hdl_scm_http_system = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u#%f' &"
+nmap <unique> <Leader>gu :Utl openLink underCursor edit<CR>
+nmap <unique> <Leader>cl :Utl copyLink underCursor<CR>
+
+" LaTeX Suite configuration
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to alway generate a file-name.
 set grepprg=grep\ -nH\ $*
-
 " LaTeX suite default output
 let g:Tex_DefaultTargetFormat = "pdf"
 let g:Tex_ViewRule_dvi = "evince"
 let g:Tex_ViewRule_pdf = "evince"
 let g:Tex_ViewRule_ps = "evince"
+
+" I use NERDCommenter, which complains when it doesn't recognize a
+" filetype; this keeps it from bitching.
+let NERDShutUp=1
 
