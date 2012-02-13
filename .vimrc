@@ -8,10 +8,6 @@ let mapleader = ','
 " line enables syntax highlighting by default.
 syntax enable
 
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-"set background=dark
-
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 set showcmd		" Show (partial) command in status line.
