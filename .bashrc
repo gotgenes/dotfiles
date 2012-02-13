@@ -87,10 +87,16 @@ export TEXMFHOME=$HOME/texmf
 # I prefer 24-hour clocks and YYYY-MM-DD date format.
 export LC_TIME="en_DK.UTF-8"
 
+# Custom executables
+export PATH="$HOME/.local/bin:$PATH"
+# Custom man pages
+export MANPATH="$HOME/.local/share/man:$MANPATH"
+
+
 # I like to use Vim as my default editor. Replace with your editor of
 # preference.
 # If we're running in a GUI environment or with ssh -X, I want gVim
-if [[ $DISPLAY ]] && [ -x /usr/bin/gvim ]; then
+if [[ $DISPLAY ]] && hash gvim &>/dev/null; then
     export EDITOR="gvim -f"
 # otherwise, give me plain old Vim
 else
@@ -134,12 +140,6 @@ export PYTHONSTARTUP="$HOME/.pythonrc"
 
 # Custom Perl modules installed in the following
 export PERL5LIB="$HOME/.local/lib/perl5:$HOME/.local/lib/murali_perl_modules"
-
-# Custom executables
-export PATH="$HOME/.local/bin:$PATH"
-
-# Custom man pages
-export MANPATH="$HOME/.local/share/man:$MANPATH"
 
 # Amazon Web Services shizzle
 export EC2_PRIVATE_KEY=$HOME/.aws/pk-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
