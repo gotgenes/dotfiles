@@ -1,7 +1,3 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -14,12 +10,45 @@ shopt -s checkwinsize
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|gnome*)
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
     ;;
 *)
     ;;
 esac
+
+# Logic for setting the TERM variable correctly (GNOME Terminal sets
+# this incorrectly).
+# Obtained from http://vim.wikia.com/wiki/256_colors_in_vim
+if [ "$TERM" = "xterm" ] ; then
+    if [ -z "$COLORTERM" ] ; then
+        if [ -z "$XTERM_VERSION" ] ; then
+            echo "Warning: Terminal wrongly calling itself 'xterm'."
+        else
+            case "$XTERM_VERSION" in
+            "XTerm(256)") TERM="xterm-256color" ;;
+            "XTerm(88)") TERM="xterm-88color" ;;
+            "XTerm") ;;
+            *)
+                echo "Warning: Unrecognized XTERM_VERSION: $XTERM_VERSION"
+                ;;
+            esac
+        fi
+    else
+        case "$COLORTERM" in
+            gnome-terminal)
+                # Those crafty Gnome folks require you to check COLORTERM,
+                # but don't allow you to just *favor* the setting over TERM.
+                # Instead you need to compare it and perform some guesses
+                # based upon the value. This is, perhaps, too simplistic.
+                TERM="gnome-256color"
+                ;;
+            *)
+                echo "Warning: Unrecognized COLORTERM: $COLORTERM"
+                ;;
+        esac
+    fi
+fi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -103,9 +132,12 @@ else
     export EDITOR="vim"
 fi
 
+
+
+
 # Use my custom prompt, if it exists.
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|gnome*)
     if [ -f ~/.bash_prompt ]; then
         source ~/.bash_prompt
     fi
