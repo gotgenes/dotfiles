@@ -1,35 +1,77 @@
+" BEHAVIORAL SETTINGS
+
+" This is Vim, not VI, so we use it like we mean it!
+set nocompatible
+" Show (partial) command in status line.
+set showcmd		
+" Show matching brackets.
+set showmatch		
+" Do case insensitive matching
+set ignorecase		
+" Do smart case matching
+set smartcase		
+" Incremental search
+"set incsearch		
+" Search highlighting disabled
+set nohlsearch
+" Automatically save before commands like :next and :make
+"set autowrite		
+" Allow resizing of the window on session restore
+set sessionoptions+=resize 
+" Enable mouse usage (all modes) in terminals
+set mouse=a		
+" Give popup menus for a right mouse-click
+set mousemodel=popup    
+
+
+" MAPPINGS
+
 " Set the leader
 let mapleader = ','
+
 " Easy access keystrokes for editing your Vim configuration
 :nmap <Leader>svrc :source $MYVIMRC<CR>
 :nmap <Leader>vrc :e $MYVIMRC<CR>
-
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-syntax enable
-
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-set showcmd		" Show (partial) command in status line.
-set showmatch		" Show matching brackets.
-set ignorecase		" Do case insensitive matching
-set smartcase		" Do smart case matching
-"set incsearch		" Incremental search
-"set autowrite		" Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes) in terminals
-set sessionoptions+=resize " Allow resizing of the window on session restore
-
-" This moves nicely among unbroken text
-noremap j gj
-noremap k gk
 
 " Quickly switch buffers
 nnoremap <unique> <silent> <leader>nn :bn<CR>
 nnoremap <unique> <silent> <leader>pp :bp<CR>
 nnoremap <unique> <silent> <leader>bd :bd<CR>
 
-" My personal programming options
+" This moves nicely among unbroken text
+noremap j gj
+noremap k gk
+
+" Omni-Completion with Control + X, Control + O is a pain in the ass. Map to 
+" Control + Space bar
+inoremap <C-space> <C-x><C-o>
+"
+" awesome remapping to open tags in new tab
+nnoremap <F2> <C-W>]<C-W>T
+
+" I want to quickly switch to text settings sometimes.
+nmap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
+
+
+" SYNTAX HIGHLIGHTING AND COLOR SETTINGS
+
+" Vim5 and later versions support syntax highlighting. Uncommenting the next
+" line enables syntax highlighting by default.
+syntax enable
+
+" Uncomment one below to get a dark background or a light background. (NOTE:
+" it is important to specify this background before specifying any colorscheme
+" in Vim. [GVim does not seem phased by the order.])
+"set background=light
+set background=dark
+
+" Choose a favorite color scheme
+if strlen(globpath(&rtp, 'colors/peaksea.vim'))
+    colorscheme peaksea
+endif
+
+
+" PROGRAMMING OPTIONS (TODO: move to separate Vim files)
 
 " This function removes trailing whitespace, a pet peeve of mine.
 function! DeleteTrailingWhitespace()
@@ -37,9 +79,6 @@ function! DeleteTrailingWhitespace()
   %s/\s\+$//e
   normal ``
 endfunction
-
-" give me popup menus for a right mouse-click
-set mousemodel=popup
 
 if has("autocmd")
   " Start editing from the last edited position in the file.
@@ -80,28 +119,6 @@ if has("autocmd")
   autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
   autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 endif
-
-" Omni-Completion with Control + X, Control + O is a pain in the ass. Map to 
-" Control + Space bar
-inoremap <C-space> <C-x><C-o>
-
-
-" Set our Django version
-let django_version = 1
-
-" awesome remapping to open tags in new tab
-nnoremap <F2> <C-W>]<C-W>T
-
-" Choose my favorite color scheme
-if strlen(globpath(&rtp, 'colors/peaksea.vim'))
-    colorscheme peaksea
-endif
-
-" Uncomment below to get a dark background.
-set background=dark
-
-" I want to quickly switch to text settings sometimes.
-nmap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
 
 
 " PLUGINS CONFIGURATIONS
