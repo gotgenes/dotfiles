@@ -39,13 +39,13 @@ function purty_prompt {
 
     if [[ $USER == "root" ]]
     then
-        local USER_COLOR=$LIGHT_RED
-        local USER_PROMPT=$LIGHT_RED\\$
+        local USER_COLOR="$LIGHT_RED"
+        local USER_PROMPT="$LIGHT_RED\\$"
     else
-        local USER_COLOR=$BROWN
-        local USER_PROMPT=\$
+        local USER_COLOR="$BROWN"
+        local USER_PROMPT="\`if [ \$? = 0 ]; then echo '\$'; else echo -e '\e[41m\\$'; fi\`"
     fi
-    PS1="\
+    PS1="\[\033]0;\u@\h: \w\007\]$NORMAL\
 $GREEN\
 [$USER_COLOR\u$GREEN]\
 \e(0q\e(B\
