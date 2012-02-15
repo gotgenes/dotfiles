@@ -107,10 +107,29 @@ export TEXMFHOME=$HOME/texmf
 # I prefer 24-hour clocks and YYYY-MM-DD date format.
 export LC_TIME="en_DK.UTF-8"
 
-# Custom executables
-export PATH="$HOME/.local/bin:$PATH"
+# USER-INSTALLED SOFTWARE
+# User's executables
+if [ -d ~/.local/bin ] ; then
+    PATH=~/.local/bin:"${PATH}"
+fi
+
+# Local libraries
+if [ -d ~/.local/bin ]; then
+    LD_LIBRARY_PATH=~/.local/lib:"${LD_LIBRARY_PATH}"
+    LD_RUN_PATH=~/.local/lib:"${LD_RUN_PATH}"
+fi
+
 # Custom man pages
-export MANPATH="$HOME/.local/share/man:$MANPATH"
+if [ -d ~/.local/share/man ]; then
+    export MANPATH="$HOME/.local/share/man:$MANPATH"
+fi
+
+# Custom Python interactive session configuration.
+export PYTHONSTARTUP="$HOME/.pythonrc"
+
+# Custom Perl modules installed in the following
+export PERL5LIB="$HOME/.local/lib/perl5:$HOME/.local/lib/murali_perl_modules"
+
 
 
 # I like to use Vim as my default editor. Replace with your editor of
@@ -155,12 +174,6 @@ bind -m vi-insert "\C-\e[C":backward-word
 
 # ^f forward a word
 bind -m vi-insert "\C-\e[D":forward-word
-
-# Custom Python interactive session configuration.
-export PYTHONSTARTUP="$HOME/.pythonrc"
-
-# Custom Perl modules installed in the following
-export PERL5LIB="$HOME/.local/lib/perl5:$HOME/.local/lib/murali_perl_modules"
 
 # Amazon Web Services shizzle
 export EC2_PRIVATE_KEY=$HOME/.aws/pk-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
