@@ -124,11 +124,9 @@ else
 fi
 
 
-
-
 # Use my custom prompt, if it exists.
 case "$TERM" in
-xterm*|rxvt*|gnome*)
+xterm*|rxvt*|gnome*|screen-256color)
     if [ -f ~/.bash_prompt ]; then
         source ~/.bash_prompt
     fi
