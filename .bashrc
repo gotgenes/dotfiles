@@ -8,6 +8,10 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
+if [ -d ~/.local/share/terminfo ]; then
+    export TERMINF0=~/.local/share/terminfo:"$TERMINFO"
+fi
+
 # Logic for setting the TERM variable correctly (GNOME Terminal sets
 # this incorrectly).
 # Obtained from http://vim.wikia.com/wiki/256_colors_in_vim
