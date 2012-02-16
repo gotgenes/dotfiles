@@ -43,7 +43,7 @@ function purty_prompt {
         local USER_PROMPT="$LIGHT_RED\\$"
     else
         local USER_COLOR="$BROWN"
-        local USER_PROMPT="\`if [ \$? = 0 ]; then echo '\$'; else echo -e '\e[41m\\$'; fi\`"
+        local USER_PROMPT="\`if [ \$? = 0 ]; then echo '\$'; else echo '\[\e[41m\]\$'; fi\`"
     fi
     PS1="\[\033]0;\u@\h: \w\007\]$NORMAL\
 $GREEN\
