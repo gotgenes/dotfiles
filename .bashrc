@@ -8,6 +8,7 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
+
 # Logic for setting the TERM variable correctly (GNOME Terminal sets
 # this incorrectly).
 # Obtained from http://vim.wikia.com/wiki/256_colors_in_vim
@@ -41,14 +42,12 @@ if [ "$TERM" = "xterm" ] ; then
     fi
 fi
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-#if [ -f ~/.bash_aliases ]; then
-#    . ~/.bash_aliases
-#fi
+# ALIAS DEFINITIONS
+#
+# Aliases which I find universally handy go here; aliases which are
+# machine-specific should be specified in a separate ~/.bash_aliases
+# file (see below).
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -72,9 +71,13 @@ alias llr='ls -lR'
 alias llar='ls -lAR'
 #alias l='ls -CF'
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# Additional aliases.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+
+# BASH COMPLETION.
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
     # I hate tilde expansion, so I'm overriding the stupid expand
@@ -131,7 +134,7 @@ export PYTHONSTARTUP="$HOME/.pythonrc"
 export PERL5LIB="$HOME/.local/lib/perl5:$HOME/.local/lib/murali_perl_modules"
 
 
-
+# EDITOR CONFIGURATION
 # I like to use Vim as my default editor. Replace with your editor of
 # preference.
 # If we're running in a GUI environment or with ssh -X, I want gVim
@@ -143,6 +146,7 @@ else
 fi
 
 
+# PROMPT_CONFIGURATION
 # Use my custom prompt, if it exists.
 case "$TERM" in
 xterm*|rxvt*|gnome*|screen-256color)
@@ -157,6 +161,8 @@ xterm*|rxvt*|gnome*|screen-256color)
     ;;
 esac
 
+
+# SHELL BEHAVIOR
 # I like to use Vim type editing of the command line, comment out
 # everything below if you prefer the default Emacs-style editing.
 set -o vi
@@ -175,6 +181,8 @@ bind -m vi-insert "\C-\e[C":backward-word
 # ^f forward a word
 bind -m vi-insert "\C-\e[D":forward-word
 
+
+# APPLICATION ENVIRONMENTAL VARIABLES
 # Amazon Web Services shizzle
 export EC2_PRIVATE_KEY=$HOME/.aws/pk-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
 export EC2_CERT=$HOME/.aws/cert-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
