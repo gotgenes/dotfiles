@@ -14,3 +14,4 @@ tags
 *.snm
 *.toc
 *.out
+.netrwhist
