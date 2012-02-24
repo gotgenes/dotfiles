@@ -78,13 +78,6 @@ endif
 
 " PROGRAMMING OPTIONS (TODO: move to separate Vim files)
 
-" This function removes trailing whitespace, a pet peeve of mine.
-function! DeleteTrailingWhitespace()
-  normal m`
-  %s/\s\+$//e
-  normal ``
-endfunction
-
 if has("autocmd")
   filetype plugin indent on
   " Start editing from the last edited position in the file.
@@ -93,10 +86,6 @@ if has("autocmd")
   " This setting makes sure Vim is always operating in the directory of
   " the current buffer
   autocmd BufEnter * lcd %:p:h
-  " This removes trailing extra whitespace from end of lines when writing the
-  " file out.
-  " NOTE: make sure to set g:delete_trailing_whitespace = 1
-  autocmd BufWritePre * call DeleteTrailingWhitespace()
   autocmd FileType vim setlocal expandtab smarttab softtabstop=2 shiftwidth=2
   autocmd FileType tex setlocal expandtab smarttab softtabstop=4 shiftwidth=4 tabstop=4 tw=72 spell spelllang=en
   autocmd FileType html,xml,css setlocal autoindent expandtab smarttab softtabstop=2 tabstop=2 shiftwidth=2
