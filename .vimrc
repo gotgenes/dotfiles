@@ -81,32 +81,18 @@ function! DeleteTrailingWhitespace()
 endfunction
 
 if has("autocmd")
+  filetype plugin indent on
   " Start editing from the last edited position in the file.
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal g'\"" | endif
-  filetype plugin indent on
   " This setting makes sure Vim is always operating in the directory of
   " the current buffer
   autocmd BufEnter * lcd %:p:h
-  " This setting looks for tags files, recursively upwards
-  autocmd FileType python,perl,c setlocal tags+=tags;$HOME
-  autocmd FileType python,perl,c,cpp,sh setlocal number expandtab smarttab softtabstop=4 shiftwidth=4 textwidth=72
+  " This removes trailing extra whitespace from end of lines when writing the
+  " file out.
+  " NOTE: make sure to set g:delete_trailing_whitespace = 1
+  autocmd BufWritePre * call DeleteTrailingWhitespace()
   autocmd FileType vim setlocal expandtab smarttab softtabstop=2 shiftwidth=2
-  " Use my Python template if this is a new Python file
-  autocmd FileType python nmap <Leader>pyt :0r ~/.vim/templates/python.py<CR>
-  if filereadable($HOME . '/.local/ropevim.vim')
-    autocmd FileType python source $HOME/.local/ropevim.vim
-  endif
-  " this removes trailing extra whitespace from end of lines
-  autocmd BufWritePre *.py,*.pl,*.c,*.cpp,*.h,*.tex,*.sh,*.rst call DeleteTrailingWhitespace()
-  " Python cTags
-  " Make sure to have run
-  " ctags -R -f ~/.vim/tags/python.ctags /usr/lib/pythonX.Y/
-  " where X is the major version and Y is the point release installed on your
-  " system
-  autocmd FileType python setlocal tags+=$HOME/.vim/tags/python.ctags
-  autocmd FileType python setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-  autocmd FileType python setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
   autocmd FileType tex setlocal expandtab smarttab softtabstop=4 shiftwidth=4 tabstop=4 tw=72 spell spelllang=en
   autocmd FileType html,xml,css setlocal autoindent expandtab smarttab softtabstop=2 tabstop=2 shiftwidth=2
   autocmd FileType dot setlocal tabstop=4 shiftwidth=4 tw=78 autoindent
