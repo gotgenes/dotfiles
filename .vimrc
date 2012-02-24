@@ -3,25 +3,25 @@
 " This is Vim, not VI, so we use it like we mean it!
 set nocompatible
 " Show (partial) command in status line.
-set showcmd		
+set showcmd
 " Show matching brackets.
-set showmatch		
+set showmatch
 " Do case insensitive matching
-set ignorecase		
+set ignorecase
 " Do smart case matching
-set smartcase		
+set smartcase
 " Incremental search
-"set incsearch		
+"set incsearch
 " Search highlighting disabled
 set nohlsearch
 " Automatically save before commands like :next and :make
-"set autowrite		
+"set autowrite
 " Allow resizing of the window on session restore
-set sessionoptions+=resize 
+set sessionoptions+=resize
 " Enable mouse usage (all modes) in terminals
-set mouse=a		
+set mouse=a
 " Give popup menus for a right mouse-click
-set mousemodel=popup    
+set mousemodel=popup
 
 
 " MAPPINGS
@@ -42,7 +42,7 @@ nnoremap <unique> <silent> <leader>bd :bd<CR>
 noremap j gj
 noremap k gk
 
-" Omni-Completion with Control + X, Control + O is a pain in the ass. Map to 
+" Omni-Completion with Control + X, Control + O is a pain in the ass. Map to
 " Control + Space bar
 inoremap <C-space> <C-x><C-o>
 "
@@ -108,10 +108,6 @@ endif
 
 
 " PLUGINS CONFIGURATIONS
-
-" vim-addon-manager support
-set runtimepath+=$HOME/.vim/vim-addons/vim-addon-manager
-call vam#ActivateAddons(['utl'], {'auto_install' : 0})
 
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u#%f' &"
