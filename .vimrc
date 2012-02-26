@@ -12,8 +12,8 @@ set ignorecase
 set smartcase
 " Incremental search
 "set incsearch
-" Search highlighting disabled
-set nohlsearch
+" Search highlighting enabled
+set hlsearch
 " Automatically save before commands like :next and :make
 "set autowrite
 " Allow resizing of the window on session restore
@@ -50,7 +50,10 @@ inoremap <C-space> <C-x><C-o>
 nnoremap <F2> <C-W>]<C-W>T
 
 " I want to quickly switch to text settings sometimes.
-nmap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
+nnoremap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
+
+" Turn off highlighted search terms
+nnoremap <silent> ,/ :nohlsearch<CR>
 
 
 " SYNTAX HIGHLIGHTING AND COLOR SETTINGS
@@ -59,8 +62,7 @@ nmap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
 " line enables syntax highlighting by default.
 syntax enable
 
-" Uncomment one below to get a dark background or a light background. (NOTE:
-" it is important to specify this background before specifying any colorscheme
+" Uncomment one below to get a dark background or a light background. (NOTE: " it is important to specify this background before specifying any colorscheme
 " in Vim. [GVim does not seem phased by the order.])
 "set background=light
 set background=dark
