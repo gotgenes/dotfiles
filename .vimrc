@@ -131,3 +131,23 @@ let g:Tex_ViewRule_ps = "evince"
 " filetype; this keeps it from bitching.
 let NERDShutUp=1
 
+" UltiSnips configuration
+let g:ultisnips_python_style = "sphinx"
+
+" LustyJuggler
+let g:LustyJugglerShowKeys = "a"
+
+function ToggleLustyJugglerLayout()
+  if !exists("g:LustyJugglerKeyboardLayout") || g:LustyJugglerKeyboardLayout != "dvorak"
+    let g:LustyJugglerKeyboardLayout = "dvorak"
+    echo "LustyJuggler using Dvorak layout."
+  else
+    let g:LustyJugglerKeyboardLayout = "default"
+    echo "LustyJuggler using default layout."
+  endif
+endfunction
+
+call ToggleLustyJugglerLayout()
+
+nnoremap <silent> <Leader>tlj :call ToggleLustyJugglerLayout()<CR>
+
