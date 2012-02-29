@@ -16,7 +16,6 @@ endif
 " ctags -R -f ~/.vim/tags/python.ctags /usr/lib/pythonX.Y/
 " where X is the major version and Y is the point release installed on your
 " system
-if 
 if filereadable(expand("$HOME/.vim/tags/python.ctags"))
   setlocal tags+=$HOME/.vim/tags/python.ctags
 endif
