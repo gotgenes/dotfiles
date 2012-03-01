@@ -103,6 +103,28 @@ endif
 
 " PLUGINS CONFIGURATIONS
 
+" vim-addon-manager support
+fun SetupVAM()
+  let vam_install_path = expand('$HOME') . '/.vim/vim-addons'
+  exec 'set runtimepath+='.vam_install_path.'/vim-addon-manager'
+
+  " * unix based os users may want to use this code checking out VAM
+  " * windows users want to use http://mawercer.de/~marc/vam/index.php
+  "   to fetch VAM, VAM-known-repositories and the listed plugins
+  "   without having to install curl, unzip, git tool chain first
+  if !filereadable(vam_install_path.'/vim-addon-manager/.git/config') && 1 == confirm("git clone VAM into ".vam_install_path."?","&Y\n&N")
+    " I'm sorry having to add this reminder. Eventually it'll pay off.
+    call confirm("Remind yourself that most plugins ship with documentation (README*, doc/*.txt). Its your first source of knowledge. If you can't find the info you're looking for in reasonable time ask maintainers to improve documentation")
+    exec '!p='.shellescape(vam_install_path).'; mkdir -p "$p" && cd "$p" && git clone --depth 1 git://github.com/MarcWeber/vim-addon-manager.git'
+    " VAM run helptags automatically if you install or update plugins
+    exec 'helptags '.fnameescape(vam_install_path.'/vim-addon-manager/doc')
+  endif
+
+  call vam#ActivateAddons(['EasyMotion', 'LustyJuggler', 'matchit.zip', 'The_NERD_Commenter', 'trailing-whitespace', 'UltiSnips', 'utl', 'vim-latex'], {'auto_install' : 0})
+endfun
+autocmd VimEnter * call SetupVAM()
+
+
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u#%f' &"
 nmap <unique> <Leader>gu :Utl openLink underCursor edit<CR>
