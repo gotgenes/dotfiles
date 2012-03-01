@@ -22,6 +22,9 @@ set sessionoptions+=resize
 set mouse=a
 " Give popup menus for a right mouse-click
 set mousemodel=popup
+" Hide buffers when they are not displayed; this prevents warning messages
+" about modified buffers when switching between them.
+set hidden
 
 
 " MAPPINGS
