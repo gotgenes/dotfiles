@@ -35,8 +35,8 @@ set hidden
 let mapleader = ','
 
 " Easy access keystrokes for editing your Vim configuration
-:nmap <Leader>svrc :source $MYVIMRC<CR>
-:nmap <Leader>vrc :e $MYVIMRC<CR>
+:nnoremap <Leader>svrc :source $MYVIMRC<CR>
+:nnoremap <Leader>vrc :e $MYVIMRC<CR>
 
 " Quickly switch buffers
 nnoremap <unique> <silent> <leader>nn :bn<CR>
@@ -44,8 +44,8 @@ nnoremap <unique> <silent> <leader>pp :bp<CR>
 nnoremap <unique> <silent> <leader>bd :bd<CR>
 
 " This moves nicely among unbroken text
-noremap j gj
-noremap k gk
+nnoremap j gj
+nnoremap k gk
 
 " Omni-Completion with Control + X, Control + O is a pain in the ass. Map to
 " Control + Space bar
@@ -129,8 +129,8 @@ autocmd VimEnter * call SetupVAM()
 
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u#%f' &"
-nmap <unique> <Leader>gu :Utl openLink underCursor edit<CR>
-nmap <unique> <Leader>cl :Utl copyLink underCursor<CR>
+nnoremap <unique> <Leader>gu :Utl openLink underCursor edit<CR>
+nnoremap <unique> <Leader>cl :Utl copyLink underCursor<CR>
 
 " LaTeX Suite configuration
 " IMPORTANT: grep will sometimes skip displaying the file name if you
