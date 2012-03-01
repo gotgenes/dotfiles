@@ -122,7 +122,7 @@ fun SetupVAM()
     exec 'helptags '.fnameescape(vam_install_path.'/vim-addon-manager/doc')
   endif
 
-  call vam#ActivateAddons(['EasyMotion', 'LustyJuggler', 'matchit.zip', 'The_NERD_Commenter', 'trailing-whitespace', 'UltiSnips', 'utl', 'vim-latex'], {'auto_install' : 0})
+  call vam#ActivateAddons(['EasyMotion', 'LustyJuggler', 'matchit.zip', 'The_NERD_Commenter', 'trailing-whitespace', 'UltiSnips', 'utl'], {'auto_install' : 0})
 endfun
 autocmd VimEnter * call SetupVAM()
 
