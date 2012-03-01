@@ -2,6 +2,8 @@
 
 " This is Vim, not VI, so we use it like we mean it!
 set nocompatible
+" Allow backspacing over anything in insert mode
+set backspace=indent,eol,start
 " Show (partial) command in status line.
 set showcmd
 " Show matching brackets.
