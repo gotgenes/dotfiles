@@ -142,18 +142,23 @@ let g:Tex_ViewRule_dvi = "evince"
 let g:Tex_ViewRule_pdf = "evince"
 let g:Tex_ViewRule_ps = "evince"
 
+
 " I use NERDCommenter, which complains when it doesn't recognize a
 " filetype; this keeps it from bitching.
 let NERDShutUp=1
 
+
 " UltiSnips configuration
 let g:ultisnips_python_style = "sphinx"
+
 
 " LustyJuggler
 let g:LustyJugglerShowKeys = "a"
 
 function ToggleLustyJugglerLayout()
-  if !exists("g:LustyJugglerKeyboardLayout") || g:LustyJugglerKeyboardLayout != "dvorak"
+  if !exists("g:LustyJugglerKeyboardLayout")
+    let g:LustyJugglerKeyboardLayout = "dvorak"
+  elseif g:LustyJugglerKeyboardLayout != "dvorak"
     let g:LustyJugglerKeyboardLayout = "dvorak"
     echo "LustyJuggler using Dvorak layout."
   else
