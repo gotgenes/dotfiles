@@ -18,7 +18,7 @@ fi
 
 for file in `ls -A`; do
     case $file in
-        ".git" | "symlink.sh" | ".gitignore")
+        ".git" | "symlink.sh" | ".gitignore" | "README.rst")
             echo "Skipping $file"
         ;;
 	* )
