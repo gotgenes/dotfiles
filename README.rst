@@ -18,15 +18,15 @@ Deploying the configurations
 
 2.  Symbolically link the files into your ``$HOME`` directory::
 
-      cd $HOME/shell-configs/
-      ./symlink.sh -f    # overwrites files in $HOME; see comment below
+      bash $HOME/shell-configs/symlink.sh
 
-    **NOTE**: This will overwrite any existing configuration files in
-    your home directory of the same name. You can try running
-    ``symlink.sh`` without the ``-f`` flag first to see what files it
-    might overwrite, then examine the existing files and look for
-    settings which you'd like to merge into the files in the Git
-    repository.
+    **NOTE**: If you have any existing files, the script will not create
+    symbolic links for files that already exist in ``$HOME``. To
+    overwrite any existing configuration files in your home directory of
+    the same name. I suggest running ``symlink.sh`` without the ``-f``
+    flag first to see what files it might overwrite, then examining the
+    existing files and looking for settings which you'd like to merge
+    into the files in the ``shell-configs`` repository.
 
 That's all there is to it! At this point, you will have successfully
 deployed your configurations.
@@ -53,7 +53,7 @@ choose to fork the repository or otherwise use it.
 .. _VAM: https://github.com/MarcWeber/vim-addon-manager
 
 .. [1]  I prefer the vi-style of command line editing over the EMACS
-        style. If your preference is the EMACS style, be sure to edit
+        style. If your preference is the EMACS-style, be sure to edit
         the appropriate lines in ``.inputrc`` and ``.bashrc``!
 
 .. [2]  I found the best practice for plugin management was to tell the
