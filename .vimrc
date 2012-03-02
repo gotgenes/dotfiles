@@ -124,7 +124,7 @@ fun SetupVAM()
 
   call vam#ActivateAddons(['EasyMotion', 'LustyJuggler', 'matchit.zip', 'The_NERD_Commenter', 'trailing-whitespace', 'github:gotgenes/ultisnips', 'utl'], {'auto_install' : 0})
 endfun
-autocmd VimEnter * call SetupVAM()
+call SetupVAM()
 
 
 " utl configuration
