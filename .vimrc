@@ -171,3 +171,27 @@ call ToggleLustyJugglerLayout()
 
 nnoremap <silent> <Leader>tlj :call ToggleLustyJugglerLayout()<CR>
 
+
+" trailing-whitespace configuration
+function ToggleAutoRmTrailingWhitespace()
+  if !exists("g:auto_rm_trailing_ws")
+    let g:auto_rm_trailing_ws = 1
+  elseif g:auto_rm_trailing_ws != 1
+    let g:auto_rm_trailing_ws = 1
+    echo "Automatically removing trailing whitespace."
+  else
+    let g:auto_rm_trailing_ws = 0
+    echo "Not automatically removing trailing whitespace."
+  endif
+endfunction
+
+call ToggleAutoRmTrailingWhitespace()
+
+nnoremap <silent> <Leader>ttws :call ToggleAutoRmTrailingWhitespace()<CR>
+
+if has("autocmd")
+  " Tidy up trailing whitespace when writing the file if we have the
+  " trailing-whitespace plugin installed and we've set the proper variable.
+  autocmd BufWritePre * if exists(":FixWhitespace") && exists("g:auto_rm_trailing_ws") && g:auto_rm_trailing_ws == 1 | exe ":FixWhitespace" | endif
+endif
+
