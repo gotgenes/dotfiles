@@ -83,8 +83,7 @@ endif
 if has("autocmd")
   filetype plugin indent on
   " Start editing from the last edited position in the file.
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal g'\"" | endif
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
   " This setting makes sure Vim is always operating in the directory of
   " the current buffer
   autocmd BufEnter * lcd %:p:h
