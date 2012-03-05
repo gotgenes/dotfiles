@@ -1,1 +1,1 @@
-set softtabstop=4 expandtab shiftwidth=4
+source <sfile>:p:h/python.vim

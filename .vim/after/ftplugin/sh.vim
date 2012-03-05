@@ -1,1 +1,1 @@
-source python.vim
+source <sfile>:p:h/python.vim
