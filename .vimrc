@@ -27,6 +27,8 @@ set mousemodel=popup
 " Hide buffers when they are not displayed; this prevents warning messages
 " about modified buffers when switching between them.
 set hidden
+" Always show the cursor position
+set ruler
 
 
 " MAPPINGS
