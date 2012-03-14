@@ -1,6 +1,10 @@
-.*.swp
-*.pyc
-*.pyo
+.#*
+[#]*#
+*~
+.*.sw[a-z]
+*.un~
+Session.vim
+*.py[co]
 *.o
 tags
 *.aux

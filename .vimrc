@@ -30,6 +30,17 @@ set hidden
 " Always show the cursor position
 set ruler
 
+" Use the persistent undo feature
+" See :h persistent-undo
+" NOTE: the directory listed in undodir must exist; Vim will not create this
+" directory itself!
+set undodir=$HOME/.vimundos
+set undofile
+" Maximum number of changes that can be undone
+set undolevels=1000
+" Maximum number lines to save for undo on a buffer reload
+set undoreload=10000
+
 
 " MAPPINGS
 
