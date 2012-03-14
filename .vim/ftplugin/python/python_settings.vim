@@ -19,6 +19,4 @@ endif
 if filereadable(expand("$HOME/.vim/tags/python.ctags"))
   setlocal tags+=$HOME/.vim/tags/python.ctags
 endif
-setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
