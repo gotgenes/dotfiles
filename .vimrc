@@ -208,3 +208,6 @@ if has("autocmd")
   autocmd BufWritePre * if exists(":FixWhitespace") && exists("g:auto_rm_trailing_ws") && g:auto_rm_trailing_ws == 1 | exe ":FixWhitespace" | endif
 endif
 
+" pylint.vim configuration
+let g:pylint_onwrite = 0
+
