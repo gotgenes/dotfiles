@@ -119,6 +119,9 @@ if [ -d ~/.local/lib ]; then
     export LD_LIBRARY_PATH=~/.local/lib:"${LD_LIBRARY_PATH}"
     export LD_RUN_PATH=~/.local/lib:"${LD_RUN_PATH}"
 fi
+if [ -d ~/.local/include ]; then
+    export CPATH=~/.local/include:"${CPATH}"
+fi
 
 # Custom man pages
 if [ -d ~/.local/share/man ]; then
