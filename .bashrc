@@ -114,7 +114,8 @@ if [ -d ~/.local/bin ] ; then
 fi
 
 # Local libraries
-if [ -d ~/.local/bin ]; then
+if [ -d ~/.local/lib ]; then
+    LIBRARY_PATH=~/.local/lib:"${LIBRARY_PATH}"
     LD_LIBRARY_PATH=~/.local/lib:"${LD_LIBRARY_PATH}"
     LD_RUN_PATH=~/.local/lib:"${LD_RUN_PATH}"
 fi
