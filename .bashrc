@@ -115,9 +115,9 @@ fi
 
 # Local libraries
 if [ -d ~/.local/lib ]; then
-    LIBRARY_PATH=~/.local/lib:"${LIBRARY_PATH}"
-    LD_LIBRARY_PATH=~/.local/lib:"${LD_LIBRARY_PATH}"
-    LD_RUN_PATH=~/.local/lib:"${LD_RUN_PATH}"
+    export LIBRARY_PATH=~/.local/lib:"${LIBRARY_PATH}"
+    export LD_LIBRARY_PATH=~/.local/lib:"${LD_LIBRARY_PATH}"
+    export LD_RUN_PATH=~/.local/lib:"${LD_RUN_PATH}"
 fi
 
 # Custom man pages
