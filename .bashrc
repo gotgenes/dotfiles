@@ -138,13 +138,7 @@ export PERL5LIB="$HOME/.local/lib/perl5:$HOME/.local/lib/murali_perl_modules"
 # EDITOR CONFIGURATION
 # I like to use Vim as my default editor. Replace with your editor of
 # preference.
-# If we're running in a GUI environment or with ssh -X, I want gVim
-if [[ $DISPLAY ]] && hash gvim &>/dev/null; then
-    export EDITOR="gvim -f"
-# otherwise, give me plain old Vim
-else
-    export EDITOR="vim"
-fi
+export EDITOR="vim"
 
 
 # PROMPT_CONFIGURATION
