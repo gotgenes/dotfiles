@@ -2,8 +2,6 @@
 
 " This setting looks for tags files, recursively upwards
 setlocal tags+=tags;$HOME
-" Use my Python template if this is a new Python file
-autocmd FileType python nmap <Leader>pyt :0r ~/.vim/templates/python.py<CR>
 
 " Use Ropevim if possible
 if filereadable($HOME . '/.local/ropevim.vim')
