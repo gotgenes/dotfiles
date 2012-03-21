@@ -87,7 +87,7 @@ set background=dark
 
 " Choose a favorite color scheme
 if strlen(globpath(&rtp, 'colors/peaksea.vim'))
-    colorscheme peaksea
+    colorscheme xoria256
 endif
 
 
