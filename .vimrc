@@ -21,7 +21,7 @@ set hlsearch
 " Allow resizing of the window on session restore
 set sessionoptions+=resize
 " Enable mouse usage (all modes) in terminals
-set mouse=a
+"set mouse=a
 " Give popup menus for a right mouse-click
 set mousemodel=popup
 " Hide buffers when they are not displayed; this prevents warning messages
