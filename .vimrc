@@ -151,9 +151,9 @@ nnoremap <unique> <Leader>cl :Utl copyLink underCursor<CR>
 set grepprg=grep\ -nH\ $*
 " LaTeX suite default output
 let g:Tex_DefaultTargetFormat = "pdf"
-let g:Tex_ViewRule_dvi = "evince"
-let g:Tex_ViewRule_pdf = "evince"
-let g:Tex_ViewRule_ps = "evince"
+"let g:Tex_ViewRule_dvi = "open"
+"let g:Tex_ViewRule_pdf = "open"
+"let g:Tex_ViewRule_ps = "open"
 
 
 " I use NERDCommenter, which complains when it doesn't recognize a
