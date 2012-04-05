@@ -140,7 +140,7 @@ call SetupVAM()
 
 
 " utl configuration
-let g:utl_cfg_hdl_scm_http_system = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u#%f' &"
+let g:utl_cfg_hdl_scm_http_system = "silent !open %u"
 nnoremap <unique> <Leader>gu :Utl openLink underCursor edit<CR>
 nnoremap <unique> <Leader>cl :Utl copyLink underCursor<CR>
 
