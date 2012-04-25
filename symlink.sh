@@ -31,11 +31,13 @@ for file in `ls -A $DIR`; do
     path="$DIR/$file"
     if ( in_array "$file" "${DO_NOT_SYMLINK[@]}" ); then
         echo "Ignoring $file"
-    elif [[ -e $path ]] && [[ $force != 1 ]]; then
-        echo "Skipping $file because it exists already (maybe try using -f)"
     else
         newpath="$HOME/$file"
-        echo "Creating symlink $newpath"
-	    ln $ln_flags $DIR/$file $HOME
+        if [[ -e $newpath ]] && [[ $force != 1 ]]; then
+            echo "Skipping $file because it exists already (maybe try using -f)"
+        else
+            echo "Creating symlink $newpath"
+    	    ln $ln_flags $DIR/$file $HOME
+        fi
     fi
 done
