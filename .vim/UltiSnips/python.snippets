@@ -10,13 +10,28 @@ snippet newscript "Template for a new script." b
 
 """${1:Description.}"""
 
+import argparse
+
 
 ${2:import logging
-logger = logging.getLogger($3)
+LOGGER = logging.getLogger($3)
 
 
-}def main(argv=None):
-    ${0:pass}
+}
+def make_cli_parser():
+    """Creates the command-line interface.
+
+    :returns: an :py:class::`argparse.ArgumentParser` instance
+
+    """
+    cli_parser = argparse.ArgumentParser(description=__doc__)
+    return cli_parser
+
+
+def main(argv=None):
+    cli_parser = make_cli_parser()
+    args = cli_parser.parse_args(argv)
+    $0
 
 
 if __name__ == '__main__':
@@ -39,7 +54,7 @@ snippet newmod "Template for a new module." b
 
 
 ${2:import logging
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 
 }$0
