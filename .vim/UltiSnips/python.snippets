@@ -12,16 +12,20 @@ snippet newscript "Template for a new script." b
 
 import argparse
 
-
 ${2:import logging
 LOGGER = logging.getLogger($3)
-
+LOGGER.setLevel(logging.INFO)
+STREAM_HANDLER = logging.StreamHandler()
+STREAM_HANDLER.setLevel(logging.INFO)
+LOGGER.addHandler(stream_handler)
+FORMATTER = logging.Formatter('%(message)s')
+STREAM_HANDLER.setFormatter(formatter)
 
 }
 def make_cli_parser():
     """Creates the command-line interface.
 
-    :returns: an :py:class::`argparse.ArgumentParser` instance
+    :returns: an :py:class:\`argparse.ArgumentParser\` instance
 
     """
     cli_parser = argparse.ArgumentParser(description=__doc__)
