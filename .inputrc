@@ -14,3 +14,7 @@ set keymap vi
 
 # Disable expanding ~ into home directory
 set expand-tilde off
+
+# Case-insensitive tab-completion
+set completion-ignore-case on
+
