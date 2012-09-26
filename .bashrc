@@ -112,26 +112,18 @@ export LC_TIME="en_DK.UTF-8"
 
 # USER-INSTALLED SOFTWARE
 # User's executables
-if [ -d ~/.local/bin ] ; then
-    PATH=~/.local/bin:"${PATH}"
-fi
+PATH=~/.local/bin:"${PATH}"
 
 # Local libraries
-if [ -d ~/.local/lib ]; then
-    export LIBRARY_PATH=~/.local/lib:"${LIBRARY_PATH}"
-    export LD_LIBRARY_PATH=~/.local/lib:"${LD_LIBRARY_PATH}"
-    export LD_RUN_PATH=~/.local/lib:"${LD_RUN_PATH}"
-fi
-if [ -d ~/.local/include ]; then
-    export CPATH=~/.local/include:"${CPATH}"
-fi
+export LIBRARY_PATH=~/.local/lib:"${LIBRARY_PATH}"
+export LD_LIBRARY_PATH=~/.local/lib:"${LD_LIBRARY_PATH}"
+export LD_RUN_PATH=~/.local/lib:"${LD_RUN_PATH}"
+export CPATH=~/.local/include:"${CPATH}"
 
 export PKG_CONFIG_PATH="$HOME/.local/lib/pkgconfig:/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
 # Custom man pages
-if [ -d ~/.local/share/man ]; then
-    export MANPATH="$HOME/.local/share/man:$MANPATH"
-fi
+export MANPATH="$HOME/.local/share/man:$MANPATH"
 
 # Custom Python interactive session configuration.
 export PYTHONSTARTUP="$HOME/.pythonrc"
