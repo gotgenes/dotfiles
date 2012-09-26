@@ -104,6 +104,9 @@ export HISTSIZE=5000
 # Locally installed LaTeX junk goes in your ~/texmf directory
 export TEXMFHOME=$HOME/texmf
 
+# Need to set default locale
+export LC_ALL="en_US.UTF-8"
+
 # I prefer 24-hour clocks and YYYY-MM-DD date format.
 export LC_TIME="en_DK.UTF-8"
 
