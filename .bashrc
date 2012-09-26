@@ -111,6 +111,9 @@ export LC_ALL="en_US.UTF-8"
 export LC_TIME="en_DK.UTF-8"
 
 # USER-INSTALLED SOFTWARE
+# MacPorts PATH modification
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+
 # User's executables
 PATH=~/.local/bin:"${PATH}"
 
