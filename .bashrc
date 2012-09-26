@@ -126,6 +126,8 @@ if [ -d ~/.local/include ]; then
     export CPATH=~/.local/include:"${CPATH}"
 fi
 
+export PKG_CONFIG_PATH="$HOME/.local/lib/pkgconfig:/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH}"
+
 # Custom man pages
 if [ -d ~/.local/share/man ]; then
     export MANPATH="$HOME/.local/share/man:$MANPATH"
