@@ -75,8 +75,8 @@ fi
 
 
 # BASH COMPLETION.
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+    . /opt/local/etc/profile.d/bash_completion.sh
     # I hate tilde expansion, so I'm overriding the stupid expand
     # functions for it.
     _expand()
