@@ -55,7 +55,7 @@ $GREEN\
 \e(0q\e(B$GREEN\
 [$NORMAL\D{%H:%M}$GREEN]\
 \e(0q\e(B\e(0q\e(B\
-[$BLUE\w$GREEN]\n\
+[$BLUE\w$GREEN]$NORMAL\n\
 ${USER_PROMPT}$NORMAL "
 }
 
