@@ -56,7 +56,7 @@ $GREEN\
 [$NORMAL\D{%H:%M}$GREEN]\
 \e(0q\e(B\e(0q\e(B\
 [$BLUE\w$GREEN]$NORMAL\n\
-${USER_PROMPT}$NORMAL "
+$GREEN${USER_PROMPT}$NORMAL "
 }
 
 purty_prompt
