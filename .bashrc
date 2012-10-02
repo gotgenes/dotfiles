@@ -128,8 +128,10 @@ export MANPATH="$HOME/.local/share/man:$MANPATH"
 # Custom Python interactive session configuration.
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
-# Custom Perl modules installed in the following
-export PERL5LIB="$HOME/.local/lib/perl5:$HOME/.local/lib/murali_perl_modules"
+# Perl module installations should be through local::lib, which should
+# be set up with the root as ~/.local. This line puts those modules on
+# the PERL5LIB path.
+eval $(perl -I$HOME/.local -Mlocal::lib=$HOME/.local)
 
 
 # EDITOR CONFIGURATION
