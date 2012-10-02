@@ -48,8 +48,8 @@ set undoreload=10000
 let mapleader = ','
 
 " Easy access keystrokes for editing your Vim configuration
-:nnoremap <Leader>svrc :source $MYVIMRC<CR>
-:nnoremap <Leader>vrc :e $MYVIMRC<CR>
+nnoremap <Leader>svrc :source $MYVIMRC<CR>
+nnoremap <Leader>vrc :e $MYVIMRC<CR>
 
 " Quickly switch buffers
 nnoremap <unique> <silent> <leader>nn :bn<CR>
@@ -68,10 +68,14 @@ inoremap <C-space> <C-x><C-o>
 nnoremap <F2> <C-W>]<C-W>T
 
 " I want to quickly switch to text settings sometimes.
-nnoremap <Leader>ts :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
+nnoremap <Leader>txt :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
 
 " Turn off highlighted search terms
 nnoremap <silent> ,/ :nohlsearch<CR>
+
+" Insert a timestamp
+nnoremap <F5> a<C-R>=strftime("%F")<CR><Esc>
+inoremap <F5> <C-R>=strftime("%F")<CR>
 
 
 " SYNTAX HIGHLIGHTING AND COLOR SETTINGS
