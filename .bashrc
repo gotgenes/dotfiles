@@ -131,7 +131,7 @@ export PYTHONSTARTUP="$HOME/.pythonrc"
 # Perl module installations should be through local::lib, which should
 # be set up with the root as ~/.local. This line puts those modules on
 # the PERL5LIB path.
-eval $(perl -I$HOME/.local -Mlocal::lib=$HOME/.local)
+eval $(perl -I$HOME/.local/lib/perl5 -Mlocal::lib=$HOME/.local)
 
 
 # EDITOR CONFIGURATION
