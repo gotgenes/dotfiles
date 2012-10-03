@@ -140,7 +140,7 @@ eval $(perl -I$HOME/.local/lib/perl5 -Mlocal::lib=$HOME/.local)
 # EDITOR CONFIGURATION
 # I like to use Vim as my default editor. Replace with your editor of
 # preference.
-export EDITOR="vim"
+export EDITOR="mvim -v"
 
 
 # PROMPT_CONFIGURATION
