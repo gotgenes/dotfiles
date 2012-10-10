@@ -5,7 +5,8 @@ setlocal tags+=tags;$HOME
 
 " Use Ropevim if possible
 if filereadable($HOME . '/.local/ropevim.vim')
-  autocmd FileType python source $HOME/.local/ropevim.vim
+  "autocmd FileType python source $HOME/.local/ropevim.vim
+  source $HOME/.local/ropevim.vim
 endif
 
 " Python cTags for omni-complete [TODO: Forget about this and just use
