@@ -29,6 +29,10 @@ set mousemodel=popup
 set hidden
 " Always show the cursor position
 set ruler
+" Set the spelling language to US English.
+set spelllang=en_us
+" Turn on spell checking by default.
+"set spell
 
 " Use the persistent undo feature
 " See :h persistent-undo
@@ -76,6 +80,9 @@ nnoremap <silent> ,/ :nohlsearch<CR>
 " Insert a timestamp
 nnoremap <F5> a<C-R>=strftime("%F")<CR><Esc>
 inoremap <F5> <C-R>=strftime("%F")<CR>
+
+" Quickly switch spelling on and off.
+nnoremap <leader>spl :setlocal spell!<CR>
 
 
 " SYNTAX HIGHLIGHTING AND COLOR SETTINGS
