@@ -146,7 +146,23 @@ fun SetupVAM()
     exec 'helptags '.fnameescape(vam_install_path.'/vim-addon-manager/doc')
   endif
 
-  call vam#ActivateAddons(['BufOnly', 'EasyMotion', 'LaTeX-Suite_aka_Vim-LaTeX', 'LustyJuggler', 'matchit.zip', 'pylint', 'The_NERD_Commenter', 'trailing-whitespace', 'UltiSnips', 'utl', 'github:gotgenes/vim-yapif', 'virtualenv'], {'auto_install' : 0})
+  call vam#ActivateAddons(
+    \[
+      \'BufOnly',
+      \'EasyMotion',
+      \'LaTeX-Suite_aka_Vim-LaTeX',
+      \'LustyJuggler',
+      \'matchit.zip',
+      \'pylint',
+      \'The_NERD_Commenter',
+      \'trailing-whitespace',
+      \'UltiSnips',
+      \'utl',
+      \'github:gotgenes/vim-yapif',
+      \'virtualenv'
+    \],
+    \{'auto_install' : 0}
+  \)
 endfun
 call SetupVAM()
 
