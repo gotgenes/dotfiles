@@ -97,8 +97,9 @@ syntax enable
 set background=dark
 
 " Choose a favorite color scheme
-if strlen(globpath(&rtp, 'colors/peaksea.vim'))
-    colorscheme xoria256
+let cscheme='xoria256'
+if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
+    exec ":colorscheme ". cscheme
 endif
 
 
