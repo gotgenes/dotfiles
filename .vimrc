@@ -96,12 +96,6 @@ syntax enable
 "set background=light
 set background=dark
 
-" Choose a favorite color scheme
-let cscheme='xoria256'
-if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
-    exec ":colorscheme ". cscheme
-endif
-
 
 " PROGRAMMING OPTIONS (TODO: move to separate Vim files)
 
@@ -159,12 +153,22 @@ fun SetupVAM()
       \'UltiSnips',
       \'utl',
       \'github:gotgenes/vim-yapif',
-      \'virtualenv'
+      \'virtualenv',
+      \'peaksea',
+      \'xoria256',
+      \'zenburn',
     \],
     \{'auto_install' : 0}
   \)
 endfun
 call SetupVAM()
+
+
+" Choose a favorite color scheme
+let cscheme='xoria256'
+if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
+    exec ":colorscheme ". cscheme
+endif
 
 
 " utl configuration
