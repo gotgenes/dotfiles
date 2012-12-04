@@ -23,3 +23,4 @@ if exists("loaded_matchit")
   \ '{% *filter .*%}:{% *endfilter *%},' .
   \ '{% *spaceless .*%}:{% *endspaceless *%}'
 endif
+setlocal autoindent expandtab smarttab softtabstop=4 tabstop=4 shiftwidth=4

@@ -29,6 +29,10 @@ set mousemodel=popup
 set hidden
 " Always show the cursor position
 set ruler
+" Set the spelling language to US English.
+set spelllang=en_us
+" Turn on spell checking by default.
+"set spell
 
 " Use the persistent undo feature
 " See :h persistent-undo
@@ -77,6 +81,9 @@ nnoremap <silent> ,/ :nohlsearch<CR>
 nnoremap <F5> a<C-R>=strftime("%F")<CR><Esc>
 inoremap <F5> <C-R>=strftime("%F")<CR>
 
+" Quickly switch spelling on and off.
+nnoremap <leader>spl :setlocal spell!<CR>
+
 
 " SYNTAX HIGHLIGHTING AND COLOR SETTINGS
 
@@ -88,11 +95,6 @@ syntax enable
 " in Vim. [GVim does not seem phased by the order.])
 "set background=light
 set background=dark
-
-" Choose a favorite color scheme
-if strlen(globpath(&rtp, 'colors/peaksea.vim'))
-    colorscheme xoria256
-endif
 
 
 " PROGRAMMING OPTIONS (TODO: move to separate Vim files)
@@ -138,9 +140,35 @@ fun SetupVAM()
     exec 'helptags '.fnameescape(vam_install_path.'/vim-addon-manager/doc')
   endif
 
-  call vam#ActivateAddons(['BufOnly', 'EasyMotion', 'LaTeX-Suite_aka_Vim-LaTeX', 'LustyJuggler', 'matchit.zip', 'pylint', 'The_NERD_Commenter', 'trailing-whitespace', 'UltiSnips', 'utl', 'github:gotgenes/vim-yapif', 'virtualenv'], {'auto_install' : 0})
+  call vam#ActivateAddons(
+    \[
+      \'BufOnly',
+      \'EasyMotion',
+      \'LaTeX-Suite_aka_Vim-LaTeX',
+      \'LustyJuggler',
+      \'matchit.zip',
+      \'pylint',
+      \'The_NERD_Commenter',
+      \'trailing-whitespace',
+      \'UltiSnips',
+      \'utl',
+      \'github:gotgenes/vim-yapif',
+      \'virtualenv',
+      \'peaksea',
+      \'xoria256',
+      \'zenburn',
+    \],
+    \{'auto_install' : 0}
+  \)
 endfun
 call SetupVAM()
+
+
+" Choose a favorite color scheme
+let cscheme='xoria256'
+if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
+    exec ":colorscheme ". cscheme
+endif
 
 
 " utl configuration
