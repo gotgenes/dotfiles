@@ -27,12 +27,18 @@ set mousemodel=popup
 " Hide buffers when they are not displayed; this prevents warning messages
 " about modified buffers when switching between them.
 set hidden
-" Always show the cursor position
-set ruler
 " Set the spelling language to US English.
 set spelllang=en_us
 " Turn on spell checking by default.
 "set spell
+" Custom statusline
+" Always show the status line
+set laststatus=2
+set statusline=%.50F
+set statusline+=\ [%{strlen(&fenc)?&fenc:&enc},%{&fileformat}]
+set statusline+=\ %m%w%h%q
+set statusline+=%=
+set statusline+=%l,%c\ %3.3p%%
 
 " Use the persistent undo feature
 " See :h persistent-undo
