@@ -183,7 +183,7 @@ bind -m vi-insert "\C-\e[D":forward-word
 # Amazon Web Services shizzle
 export EC2_PRIVATE_KEY=$HOME/.aws/pk-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
 export EC2_CERT=$HOME/.aws/cert-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
-export JAVA_HOME=/usr/lib/jvm/java-6-openjdk/
+export JAVA_HOME=$(/usr/libexec/java_home)
 
 # virtualenvwrapper customization
 export WORKON_HOME=$HOME/.virtualenvs
