@@ -19,7 +19,7 @@ if exists("loaded_matchit")
   \ '{% *for .*%}:{% *endfor *%},' .
   \ '{% *with .*%}:{% *endwith *%},' .
   \ '{% *comment .*%}:{% *endcomment *%},' .
-  \ '{% *block .*%}:{% *endblock *%},' .
+  \ '{% *block .*%}:{% *endblock .*%},' .
   \ '{% *filter .*%}:{% *endfilter *%},' .
   \ '{% *spaceless .*%}:{% *endspaceless *%}'
 endif

@@ -35,8 +35,8 @@ set spelllang=en_us
 " Always show the status line
 set laststatus=2
 set statusline=%.50F
-set statusline+=\%m%w%h%q
 set statusline+=\ [%{strlen(&fenc)?&fenc:&enc},%{&fileformat}]
+set statusline+=\ %m%w%h%q
 set statusline+=%=
 set statusline+=%l,%c\ %3.3p%%
 
