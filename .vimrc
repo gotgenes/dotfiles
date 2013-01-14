@@ -163,7 +163,7 @@ fun SetupVAM()
       \'virtualenv',
       \'peaksea',
       \'xoria256',
-      \'zenburn',
+      \'Zenburn',
     \],
     \{'auto_install' : 0}
   \)
