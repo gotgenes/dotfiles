@@ -7,7 +7,6 @@
 	excludesfile = ~/.gitignore_global
 [github]
 	user = gotgenes
-	token = fef2f9ef106f8c88bab039b4c5dcb4b1
 [alias]
 	ci = commit
 	; Superb log aliases from
