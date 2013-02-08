@@ -154,7 +154,7 @@ fun SetupVAM()
       \'LaTeX-Suite_aka_Vim-LaTeX',
       \'LustyJuggler',
       \'matchit.zip',
-      \'pylint',
+      \'Syntastic',
       \'The_NERD_Commenter',
       \'trailing-whitespace',
       \'UltiSnips',
@@ -248,6 +248,9 @@ if has("autocmd")
   autocmd BufWritePre * if exists(":FixWhitespace") && exists("g:auto_rm_trailing_ws") && g:auto_rm_trailing_ws == 1 | exe ":FixWhitespace" | endif
 endif
 
-" pylint.vim configuration
-let g:pylint_onwrite = 0
+
+" Syntastic configuration
+set statusline+=\ %#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
