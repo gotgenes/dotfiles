@@ -137,6 +137,12 @@ export PYTHONSTARTUP="$HOME/.pythonrc"
 eval $(perl -I$HOME/.local/lib/perl5 -Mlocal::lib=$HOME/.local)
 
 
+# Ruby gems install locally.
+export GEM_HOME="$HOME/.local"
+export GEM_PATH="$GEM_HOME:$GEM_PATH"
+export RUBYLIB="$GEM_HOME/lib:$RUBY_LIB"
+
+
 # EDITOR CONFIGURATION
 # I like to use Vim as my default editor. Replace with your editor of
 # preference.
