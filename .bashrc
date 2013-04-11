@@ -112,7 +112,7 @@ export LC_TIME="en_DK.UTF-8"
 
 # USER-INSTALLED SOFTWARE
 # User's executables
-PATH=~/.local/bin:"${PATH}"
+PATH="${HOME}/.local/bin:${PATH}"
 
 # Local libraries
 export LIBRARY_PATH=~/.local/lib:"${LIBRARY_PATH}"
