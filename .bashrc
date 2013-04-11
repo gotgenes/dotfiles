@@ -112,7 +112,12 @@ export LC_TIME="en_DK.UTF-8"
 
 # USER-INSTALLED SOFTWARE
 # MacPorts PATH modification
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
+#
+# MacPorts Python bins
+export PATH="/opt/local/Library/Frameworks/Python.framework/Versions/3.3/bin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+# Python user site directory bins
+export PATH="${HOME}/Library/Python/3.3/bin:${HOME}/Library/Python/2.7/bin:${PATH}"
 
 # User's executables
 PATH="${HOME}/.local/bin:${PATH}"
