@@ -56,24 +56,22 @@ WhiteBg='\e[107m'
 function purty_prompt {
     if [[ $USER == "root" ]]
     then
-        local USER_COLOR="\[$Bold\]\[$Red\]"
-        local USER_PROMPT="\[$Bold\]\[$Red\]\\$\[$DefaultFg\]\[$NoBold\]"
+        local USER_COLOR="\\[$Bold\\]\\[$Red\\]"
+        local USER_PROMPT="\\[$Bold\\]\\[$Red\\]\\$\\[$DefaultFg\\]\\[$NoBold\\]"
     else
         local USER_COLOR="$Yellow"
-        local USER_PROMPT="\$(if [ \$? = 0 ]; then echo '\$'; else echo '\\[$RedBg\\]\[$White\]\$\[$DefaultFg\]\\[$DefaultBg\\]'; fi)"
+        local USER_PROMPT="\$(if [ \$? = 0 ]; then echo '\\[$Green\\]\$\\[$DefaultFg\\]'; else echo '\\[$Red\\]\$\\[$DefaultFg\\]'; fi)"
     fi
     PS1="\[\e]0;\u@\h: \w\007\]\[$Reset\]\
-\[$Green\]\
-[\[$USER_COLOR\]\u\[$Reset\]\[$Green\]]\
-\e(0q\e(B\
-[\[$Purple\]@\h\[$Green\]]\
-\e(0q\e(B\[$Green\]\
-[\[$Reset\]\!\[$Green\]]\
-\e(0q\e(B\[$Green\]\
-[\[$Reset\]\D{%H:%M}\[$Green\]]\
+\[$LightGray\]\
+[\[$USER_COLOR\]\u\[$Reset\]\[$LightGray\]@\[$Magenta\]\h\[$LightGray\]]\
+\e(0q\e(B\[$LightGray\]\
+[\[$Reset\]\!\[$LightGray\]]\
+\e(0q\e(B\[$LightGray\]\
+[\[$Reset\]\D{%H:%M}\[$LightGray\]]\
 \e(0q\e(B\e(0q\e(B\
-[\[$Blue\]\w\[$Green\]]\[$Reset\]\n\
-\[$Green\]${USER_PROMPT}\[$Reset\] "
+[\[$Blue\]\w\[$LightGray\]]\[$Reset\]\n\
+\[$LightGray\]${USER_PROMPT}\[$Reset\] "
 }
 
 purty_prompt
