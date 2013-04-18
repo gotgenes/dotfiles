@@ -196,4 +196,6 @@ fi
 
 # let pip know about virtualenvwrapper
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
+# let pip cache packages
+export PIP_DOWNLOAD_CACHE="$HOME/.pip_download_cache"
 
