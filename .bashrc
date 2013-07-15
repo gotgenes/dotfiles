@@ -118,6 +118,9 @@ export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
 export PATH="/opt/local/Library/Frameworks/Python.framework/Versions/3.3/bin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 # Python user site directory bins
 export PATH="${HOME}/Library/Python/3.3/bin:${HOME}/Library/Python/2.7/bin:${PATH}"
+#
+# MacPorts Postgres bins
+export PATH="/opt/local/lib/postgresql91/bin:${PATH}"
 
 # User's executables
 PATH="${HOME}/.local/bin:${PATH}"
