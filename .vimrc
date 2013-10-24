@@ -150,6 +150,7 @@ fun SetupVAM()
     \[
       \'BufOnly',
       \'EasyMotion',
+      \'fugitive',
       \'html5',
       \'LaTeX-Suite_aka_Vim-LaTeX',
       \'LustyJuggler',
@@ -158,10 +159,12 @@ fun SetupVAM()
       \'The_NERD_Commenter',
       \'trailing-whitespace',
       \'UltiSnips',
+      \'jedi-vim',
       \'utl',
       \'github:gotgenes/vim-yapif',
       \'virtualenv',
       \'peaksea',
+      \'Solarized',
       \'xoria256',
       \'Zenburn',
     \],
@@ -172,7 +175,8 @@ call SetupVAM()
 
 
 " Choose a favorite color scheme
-let cscheme='xoria256'
+let cscheme='solarized'
+set bg=light
 if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
     exec ":colorscheme ". cscheme
 endif
