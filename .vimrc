@@ -150,6 +150,7 @@ fun SetupVAM()
     \[
       \'BufOnly',
       \'EasyMotion',
+      \'fugitive',
       \'html5',
       \'LaTeX-Suite_aka_Vim-LaTeX',
       \'LustyJuggler',
