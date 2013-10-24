@@ -162,6 +162,7 @@ fun SetupVAM()
       \'github:gotgenes/vim-yapif',
       \'virtualenv',
       \'peaksea',
+      \'Solarized',
       \'xoria256',
       \'Zenburn',
     \],
@@ -172,7 +173,8 @@ call SetupVAM()
 
 
 " Choose a favorite color scheme
-let cscheme='xoria256'
+let cscheme='solarized'
+set bg=light
 if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
     exec ":colorscheme ". cscheme
 endif
