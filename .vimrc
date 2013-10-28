@@ -91,18 +91,6 @@ inoremap <F5> <C-R>=strftime("%F")<CR>
 nnoremap <leader>spl :setlocal spell!<CR>
 
 
-" SYNTAX HIGHLIGHTING AND COLOR SETTINGS
-
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-syntax enable
-
-" Uncomment one below to get a dark background or a light background. (NOTE: " it is important to specify this background before specifying any colorscheme
-" in Vim. [GVim does not seem phased by the order.])
-"set background=light
-set background=dark
-
-
 " PROGRAMMING OPTIONS (TODO: move to separate Vim files)
 
 if has("autocmd")
@@ -174,9 +162,17 @@ endfun
 call SetupVAM()
 
 
+" SYNTAX HIGHLIGHTING AND COLOR SETTINGS
+syntax enable
+
+" Uncomment one below to get a dark background or a light background. (NOTE:
+" it is important to specify this background before specifying any colorscheme
+" in Vim. [GVim does not seem phased by the order.])
+set background=light
+"set background=dark
+
 " Choose a favorite color scheme
 let cscheme='solarized'
-set bg=light
 if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
     exec ":colorscheme ". cscheme
 endif
