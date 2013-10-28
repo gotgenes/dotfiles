@@ -39,6 +39,8 @@ set statusline+=\ [%{strlen(&fenc)?&fenc:&enc},%{&fileformat}]
 set statusline+=\ %m%w%h%q
 set statusline+=%=
 set statusline+=%l,%c\ %3.3p%%
+" Highlight the line on which the cursor lies
+set cursorline
 
 " Use the persistent undo feature
 " See :h persistent-undo
