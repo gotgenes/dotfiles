@@ -1,1 +1,1 @@
-set lines=40
+set lines=50
