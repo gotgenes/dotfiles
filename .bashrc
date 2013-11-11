@@ -75,8 +75,8 @@ fi
 
 
 # BASH COMPLETION.
-if [ -f /user/local/etc/profile.d/bash_completion.sh ]; then
-    . /user/local/etc/profile.d/bash_completion.sh
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
     # I hate tilde expansion, so I'm overriding the stupid expand
     # functions for it.
     _expand()
