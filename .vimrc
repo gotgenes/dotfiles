@@ -72,13 +72,6 @@ nnoremap <unique> <silent> <leader>bd :bd<CR>
 nnoremap j gj
 nnoremap k gk
 
-" Omni-Completion with Control + X, Control + O is a pain in the ass. Map to
-" Control + Space bar
-inoremap <C-space> <C-x><C-o>
-"
-" awesome remapping to open tags in new tab
-nnoremap <F2> <C-W>]<C-W>T
-
 " I want to quickly switch to text settings sometimes.
 nnoremap <Leader>txt :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
 
@@ -101,7 +94,7 @@ if has("autocmd")
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
   " This setting makes sure Vim is always operating in the directory of
   " the current buffer
-  autocmd BufEnter * lcd %:p:h
+  autocmd BufEnter * if expand('%:p') !~ '://' | :lchdir %:p:h | endif
   autocmd FileType vim setlocal expandtab smarttab softtabstop=2 shiftwidth=2
   autocmd FileType tex setlocal expandtab smarttab softtabstop=4 shiftwidth=4 tabstop=4 tw=72 spell spelllang=en
   autocmd FileType html,xml,css setlocal autoindent expandtab smarttab softtabstop=2 tabstop=2 shiftwidth=2
@@ -256,3 +249,5 @@ set statusline+=\ %#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" jedi configuration
+let g:jedi#use_tabs_not_buffers = 0
