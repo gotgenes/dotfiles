@@ -101,7 +101,7 @@ if has("autocmd")
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
   " This setting makes sure Vim is always operating in the directory of
   " the current buffer
-  autocmd BufEnter * lcd %:p:h
+  autocmd BufEnter * if expand('%:p') !~ '://' | :lchdir %:p:h | endif
   autocmd FileType vim setlocal expandtab smarttab softtabstop=2 shiftwidth=2
   autocmd FileType tex setlocal expandtab smarttab softtabstop=4 shiftwidth=4 tabstop=4 tw=72 spell spelllang=en
   autocmd FileType html,xml,css setlocal autoindent expandtab smarttab softtabstop=2 tabstop=2 shiftwidth=2
