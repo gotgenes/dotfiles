@@ -249,3 +249,5 @@ set statusline+=\ %#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" jedi configuration
+let g:jedi#use_tabs_not_buffers = 0
