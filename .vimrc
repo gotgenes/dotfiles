@@ -72,13 +72,6 @@ nnoremap <unique> <silent> <leader>bd :bd<CR>
 nnoremap j gj
 nnoremap k gk
 
-" Omni-Completion with Control + X, Control + O is a pain in the ass. Map to
-" Control + Space bar
-inoremap <C-space> <C-x><C-o>
-"
-" awesome remapping to open tags in new tab
-nnoremap <F2> <C-W>]<C-W>T
-
 " I want to quickly switch to text settings sometimes.
 nnoremap <Leader>txt :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
 
