@@ -138,6 +138,7 @@ fun SetupVAM()
       \'LaTeX-Suite_aka_Vim-LaTeX',
       \'LustyJuggler',
       \'matchit.zip',
+      \'Supertab',
       \'Syntastic',
       \'The_NERD_Commenter',
       \'trailing-whitespace',
