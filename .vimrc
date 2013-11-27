@@ -143,6 +143,7 @@ fun SetupVAM()
       \'The_NERD_Commenter',
       \'trailing-whitespace',
       \'UltiSnips',
+      \'Unite',
       \'jedi-vim',
       \'utl',
       \'github:gotgenes/vim-yapif',
@@ -252,3 +253,8 @@ set statusline+=%*
 
 " jedi configuration
 let g:jedi#use_tabs_not_buffers = 0
+
+" Unite settings
+nnoremap <silent> <Leader>ub :Unite buffer<CR>
+
+
