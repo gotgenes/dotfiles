@@ -5,6 +5,7 @@
 	ui = auto
 [core]
 	excludesfile = ~/.gitignore_global
+	autocrlf = input
 [github]
 	user = gotgenes
 [alias]
