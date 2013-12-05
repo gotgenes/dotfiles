@@ -16,3 +16,5 @@
 	glog = log --graph --pretty=format:'%C(auto)%h -%d %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --date-order
 [push]
 	default = matching
+[credential]
+	helper = cache
