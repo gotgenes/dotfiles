@@ -143,7 +143,7 @@ fun SetupVAM()
       \'The_NERD_Commenter',
       \'trailing-whitespace',
       \'UltiSnips',
-      \'Unite',
+      \'unite',
       \'jedi-vim',
       \'utl',
       \'github:gotgenes/vim-yapif',
