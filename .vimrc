@@ -1,4 +1,6 @@
-" BEHAVIORAL SETTINGS
+"""""""""""""""""""""""
+" BEHAVIORAL SETTINGS "
+"""""""""""""""""""""""
 
 " This is Vim, not VI, so we use it like we mean it!
 set nocompatible
@@ -54,7 +56,9 @@ set undolevels=1000
 set undoreload=10000
 
 
-" MAPPINGS
+""""""""""""
+" MAPPINGS "
+""""""""""""
 
 " Set the leader
 let mapleader = ','
@@ -68,7 +72,7 @@ nnoremap <unique> <silent> <leader>nn :bn<CR>
 nnoremap <unique> <silent> <leader>pp :bp<CR>
 nnoremap <unique> <silent> <leader>bd :bd<CR>
 
-" This moves nicely among unbroken text
+" Let j and k move up and down over line-wrapped lines, too.
 nnoremap j gj
 nnoremap k gk
 
@@ -76,7 +80,7 @@ nnoremap k gk
 nnoremap <Leader>txt :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
 
 " Turn off highlighted search terms
-nnoremap <silent> ,/ :nohlsearch<CR>
+nnoremap <silent> <Leader>/ :nohlsearch<CR>
 
 " Insert a timestamp
 nnoremap <F5> a<C-R>=strftime("%F")<CR><Esc>
@@ -85,32 +89,27 @@ inoremap <F5> <C-R>=strftime("%F")<CR>
 " Quickly switch spelling on and off.
 nnoremap <leader>spl :setlocal spell!<CR>
 
-
-" PROGRAMMING OPTIONS (TODO: move to separate Vim files)
+" autocmd settings
 
 if has("autocmd")
   filetype plugin indent on
-  " Start editing from the last edited position in the file.
+  " Start editing a previously opened file from the position of the most
+  " recent edit.
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
   " This setting makes sure Vim is always operating in the directory of
-  " the current buffer
+  " the current buffer.
   autocmd BufEnter * if expand('%:p') !~ '://' | :lchdir %:p:h | endif
-  autocmd FileType vim setlocal expandtab smarttab softtabstop=2 shiftwidth=2
-  autocmd FileType tex setlocal expandtab smarttab softtabstop=4 shiftwidth=4 tabstop=4 tw=72 spell spelllang=en
-  autocmd FileType html,xml,css setlocal autoindent expandtab smarttab softtabstop=2 tabstop=2 shiftwidth=2
-  autocmd FileType dot setlocal tabstop=4 shiftwidth=4 tw=78 autoindent
-  autocmd FileType Wikipedia setlocal linebreak
-  autocmd FileType rst setlocal autoindent expandtab smarttab softtabstop=2 tabstop=2 shiftwidth=2 tw=72
 
-  " If you prefer the Omni-Completion tip window to close when a selection is
-  " made, these lines close it on movement in insert mode or when leaving
-  " insert mode
+  " The lines below close the Omni-Completion tip window on movement in insert
+  " mode or when leaving insert mode.
   "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
   "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 endif
 
 
-" PLUGINS CONFIGURATIONS
+""""""""""""""""""""""""""
+" PLUGINS CONFIGURATIONS "
+""""""""""""""""""""""""""
 
 " vim-addon-manager support
 fun SetupVAM()
@@ -159,22 +158,6 @@ endfun
 call SetupVAM()
 
 
-" SYNTAX HIGHLIGHTING AND COLOR SETTINGS
-syntax enable
-
-" Uncomment one below to get a dark background or a light background. (NOTE:
-" it is important to specify this background before specifying any colorscheme
-" in Vim. [GVim does not seem phased by the order.])
-set background=light
-"set background=dark
-
-" Choose a favorite color scheme
-let cscheme='solarized'
-if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
-    exec ":colorscheme ". cscheme
-endif
-
-
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u#%f' &"
 nnoremap <unique> <Leader>gu :Utl openLink underCursor edit<CR>
@@ -192,8 +175,9 @@ let g:Tex_ViewRule_pdf = "evince"
 let g:Tex_ViewRule_ps = "evince"
 
 
-" I use NERDCommenter, which complains when it doesn't recognize a
-" filetype; this keeps it from bitching.
+" NERDCommenter configuration
+
+" Prevent NERDCommenter from complaining about unrecognized filetypes.
 let NERDShutUp=1
 
 
@@ -256,5 +240,21 @@ let g:jedi#use_tabs_not_buffers = 0
 
 " Unite settings
 nnoremap <silent> <Leader>ub :Unite buffer<CR>
+
+
+" Syntax highlighting and color settings
+syntax enable
+
+" Uncomment one below to get a dark background or a light background. (NOTE:
+" it is important to specify this background before specifying any colorscheme
+" in Vim. [GVim does not seem phased by the order.])
+set background=light
+"set background=dark
+
+" Choose a favorite color scheme
+let cscheme='solarized'
+if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
+    exec ":colorscheme ". cscheme
+endif
 
 
