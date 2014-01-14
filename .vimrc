@@ -184,6 +184,7 @@ fun! SetupVAM()
       \'utl',
       \'github:gotgenes/vim-yapif',
       \'virtualenv',
+      \'vspec',
       \'peaksea',
       \'Solarized',
       \'xoria256',
