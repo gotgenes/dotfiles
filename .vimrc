@@ -183,6 +183,7 @@ fun! SetupVAM()
       \'jedi-vim',
       \'utl',
       \'github:gotgenes/vim-yapif',
+      \'vim-gitgutter',
       \'virtualenv',
       \'vspec',
       \'peaksea',
