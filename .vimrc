@@ -179,6 +179,7 @@ fun! SetupVAM()
       \'The_NERD_Commenter',
       \'trailing-whitespace',
       \'UltiSnips',
+      \'vim-snippets',
       \'unite',
       \'jedi-vim',
       \'utl',
