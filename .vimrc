@@ -143,74 +143,47 @@ fun! EnsureVamIsOnDisk(plugin_root_dir)
 endfun
 
 fun! SetupVAM()
-  " Set advanced options like this:
-  " let g:vim_addon_manager = {}
-  " let g:vim_addon_manager.key = value
-  "     Pipe all output into a buffer which gets written to disk
-  " let g:vim_addon_manager.log_to_buf =1
-
-  " Example: drop git sources unless git is in PATH. Same plugins can
-  " be installed from www.vim.org. Lookup MergeSources to get more control
-  " let g:vim_addon_manager.drop_git_sources = !executable('git')
-  " let g:vim_addon_manager.debug_activation = 1
-
-  " VAM install location:
   let c = get(g:, 'vim_addon_manager', {})
   let g:vim_addon_manager = c
-  let c.plugin_root_dir = expand('$HOME/.vim/vim-addons', 1)
+  let c.plugin_root_dir = expand('$HOME', 1) . '/.vim/vim-addons'
   if !EnsureVamIsOnDisk(c.plugin_root_dir)
     echohl ErrorMsg | echomsg "No VAM found!" | echohl NONE
     return
   endif
   let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
-
-  " Tell VAM which plugins to fetch & load:
-  call vam#ActivateAddons(
-    \[
-      \'BufOnly',
-      \'EasyMotion',
-      \'fugitive',
-      \'html5',
-      \'LaTeX-Suite_aka_Vim-LaTeX',
-      \'LustyJuggler',
-      \'matchit.zip',
-      \'Supertab',
-      \'Syntastic',
-      \'The_NERD_Commenter',
-      \'trailing-whitespace',
-      \'UltiSnips',
-      \'vim-snippets',
-      \'unite',
-      \'jedi-vim',
-      \'utl',
-      \'github:gotgenes/vim-yapif',
-      \'vim-gitgutter',
-      \'virtualenv',
-      \'vspec',
-      \'peaksea',
-      \'Solarized',
-      \'xoria256',
-      \'Zenburn',
-    \],
-    \{'auto_install' : 0}
-  \)
-  " sample: call vam#ActivateAddons(['pluginA','pluginB', ...], {'auto_install' : 0})
-  " Also See "plugins-per-line" below
-
-  " Addons are put into plugin_root_dir/plugin-name directory
-  " unless those directories exist. Then they are activated.
-  " Activating means adding addon dirs to rtp and do some additional
-  " magic
-
-  " How to find addon names?
-  " - look up source from pool
-  " - (<c-x><c-p> complete plugin names):
-  " You can use name rewritings to point to sources:
-  "    ..ActivateAddons(["github:foo", .. => github://foo/vim-addon-foo
-  "    ..ActivateAddons(["github:user/repo", .. => github://user/repo
-  " Also see section "2.2. names of addons and addon sources" in VAM's documentation
+  if !isdirectory(c.plugin_root_dir.'/vim-addon-manager/autoload')
+    execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '
+        \       shellescape(c.plugin_root_dir.'/vim-addon-manager', 1)
+  endif
+  call vam#ActivateAddons([], {'auto_install' : 0})
 endfun
 call SetupVAM()
+
+" Tell VAM which plugins to fetch & load:
+VAMActivate BufOnly
+VAMActivate EasyMotion
+VAMActivate fugitive
+VAMActivate html5
+VAMActivate LaTeX-Suite_aka_Vim-LaTeX
+VAMActivate LustyJuggler
+VAMActivate matchit.zip
+VAMActivate Supertab
+VAMActivate Syntastic
+VAMActivate The_NERD_Commenter
+VAMActivate trailing-whitespace
+VAMActivate UltiSnips
+VAMActivate vim-snippets
+VAMActivate unite
+VAMActivate jedi-vim
+VAMActivate utl
+VAMActivate github:gotgenes/vim-yapif
+VAMActivate vim-gitgutter
+VAMActivate virtualenv
+VAMActivate vspec
+VAMActivate peaksea
+VAMActivate Solarized
+VAMActivate xoria256
+VAMActivate Zenburn
 
 
 " utl configuration
