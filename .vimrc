@@ -289,3 +289,6 @@ if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
     exec ":colorscheme ". cscheme
 endif
 
+" Fix for vim-gitgutter coloring with Solarized colorscheme
+highlight clear SignColumn
+highlight link SignColumn LineNr
