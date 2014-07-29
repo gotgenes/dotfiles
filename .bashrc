@@ -99,7 +99,7 @@ export HISTCONTROL=erasedups:ignorespace
 shopt -s histappend
 
 # Set the number of lines to be recorded in the history
-export HISTSIZE=5000
+export HISTSIZE=100000
 
 # Locally installed LaTeX junk goes in your ~/texmf directory
 export TEXMFHOME=$HOME/texmf
