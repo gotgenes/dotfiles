@@ -210,7 +210,7 @@ let NERDShutUp=1
 
 
 " UltiSnips configuration
-let g:UltiSnipsListSnippets = "<S-Tab>"
+let g:UltiSnipsListSnippets = "<c-tab>"
 let g:ultisnips_python_style = "sphinx"
 
 
