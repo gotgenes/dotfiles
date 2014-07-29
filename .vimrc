@@ -210,7 +210,7 @@ let NERDShutUp=1
 
 
 " UltiSnips configuration
-let g:UltiSnipsListSnippets = "<S-Tab>"
+let g:UltiSnipsListSnippets = "<c-tab>"
 let g:ultisnips_python_style = "sphinx"
 
 
@@ -289,3 +289,6 @@ if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
     exec ":colorscheme ". cscheme
 endif
 
+" Fix for vim-gitgutter coloring with Solarized colorscheme
+highlight clear SignColumn
+highlight link SignColumn LineNr
