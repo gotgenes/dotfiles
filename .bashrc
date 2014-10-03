@@ -211,3 +211,10 @@ export PIP_VIRTUALENV_BASE=$WORKON_HOME
 # let pip cache packages
 export PIP_DOWNLOAD_CACHE="$HOME/Library/Caches/pip_downloads"
 
+# pyenv setup
+if command -v pyenv >/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+    if [ -f $HOME/.pyenv/completions/pyenv.bash ]; then
+        source $HOME/.pyenv/completions/pyenv.bash
+    fi
+fi
