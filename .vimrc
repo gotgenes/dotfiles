@@ -178,6 +178,7 @@ VAMActivate jedi-vim
 VAMActivate utl
 VAMActivate github:gotgenes/vim-yapif
 VAMActivate vim-gitgutter
+VAMActivate vim-go
 VAMActivate virtualenv
 VAMActivate vspec
 VAMActivate peaksea
