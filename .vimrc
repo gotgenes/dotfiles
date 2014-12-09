@@ -163,6 +163,7 @@ call SetupVAM()
 VAMActivate BufOnly
 VAMActivate EasyMotion
 VAMActivate fugitive
+VAMActivate gitv
 VAMActivate html5
 VAMActivate LaTeX-Suite_aka_Vim-LaTeX
 VAMActivate LustyJuggler
