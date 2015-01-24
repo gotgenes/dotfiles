@@ -16,6 +16,6 @@
 	log1 = log --oneline --decorate
 	glog = log --graph --pretty=format:'%C(auto)%h -%d %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --date-order
 [push]
-	default = matching
+	default = simple
 [credential]
 	helper = cache
