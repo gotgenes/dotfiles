@@ -53,29 +53,12 @@ fi
 # machine-specific should be specified in a separate ~/.bash_aliases
 # file (see below).
 
-# enable color support of ls and also add handy aliases
+# enable color support of ls and other programs
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias lr='ls -R'
-alias lla='ls -lA'
-alias llh='ls -lh'
-alias llr='ls -lR'
-alias llar='ls -lAR'
-#alias l='ls -CF'
-
-# Additional aliases.
+# BASH aliases
 source_if_exists "$HOME/.bash_aliases"
 
 
