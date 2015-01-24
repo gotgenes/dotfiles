@@ -1,3 +1,10 @@
+source_if_exists () {
+    file_to_source="$1"
+    if [ -f $file_to_source ]; then
+        . $file_to_source
+    fi
+}
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -69,16 +76,14 @@ alias llar='ls -lAR'
 #alias l='ls -CF'
 
 # Additional aliases.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+source_if_exists "$HOME/.bash_aliases"
 
 
-# BASH COMPLETION.
+# BASH completion
+source_if_exists /etc/bash_completion
 if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-    # I hate tilde expansion, so I'm overriding the stupid expand
-    # functions for it.
+    # Disable tilde expansion; see
+    # http://superuser.com/questions/95653/bash-shell-tab-completion-dont-expand-the
     _expand()
     {
         return 0
@@ -154,14 +159,10 @@ export EDITOR="vim"
 # Use my custom prompt, if it exists.
 case "$TERM" in
 xterm*|rxvt*|gnome*|screen-256color)
-    if [ -f ~/.bash_prompt ]; then
-        source ~/.bash_prompt
-    fi
+    source_if_exists "$HOME/.bash_prompt"
     ;;
 *)
-    if [ -f ~/.bash_prompt_alt ]; then
-        source ~/.bash_prompt_alt
-    fi
+    source_if_exists "$HOME/.bash_prompt_alt"
     ;;
 esac
 
@@ -190,9 +191,7 @@ bind -m vi-insert "\C-\e[D":forward-word
 
 # virtualenvwrapper customization
 export WORKON_HOME="$HOME/.virtualenvs"
-if [ -f "$LOCAL_DIR/bin/virtualenvwrapper.sh" ]; then
-    source "$LOCAL_DIR/bin/virtualenvwrapper.sh"
-fi
+source_if_exists "$LOCAL_DIR/bin/virtualenvwrapper.sh"
 
 # let pip know about virtualenvwrapper
 export PIP_VIRTUALENV_BASE="$WORKON_HOME"
@@ -203,7 +202,5 @@ export PIP_DOWNLOAD_CACHE="$HOME/.pip_download_cache"
 PYENV_DIR="$HOME/.pyenv"
 if command -v pyenv >/dev/null 2>&1; then
     eval "$(pyenv init -)"
-    if [ -f "$PYENV_DIR/completions/pyenv.bash" ]; then
-        source "$PYENV_DIR/completions/pyenv.bash"
-    fi
+    source_if_exists "$PYENV_DIR/completions/pyenv.bash"
 fi
