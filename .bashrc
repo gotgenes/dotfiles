@@ -58,11 +58,11 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# BASH aliases
+# Bash aliases
 source_if_exists "$HOME/.bash_aliases"
 
 
-# BASH completion
+# Bash completion
 source_if_exists /etc/bash_completion
 if [ -f /etc/bash_completion ]; then
     # Disable tilde expansion; see
