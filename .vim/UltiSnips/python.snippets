@@ -13,15 +13,9 @@ snippet newscript "Template for a new script." b
 import argparse
 
 ${2:import logging
-LOGGER = logging.getLogger($3)
-LOGGER.setLevel(logging.INFO)
-STREAM_HANDLER = logging.StreamHandler()
-STREAM_HANDLER.setLevel(logging.INFO)
-LOGGER.addHandler(STREAM_HANDLER)
-FORMATTER = logging.Formatter('%(message)s')
-STREAM_HANDLER.setFormatter(FORMATTER)
+LOGGER = logging.getLogger(__name__)
 
-}
+}$0
 def make_cli_parser():
     """Creates the command-line interface.
 
@@ -58,11 +52,7 @@ snippet newmod "Template for a new module." b
 
 
 ${2:import logging
-LOGGER = logging.getLogger(__name__)
-
-
-}$0
-
+LOGGER = logging.getLogger(__name__)}$0
 endsnippet
 
 
@@ -76,7 +66,7 @@ snippet newtestmod "Template for a new testing module." b
 # LICENSE.txt for details.
 
 
-"""Tests for ${1:modulename}.py"""
+"""Tests for ${1:modulename}"""
 
 
 import unittest
@@ -88,6 +78,4 @@ $0
 
 if __name__ == '__main__':
     unittest.main()
-
 endsnippet
-
