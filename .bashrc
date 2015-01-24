@@ -170,11 +170,6 @@ export PYTHONSTARTUP="$HOME/.pythonrc"
 export WORKON_HOME="$HOME/.virtualenvs"
 source_if_exists "$LOCAL_DIR/bin/virtualenvwrapper.sh"
 
-# let pip know about virtualenvwrapper
-export PIP_VIRTUALENV_BASE="$WORKON_HOME"
-# let pip cache packages
-export PIP_DOWNLOAD_CACHE="$HOME/.pip_download_cache"
-
 # pyenv setup
 PYENV_DIR="$HOME/.pyenv"
 if command -v pyenv >/dev/null 2>&1; then
