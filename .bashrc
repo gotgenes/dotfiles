@@ -187,10 +187,6 @@ bind -m vi-insert "\C-\e[D":forward-word
 
 
 # APPLICATION ENVIRONMENTAL VARIABLES
-# Amazon Web Services shizzle
-export EC2_PRIVATE_KEY=$HOME/.aws/pk-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
-export EC2_CERT=$HOME/.aws/cert-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
-export JAVA_HOME=/usr/lib/jvm/java-6-openjdk/
 
 # virtualenvwrapper customization
 export WORKON_HOME="$HOME/.virtualenvs"
