@@ -102,7 +102,7 @@ shopt -s histappend
 export HISTSIZE=100000
 
 # Locally installed LaTeX junk goes in your ~/texmf directory
-export TEXMFHOME=$HOME/texmf
+export TEXMFHOME="$HOME/texmf"
 
 # Need to set default locale
 export LC_ALL="en_US.UTF-8"
@@ -110,20 +110,24 @@ export LC_ALL="en_US.UTF-8"
 # I prefer 24-hour clocks and YYYY-MM-DD date format.
 export LC_TIME="en_DK.UTF-8"
 
+
+LOCAL_DIR="$HOME/.local"
+
 # USER-INSTALLED SOFTWARE
 # User's executables
-PATH="${HOME}/.local/bin:${PATH}"
+export PATH="$LOCAL_DIR/bin:$PATH"
 
 # Local libraries
-export LIBRARY_PATH=~/.local/lib:"${LIBRARY_PATH}"
-export LD_LIBRARY_PATH=~/.local/lib:"${LD_LIBRARY_PATH}"
-export LD_RUN_PATH=~/.local/lib:"${LD_RUN_PATH}"
-export CPATH=~/.local/include:"${CPATH}"
+LOCAL_LIB_DIR="$LOCAL_DIR/lib"
+export LIBRARY_PATH="$LOCAL_LIB_DIR:$LIBRARY_PATH"
+export LD_LIBRARY_PATH="$LOCAL_LIB_DIR:$LD_LIBRARY_PATH"
+export LD_RUN_PATH="$LOCAL_LIB_DIR:$LD_RUN_PATH"
+export CPATH="$LOCAL_LIB_DIR/include:$CPATH"
 
-export PKG_CONFIG_PATH="$HOME/.local/lib/pkgconfig:/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH}"
+export PKG_CONFIG_PATH="$LOCAL_LIB_DIR/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # Custom man pages
-export MANPATH="$HOME/.local/share/man:$MANPATH"
+export MANPATH="$LOCAL_DIR/share/man:$MANPATH"
 
 # Custom Python interactive session configuration.
 export PYTHONSTARTUP="$HOME/.pythonrc"
@@ -131,11 +135,11 @@ export PYTHONSTARTUP="$HOME/.pythonrc"
 # Perl module installations should be through local::lib, which should
 # be set up with the root as ~/.local. This line puts those modules on
 # the PERL5LIB path.
-eval $(perl -I$HOME/.local/lib/perl5 -Mlocal::lib=$HOME/.local)
+eval $(perl -I$LOCAL_LIB_DIR/perl5 -Mlocal::lib=$LOCAL_DIR)
 
 
 # Ruby gems install locally.
-export GEM_HOME="$HOME/.local"
+export GEM_HOME="$LOCAL_DIR"
 export GEM_PATH="$GEM_HOME:$GEM_PATH"
 export RUBYLIB="$GEM_HOME/lib:$RUBY_LIB"
 
@@ -189,20 +193,21 @@ export EC2_CERT=$HOME/.aws/cert-CVOZOBWUHLG5QUKSXTEYV6KG6TY4LRMW.pem
 export JAVA_HOME=/usr/lib/jvm/java-6-openjdk/
 
 # virtualenvwrapper customization
-export WORKON_HOME=$HOME/.virtualenvs
-if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
-    source $HOME/.local/bin/virtualenvwrapper.sh
+export WORKON_HOME="$HOME/.virtualenvs"
+if [ -f "$LOCAL_DIR/bin/virtualenvwrapper.sh" ]; then
+    source "$LOCAL_DIR/bin/virtualenvwrapper.sh"
 fi
 
 # let pip know about virtualenvwrapper
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_VIRTUALENV_BASE="$WORKON_HOME"
 # let pip cache packages
 export PIP_DOWNLOAD_CACHE="$HOME/.pip_download_cache"
 
 # pyenv setup
+PYENV_DIR="$HOME/.pyenv"
 if command -v pyenv >/dev/null 2>&1; then
     eval "$(pyenv init -)"
-    if [ -f $HOME/.pyenv/completions/pyenv.bash ]; then
-        source $HOME/.pyenv/completions/pyenv.bash
+    if [ -f "$PYENV_DIR/completions/pyenv.bash" ]; then
+        source "$PYENV_DIR/completions/pyenv.bash"
     fi
 fi
