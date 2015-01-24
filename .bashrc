@@ -1,17 +1,38 @@
-source_if_exists () {
-    file_to_source="$1"
-    if [ -f $file_to_source ]; then
-        . $file_to_source
-    fi
-}
+# BASH BEHAVIOR
+
+# I like to use Vim type editing of the command line, comment out
+# everything below if you prefer the default Emacs-style editing.
+set -o vi
+# ^p check for partial match in history
+bind -m vi-insert "\C-p":dynamic-complete-history
+
+# ^n cycle through the list of partial matches
+bind -m vi-insert "\C-n":menu-complete
+
+# ^l clear screen
+bind -m vi-insert "\C-l":clear-screen
+
+# ^b back a word
+bind -m vi-insert "\C-\e[C":backward-word
+
+# ^f forward a word
+bind -m vi-insert "\C-\e[D":forward-word
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+# Remove duplicate lines in the history, and ignore any lines that begin
+# with a space. See bash(1) for more options.
+export HISTCONTROL=erasedups:ignorespace
 
+# Append history, don't overwrite it--very handy when working with
+# multiple shells, as closing the last one won't blow away the history
+# of the previous session.
+shopt -s histappend
+
+# Set the number of lines to be recorded in the history
+export HISTSIZE=100000
 
 # Logic for setting the TERM variable correctly (GNOME Terminal sets
 # this incorrectly).
@@ -46,40 +67,21 @@ if [ "$TERM" = "xterm" ] ; then
     fi
 fi
 
+# Use Vim as the default editor.
+export EDITOR="mvim -v"
 
-# ALIAS DEFINITIONS
-#
-# Aliases which I find universally handy go here; aliases which are
-# machine-specific should be specified in a separate ~/.bash_aliases
-# file (see below).
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+source_if_exists () {
+    file_to_source="$1"
+    if [ -f $file_to_source ]; then
+        . $file_to_source
+    fi
+}
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias lr='ls -R'
-alias lla='ls -lA'
-alias llh='ls -lh'
-alias llr='ls -lR'
-alias llar='ls -lAR'
-#alias l='ls -CF'
-
-# Additional aliases.
+# Bash aliases
 source_if_exists "$HOME/.bash_aliases"
 
-
-# BASH completion
+# Bash completion
 source_if_exists "$(brew --prefix)/etc/bash_completion"
 if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
     # Disable tilde expansion; see
@@ -94,42 +96,37 @@ if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
     }
 fi
 
-# Remove duplicate lines in the history, and ignore any lines that begin
-# with a space. See bash(1) for more options.
-export HISTCONTROL=erasedups:ignorespace
+# Bash prompt
+case "$TERM" in
+xterm*|rxvt*|gnome*|screen-256color)
+    source_if_exists "$HOME/.bash_prompt"
+    ;;
+*)
+    source_if_exists "$HOME/.bash_prompt_alt"
+    ;;
+esac
 
-# Append history, don't overwrite it--very handy when working with
-# multiple shells, as closing the last one won't blow away the history
-# of the previous session.
-shopt -s histappend
 
-# Set the number of lines to be recorded in the history
-export HISTSIZE=100000
 
-# Locally installed LaTeX junk goes in your ~/texmf directory
-export TEXMFHOME="$HOME/texmf"
-
-# Need to set default locale
+# LOCALE PREFERENCES
 export LC_ALL="en_US.UTF-8"
-
 # I prefer 24-hour clocks and YYYY-MM-DD date format.
 export LC_TIME="en_DK.UTF-8"
 
 
-LOCAL_DIR="$HOME/.local"
-
-# USER-INSTALLED SOFTWARE
+# HOMEBREW
 # Prioritize /usr/local/bin for Homebrew
 export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/usr\/local\/bin/ {next} {print}' | sed 's/:*$//')
 export PATH="/usr/local/bin:${PATH}"
 
-# Python user site directory bins
-export PATH="${HOME}/Library/Python/3.3/bin:${HOME}/Library/Python/2.7/bin:${PATH}"
-#
-# MacPorts Postgres bins
-export PATH="/opt/local/lib/postgresql91/bin:${PATH}"
 
-# User's executables
+# LOCALLY-INSTALLED SOFTWARE
+# For software installation, compilation, etc. without needing
+# administrator priveleges.
+
+LOCAL_DIR="$HOME/.local"
+
+# Local executables
 export PATH="$LOCAL_DIR/bin:$PATH"
 
 # Local libraries
@@ -141,11 +138,11 @@ export CPATH="$LOCAL_LIB_DIR/include:$CPATH"
 
 export PKG_CONFIG_PATH="$LOCAL_LIB_DIR/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-# Custom man pages
+# Local man pages
 export MANPATH="$LOCAL_DIR/share/man:$MANPATH"
 
-# Custom Python interactive session configuration.
-export PYTHONSTARTUP="$HOME/.pythonrc"
+# Locally installed LaTeX files
+export TEXMFHOME="$HOME/texmf"
 
 # Perl module installations should be through local::lib, which should
 # be set up with the root as ~/.local. This line puts those modules on
@@ -159,45 +156,21 @@ export GEM_PATH="$GEM_HOME:$GEM_PATH"
 export RUBYLIB="$GEM_HOME/lib:$RUBY_LIB"
 
 
-# EDITOR CONFIGURATION
-# I like to use Vim as my default editor. Replace with your editor of
-# preference.
-export EDITOR="mvim -v"
-
-
-# PROMPT_CONFIGURATION
-# Use my custom prompt, if it exists.
-case "$TERM" in
-xterm*|rxvt*|gnome*|screen-256color)
-    source_if_exists "$HOME/.bash_prompt"
-    ;;
-*)
-    source_if_exists "$HOME/.bash_prompt_alt"
-    ;;
-esac
-
-
-# SHELL BEHAVIOR
-# I like to use Vim type editing of the command line, comment out
-# everything below if you prefer the default Emacs-style editing.
-set -o vi
-# ^p check for partial match in history
-bind -m vi-insert "\C-p":dynamic-complete-history
-
-# ^n cycle through the list of partial matches
-bind -m vi-insert "\C-n":menu-complete
-
-# ^l clear screen
-bind -m vi-insert "\C-l":clear-screen
-
-# ^b back a word
-bind -m vi-insert "\C-\e[C":backward-word
-
-# ^f forward a word
-bind -m vi-insert "\C-\e[D":forward-word
-
-
 # APPLICATION ENVIRONMENTAL VARIABLES
+
+# enable color support of ls and other programs
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+
+
+# PYTHON ENVIRONMENT
+
+# Custom Python interactive session configuration.
+export PYTHONSTARTUP="$HOME/.pythonrc"
 
 # virtualenvwrapper customization
 export WORKON_HOME="$HOME/.virtualenvs"
