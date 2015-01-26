@@ -164,7 +164,6 @@ VAMActivate BufOnly
 VAMActivate fugitive
 VAMActivate html5
 VAMActivate LaTeX-Suite_aka_Vim-LaTeX
-VAMActivate LustyJuggler
 VAMActivate matchit.zip
 VAMActivate Supertab
 VAMActivate Syntastic
@@ -212,26 +211,6 @@ let NERDShutUp=1
 " UltiSnips configuration
 let g:UltiSnipsListSnippets = "<c-tab>"
 let g:ultisnips_python_style = "sphinx"
-
-
-" LustyJuggler
-let g:LustyJugglerShowKeys = "a"
-
-function ToggleLustyJugglerLayout()
-  if !exists("g:LustyJugglerKeyboardLayout")
-    let g:LustyJugglerKeyboardLayout = "dvorak"
-  elseif g:LustyJugglerKeyboardLayout != "dvorak"
-    let g:LustyJugglerKeyboardLayout = "dvorak"
-    echo "LustyJuggler using Dvorak layout."
-  else
-    let g:LustyJugglerKeyboardLayout = "default"
-    echo "LustyJuggler using default layout."
-  endif
-endfunction
-
-call ToggleLustyJugglerLayout()
-
-nnoremap <silent> <leader>tlj :call ToggleLustyJugglerLayout()<CR>
 
 
 " trailing-whitespace configuration
