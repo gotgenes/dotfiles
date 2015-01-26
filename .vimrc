@@ -161,17 +161,18 @@ call SetupVAM()
 
 " Tell VAM which plugins to fetch & load:
 VAMActivate BufOnly
-VAMActivate EasyMotion
 VAMActivate fugitive
 VAMActivate html5
 VAMActivate LaTeX-Suite_aka_Vim-LaTeX
-VAMActivate LustyJuggler
 VAMActivate matchit.zip
 VAMActivate Supertab
 VAMActivate Syntastic
 VAMActivate The_NERD_Commenter
 VAMActivate trailing-whitespace
 VAMActivate UltiSnips
+" Note, the line below only installs vimproc to the vim-addons directory; you
+" still have to compile the plugin with make after it's installed
+VAMActivate vimproc
 VAMActivate vim-snippets
 VAMActivate unite
 VAMActivate jedi-vim
@@ -215,26 +216,6 @@ let g:UltiSnipsListSnippets = "<c-tab>"
 let g:ultisnips_python_style = "sphinx"
 
 
-" LustyJuggler
-let g:LustyJugglerShowKeys = "a"
-
-function ToggleLustyJugglerLayout()
-  if !exists("g:LustyJugglerKeyboardLayout")
-    let g:LustyJugglerKeyboardLayout = "dvorak"
-  elseif g:LustyJugglerKeyboardLayout != "dvorak"
-    let g:LustyJugglerKeyboardLayout = "dvorak"
-    echo "LustyJuggler using Dvorak layout."
-  else
-    let g:LustyJugglerKeyboardLayout = "default"
-    echo "LustyJuggler using default layout."
-  endif
-endfunction
-
-call ToggleLustyJugglerLayout()
-
-nnoremap <silent> <leader>tlj :call ToggleLustyJugglerLayout()<CR>
-
-
 " trailing-whitespace configuration
 function ToggleAutoRmTrailingWhitespace()
   if !exists("g:auto_rm_trailing_ws")
@@ -270,7 +251,13 @@ let g:jedi#use_tabs_not_buffers = 0
 
 
 " Unite settings
-nnoremap <silent> <leader>ub :Unite buffer<CR>
+let g:unite_source_history_yank_enable = 1
+call unite#custom#source('file,file_rec,file_rec/async', 'matchers',
+      \'matcher_fuzzy')
+nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
+" file-rec/async requires vimproc is installed and compiled
+nnoremap <silent> <leader>uf :<C-u>Unite -start-insert file_rec/async<CR>
+nnoremap <leader>yh :<C-u>Unite history/yank<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""
