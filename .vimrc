@@ -161,7 +161,6 @@ call SetupVAM()
 
 " Tell VAM which plugins to fetch & load:
 VAMActivate BufOnly
-VAMActivate EasyMotion
 VAMActivate fugitive
 VAMActivate html5
 VAMActivate LaTeX-Suite_aka_Vim-LaTeX
