@@ -147,7 +147,8 @@ export TEXMFHOME="$HOME/texmf"
 # Perl module installations should be through local::lib, which should
 # be set up with the root as ~/.local. This line puts those modules on
 # the PERL5LIB path.
-eval $(perl -I$LOCAL_LIB_DIR/perl5 -Mlocal::lib=$LOCAL_DIR)
+# Disabled for plenv.
+#eval $(perl -I$LOCAL_LIB_DIR/perl5 -Mlocal::lib=$LOCAL_DIR)
 
 
 # Ruby gems install locally.
@@ -176,9 +177,17 @@ export PYTHONSTARTUP="$HOME/.pythonrc"
 export WORKON_HOME="$HOME/.virtualenvs"
 source_if_exists /usr/local/bin/virtualenvwrapper.sh
 
-# pyenv setup
-PYENV_DIR="$HOME/.pyenv"
-if command -v pyenv >/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-    source_if_exists "$PYENV_DIR/completions/pyenv.bash"
-fi
+# pyenv and plenv setup
+init_xenv() {
+    xenv=$1
+    if [ -d $HOME/.$xenv/bin ]; then
+        export PATH="$HOME/.$xenv/bin:$PATH"
+    fi
+    if command -v $xenv >/dev/null 2>&1; then
+        eval "$($xenv init -)"
+        source_if_exists "$HOME/.$xenv/completions/$xenv.bash"
+    fi
+}
+
+init_xenv 'pyenv'
+init_xenv 'plenv'
