@@ -10,3 +10,7 @@ alias llar='ls -lAR'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+
+alias vim='mvim -v'
+alias view='mvim -vR'
+alias gvim='mvim'
