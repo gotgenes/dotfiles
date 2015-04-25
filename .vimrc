@@ -163,6 +163,7 @@ call SetupVAM()
 VAMActivate BufOnly
 VAMActivate fugitive
 VAMActivate gitv
+VAMActivate Lawrencium
 VAMActivate html5
 VAMActivate LaTeX-Suite_aka_Vim-LaTeX
 VAMActivate matchit.zip
