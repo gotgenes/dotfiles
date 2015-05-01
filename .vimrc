@@ -164,7 +164,6 @@ VAMActivate BufOnly
 VAMActivate fugitive
 VAMActivate gitv
 VAMActivate Lawrencium
-VAMActivate html5
 VAMActivate LaTeX-Suite_aka_Vim-LaTeX
 VAMActivate matchit.zip
 VAMActivate Supertab
@@ -182,6 +181,8 @@ VAMActivate utl
 VAMActivate github:gotgenes/vim-yapif
 VAMActivate vim-gitgutter
 VAMActivate vim-go
+VAMActivate html5
+VAMActivate vim-javascript
 VAMActivate virtualenv
 VAMActivate vspec
 VAMActivate peaksea
