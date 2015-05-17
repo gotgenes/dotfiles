@@ -162,6 +162,8 @@ VAMActivate vim-gitgutter
 VAMActivate vim-go
 VAMActivate html5
 VAMActivate vim-javascript
+VAMActivate typescript-vim
+VAMActivate tsuquyomi
 VAMActivate virtualenv
 VAMActivate vspec
 VAMActivate peaksea
