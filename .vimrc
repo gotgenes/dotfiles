@@ -65,6 +65,9 @@ set undoreload=10000
 " Set the leader
 let mapleader = ','
 
+" Get to command mode easier
+nnoremap ; :
+
 " Easy access keystrokes for editing your Vim configuration
 nnoremap <leader>svrc :source $MYVIMRC<CR>
 nnoremap <leader>vrc :e $MYVIMRC<CR>
@@ -228,6 +231,11 @@ endif
 set statusline+=\ %#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 
 " jedi configuration
