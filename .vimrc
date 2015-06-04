@@ -65,6 +65,9 @@ set undoreload=10000
 " Set the leader
 let mapleader = ','
 
+" Get to command mode easier
+nnoremap ; :
+
 " Easy access keystrokes for editing your Vim configuration
 nnoremap <leader>svrc :source $MYVIMRC<CR>
 nnoremap <leader>vrc :e $MYVIMRC<CR>
