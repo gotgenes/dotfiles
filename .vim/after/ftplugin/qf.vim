@@ -1,2 +1,2 @@
-nnoremap j j
-nnoremap k k
+nnoremap <buffer> j j
+nnoremap <buffer> k k
