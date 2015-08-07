@@ -191,3 +191,15 @@ init_xenv() {
 
 init_xenv 'pyenv'
 init_xenv 'plenv'
+
+
+# Docker support
+connect_to_docker() {
+    if [ "$(boot2docker status)" = 'running' ]; then
+        eval "$(boot2docker shellinit 2>/dev/null)"
+    fi
+}
+
+if which boot2docker >/dev/null; then
+    connect_to_docker
+fi
