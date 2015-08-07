@@ -194,12 +194,21 @@ init_xenv 'plenv'
 
 
 # Docker support
-connect_to_docker() {
-    if [ "$(boot2docker status)" = 'running' ]; then
-        eval "$(boot2docker shellinit 2>/dev/null)"
-    fi
-}
 
-if which boot2docker >/dev/null; then
-    connect_to_docker
+boot2docker_installed="$(which boot2docker)"
+if [ -n $boot2docker_installed ]; then
+
+    # Provides a function to connect to the docker environment provided
+    # by boot2docker; can be called any time, for example, after running
+    # `boot2docker up`
+    connect_to_docker() {
+        if [ "$(boot2docker status)" = 'running' ]; then
+            eval "$(boot2docker shellinit 2>/dev/null)"
+        else
+            >&2 echo "boot2docker does not appear to be running."
+        fi
+    }
+    # Try connecting by default any time we create a new shell; silence
+    # any warnings if it's not able to connect.
+    connect_to_docker 2>/dev/null
 fi
