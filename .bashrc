@@ -195,20 +195,37 @@ init_xenv 'plenv'
 
 # Docker support
 
-boot2docker_installed="$(which boot2docker)"
-if [ -n $boot2docker_installed ]; then
+docker_machine_installed="$(which docker-machine)"
+if [ -n $docker_machine_installed ]; then
 
-    # Provides a function to connect to the docker environment provided
-    # by boot2docker; can be called any time, for example, after running
-    # `boot2docker up`
-    connect_to_docker() {
-        if [ "$(boot2docker status)" = 'running' ]; then
-            eval "$(boot2docker shellinit 2>/dev/null)"
-        else
-            >&2 echo "boot2docker does not appear to be running."
+    # Tries to determine the name of the Docker host
+    determine_docker_host() {
+        docker_host="$(docker-machine ls -q)"
+        if [ "$(echo $docker_host 2>/dev/null | wc -l)" -ne 1 ]; then
+            >&2 echo "More than one docker-machine host appears to be active."
+            >&2 echo "Unable to determine desired Docker host."
+            docker_host=
         fi
     }
+
+    # Provides a function to connect to the docker environment provided
+    # by docker-machine; can be called any time, for example, after running
+    # `docker-machine up $docker_host`
+    connect_to_docker_host() {
+        local docker_host=$1
+        if [ "$(docker-machine status $docker_host)" = 'Running' ]; then
+            eval "$(docker-machine env $docker_host 2>/dev/null)"
+        else
+            >&2 echo "docker-machine host '$docker_host' does not appear to be running."
+        fi
+    }
+
     # Try connecting by default any time we create a new shell; silence
     # any warnings if it's not able to connect.
-    connect_to_docker 2>/dev/null
+    determine_docker_host
+    if [ -n "$docker_host" ]; then
+        connect_to_docker_host "$docker_host" 2>/dev/null
+    fi
+    unset docker_host
 fi
+unset docker_machine_installed
