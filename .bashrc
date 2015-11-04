@@ -200,7 +200,7 @@ if [ -n $docker_machine_installed ]; then
 
     # Tries to determine the name of the Docker host
     determine_docker_host() {
-        docker_host="$(docker-machine ls -q)"
+        docker_host="$(docker-machine ls | grep Running | awk '{ print $1; }')"
         if [ "$(echo $docker_host 2>/dev/null | wc -l)" -ne 1 ]; then
             >&2 echo "More than one docker-machine host appears to be active."
             >&2 echo "Unable to determine desired Docker host."
