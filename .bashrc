@@ -196,7 +196,7 @@ init_xenv 'plenv'
 # Docker support
 
 docker_machine_installed="$(which docker-machine)"
-if [ -n $docker_machine_installed ]; then
+if [[ -n "$docker_machine_installed" ]]; then
 
     # Tries to determine the name of the Docker host
     determine_docker_host() {
