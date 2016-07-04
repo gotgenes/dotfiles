@@ -45,6 +45,8 @@ set statusline+=%=
 set statusline+=%l,%c\ %3.3p%%
 " Highlight the line on which the cursor lies
 set cursorline
+" Show line numbers
+set number
 
 " Use the persistent undo feature
 " See :h persistent-undo
@@ -193,7 +195,6 @@ let g:Tex_ViewRule_ps = "evince"
 
 
 " NERDCommenter configuration
-
 " Prevent NERDCommenter from complaining about unrecognized filetypes.
 let NERDShutUp=1
 
@@ -231,7 +232,6 @@ endif
 set statusline+=\ %#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
@@ -254,7 +254,6 @@ nnoremap <leader>yh :<C-u>Unite history/yank<CR>
 """"""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
-syntax enable
 
 " Uncomment one below to get a dark background or a light background. (NOTE:
 " it is important to specify this background before specifying any colorscheme
