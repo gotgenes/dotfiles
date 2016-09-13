@@ -160,6 +160,7 @@ VAMActivate UltiSnips
 VAMActivate vimproc
 VAMActivate vim-snippets
 VAMActivate unite
+VAMActivate projectroot
 VAMActivate jedi-vim
 VAMActivate utl
 VAMActivate github:gotgenes/vim-yapif
@@ -242,12 +243,17 @@ let g:jedi#use_tabs_not_buffers = 0
 
 
 " Unite settings
+function! Unite_project()
+  execute ':Unite -start-insert buffer file_rec/async:'.ProjectRootGuess().'/'
+endfunction
+
 let g:unite_source_history_yank_enable = 1
 call unite#custom#source('file,file_rec,file_rec/async', 'matchers',
       \'matcher_fuzzy')
 nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
 " file-rec/async requires vimproc is installed and compiled
 nnoremap <silent> <leader>uf :<C-u>Unite -start-insert file_rec/async<CR>
+nnoremap <silent> <leader>up :call Unite_project()<CR>
 nnoremap <leader>yh :<C-u>Unite history/yank<CR>
 
 
