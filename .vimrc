@@ -96,6 +96,10 @@ inoremap <F5> <C-R>=strftime("%F")<CR>
 " Quickly switch spelling on and off.
 nnoremap <leader>spl :setlocal spell!<CR>
 
+" Make it easy to toggle folding
+nnoremap <space> za
+vnoremap <space> zf
+
 
 """"""""""""""""""""
 " autocmd settings "
@@ -162,6 +166,7 @@ VAMActivate vim-snippets
 VAMActivate unite
 VAMActivate projectroot
 VAMActivate jedi-vim
+VAMActivate SimpylFold
 VAMActivate utl
 VAMActivate github:gotgenes/vim-yapif
 VAMActivate vim-gitgutter
