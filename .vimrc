@@ -172,6 +172,8 @@ VAMActivate github:gotgenes/vim-yapif
 VAMActivate vim-gitgutter
 VAMActivate vim-go
 VAMActivate html5
+VAMActivate Tabular
+VAMActivate Markdown_syntax
 VAMActivate vim-javascript
 VAMActivate typescript-vim
 VAMActivate tsuquyomi
