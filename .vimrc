@@ -208,7 +208,7 @@ let g:ultisnips_python_style = "sphinx"
 
 
 " trailing-whitespace configuration
-function ToggleAutoRmTrailingWhitespace()
+function! ToggleAutoRmTrailingWhitespace()
   if !exists("g:auto_rm_trailing_ws")
     let g:auto_rm_trailing_ws = 1
   elseif g:auto_rm_trailing_ws != 1
