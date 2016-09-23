@@ -75,9 +75,14 @@ nnoremap <leader>svrc :source $MYVIMRC<CR>
 nnoremap <leader>vrc :e $MYVIMRC<CR>
 
 " Quickly switch buffers
-nnoremap <unique> <silent> <leader>nn :bn<CR>
-nnoremap <unique> <silent> <leader>pp :bp<CR>
-nnoremap <unique> <silent> <leader>bd :bd<CR>
+nnoremap <silent> <leader>nn :bn<CR>
+nnoremap <silent> <leader>pp :bp<CR>
+nnoremap <silent> <leader>bd :bd<CR>
+
+" Change the current directory to the directory of the current buffer
+nnoremap <silent> <leader>cdb :lcd %:p:h<CR>
+
+" Change the current directory to the project directory
 
 " Let j and k move up and down over line-wrapped lines, too.
 nnoremap j gj
@@ -109,14 +114,6 @@ if has("autocmd")
   " Start editing a previously opened file from the position of the most
   " recent edit.
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
-  " This setting makes sure Vim is always operating in the directory of
-  " the current buffer.
-  autocmd BufEnter * if expand('%:p') !~ '://' | :lchdir %:p:h | endif
-
-  " The lines below close the Omni-Completion tip window on movement in insert
-  " mode or when leaving insert mode.
-  "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-  "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 endif
 
 
@@ -148,27 +145,28 @@ endfun
 call SetupVAM()
 
 " Tell VAM which plugins to fetch & load:
+" Note, the line below only installs vimproc to the vim-addons directory; you
+" still have to compile the plugin with make after it's installed
+VAMActivate vimproc
 VAMActivate BufOnly
 VAMActivate fugitive
 VAMActivate gitv
 VAMActivate Lawrencium
-VAMActivate LaTeX-Suite_aka_Vim-LaTeX
+VAMActivate vimtex
 VAMActivate matchit.zip
 VAMActivate Supertab
 VAMActivate Syntastic
 VAMActivate The_NERD_Commenter
+VAMActivate The_NERD_tree
 VAMActivate trailing-whitespace
 VAMActivate UltiSnips
-" Note, the line below only installs vimproc to the vim-addons directory; you
-" still have to compile the plugin with make after it's installed
-VAMActivate vimproc
 VAMActivate vim-snippets
-VAMActivate unite
 VAMActivate projectroot
+VAMActivate unite
+VAMActivate utl
 VAMActivate jedi-vim
 VAMActivate SimpylFold
-VAMActivate utl
-VAMActivate github:gotgenes/vim-yapif
+VAMActivate github:hynek/vim-python-pep8-indent
 VAMActivate vim-gitgutter
 VAMActivate vim-go
 VAMActivate html5
@@ -187,8 +185,8 @@ VAMActivate Zenburn
 
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !open %u"
-nnoremap <unique> <leader>gu :Utl openLink underCursor edit<CR>
-nnoremap <unique> <leader>cl :Utl copyLink underCursor<CR>
+nnoremap <leader>gu :Utl openLink underCursor edit<CR>
+nnoremap <leader>cl :Utl copyLink underCursor<CR>
 
 " LaTeX Suite configuration
 " IMPORTANT: grep will sometimes skip displaying the file name if you
@@ -213,7 +211,7 @@ let g:ultisnips_python_style = "sphinx"
 
 
 " trailing-whitespace configuration
-function ToggleAutoRmTrailingWhitespace()
+function! ToggleAutoRmTrailingWhitespace()
   if !exists("g:auto_rm_trailing_ws")
     let g:auto_rm_trailing_ws = 1
   elseif g:auto_rm_trailing_ws != 1
@@ -249,6 +247,15 @@ let g:syntastic_check_on_wq = 0
 let g:jedi#use_tabs_not_buffers = 0
 
 
+" SimpylFold configuration
+let g:SimpylFold_fold_docstring = 0
+
+
+" projectroot settings
+nnoremap <silent> <leader>cdp :ProjectRootCD<CR>
+nnoremap <silent> <leader>ntp :ProjectRootExe NERDTreeFind<CR>
+
+
 " Unite settings
 function! Unite_project()
   execute ':Unite -start-insert buffer file_rec/async:'.ProjectRootGuess().'/'
@@ -256,7 +263,7 @@ endfunction
 
 let g:unite_source_history_yank_enable = 1
 call unite#custom#source('file,file_rec,file_rec/async', 'matchers',
-      \'matcher_fuzzy')
+  \['converter_relative_word', 'matcher_fuzzy'])
 nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
 " file-rec/async requires vimproc is installed and compiled
 nnoremap <silent> <leader>uf :<C-u>Unite -start-insert file_rec/async<CR>
