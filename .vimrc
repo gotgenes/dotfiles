@@ -149,7 +149,7 @@ VAMActivate BufOnly
 VAMActivate fugitive
 VAMActivate gitv
 VAMActivate Lawrencium
-VAMActivate LaTeX-Suite_aka_Vim-LaTeX
+VAMActivate vimtex
 VAMActivate matchit.zip
 VAMActivate Supertab
 VAMActivate Syntastic
