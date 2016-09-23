@@ -112,11 +112,6 @@ if has("autocmd")
   " Start editing a previously opened file from the position of the most
   " recent edit.
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
-
-  " The lines below close the Omni-Completion tip window on movement in insert
-  " mode or when leaving insert mode.
-  "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-  "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 endif
 
 
