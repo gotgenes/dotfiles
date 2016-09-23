@@ -250,6 +250,10 @@ let g:jedi#use_tabs_not_buffers = 0
 let g:SimpylFold_fold_docstring = 0
 
 
+" projectroot settings
+nnoremap <silent> <leader>cdp :ProjectRootCD<CR>
+
+
 " Unite settings
 function! Unite_project()
   execute ':Unite -start-insert buffer file_rec/async:'.ProjectRootGuess().'/'
