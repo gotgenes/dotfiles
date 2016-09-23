@@ -79,6 +79,9 @@ nnoremap <unique> <silent> <leader>nn :bn<CR>
 nnoremap <unique> <silent> <leader>pp :bp<CR>
 nnoremap <unique> <silent> <leader>bd :bd<CR>
 
+" Change the current directory to the directory of the current buffer
+nnoremap <silent> <leader>cdb :lcd %:p:h<CR>
+
 " Let j and k move up and down over line-wrapped lines, too.
 nnoremap j gj
 nnoremap k gk
