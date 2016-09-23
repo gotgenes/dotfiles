@@ -145,6 +145,9 @@ endfun
 call SetupVAM()
 
 " Tell VAM which plugins to fetch & load:
+" Note, the line below only installs vimproc to the vim-addons directory; you
+" still have to compile the plugin with make after it's installed
+VAMActivate vimproc
 VAMActivate BufOnly
 VAMActivate fugitive
 VAMActivate gitv
@@ -156,15 +159,12 @@ VAMActivate Syntastic
 VAMActivate The_NERD_Commenter
 VAMActivate trailing-whitespace
 VAMActivate UltiSnips
-" Note, the line below only installs vimproc to the vim-addons directory; you
-" still have to compile the plugin with make after it's installed
-VAMActivate vimproc
 VAMActivate vim-snippets
-VAMActivate unite
 VAMActivate projectroot
+VAMActivate unite
+VAMActivate utl
 VAMActivate jedi-vim
 VAMActivate SimpylFold
-VAMActivate utl
 VAMActivate github:gotgenes/vim-yapif
 VAMActivate vim-gitgutter
 VAMActivate vim-go
