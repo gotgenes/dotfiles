@@ -249,6 +249,10 @@ let g:syntastic_check_on_wq = 0
 let g:jedi#use_tabs_not_buffers = 0
 
 
+" SimpylFold configuration
+let g:SimpylFold_fold_docstring = 0
+
+
 " Unite settings
 function! Unite_project()
   execute ':Unite -start-insert buffer file_rec/async:'.ProjectRootGuess().'/'
