@@ -82,6 +82,8 @@ nnoremap <silent> <leader>bd :bd<CR>
 " Change the current directory to the directory of the current buffer
 nnoremap <silent> <leader>cdb :lcd %:p:h<CR>
 
+" Change the current directory to the project directory
+
 " Let j and k move up and down over line-wrapped lines, too.
 nnoremap j gj
 nnoremap k gk
@@ -255,7 +257,7 @@ endfunction
 
 let g:unite_source_history_yank_enable = 1
 call unite#custom#source('file,file_rec,file_rec/async', 'matchers',
-      \'matcher_fuzzy')
+  \['converter_relative_word', 'matcher_fuzzy'])
 nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
 " file-rec/async requires vimproc is installed and compiled
 nnoremap <silent> <leader>uf :<C-u>Unite -start-insert file_rec/async<CR>
