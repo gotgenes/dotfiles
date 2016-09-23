@@ -75,9 +75,9 @@ nnoremap <leader>svrc :source $MYVIMRC<CR>
 nnoremap <leader>vrc :e $MYVIMRC<CR>
 
 " Quickly switch buffers
-nnoremap <unique> <silent> <leader>nn :bn<CR>
-nnoremap <unique> <silent> <leader>pp :bp<CR>
-nnoremap <unique> <silent> <leader>bd :bd<CR>
+nnoremap <silent> <leader>nn :bn<CR>
+nnoremap <silent> <leader>pp :bp<CR>
+nnoremap <silent> <leader>bd :bd<CR>
 
 " Change the current directory to the directory of the current buffer
 nnoremap <silent> <leader>cdb :lcd %:p:h<CR>
@@ -182,8 +182,8 @@ VAMActivate Zenburn
 
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u#%f' &"
-nnoremap <unique> <leader>gu :Utl openLink underCursor edit<CR>
-nnoremap <unique> <leader>cl :Utl copyLink underCursor<CR>
+nnoremap <leader>gu :Utl openLink underCursor edit<CR>
+nnoremap <leader>cl :Utl copyLink underCursor<CR>
 
 " LaTeX Suite configuration
 " IMPORTANT: grep will sometimes skip displaying the file name if you
