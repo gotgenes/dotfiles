@@ -165,7 +165,7 @@ VAMActivate unite
 VAMActivate utl
 VAMActivate jedi-vim
 VAMActivate SimpylFold
-VAMActivate github:gotgenes/vim-yapif
+VAMActivate github:hynek/vim-python-pep8-indent
 VAMActivate vim-gitgutter
 VAMActivate vim-go
 VAMActivate html5
