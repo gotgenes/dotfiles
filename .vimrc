@@ -109,9 +109,6 @@ if has("autocmd")
   " Start editing a previously opened file from the position of the most
   " recent edit.
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
-  " This setting makes sure Vim is always operating in the directory of
-  " the current buffer.
-  autocmd BufEnter * if expand('%:p') !~ '://' | :lchdir %:p:h | endif
 
   " The lines below close the Omni-Completion tip window on movement in insert
   " mode or when leaving insert mode.
