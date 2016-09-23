@@ -157,6 +157,7 @@ VAMActivate matchit.zip
 VAMActivate Supertab
 VAMActivate Syntastic
 VAMActivate The_NERD_Commenter
+VAMActivate The_NERD_tree
 VAMActivate trailing-whitespace
 VAMActivate UltiSnips
 VAMActivate vim-snippets
@@ -252,6 +253,7 @@ let g:SimpylFold_fold_docstring = 0
 
 " projectroot settings
 nnoremap <silent> <leader>cdp :ProjectRootCD<CR>
+nnoremap <silent> <leader>ntp :ProjectRootExe NERDTreeFind<CR>
 
 
 " Unite settings
