@@ -261,7 +261,6 @@ function! Unite_project()
   execute ':Unite -start-insert buffer file_rec/async:'.ProjectRootGuess().'/'
 endfunction
 
-let g:unite_source_history_yank_enable = 1
 call unite#custom#source('file,file_rec,file_rec/async', 'matchers',
   \['converter_relative_word', 'matcher_fuzzy'])
 nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
@@ -270,6 +269,11 @@ nnoremap <silent> <leader>uf :<C-u>Unite -start-insert file_rec/async<CR>
 nnoremap <silent> <leader>up :call Unite_project()<CR>
 nnoremap <leader>yh :<C-u>Unite history/yank<CR>
 
+if executable('ag')
+  let g:unite_source_rec_async_command = [
+    \ 'ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+endif
+let g:unite_source_history_yank_enable = 1
 
 """"""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and color settings "
