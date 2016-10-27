@@ -188,17 +188,6 @@ let g:utl_cfg_hdl_scm_http_system = "silent !firefox -remote 'ping()' && firefox
 nnoremap <leader>gu :Utl openLink underCursor edit<CR>
 nnoremap <leader>cl :Utl copyLink underCursor<CR>
 
-" LaTeX Suite configuration
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to alway generate a file-name.
-set grepprg=grep\ -nH\ $*
-" LaTeX suite default output
-let g:Tex_DefaultTargetFormat = "pdf"
-let g:Tex_ViewRule_dvi = "evince"
-let g:Tex_ViewRule_pdf = "evince"
-let g:Tex_ViewRule_ps = "evince"
-
 
 " NERDCommenter configuration
 " Prevent NERDCommenter from complaining about unrecognized filetypes.
