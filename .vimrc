@@ -136,6 +136,7 @@ call dein#add('jisaacks/GitGutter')
 call dein#add('gregsexton/gitv')
 
 " Programming
+call dein#add('Shougo/neocomplete')
 call dein#add('scrooloose/syntastic')
 call dein#add('scrooloose/nerdcommenter')
 call dein#add('SirVer/ultisnips')
@@ -241,6 +242,13 @@ let g:syntastic_check_on_wq = 0
 
 " jedi configuration
 let g:jedi#use_tabs_not_buffers = 0
+" Compatibility with neocomplete
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#smart_auto_mappings = 0
+let g:neocomplete#force_omni_input_patterns.python =
+\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 
 " SimpylFold configuration
