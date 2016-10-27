@@ -1,11 +1,9 @@
+set nocompatible
+
 """""""""""""""""""""""
 " BEHAVIORAL SETTINGS "
 """""""""""""""""""""""
 
-" This is Vim, not VI, so we use it like we mean it!
-set nocompatible
-filetype plugin indent on
-syntax enable
 " Allow backspacing over anything in insert mode
 set backspace=indent,eol,start
 " Show (partial) command in status line.
@@ -16,16 +14,10 @@ set showmatch
 set ignorecase
 " Do smart case matching
 set smartcase
-" Incremental search
-"set incsearch
 " Search highlighting enabled
 set hlsearch
-" Automatically save before commands like :next and :make
-"set autowrite
 " Allow resizing of the window on session restore
 set sessionoptions+=resize
-" Enable mouse usage (all modes) in terminals
-"set mouse=a
 " Give popup menus for a right mouse-click
 set mousemodel=popup
 " Hide buffers when they are not displayed; this prevents warning messages
@@ -33,16 +25,6 @@ set mousemodel=popup
 set hidden
 " Set the spelling language to US English.
 set spelllang=en_us
-" Turn on spell checking by default.
-"set spell
-" Custom statusline
-" Always show the status line
-set laststatus=2
-set statusline=%.50F
-set statusline+=\ [%{strlen(&fenc)?&fenc:&enc},%{&fileformat}]
-set statusline+=\ %m%w%h%q
-set statusline+=%=
-set statusline+=%l,%c\ %3.3p%%
 " Highlight the line on which the cursor lies
 set cursorline
 " Show line numbers
@@ -52,7 +34,7 @@ set number
 " See :h persistent-undo
 " NOTE: the directory listed in undodir must exist; Vim will not create this
 " directory itself!
-set undodir=$HOME/.vimundos
+set undodir=~/.vimundos
 set undofile
 " Maximum number of changes that can be undone
 set undolevels=1000
@@ -117,70 +99,138 @@ if has("autocmd")
 endif
 
 
+"""""""""""""""""""
+" INSTALL PLUGINS "
+"""""""""""""""""""
+set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim
+
+" Required:
+call dein#begin('/Users/chris/shell-configs/.vim/plugins')
+
+" Let dein manage dein
+call dein#add('Shougo/dein.vim')
+
+" Productivity
+call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/neoyank.vim')
+call dein#add('ervandew/supertab')
+call dein#add('schickling/vim-bufonly')
+call dein#add('scrooloose/nerdtree')
+call dein#add('bronson/vim-trailing-whitespace')  " TODO: replace this with ntpeters/vim-better-whitespace
+call dein#add('dbakker/vim-projectroot')
+call dein#add('altercation/vim-colors-solarized')
+call dein#add('vim-scripts/utl.vim')
+call dein#add('itchyny/lightline.vim')
+
+" Git
+call dein#add('tpope/vim-fugitive')
+call dein#add('jisaacks/GitGutter')
+call dein#add('gregsexton/gitv')
+
+" Programming
+call dein#add('Shougo/neocomplete')
+call dein#add('scrooloose/syntastic')
+call dein#add('scrooloose/nerdcommenter')
+call dein#add('SirVer/ultisnips')
+call dein#add('honza/vim-snippets')
+call dein#add('majutsushi/tagbar')
+
+" Go
+call dein#add('fatih/vim-go')
+
+" HTML
+call dein#add('tmhedberg/matchit')
+call dein#add('othree/html5.vim')
+
+" JavaScript
+call dein#add('pangloss/vim-javascript')
+
+" LaTeX
+call dein#add('lervag/vimtex')
+
+" Markdown
+call dein#add('godlygeek/tabular')
+call dein#add('plasticboy/vim-markdown')
+
+" Python
+call dein#add('davidhalter/jedi-vim')
+call dein#add('tmhedberg/SimpylFold')
+call dein#add('hynek/vim-python-pep8-indent')
+
+" TypeScript
+call dein#add('leafgarland/typescript-vim')
+call dein#add('Quramy/tsuquyomi')
+
+call dein#end()
+
+filetype plugin indent on
+syntax enable
+
+if dein#check_install()
+  call dein#install()
+endif
+
+
 """"""""""""""""""""""""""
 " PLUGINS CONFIGURATIONS "
 """"""""""""""""""""""""""
 
-" vim-addon-manager support
-fun! SetupVAM()
-  let c = get(g:, 'vim_addon_manager', {})
-  let g:vim_addon_manager = c
-  let c.plugin_root_dir = expand('$HOME', 1) . '/.vim/vim-addons'
+" lightline configuration
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \   'fugitive': 'LightlineFugitive',
+      \   'mode': 'LightlineMode',
+      \   'readonly': 'LightlineReadonly',
+      \ },
+      \}
 
-  " Force your ~/.vim/after directory to be last in &rtp always:
-  let g:vim_addon_manager.rtp_list_hook = 'vam#ForceUsersAfterDirectoriesToBeLast'
+function! LightlineReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'RO' : ''
+endfunction
 
-  " most used options you may want to use:
-  let c.log_to_buf = 1
-  " let c.auto_install = 0
-  let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
-  if !isdirectory(c.plugin_root_dir.'/vim-addon-manager/autoload')
-    execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '
-      \ shellescape(c.plugin_root_dir.'/vim-addon-manager', 1)
-  endif
+function! LightlineFilename()
+  return (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]')
+endfunction
 
-  " This provides the VAMActivate command, you could be passing plugin names, too
-  call vam#ActivateAddons([], {})
-endfun
-call SetupVAM()
+function! LightlineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ''  " edit here for cool mark
+      let branch = fugitive#head()
+      return branch !=# '' ? mark.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
 
-" Tell VAM which plugins to fetch & load:
-" Note, the line below only installs vimproc to the vim-addons directory; you
-" still have to compile the plugin with make after it's installed
-VAMActivate vimproc
-VAMActivate BufOnly
-VAMActivate fugitive
-VAMActivate gitv
-VAMActivate Lawrencium
-VAMActivate vimtex
-VAMActivate matchit.zip
-VAMActivate Supertab
-VAMActivate Syntastic
-VAMActivate The_NERD_Commenter
-VAMActivate The_NERD_tree
-VAMActivate trailing-whitespace
-VAMActivate UltiSnips
-VAMActivate vim-snippets
-VAMActivate projectroot
-VAMActivate unite
-VAMActivate utl
-VAMActivate jedi-vim
-VAMActivate SimpylFold
-VAMActivate github:hynek/vim-python-pep8-indent
-VAMActivate vim-gitgutter
-VAMActivate vim-go
-VAMActivate html5
-VAMActivate Tabular
-VAMActivate Markdown_syntax
-VAMActivate vim-javascript
-VAMActivate typescript-vim
-VAMActivate tsuquyomi
-VAMActivate virtualenv
-VAMActivate vspec
-VAMActivate peaksea
-VAMActivate Solarized
-VAMActivate xoria256
-VAMActivate Zenburn
+function! LightlineMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+    let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
 
 
 " utl configuration
@@ -188,21 +238,17 @@ let g:utl_cfg_hdl_scm_http_system = "silent !open %u"
 nnoremap <leader>gu :Utl openLink underCursor edit<CR>
 nnoremap <leader>cl :Utl copyLink underCursor<CR>
 
-" LaTeX Suite configuration
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to alway generate a file-name.
-set grepprg=grep\ -nH\ $*
-" LaTeX suite default output
-let g:Tex_DefaultTargetFormat = "pdf"
-"let g:Tex_ViewRule_dvi = "open"
-"let g:Tex_ViewRule_pdf = "open"
-"let g:Tex_ViewRule_ps = "open"
-
-
 " NERDCommenter configuration
 " Prevent NERDCommenter from complaining about unrecognized filetypes.
 let NERDShutUp=1
+
+
+" NERDTree configuration
+nnoremap <leader>nt :NERDTreeToggle<CR>
+
+
+" Tagbar configuration
+nnoremap <leader>tb :TagbarToggle<CR>
 
 
 " UltiSnips configuration
@@ -241,6 +287,20 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
+
+
+" neocomplete configuration
+let g:neocomplete#enable_at_startup = 1
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#smart_auto_mappings = 0
+let g:neocomplete#force_omni_input_patterns.python =
+\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::'
 
 
 " jedi configuration
