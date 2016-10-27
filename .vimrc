@@ -25,14 +25,6 @@ set mousemodel=popup
 set hidden
 " Set the spelling language to US English.
 set spelllang=en_us
-" Custom statusline
-" Always show the status line
-set laststatus=2
-set statusline=%.50F
-set statusline+=\ [%{strlen(&fenc)?&fenc:&enc},%{&fileformat}]
-set statusline+=\ %m%w%h%q
-set statusline+=%=
-set statusline+=%l,%c\ %3.3p%%
 " Highlight the line on which the cursor lies
 set cursorline
 " Show line numbers
@@ -129,6 +121,7 @@ call dein#add('bronson/vim-trailing-whitespace')  " TODO: replace this with ntpe
 call dein#add('dbakker/vim-projectroot')
 call dein#add('altercation/vim-colors-solarized')
 call dein#add('vim-scripts/utl.vim')
+call dein#add('itchyny/lightline.vim')
 
 " Git
 call dein#add('tpope/vim-fugitive')
@@ -182,6 +175,63 @@ endif
 """"""""""""""""""""""""""
 " PLUGINS CONFIGURATIONS "
 """"""""""""""""""""""""""
+
+" lightline configuration
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \   'fugitive': 'LightlineFugitive',
+      \   'mode': 'LightlineMode',
+      \   'readonly': 'LightlineReadonly',
+      \ },
+      \}
+
+function! LightlineReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightlineFilename()
+  return (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]')
+endfunction
+
+function! LightlineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ''  " edit here for cool mark
+      let branch = fugitive#head()
+      return branch !=# '' ? mark.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightlineMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+    let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
+
 
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u#%f' &"
