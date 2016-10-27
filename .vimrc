@@ -1,11 +1,9 @@
+set nocompatible
+
 """""""""""""""""""""""
 " BEHAVIORAL SETTINGS "
 """""""""""""""""""""""
 
-" This is Vim, not VI, so we use it like we mean it!
-set nocompatible
-filetype plugin indent on
-syntax enable
 " Allow backspacing over anything in insert mode
 set backspace=indent,eol,start
 " Show (partial) command in status line.
@@ -16,16 +14,10 @@ set showmatch
 set ignorecase
 " Do smart case matching
 set smartcase
-" Incremental search
-"set incsearch
 " Search highlighting enabled
 set hlsearch
-" Automatically save before commands like :next and :make
-"set autowrite
 " Allow resizing of the window on session restore
 set sessionoptions+=resize
-" Enable mouse usage (all modes) in terminals
-"set mouse=a
 " Give popup menus for a right mouse-click
 set mousemodel=popup
 " Hide buffers when they are not displayed; this prevents warning messages
@@ -33,8 +25,6 @@ set mousemodel=popup
 set hidden
 " Set the spelling language to US English.
 set spelllang=en_us
-" Turn on spell checking by default.
-"set spell
 " Custom statusline
 " Always show the status line
 set laststatus=2
@@ -52,7 +42,7 @@ set number
 " See :h persistent-undo
 " NOTE: the directory listed in undodir must exist; Vim will not create this
 " directory itself!
-set undodir=$HOME/.vimundos
+set undodir=~/.vimundos
 set undofile
 " Maximum number of changes that can be undone
 set undolevels=1000
@@ -117,71 +107,79 @@ if has("autocmd")
 endif
 
 
+"""""""""""""""""""
+" INSTALL PLUGINS "
+"""""""""""""""""""
+set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim
+
+" Required:
+call dein#begin('/Users/chris/shell-configs/.vim/plugins')
+
+" Let dein manage dein
+call dein#add('Shougo/dein.vim')
+
+" Productivity
+call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+call dein#add('Shougo/unite.vim')
+call dein#add('ervandew/supertab')
+call dein#add('schickling/vim-bufonly')
+call dein#add('scrooloose/nerdtree')
+call dein#add('bronson/vim-trailing-whitespace')  " TODO: replace this with ntpeters/vim-better-whitespace
+call dein#add('dbakker/vim-projectroot')
+call dein#add('altercation/vim-colors-solarized')
+call dein#add('vim-scripts/utl.vim')
+
+" Git
+call dein#add('tpope/vim-fugitive')
+call dein#add('jisaacks/GitGutter')
+call dein#add('gregsexton/gitv')
+
+
+" Programming
+call dein#add('scrooloose/syntastic')
+call dein#add('scrooloose/nerdcommenter')
+call dein#add('SirVer/ultisnips')
+call dein#add('honza/vim-snippets')
+
+" Go
+call dein#add('fatih/vim-go')
+
+" HTML
+call dein#add('tmhedberg/matchit')
+call dein#add('othree/html5.vim')
+
+" JavaScript
+call dein#add('pangloss/vim-javascript')
+
+" LaTeX
+call dein#add('lervag/vimtex')
+
+" Markdown
+call dein#add('godlygeek/tabular')
+call dein#add('plasticboy/vim-markdown')
+
+" Python
+call dein#add('davidhalter/jedi-vim')
+call dein#add('tmhedberg/SimpylFold')
+call dein#add('hynek/vim-python-pep8-indent')
+
+" TypeScript
+call dein#add('leafgarland/typescript-vim')
+call dein#add('Quramy/tsuquyomi')
+
+call dein#end()
+
+filetype plugin indent on
+syntax enable
+
+if dein#check_install()
+  call dein#install()
+endif
+
+
 """"""""""""""""""""""""""
 " PLUGINS CONFIGURATIONS "
 """"""""""""""""""""""""""
-
-" vim-addon-manager support
-fun! SetupVAM()
-  let c = get(g:, 'vim_addon_manager', {})
-  let g:vim_addon_manager = c
-  let c.plugin_root_dir = expand('$HOME', 1) . '/.vim/vim-addons'
-
-  " Force your ~/.vim/after directory to be last in &rtp always:
-  let g:vim_addon_manager.rtp_list_hook = 'vam#ForceUsersAfterDirectoriesToBeLast'
-
-  " most used options you may want to use:
-  let c.log_to_buf = 1
-  " let c.auto_install = 0
-  let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
-  if !isdirectory(c.plugin_root_dir.'/vim-addon-manager/autoload')
-    execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '
-      \ shellescape(c.plugin_root_dir.'/vim-addon-manager', 1)
-  endif
-
-  " This provides the VAMActivate command, you could be passing plugin names, too
-  call vam#ActivateAddons([], {})
-endfun
-call SetupVAM()
-
-" Tell VAM which plugins to fetch & load:
-" Note, the line below only installs vimproc to the vim-addons directory; you
-" still have to compile the plugin with make after it's installed
-VAMActivate vimproc
-VAMActivate BufOnly
-VAMActivate fugitive
-VAMActivate gitv
-VAMActivate Lawrencium
-VAMActivate vimtex
-VAMActivate matchit.zip
-VAMActivate Supertab
-VAMActivate Syntastic
-VAMActivate The_NERD_Commenter
-VAMActivate The_NERD_tree
-VAMActivate trailing-whitespace
-VAMActivate UltiSnips
-VAMActivate vim-snippets
-VAMActivate projectroot
-VAMActivate unite
-VAMActivate utl
-VAMActivate jedi-vim
-VAMActivate SimpylFold
-VAMActivate github:hynek/vim-python-pep8-indent
-VAMActivate vim-gitgutter
-VAMActivate vim-go
-VAMActivate html5
-VAMActivate Tabular
-VAMActivate Markdown_syntax
-VAMActivate vim-javascript
-VAMActivate typescript-vim
-VAMActivate tsuquyomi
-VAMActivate virtualenv
-VAMActivate vspec
-VAMActivate peaksea
-VAMActivate Solarized
-VAMActivate xoria256
-VAMActivate Zenburn
-
 
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !firefox -remote 'ping()' && firefox -remote 'openURL( %u )' || firefox '%u#%f' &"
