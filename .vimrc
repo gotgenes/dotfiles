@@ -105,7 +105,7 @@ endif
 set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin('/Users/chris/shell-configs/.vim/plugins')
+call dein#begin('~/.vim/plugins')
 
 " Let dein manage dein
 call dein#add('Shougo/dein.vim')
