@@ -140,6 +140,7 @@ call dein#add('scrooloose/syntastic')
 call dein#add('scrooloose/nerdcommenter')
 call dein#add('SirVer/ultisnips')
 call dein#add('honza/vim-snippets')
+call dein#add('majutsushi/tagbar')
 
 " Go
 call dein#add('fatih/vim-go')
@@ -190,6 +191,10 @@ nnoremap <leader>cl :Utl copyLink underCursor<CR>
 " NERDCommenter configuration
 " Prevent NERDCommenter from complaining about unrecognized filetypes.
 let NERDShutUp=1
+
+
+" Tagbar configuration
+nnoremap <leader>tb :TagbarToggle<CR>
 
 
 " UltiSnips configuration
