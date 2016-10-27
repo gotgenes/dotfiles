@@ -121,6 +121,7 @@ call dein#add('Shougo/dein.vim')
 " Productivity
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/neoyank.vim')
 call dein#add('ervandew/supertab')
 call dein#add('schickling/vim-bufonly')
 call dein#add('scrooloose/nerdtree')
