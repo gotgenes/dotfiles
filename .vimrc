@@ -135,7 +135,6 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('jisaacks/GitGutter')
 call dein#add('gregsexton/gitv')
 
-
 " Programming
 call dein#add('scrooloose/syntastic')
 call dein#add('scrooloose/nerdcommenter')
@@ -192,6 +191,10 @@ nnoremap <leader>cl :Utl copyLink underCursor<CR>
 " NERDCommenter configuration
 " Prevent NERDCommenter from complaining about unrecognized filetypes.
 let NERDShutUp=1
+
+
+" NERDTree configuration
+nnoremap <leader>nt :NERDTreeToggle<CR>
 
 
 " Tagbar configuration
