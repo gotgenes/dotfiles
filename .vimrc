@@ -135,6 +135,7 @@ call dein#add('scrooloose/nerdcommenter')
 call dein#add('SirVer/ultisnips')
 call dein#add('honza/vim-snippets')
 call dein#add('majutsushi/tagbar')
+call dein#add('cohama/lexima.vim')
 
 " Go
 call dein#add('fatih/vim-go')
@@ -151,7 +152,7 @@ call dein#add('lervag/vimtex')
 
 " Markdown
 call dein#add('godlygeek/tabular')
-call dein#add('plasticboy/vim-markdown')
+call dein#add('gabrielelana/vim-markdown')
 
 " Python
 call dein#add('davidhalter/jedi-vim')
