@@ -113,8 +113,8 @@ call dein#add('Shougo/dein.vim')
 " Productivity
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 call dein#add('Shougo/unite.vim')
+call dein#add('tsukkee/unite-help')
 call dein#add('Shougo/neoyank.vim')
-call dein#add('ervandew/supertab')
 call dein#add('schickling/vim-bufonly')
 call dein#add('scrooloose/nerdtree')
 call dein#add('bronson/vim-trailing-whitespace')  " TODO: replace this with ntpeters/vim-better-whitespace
@@ -282,9 +282,6 @@ endif
 
 
 " Syntastic configuration
-set statusline+=\ %#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
@@ -303,6 +300,14 @@ let g:neocomplete#force_omni_input_patterns.python =
 \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::'
 
+imap <expr> <C-G> neocomplete#undo_completion()
+
+
+" lexima configuration
+let g:lexima_no_default_rules = 1
+call lexima#set_default_rules()
+imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
 
 " jedi configuration
 let g:jedi#use_tabs_not_buffers = 0
@@ -318,23 +323,25 @@ nnoremap <silent> <leader>ntp :ProjectRootExe NERDTreeFind<CR>
 
 
 " Unite settings
+if executable('ag')
+  let g:unite_source_rec_async_command = [
+    \ 'ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+endif
+let g:unite_source_history_yank_enable = 1
+
 function! Unite_project()
   execute ':Unite -start-insert buffer file_rec/async:'.ProjectRootGuess().'/'
 endfunction
 
 call unite#custom#source('file,file_rec,file_rec/async', 'matchers',
   \['converter_relative_word', 'matcher_fuzzy'])
+
 nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
-" file-rec/async requires vimproc is installed and compiled
 nnoremap <silent> <leader>uf :<C-u>Unite -start-insert file_rec/async<CR>
 nnoremap <silent> <leader>up :call Unite_project()<CR>
-nnoremap <leader>yh :<C-u>Unite history/yank<CR>
+nnoremap <leader>uy :<C-u>Unite history/yank<CR>
+nnoremap <leader>uh :<C-U>Unite -start-insert help<CR>
 
-if executable('ag')
-  let g:unite_source_rec_async_command = [
-    \ 'ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
-endif
-let g:unite_source_history_yank_enable = 1
 
 """"""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and color settings "
