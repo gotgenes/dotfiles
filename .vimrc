@@ -114,7 +114,6 @@ call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/neoyank.vim')
-call dein#add('ervandew/supertab')
 call dein#add('schickling/vim-bufonly')
 call dein#add('scrooloose/nerdtree')
 call dein#add('bronson/vim-trailing-whitespace')  " TODO: replace this with ntpeters/vim-better-whitespace
@@ -303,6 +302,14 @@ let g:jedi#smart_auto_mappings = 0
 let g:neocomplete#force_omni_input_patterns.python =
 \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::'
+
+imap <expr> <C-G> neocomplete#undo_completion()
+
+
+" lexima configuration
+let g:lexima_no_default_rules = 1
+call lexima#set_default_rules()
+imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 
 " jedi configuration
