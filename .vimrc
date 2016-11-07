@@ -253,8 +253,12 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <leader>tb :TagbarToggle<CR>
 
 
+
 " UltiSnips configuration
-let g:UltiSnipsListSnippets = "<c-tab>"
+let g:UltiSnipsExpandTrigger = '<C-S>'
+let g:UltiSnipsJumpForwardTrigger = '<C-,>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-.>'
+
 let g:ultisnips_python_style = "sphinx"
 
 
@@ -307,7 +311,13 @@ imap <expr> <C-G> neocomplete#undo_completion()
 " lexima configuration
 let g:lexima_no_default_rules = 1
 call lexima#set_default_rules()
-imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
+imap <CR> <C-R>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return pumvisible() ? "\<C-Y>" : "\<CR>"
+endfunction
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-N>" : "\<TAB>"
 
 
 " jedi configuration
