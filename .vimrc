@@ -304,19 +304,10 @@ let g:neocomplete#force_omni_input_patterns.python =
 \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::'
 
-imap <expr> <C-G> neocomplete#undo_completion()
+inoremap <expr> <C-G> neocomplete#undo_completion()
 
-
-" lexima configuration
-let g:lexima_no_default_rules = 1
-call lexima#set_default_rules()
-
-imap <CR> <C-R>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return pumvisible() ? "\<C-Y>" : "\<CR>"
-endfunction
-
-inoremap <expr><TAB>  pumvisible() ? "\<C-N>" : "\<TAB>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
 
 
 " jedi configuration
