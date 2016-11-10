@@ -112,6 +112,7 @@ call dein#begin('~/.cache/dein', '~/shell-configs/.vimrc')
 
 " Let dein manage dein
 call dein#add('Shougo/dein.vim')
+call dein#add('haya14busa/dein-command.vim')
 
 " Productivity
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
