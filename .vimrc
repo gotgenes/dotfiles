@@ -349,6 +349,10 @@ nnoremap <leader>uy :<C-u>Unite history/yank<CR>
 nnoremap <leader>uh :<C-U>Unite -start-insert help<CR>
 
 
+" gruvbox configuration
+let g:gruvbox_contrast_light='hard'
+
+
 """"""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
