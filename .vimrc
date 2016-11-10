@@ -136,6 +136,7 @@ call dein#add('SirVer/ultisnips')
 call dein#add('honza/vim-snippets')
 call dein#add('majutsushi/tagbar')
 call dein#add('cohama/lexima.vim')
+call dein#add('Konfekt/FastFold')
 
 " Go
 call dein#add('fatih/vim-go')
@@ -251,7 +252,6 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 
 " Tagbar configuration
 nnoremap <leader>tb :TagbarToggle<CR>
-
 
 
 " UltiSnips configuration
