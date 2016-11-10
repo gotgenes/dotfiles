@@ -119,9 +119,10 @@ call dein#add('schickling/vim-bufonly')
 call dein#add('scrooloose/nerdtree')
 call dein#add('bronson/vim-trailing-whitespace')  " TODO: replace this with ntpeters/vim-better-whitespace
 call dein#add('dbakker/vim-projectroot')
-call dein#add('altercation/vim-colors-solarized')
 call dein#add('vim-scripts/utl.vim')
 call dein#add('itchyny/lightline.vim')
+call dein#add('altercation/vim-colors-solarized')
+call dein#add('morhetz/gruvbox')
 
 " Git
 call dein#add('tpope/vim-fugitive')
@@ -181,7 +182,7 @@ endif
 " lightline configuration
 set laststatus=2
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'gruvbox',
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
       \   'fugitive': 'LightlineFugitive',
@@ -349,18 +350,10 @@ nnoremap <leader>uh :<C-U>Unite -start-insert help<CR>
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
 
-" Uncomment one below to get a dark background or a light background. (NOTE:
-" it is important to specify this background before specifying any colorscheme
-" in Vim. [GVim does not seem phased by the order.])
-set background=light
-"set background=dark
-
-" Choose a favorite color scheme
-let cscheme='solarized'
-if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
-    exec ":colorscheme ". cscheme
+if has('termguicolors')
+  set termguicolors
 endif
 
-" Fix for vim-gitgutter coloring with Solarized colorscheme
-highlight clear SignColumn
-highlight link SignColumn LineNr
+set background=light
+
+colorscheme gruvbox
