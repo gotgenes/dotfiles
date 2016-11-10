@@ -41,6 +41,9 @@ set undolevels=1000
 " Maximum number lines to save for undo on a buffer reload
 set undoreload=10000
 
+" Decrease the time to update the swap file
+set updatetime=500
+
 
 """"""""""""
 " MAPPINGS "
@@ -102,13 +105,14 @@ endif
 """""""""""""""""""
 " INSTALL PLUGINS "
 """""""""""""""""""
-set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin('~/.vim/plugins')
+call dein#begin('~/.cache/dein', '~/shell-configs/.vimrc')
 
 " Let dein manage dein
 call dein#add('Shougo/dein.vim')
+call dein#add('haya14busa/dein-command.vim')
 
 " Productivity
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
@@ -119,13 +123,14 @@ call dein#add('schickling/vim-bufonly')
 call dein#add('scrooloose/nerdtree')
 call dein#add('bronson/vim-trailing-whitespace')  " TODO: replace this with ntpeters/vim-better-whitespace
 call dein#add('dbakker/vim-projectroot')
-call dein#add('altercation/vim-colors-solarized')
 call dein#add('vim-scripts/utl.vim')
 call dein#add('itchyny/lightline.vim')
+call dein#add('altercation/vim-colors-solarized')
+call dein#add('morhetz/gruvbox')
 
 " Git
 call dein#add('tpope/vim-fugitive')
-call dein#add('jisaacks/GitGutter')
+call dein#add('airblade/vim-gitgutter')
 call dein#add('gregsexton/gitv')
 
 " Programming
@@ -136,6 +141,7 @@ call dein#add('SirVer/ultisnips')
 call dein#add('honza/vim-snippets')
 call dein#add('majutsushi/tagbar')
 call dein#add('cohama/lexima.vim')
+call dein#add('Konfekt/FastFold')
 
 " Go
 call dein#add('fatih/vim-go')
@@ -180,7 +186,7 @@ endif
 " lightline configuration
 set laststatus=2
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'gruvbox',
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
       \   'fugitive': 'LightlineFugitive',
@@ -252,7 +258,6 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <leader>tb :TagbarToggle<CR>
 
 
-
 " UltiSnips configuration
 let g:UltiSnipsExpandTrigger = '<C-S>'
 let g:UltiSnipsJumpForwardTrigger = '<C-,>'
@@ -293,6 +298,11 @@ let g:syntastic_check_on_wq = 0
 
 " neocomplete configuration
 let g:neocomplete#enable_at_startup = 1
+
+call neocomplete#custom#source('_', 'converters',
+      \['converter_remove_overlap', 'converter_remove_last_paren',
+      \ 'converter_delimiter', 'converter_abbr'])
+
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
@@ -306,8 +316,17 @@ let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::
 
 inoremap <expr> <C-G> neocomplete#undo_completion()
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
+" tab-completion
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-N>" :
+      \ <SID>has_space_before() ? "\<Tab>" :
+      \ neocomplete#start_manual_complete()
+
+function! s:has_space_before() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
 
 
 " jedi configuration
@@ -344,22 +363,18 @@ nnoremap <leader>uy :<C-u>Unite history/yank<CR>
 nnoremap <leader>uh :<C-U>Unite -start-insert help<CR>
 
 
+" gruvbox configuration
+let g:gruvbox_contrast_light='hard'
+
+
 """"""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
 
-" Uncomment one below to get a dark background or a light background. (NOTE:
-" it is important to specify this background before specifying any colorscheme
-" in Vim. [GVim does not seem phased by the order.])
-set background=light
-"set background=dark
-
-" Choose a favorite color scheme
-let cscheme='solarized'
-if strlen(globpath(&rtp, "colors/".cscheme.".vim"))
-    exec ":colorscheme ". cscheme
+if has('termguicolors')
+  set termguicolors
 endif
 
-" Fix for vim-gitgutter coloring with Solarized colorscheme
-highlight clear SignColumn
-highlight link SignColumn LineNr
+set background=light
+
+colorscheme gruvbox
