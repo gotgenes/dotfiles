@@ -41,6 +41,9 @@ set undolevels=1000
 " Maximum number lines to save for undo on a buffer reload
 set undoreload=10000
 
+" Decrease the time to update the swap file
+set updatetime=500
+
 
 """"""""""""
 " MAPPINGS "
