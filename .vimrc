@@ -102,10 +102,10 @@ endif
 """""""""""""""""""
 " INSTALL PLUGINS "
 """""""""""""""""""
-set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin('~/.vim/plugins')
+call dein#begin('~/.cache/dein', '~/shell-configs/.vimrc')
 
 " Let dein manage dein
 call dein#add('Shougo/dein.vim')
