@@ -299,6 +299,11 @@ let g:syntastic_check_on_wq = 0
 
 " neocomplete configuration
 let g:neocomplete#enable_at_startup = 1
+
+call neocomplete#custom#source('_', 'converters',
+      \['converter_remove_overlap', 'converter_remove_last_paren',
+      \ 'converter_delimiter', 'converter_abbr'])
+
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
