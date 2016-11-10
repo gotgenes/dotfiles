@@ -126,7 +126,7 @@ call dein#add('morhetz/gruvbox')
 
 " Git
 call dein#add('tpope/vim-fugitive')
-call dein#add('jisaacks/GitGutter')
+call dein#add('airblade/vim-gitgutter')
 call dein#add('gregsexton/gitv')
 
 " Programming
