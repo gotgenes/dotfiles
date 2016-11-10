@@ -311,8 +311,17 @@ let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::
 
 inoremap <expr> <C-G> neocomplete#undo_completion()
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
+" tab-completion
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-N>" :
+      \ <SID>has_space_before() ? "\<Tab>" :
+      \ neocomplete#start_manual_complete()
+
+function! s:has_space_before() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
 
 
 " jedi configuration
