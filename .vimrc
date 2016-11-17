@@ -54,6 +54,7 @@ let mapleader = ','
 
 " Get to command mode easier
 nnoremap ; :
+vnoremap ; :
 
 " Easy access keystrokes for editing your Vim configuration
 nnoremap <leader>svrc :source $MYVIMRC<CR>
