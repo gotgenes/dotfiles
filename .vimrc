@@ -128,6 +128,8 @@ call dein#add('vim-scripts/utl.vim')
 call dein#add('itchyny/lightline.vim')
 call dein#add('altercation/vim-colors-solarized')
 call dein#add('morhetz/gruvbox')
+call dein#add('chriskempson/base16-vim')
+call dein#add('gotgenes/base16-lightline.vim')
 
 " Git
 call dein#add('tpope/vim-fugitive')
@@ -187,7 +189,7 @@ endif
 " lightline configuration
 set laststatus=2
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'base16_eighties',
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
       \   'fugitive': 'LightlineFugitive',
@@ -364,6 +366,9 @@ nnoremap <leader>uy :<C-u>Unite history/yank<CR>
 nnoremap <leader>uh :<C-U>Unite -start-insert help<CR>
 
 
+" base16 configuration
+let g:base16colorspace=256
+
 """"""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
@@ -372,6 +377,4 @@ if has('termguicolors')
   set termguicolors
 endif
 
-set background=light
-
-colorscheme gruvbox
+colorscheme base16-eighties
