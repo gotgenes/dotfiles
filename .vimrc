@@ -350,6 +350,9 @@ nnoremap <silent> <leader>ntp :ProjectRootExe NERDTreeFind<CR>
 if executable('ag')
   let g:unite_source_rec_async_command = [
     \ 'ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+    \ '-i --vimgrep --hidden'
 endif
 let g:unite_source_history_yank_enable = 1
 
