@@ -262,9 +262,9 @@ nnoremap <leader>tb :TagbarToggle<CR>
 
 
 " UltiSnips configuration
-let g:UltiSnipsExpandTrigger = '<C-S>'
-let g:UltiSnipsJumpForwardTrigger = '<C-,>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-.>'
+let g:UltiSnipsExpandTrigger = "<C-S>"
+let g:UltiSnipsJumpForwardTrigger = "<C-,>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-.>"
 
 let g:ultisnips_python_style = "sphinx"
 
