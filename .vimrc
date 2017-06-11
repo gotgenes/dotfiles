@@ -168,6 +168,9 @@ call dein#add('davidhalter/jedi-vim')
 call dein#add('tmhedberg/SimpylFold')
 call dein#add('hynek/vim-python-pep8-indent')
 
+" TOML
+call dein#add('cespare/vim-toml')
+
 " TypeScript
 call dein#add('leafgarland/typescript-vim')
 call dein#add('Quramy/tsuquyomi')
