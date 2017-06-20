@@ -148,6 +148,7 @@ call dein#add('Konfekt/FastFold')
 
 " Go
 call dein#add('fatih/vim-go')
+call dein#add('gotgenes/golang-template.vim')
 
 " HTML
 call dein#add('tmhedberg/matchit')
