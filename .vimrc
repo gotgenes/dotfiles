@@ -125,6 +125,8 @@ call dein#add('scrooloose/nerdtree')
 call dein#add('bronson/vim-trailing-whitespace')  " TODO: replace this with ntpeters/vim-better-whitespace
 call dein#add('dbakker/vim-projectroot')
 call dein#add('vim-scripts/utl.vim')
+call dein#add('tpope/vim-repeat')
+call dein#add('tpope/vim-surround')
 call dein#add('itchyny/lightline.vim')
 call dein#add('altercation/vim-colors-solarized')
 call dein#add('morhetz/gruvbox')
