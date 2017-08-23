@@ -282,6 +282,8 @@ if has("autocmd")
   autocmd BufEnter * EnableStripWhitespaceOnSave
 endif
 
+highlight link ExtraWhitespace Error
+
 
 " Syntastic configuration
 let g:syntastic_always_populate_loc_list = 1
