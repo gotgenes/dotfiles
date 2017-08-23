@@ -128,8 +128,6 @@ call dein#add('vim-scripts/utl.vim')
 call dein#add('tpope/vim-repeat')
 call dein#add('tpope/vim-surround')
 call dein#add('itchyny/lightline.vim')
-call dein#add('altercation/vim-colors-solarized')
-call dein#add('morhetz/gruvbox')
 call dein#add('chriskempson/base16-vim')
 call dein#add('gotgenes/base16-lightline.vim')
 
