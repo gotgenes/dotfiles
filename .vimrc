@@ -122,12 +122,13 @@ call dein#add('tsukkee/unite-help')
 call dein#add('Shougo/neoyank.vim')
 call dein#add('schickling/vim-bufonly')
 call dein#add('scrooloose/nerdtree')
-call dein#add('bronson/vim-trailing-whitespace')  " TODO: replace this with ntpeters/vim-better-whitespace
+call dein#add('ntpeters/vim-better-whitespace')
 call dein#add('dbakker/vim-projectroot')
 call dein#add('vim-scripts/utl.vim')
+call dein#add('tpope/vim-repeat')
+call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-unimpaired')
 call dein#add('itchyny/lightline.vim')
-call dein#add('altercation/vim-colors-solarized')
-call dein#add('morhetz/gruvbox')
 call dein#add('chriskempson/base16-vim')
 call dein#add('gotgenes/base16-lightline.vim')
 
@@ -273,27 +274,12 @@ let g:UltiSnipsJumpBackwardTrigger = "<C-.>"
 let g:ultisnips_python_style = "sphinx"
 
 
-" trailing-whitespace configuration
-function! ToggleAutoRmTrailingWhitespace()
-  if !exists("g:auto_rm_trailing_ws")
-    let g:auto_rm_trailing_ws = 1
-  elseif g:auto_rm_trailing_ws != 1
-    let g:auto_rm_trailing_ws = 1
-    echo "Automatically removing trailing whitespace."
-  else
-    let g:auto_rm_trailing_ws = 0
-    echo "Not automatically removing trailing whitespace."
-  endif
-endfunction
-
-call ToggleAutoRmTrailingWhitespace()
-
-nnoremap <silent> <leader>rws :call ToggleAutoRmTrailingWhitespace()<CR>
+" vim-better-whitespace configuration
+nnoremap <silent> <leader>rws :ToggleStripWhitespaceOnSave<CR>
+nnoremap <silent> <leader>hws :ToggleWhitespace<CR>
 
 if has("autocmd")
-  " Tidy up trailing whitespace when writing the file if we have the
-  " trailing-whitespace plugin installed and we've set the proper variable.
-  autocmd BufWritePre * if exists(":FixWhitespace") && exists("g:auto_rm_trailing_ws") && g:auto_rm_trailing_ws == 1 | exe ":FixWhitespace" | endif
+  autocmd BufEnter * EnableStripWhitespaceOnSave
 endif
 
 
