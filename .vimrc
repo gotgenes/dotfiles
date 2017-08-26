@@ -154,6 +154,7 @@ call dein#add('gotgenes/golang-template.vim')
 " HTML
 call dein#add('tmhedberg/matchit')
 call dein#add('othree/html5.vim')
+call dein#add('alvan/vim-closetag')
 
 " JavaScript
 call dein#add('pangloss/vim-javascript')
