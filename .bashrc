@@ -138,12 +138,6 @@ export MANPATH="$LOCAL_DIR/share/man:$MANPATH"
 # Locally installed LaTeX files
 export TEXMFHOME="$HOME/texmf"
 
-# Perl module installations should be through local::lib, which should
-# be set up with the root as ~/.local. This line puts those modules on
-# the PERL5LIB path.
-# Disabled for plenv.
-#eval $(perl -I$LOCAL_LIB_DIR/perl5 -Mlocal::lib=$LOCAL_DIR)
-
 
 # APPLICATION ENVIRONMENTAL VARIABLES
 
