@@ -145,12 +145,6 @@ export TEXMFHOME="$HOME/texmf"
 #eval $(perl -I$LOCAL_LIB_DIR/perl5 -Mlocal::lib=$LOCAL_DIR)
 
 
-# Ruby gems install locally.
-export GEM_HOME="$LOCAL_DIR"
-export GEM_PATH="$GEM_HOME:$GEM_PATH"
-export RUBYLIB="$GEM_HOME/lib:$RUBY_LIB"
-
-
 # APPLICATION ENVIRONMENTAL VARIABLES
 
 # enable color support of ls and other programs
