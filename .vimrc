@@ -164,7 +164,7 @@ call dein#add('lervag/vimtex')
 
 " Markdown
 call dein#add('godlygeek/tabular')
-call dein#add('gabrielelana/vim-markdown')
+call dein#add('plasticboy/vim-markdown')
 
 " Python
 call dein#add('davidhalter/jedi-vim')
