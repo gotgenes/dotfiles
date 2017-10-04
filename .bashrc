@@ -156,6 +156,7 @@ fi
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
 # virtualenvwrapper customization
+export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python2"
 export WORKON_HOME="$HOME/.virtualenvs"
 source_if_exists "$LOCAL_DIR/bin/virtualenvwrapper.sh"
 
