@@ -13,8 +13,10 @@
 	ci = commit
 	; Superb log aliases adapted from
 	; http://www.jukie.net/bart/blog/pimping-out-git-log
+	logs = log --decorate --stat
 	log1 = log --oneline --decorate
 	glog = log --graph --pretty=format:'%C(auto)%h -%d %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --date-order
+	pushup = push -u origin HEAD
 [push]
 	default = simple
 [credential]
