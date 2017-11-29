@@ -360,7 +360,7 @@ nnoremap <silent> <leader>uf :<C-u>Unite -start-insert file_rec/async<CR>
 nnoremap <silent> <leader>up :call Unite_project()<CR>
 nnoremap <leader>uy :<C-u>Unite history/yank<CR>
 nnoremap <leader>uh :<C-u>Unite -start-insert help<CR>
-nnoremap <leader>ug :<C-u>Unite grep<CR><CR>
+nnoremap <leader>ug :<C-u>Unite -no-quit grep<CR><CR>
 
 
 " base16 configuration
