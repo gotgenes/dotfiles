@@ -156,6 +156,10 @@ call dein#add('tmhedberg/matchit')
 call dein#add('othree/html5.vim')
 call dein#add('alvan/vim-closetag')
 
+" CSS / SASS
+call dein#add('hail2u/vim-css3-syntax')
+call dein#add('cakebaker/scss-syntax.vim')
+
 " JavaScript
 call dein#add('pangloss/vim-javascript')
 
