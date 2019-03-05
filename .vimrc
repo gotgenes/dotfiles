@@ -129,7 +129,7 @@ call dein#add('tpope/vim-repeat')
 call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-unimpaired')
 call dein#add('itchyny/lightline.vim')
-call dein#add('chriskempson/base16-vim')
+call dein#add('danielwe/base16-vim')
 call dein#add('gotgenes/base16-lightline.vim')
 
 " Git
