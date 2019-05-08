@@ -137,6 +137,9 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('airblade/vim-gitgutter')
 call dein#add('gregsexton/gitv')
 
+" CI
+call dein#add('martinda/Jenkinsfile-vim-syntax')
+
 " Programming
 call dein#add('Shougo/neocomplete')
 call dein#add('scrooloose/syntastic')
