@@ -182,6 +182,9 @@ call dein#add('cespare/vim-toml')
 call dein#add('leafgarland/typescript-vim')
 call dein#add('Quramy/tsuquyomi')
 
+" C#
+call dein#add('OmniSharp/omnisharp-vim')
+
 call dein#end()
 
 filetype plugin indent on
@@ -307,6 +310,7 @@ call neocomplete#custom#source('_', 'converters',
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
+autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
@@ -314,6 +318,7 @@ let g:jedi#smart_auto_mappings = 0
 let g:neocomplete#force_omni_input_patterns.python =
 \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::'
+let g:neocomplete#force_omni_input_patterns.cs = '.*[^=\);]'
 
 inoremap <expr> <C-G> neocomplete#undo_completion()
 
