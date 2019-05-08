@@ -178,6 +178,9 @@ call dein#add('davidhalter/jedi-vim')
 call dein#add('tmhedberg/SimpylFold')
 call dein#add('hynek/vim-python-pep8-indent')
 
+" Terraform
+call dein#add('hashivim/vim-terraform')
+
 " TOML
 call dein#add('cespare/vim-toml')
 
