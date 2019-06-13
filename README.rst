@@ -6,6 +6,9 @@ This is a collection of configuration files (a.k.a. "dot files") for
 working in a \*NIX environment. This allows me to easily set up in a new
 environment very quickly.
 
+Presently this repository is tailored towards macOS. Some configuration
+values may not be appropriate for Linux.
+
 Deploying the configurations
 ============================
 
