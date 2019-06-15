@@ -116,10 +116,14 @@ call dein#add('Shougo/dein.vim')
 call dein#add('haya14busa/dein-command.vim')
 
 " Productivity
-call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-call dein#add('Shougo/unite.vim')
-call dein#add('tsukkee/unite-help')
+if !has('nvim')
+  call dein#add('roxma/vim-hug-neovim-rpc')
+  call dein#add('roxma/nvim-yarp')
+endif
+call dein#add('Shougo/denite.nvim')
+call dein#add('nixprime/cpsm')
 call dein#add('Shougo/neoyank.vim')
+
 call dein#add('schickling/vim-bufonly')
 call dein#add('scrooloose/nerdtree')
 call dein#add('ntpeters/vim-better-whitespace')
@@ -223,7 +227,7 @@ endfunction
 
 function! LightlineFilename()
   return (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'denite' ? denite#get_status('sources') :
         \  &ft == 'vimshell' ? vimshell#get_status_string() :
         \ '' != expand('%:t') ? expand('%:t') : '[No Name]')
 endfunction
@@ -247,7 +251,7 @@ function! LightlineMode()
         \ fname == '__Gundo__' ? 'Gundo' :
         \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'denite' ? 'Denite' :
         \ &ft == 'vimfiler' ? 'VimFiler' :
         \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
@@ -258,8 +262,6 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
     let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
-
-let g:unite_force_overwrite_statusline = 0
 
 
 " utl configuration
@@ -353,29 +355,42 @@ nnoremap <silent> <leader>cdp :ProjectRootCD<CR>
 nnoremap <silent> <leader>ntp :ProjectRootExe NERDTreeFind<CR>
 
 
-" Unite settings
-if executable('ag')
-  let g:unite_source_rec_async_command = [
-    \ 'ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-    \ '-i --vimgrep --hidden'
-endif
-let g:unite_source_history_yank_enable = 1
-
-function! Unite_project()
-  execute ':Unite -start-insert buffer file_rec/async:'.ProjectRootGuess().'/'
+" Denite settings
+autocmd FileType denite call s:denite_my_mappings()
+function! s:denite_my_mappings() abort
+  nnoremap <silent><buffer><expr> <CR>
+    \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> q
+    \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> a
+    \ denite#do_map('choose_action')
+  nnoremap <silent><buffer><expr> <C-l>
+    \ denite#do_map('redraw')
+  nnoremap <silent><buffer><expr> i
+    \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+    \ denite#do_map('toggle_select')
 endfunction
 
-call unite#custom#source('file,file_rec,file_rec/async', 'matchers',
-  \['converter_relative_word', 'matcher_fuzzy'])
+call denite#custom#source('file/rec', 'matchers', ['matcher/cpsm'])
+if executable('ag')
+  call denite#custom#var('file/rec', 'command',
+    \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
 
-nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
-nnoremap <silent> <leader>uf :<C-u>Unite -start-insert file_rec/async<CR>
-nnoremap <silent> <leader>up :call Unite_project()<CR>
-nnoremap <leader>uy :<C-u>Unite history/yank<CR>
-nnoremap <leader>uh :<C-u>Unite -start-insert help<CR>
-nnoremap <leader>ug :<C-u>Unite -no-quit grep<CR><CR>
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'default_opts',
+    \ ['-i', '--vimgrep'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+endif
+
+nnoremap <silent> <leader>db :<C-u>Denite buffer<CR>
+nnoremap <silent> <leader>df :<C-u>Denite file/rec -start-filter<CR>
+nnoremap <silent> <leader>dp :<C-u>DeniteProjectDir file/rec -start-filter<CR>
+nnoremap <leader>dg :<C-u>Denite grep<CR><CR>
+nnoremap <leader>dy :<C-u>Denite neoyank<CR>
 
 
 " base16 configuration
