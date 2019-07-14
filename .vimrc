@@ -364,6 +364,8 @@ function! s:denite_my_mappings() abort
     \ denite#do_map('quit')
   nnoremap <silent><buffer><expr> a
     \ denite#do_map('choose_action')
+  nnoremap <silent><buffer><expr> dd
+    \ denite#do_map('do_action', 'delete')
   nnoremap <silent><buffer><expr> <C-l>
     \ denite#do_map('redraw')
   nnoremap <silent><buffer><expr> i
