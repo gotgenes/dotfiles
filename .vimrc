@@ -310,6 +310,20 @@ let g:syntastic_check_on_wq = 0
 " deoplete configuration
 let g:deoplete#enable_at_startup = 1
 
+call deoplete#custom#source('_', 'converters',
+      \['converter_remove_overlap',
+      \ 'converter_truncate_abbr',
+      \ 'converter_truncate_menu',
+      \ 'converter_remove_paren',
+      \ 'converter_auto_delimiter'])
+
+inoremap <expr> <C-G> deoplete#undo_completion()
+" tab-completion
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-N>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
+
+
 " SimpylFold configuration
 let g:SimpylFold_fold_docstring = 0
 
