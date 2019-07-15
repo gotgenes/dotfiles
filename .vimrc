@@ -145,7 +145,8 @@ call dein#add('gregsexton/gitv')
 call dein#add('martinda/Jenkinsfile-vim-syntax')
 
 " Programming
-call dein#add('Shougo/neocomplete')
+call dein#add('Shougo/deoplete.nvim')
+call dein#add('autozimu/LanguageClient-neovim', {'build': 'bash install.sh'})
 call dein#add('scrooloose/syntastic')
 call dein#add('scrooloose/nerdcommenter')
 call dein#add('SirVer/ultisnips')
@@ -178,7 +179,6 @@ call dein#add('godlygeek/tabular')
 call dein#add('plasticboy/vim-markdown')
 
 " Python
-call dein#add('davidhalter/jedi-vim')
 call dein#add('tmhedberg/SimpylFold')
 call dein#add('hynek/vim-python-pep8-indent')
 
@@ -307,44 +307,8 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
 
 
-" neocomplete configuration
-let g:neocomplete#enable_at_startup = 1
-
-call neocomplete#custom#source('_', 'converters',
-      \['converter_remove_overlap', 'converter_remove_last_paren',
-      \ 'converter_delimiter', 'converter_abbr'])
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
-let g:neocomplete#force_omni_input_patterns.python =
-\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::'
-let g:neocomplete#force_omni_input_patterns.cs = '.*[^=\);]'
-
-inoremap <expr> <C-G> neocomplete#undo_completion()
-
-" tab-completion
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-N>" :
-      \ <SID>has_space_before() ? "\<Tab>" :
-      \ neocomplete#start_manual_complete()
-
-function! s:has_space_before() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
-
-
-" jedi configuration
-let g:jedi#use_tabs_not_buffers = 0
-
+" deoplete configuration
+let g:deoplete#enable_at_startup = 1
 
 " SimpylFold configuration
 let g:SimpylFold_fold_docstring = 0
