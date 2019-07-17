@@ -121,7 +121,7 @@ if !has('nvim')
   call dein#add('roxma/nvim-yarp')
 endif
 call dein#add('Shougo/denite.nvim')
-call dein#add('nixprime/cpsm')
+call dein#add('nixprime/cpsm', {'build': 'PY3=ON ./install.sh'})
 call dein#add('Shougo/neoyank.vim')
 
 call dein#add('schickling/vim-bufonly')
