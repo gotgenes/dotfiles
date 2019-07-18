@@ -82,8 +82,10 @@ source_if_exists () {
 source_if_exists "$HOME/.bash_aliases"
 
 # Bash completion
-source_if_exists "$(brew --prefix)/etc/bash_completion"
-if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+source_if_exists "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+if [ -f "$(brew --prefix)/etc/bash_completion.d" ]; then
     # Disable tilde expansion; see
     # http://superuser.com/questions/95653/bash-shell-tab-completion-dont-expand-the
     _expand()
