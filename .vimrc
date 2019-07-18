@@ -317,6 +317,9 @@ call deoplete#custom#source('_', 'converters',
       \ 'converter_remove_paren',
       \ 'converter_auto_delimiter'])
 
+autocmd FileType denite-filter
+      \ call deoplete#custom#buffer_option('auto_complete', v:false)
+
 inoremap <expr> <C-G> deoplete#undo_completion()
 " tab-completion
 inoremap <silent><expr> <Tab>
