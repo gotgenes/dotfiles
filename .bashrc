@@ -73,8 +73,8 @@ export EDITOR="mvim -v"
 
 source_if_exists () {
     file_to_source="$1"
-    if [ -f $file_to_source ]; then
-        . $file_to_source
+    if [[ -r "$file_to_source" ]]; then
+        . "$file_to_source"
     fi
 }
 
@@ -83,9 +83,9 @@ source_if_exists "$HOME/.bash_aliases"
 
 # Bash completion
 export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
-[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-source_if_exists "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-if [ -f "$(brew --prefix)/etc/bash_completion.d" ]; then
+bash_completion_script="$(brew --prefix)/etc/profile.d/bash_completion.sh"
+source_if_exists "$bash_completion_script"
+if [[ -r "$bash_completion_script" ]]; then
     # Disable tilde expansion; see
     # http://superuser.com/questions/95653/bash-shell-tab-completion-dont-expand-the
     _expand()
