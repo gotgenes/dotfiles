@@ -67,8 +67,8 @@ if [ "$TERM" = "xterm" ] ; then
     fi
 fi
 
-# Use Vim as the default editor.
-export EDITOR="mvim -v"
+# Use Neovim as the default editor.
+export EDITOR="nvim"
 
 
 source_if_exists () {
