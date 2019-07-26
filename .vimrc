@@ -359,7 +359,7 @@ call denite#custom#source('file/rec', 'matchers', ['matcher/cpsm', 'sorter/rank'
 
 if executable('rg')
   call denite#custom#var('file/rec', 'command',
-        \ ['rg', '--files', '--glob', '!.git', '--color', 'never'])
+        \ ['rg', '--files', '--hidden', '--glob', '!.git', '--color', 'never'])
   call denite#custom#var('grep', 'command', ['rg'])
   call denite#custom#var('grep', 'default_opts',
         \ ['-i', '--vimgrep', '--no-heading'])
