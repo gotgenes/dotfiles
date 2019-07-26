@@ -37,6 +37,9 @@ source_if_exists "$NVM_DIR/bash_completion"
 # Custom Python interactive session configuration.
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
+# Poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+
 # pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
