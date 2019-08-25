@@ -41,8 +41,8 @@ xterm*|rxvt*|gnome*|screen-256color)
 esac
 
 bash_completion_script="$(brew --prefix)/etc/profile.d/bash_completion.sh"
-source_if_exists "$bash_completion_script"
 if [[ -r "$bash_completion_script" ]]; then
+    source "$bash_completion_script"
     # Disable tilde expansion; see
     # http://superuser.com/questions/95653/bash-shell-tab-completion-dont-expand-the
     _expand()
