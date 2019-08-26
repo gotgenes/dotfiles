@@ -307,6 +307,22 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
 
 
+" LanguageClient configuration
+let g:LanguageClient_serverCommands = {
+      \ 'python': ['pyls']
+      \ }
+
+function LC_maps()
+  if has_key(g:LanguageClient_serverCommands, &filetype)
+    nnoremap <buffer> <silent> <leader>lcd :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <buffer> <silent> <leader>lcg :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <buffer> <silent> <leader>lcr :call LanguageClient#textDocument_rename()<CR>
+  endif
+endfunction
+
+autocmd FileType * call LC_maps()
+
+
 " deoplete configuration
 let g:deoplete#enable_at_startup = 1
 
