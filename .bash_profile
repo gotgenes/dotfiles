@@ -34,9 +34,11 @@ export PYTHONSTARTUP="$HOME/.pythonrc"
 export PATH="$HOME/.poetry/bin:$PATH"
 
 # pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-    export -f pyenv
+if [[ ! -v XONSH_VERSION ]]; then
+    if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init -)"
+        export -f pyenv
+    fi
 fi
 
 # rvm
