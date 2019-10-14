@@ -1,4 +1,5 @@
 # BASH BEHAVIOR
+source "$HOME/.bash_common"
 
 # I like to use Vim type editing of the command line, comment out
 # everything below if you prefer the default Emacs-style editing.
