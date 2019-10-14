@@ -1,11 +1,4 @@
-source_if_exists () {
-    file_to_source="$1"
-    if [[ -r "$file_to_source" ]]; then
-        source "$file_to_source"
-    fi
-}
-
-export -f source_if_exists
+source "$HOME/.bash_common"
 
 # Set the number of lines to be recorded in the history
 export HISTSIZE=100000
