@@ -1,5 +1,5 @@
 # XONSH WIZARD START
-$BASH_COMPLETIONS = "['/usr/local/etc/profile.d/bash_completion.sh', '/usr/local/share/bash-completion/bash_completion', '/usr/local/etc/bash_completion']"
+$BASH_COMPLETIONS = ('/usr/local/share/bash-completion/bash_completion', '/usr/local/etc/bash_completion')
 $COMPLETION_IN_THREAD = '1'
 source-bash --login True "echo loading xonsh foreign shell"
 xontrib load autojump jedi kitty vox
