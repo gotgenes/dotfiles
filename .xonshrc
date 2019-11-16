@@ -5,3 +5,19 @@ $VI_MODE = True
 source-bash --login True "echo loading xonsh foreign shell"
 xontrib load autojump jedi kitty vox
 # XONSH WIZARD END
+
+import time
+
+def prompt_color():
+    last_return_code = __xonsh__.history[-1].rtn if __xonsh__.history else 0
+    return "{INTENSE_RED}" if last_return_code else "{CYAN}"
+
+
+$PROMPT_FIELDS['prompt_color'] = prompt_color
+$PROMPT = '{env_name}{FAINT_PURPLE}{user}{PURPLE}@{hostname}{BOLD_BLUE} {cwd}{NO_COLOR}{gitstatus: {}}\n{NO_COLOR}{prompt_color}{prompt_end} '
+$PROMPT_FIELDS['timestamp'] = lambda: time.strftime('%H:%M:%S', time.localtime())
+$RIGHT_PROMPT = '{FAINT_YELLOW}{timestamp}{NO_COLOR}'
+
+$XONSH_GITSTATUS_STAGED = '{BLUE}●'
+$XONSH_GITSTATUS_CHANGED = '{YELLOW}+'
+$XONSH_GITSTATUS_UNTRACKED = '{WHITE}…'
