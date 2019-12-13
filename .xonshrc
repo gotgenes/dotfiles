@@ -3,7 +3,7 @@ $BASH_COMPLETIONS = ('/usr/local/share/bash-completion/bash_completion', '/usr/l
 $COMPLETION_IN_THREAD = True
 $VI_MODE = True
 source-bash --login True "echo loading xonsh foreign shell"
-xontrib load autojump jedi kitty pyenv vox
+xontrib load autojump jedi kitty pyenv ssh_agent vox
 # XONSH WIZARD END
 
 import time
