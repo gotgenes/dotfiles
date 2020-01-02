@@ -41,9 +41,6 @@ xterm*|rxvt*|gnome*|screen-256color)
     ;;
 esac
 
-export NVM_HOMEBREW_DIR="$(brew --prefix)/opt/nvm"
-source_if_exists "$NVM_HOMEBREW_DIR/nvm.sh"
-
 bash_completion_script="$(brew --prefix)/etc/profile.d/bash_completion.sh"
 if [[ -r "$bash_completion_script" ]]; then
     source "$bash_completion_script"
@@ -58,3 +55,7 @@ if [[ -r "$bash_completion_script" ]]; then
         return 0
     }
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
