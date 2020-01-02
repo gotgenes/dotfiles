@@ -45,9 +45,6 @@ fi
 export PATH="$PATH:$HOME/.rvm/bin"
 source_if_exists "$HOME/.rvm/scripts/rvm"
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-
 source_if_exists "$HOME/.iterm2_shell_integration.bash"
 
 # include .bashrc if it exists
