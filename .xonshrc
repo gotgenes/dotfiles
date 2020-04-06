@@ -21,8 +21,7 @@ def prompt_color():
 
 $PROMPT_FIELDS['prompt_color'] = prompt_color
 $PROMPT = '{env_name}{FAINT_PURPLE}{user}{PURPLE}@{hostname}{BOLD_BLUE} {cwd}{NO_COLOR}{gitstatus: {}}\n{NO_COLOR}{prompt_color}{prompt_end} '
-$PROMPT_FIELDS['timestamp'] = lambda: time.strftime('%H:%M:%S', time.localtime())
-$RIGHT_PROMPT = '{FAINT_YELLOW}{timestamp}{NO_COLOR}'
+$RIGHT_PROMPT = '{FAINT_YELLOW}{localtime}{NO_COLOR}'
 
 $XONSH_GITSTATUS_STAGED = '{BLUE}●'
 $XONSH_GITSTATUS_CHANGED = '{YELLOW}+'
