@@ -1,3 +1,9 @@
+import os.path
+import sys
+$REPASSH_COMMAND = os.path.join(os.path.dirname(sys.executable), 'repassh')
+
+del os
+del sys
 # XONSH WIZARD START
 $BASH_COMPLETIONS = ('/usr/local/share/bash-completion/bash_completion', '/usr/local/etc/bash_completion')
 $COMPLETION_IN_THREAD = True
