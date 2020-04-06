@@ -203,6 +203,9 @@ call dein#add('cespare/vim-toml')
 call dein#add('leafgarland/typescript-vim')
 call dein#add('Quramy/tsuquyomi')
 
+" xonsh
+call dein#add('meatballs/vim-xonsh')
+
 " C#
 call dein#add('OmniSharp/omnisharp-vim')
 
