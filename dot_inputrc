@@ -1,0 +1,20 @@
+# Allow up and down to search the history
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+set editing-mode vi
+set keymap vi
+#set convert-meta on
+
+# glob patterns without executing, eg: 'rm *x'
+"\ee": glob-expand-word
+
+"\e[C": forward-char
+"\e[D": backward-char
+
+# Disable expanding ~ into home directory
+set expand-tilde off
+
+# Case-insensitive tab-completion
+set completion-ignore-case on
+

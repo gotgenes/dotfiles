@@ -1,6 +1,0 @@
-source_if_exists () {
-    file_to_source="$1"
-    if [[ -r "$file_to_source" ]]; then
-        source "$file_to_source"
-    fi
-}

@@ -1,0 +1,3 @@
+#!/bin/bash
+PS1="\[\033]0;\u@\h: \w\007\]\u@\h \W \`if [ \$? = 0 ]; then echo ':)';
+else echo ':('; fi\` \$ "

@@ -1,0 +1,28 @@
+import os.path
+import sys
+$REPASSH_COMMAND = os.path.join(os.path.dirname(sys.executable), 'repassh')
+
+del os
+del sys
+# XONSH WIZARD START
+$BASH_COMPLETIONS = ('/usr/local/share/bash-completion/bash_completion', '/usr/local/etc/bash_completion')
+$COMPLETION_IN_THREAD = True
+$VI_MODE = True
+source-bash --login True "echo loading xonsh foreign shell"
+xontrib load autojump jedi kitty pyenv ssh_agent vox
+# XONSH WIZARD END
+
+import time
+
+def prompt_color():
+    last_return_code = __xonsh__.history[-1].rtn if __xonsh__.history else 0
+    return "{INTENSE_RED}" if last_return_code else "{CYAN}"
+
+
+$PROMPT_FIELDS['prompt_color'] = prompt_color
+$PROMPT = '{env_name}{FAINT_PURPLE}{user}{PURPLE}@{hostname}{BOLD_BLUE} {cwd}{NO_COLOR}{gitstatus: {}}\n{NO_COLOR}{prompt_color}{prompt_end} '
+$RIGHT_PROMPT = '{FAINT_YELLOW}{localtime}{NO_COLOR}'
+
+$XONSH_GITSTATUS_STAGED = '{BLUE}●'
+$XONSH_GITSTATUS_CHANGED = '{YELLOW}+'
+$XONSH_GITSTATUS_UNTRACKED = '{WHITE}…'
