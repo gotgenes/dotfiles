@@ -189,6 +189,8 @@ call dein#add('lervag/vimtex')
 " Markdown
 call dein#add('godlygeek/tabular')
 call dein#add('plasticboy/vim-markdown')
+call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+      \ 'build': 'sh -c "cd app & yarn install"' })
 
 " Python
 call dein#add('tmhedberg/SimpylFold')
