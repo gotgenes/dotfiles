@@ -183,6 +183,7 @@ call dein#add('cakebaker/scss-syntax.vim')
 
 " JavaScript
 call dein#add('pangloss/vim-javascript')
+call dein#add('maxmellon/vim-jsx-pretty')
 
 " LaTeX
 call dein#add('lervag/vimtex')
