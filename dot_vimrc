@@ -120,102 +120,107 @@ augroup END
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin('~/.cache/dein', '~/shell-configs/.vimrc')
+if dein#load_state('~/.cache/dein/')
+  call dein#begin('~/.cache/dein')
 
-" Let dein manage dein
-call dein#add('Shougo/dein.vim')
-call dein#add('haya14busa/dein-command.vim')
+  " Let dein manage dein
+  call dein#add('Shougo/dein.vim')
+  call dein#add('haya14busa/dein-command.vim')
 
-" Productivity
-if !has('nvim')
-  call dein#add('roxma/vim-hug-neovim-rpc')
-  call dein#add('roxma/nvim-yarp')
+  " Productivity
+  if !has('nvim')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+    call dein#add('roxma/nvim-yarp')
+  endif
+  call dein#add('wsdjeg/dein-ui.vim')
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
+  call dein#add('Shougo/neoyank.vim')
+
+  call dein#add('schickling/vim-bufonly')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('ntpeters/vim-better-whitespace')
+  call dein#add('dbakker/vim-projectroot')
+  call dein#add('vim-scripts/utl.vim')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-unimpaired')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('chriskempson/base16-vim')
+  call dein#add('gotgenes/base16-lightline.vim')
+  call dein#add('AndrewRadev/splitjoin.vim')
+
+  " Git
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('gregsexton/gitv')
+
+  " CI
+  call dein#add('martinda/Jenkinsfile-vim-syntax')
+
+  " Programming
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('autozimu/LanguageClient-neovim', {'build': 'bash install.sh'})
+  call dein#add('scrooloose/syntastic')
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('SirVer/ultisnips')
+  call dein#add('honza/vim-snippets')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('cohama/lexima.vim')
+  call dein#add('Konfekt/FastFold')
+
+  " Go
+  call dein#add('fatih/vim-go')
+  call dein#add('gotgenes/golang-template.vim')
+
+  " HTML
+  call dein#add('tmhedberg/matchit')
+  call dein#add('othree/html5.vim')
+  call dein#add('alvan/vim-closetag')
+
+  " CSS / SASS
+  call dein#add('hail2u/vim-css3-syntax')
+  call dein#add('cakebaker/scss-syntax.vim')
+
+  " JavaScript
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('maxmellon/vim-jsx-pretty')
+
+  " LaTeX
+  call dein#add('lervag/vimtex')
+
+  " Markdown
+  call dein#add('godlygeek/tabular')
+  call dein#add('plasticboy/vim-markdown')
+  call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+        \ 'build': 'sh -c "cd app & yarn install"' })
+
+  " Python
+  call dein#add('tmhedberg/SimpylFold')
+  call dein#add('hynek/vim-python-pep8-indent')
+
+  " Terraform
+  call dein#add('hashivim/vim-terraform')
+
+  " TOML
+  call dein#add('cespare/vim-toml')
+
+  " TypeScript
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('Quramy/tsuquyomi')
+
+  " xonsh
+  call dein#add('meatballs/vim-xonsh')
+
+  " C#
+  call dein#add('OmniSharp/omnisharp-vim')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
 endif
-call dein#add('wsdjeg/dein-ui.vim')
-call dein#add('Shougo/denite.nvim')
-call dein#add('raghur/fruzzy', {'hook_post_source': "call fruzzy#install()"})
-call dein#add('Shougo/neoyank.vim')
 
-call dein#add('schickling/vim-bufonly')
-call dein#add('scrooloose/nerdtree')
-call dein#add('ntpeters/vim-better-whitespace')
-call dein#add('dbakker/vim-projectroot')
-call dein#add('vim-scripts/utl.vim')
-call dein#add('tpope/vim-repeat')
-call dein#add('tpope/vim-surround')
-call dein#add('tpope/vim-unimpaired')
-call dein#add('itchyny/lightline.vim')
-call dein#add('chriskempson/base16-vim')
-call dein#add('gotgenes/base16-lightline.vim')
-call dein#add('AndrewRadev/splitjoin.vim')
-
-" Git
-call dein#add('tpope/vim-fugitive')
-call dein#add('airblade/vim-gitgutter')
-call dein#add('gregsexton/gitv')
-
-" CI
-call dein#add('martinda/Jenkinsfile-vim-syntax')
-
-" Programming
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('autozimu/LanguageClient-neovim', {'build': 'bash install.sh'})
-call dein#add('scrooloose/syntastic')
-call dein#add('scrooloose/nerdcommenter')
-call dein#add('SirVer/ultisnips')
-call dein#add('honza/vim-snippets')
-call dein#add('majutsushi/tagbar')
-call dein#add('cohama/lexima.vim')
-call dein#add('Konfekt/FastFold')
-
-" Go
-call dein#add('fatih/vim-go')
-call dein#add('gotgenes/golang-template.vim')
-
-" HTML
-call dein#add('tmhedberg/matchit')
-call dein#add('othree/html5.vim')
-call dein#add('alvan/vim-closetag')
-
-" CSS / SASS
-call dein#add('hail2u/vim-css3-syntax')
-call dein#add('cakebaker/scss-syntax.vim')
-
-" JavaScript
-call dein#add('pangloss/vim-javascript')
-call dein#add('maxmellon/vim-jsx-pretty')
-
-" LaTeX
-call dein#add('lervag/vimtex')
-
-" Markdown
-call dein#add('godlygeek/tabular')
-call dein#add('plasticboy/vim-markdown')
-call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
-      \ 'build': 'sh -c "cd app & yarn install"' })
-
-" Python
-call dein#add('tmhedberg/SimpylFold')
-call dein#add('hynek/vim-python-pep8-indent')
-
-" Terraform
-call dein#add('hashivim/vim-terraform')
-
-" TOML
-call dein#add('cespare/vim-toml')
-
-" TypeScript
-call dein#add('leafgarland/typescript-vim')
-call dein#add('Quramy/tsuquyomi')
-
-" xonsh
-call dein#add('meatballs/vim-xonsh')
-
-" C#
-call dein#add('OmniSharp/omnisharp-vim')
-
-call dein#end()
-
+" Required:
 filetype plugin indent on
 syntax enable
 
