@@ -426,9 +426,10 @@ elseif executable('ag')
 endif
 
 nnoremap <silent> <leader>db :<C-u>Denite buffer<CR>
-nnoremap <silent> <leader>df :<C-u>Denite file/rec -start-filter<CR>
-nnoremap <silent> <leader>dp :<C-u>DeniteProjectDir file/rec -start-filter<CR>
+nnoremap <silent> <leader>df :<C-u>Denite -start-filter file/rec<CR>
+nnoremap <silent> <leader>dp :<C-u>DeniteProjectDir -start-filter file/rec<CR>
 nnoremap <leader>dg :<C-u>Denite grep<CR><CR>
+nnoremap <leader>dh :<C-u>Denite -start-filter help<CR><CR>
 nnoremap <leader>dy :<C-u>Denite neoyank<CR>
 
 
