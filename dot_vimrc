@@ -401,7 +401,7 @@ function! s:denite_my_mappings() abort
 endfunction
 
 call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
-call denite#custom#source('file/rec', 'matchers', ['matcher/fruzzy', 'sorter/rank'])
+call denite#custom#source('file,file/rec', 'sorters', ['sorter/rank'])
 
 if executable('rg')
   call denite#custom#var('file/rec', 'command',
