@@ -132,7 +132,6 @@ if dein#load_state('~/.cache/dein/')
     call dein#add('roxma/vim-hug-neovim-rpc')
     call dein#add('roxma/nvim-yarp')
   endif
-  call dein#add('wsdjeg/dein-ui.vim')
   call dein#add('Shougo/denite.nvim')
   call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
   call dein#add('Shougo/neoyank.vim')
