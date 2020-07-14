@@ -1,5 +1,6 @@
-alias e='exa'
-alias ea='exa -a'
+alias e='exa --group-directories-first'
+alias el='e -l'
+alias ea='e -a'
 
 alias ls='ls -G'
 alias ll='ls -l'
