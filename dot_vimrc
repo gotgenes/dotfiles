@@ -149,6 +149,9 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('gotgenes/base16-lightline.vim')
   call dein#add('AndrewRadev/splitjoin.vim')
   call dein#add('embear/vim-localvimrc')
+  if has('nvim')
+    call dein#add('norcalli/nvim-colorizer.lua')
+  endif
 
   " Git
   call dein#add('tpope/vim-fugitive')
