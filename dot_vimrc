@@ -121,7 +121,7 @@ set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
 if dein#load_state('~/.cache/dein/')
-  call dein#begin('~/.cache/dein')
+  call dein#begin('~/.cache/dein', ['~/.config/init.vim', '~/.vimrc'])
 
   " Let dein manage dein
   call dein#add('Shougo/dein.vim')
