@@ -253,6 +253,8 @@ let g:lightline = {
       \   'mode': 'LightlineMode',
       \   'readonly': 'LightlineReadonly',
       \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
       \}
 
 function! LightlineReadonly()
