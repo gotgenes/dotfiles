@@ -29,6 +29,10 @@ set spelllang=en_us
 set cursorline
 " Show line numbers
 set number
+" Don't show insert mode; taken care of by lightline
+set noshowmode
+" Expand the status line for lightline
+set laststatus=2
 
 " Use the persistent undo feature
 " See :h persistent-undo
@@ -237,9 +241,12 @@ endif
 """"""""""""""""""""""""""
 
 " lightline configuration
-set laststatus=2
 let g:lightline = {
       \ 'colorscheme': 'base16_eighties',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified'] ]
+      \ },
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
       \   'fugitive': 'LightlineFugitive',
@@ -261,9 +268,9 @@ endfunction
 
 function! LightlineFugitive()
   try
-    if expand('%:t') !~? 'Tagbar\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = ''  " edit here for cool mark
-      let branch = fugitive#head()
+    if expand('%:t') !~? 'denite\|Tagbar\|NERD' && exists('*FugitiveHead')
+      let mark = ' '  " edit here for cool mark
+      let branch = FugitiveHead()
       return branch !=# '' ? mark.branch : ''
     endif
   catch
