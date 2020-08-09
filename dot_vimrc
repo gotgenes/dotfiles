@@ -137,7 +137,7 @@ if dein#load_state('~/.cache/dein/')
     call dein#add('roxma/nvim-yarp')
   endif
   call dein#add('Shougo/denite.nvim')
-  call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
+  call dein#add('nixprime/cpsm', {'build': 'PY3=ON ./install.sh'})
   call dein#add('Shougo/neoyank.vim')
 
   call dein#add('schickling/vim-bufonly')
@@ -388,11 +388,6 @@ nnoremap <silent> <leader>cdp :ProjectRootCD<CR>
 nnoremap <silent> <leader>ntp :ProjectRootExe NERDTreeFind<CR>
 
 
-" fruzzy settings
-let g:fruzzy#usenative = 1
-let g:fruzzy#sortonempty = 0
-
-
 " Denite settings
 autocmd FileType denite call s:denite_my_mappings()
 function! s:denite_my_mappings() abort
@@ -412,7 +407,7 @@ function! s:denite_my_mappings() abort
     \ denite#do_map('toggle_select')
 endfunction
 
-call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
+call denite#custom#source('_', 'matchers', ['matcher/cpsm'])
 call denite#custom#source('file,file/rec', 'sorters', ['sorter/rank'])
 
 if executable('rg')
