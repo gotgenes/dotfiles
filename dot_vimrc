@@ -441,6 +441,10 @@ nnoremap <leader>dy :<C-u>Denite neoyank<CR>
 nnoremap <leader>dr :<C-u>Denite -resume<CR>
 
 
+" vimtex configuration
+let g:tex_flavor = 'latex'
+
+
 " base16 configuration
 let g:base16colorspace=256
 
