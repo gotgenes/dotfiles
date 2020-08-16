@@ -27,6 +27,11 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 zinit load softmoth/zsh-vim-mode
 
+zinit ice as"completion"
+zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
+zinit ice as"completion"
+zinit snippet "https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose"
+
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
 
@@ -44,3 +49,6 @@ fi
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
+
+autoload -Uz compinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
