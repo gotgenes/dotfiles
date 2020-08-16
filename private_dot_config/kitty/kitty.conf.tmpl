@@ -26,8 +26,11 @@ tab_bar_style fade
 
 enabled_layouts tall:mirrored=true, tall:mirrored=false
 
+{{ if eq .chezmoi.os "darwin" -}}
 macos_titlebar_color system
 macos_show_window_title_in window
+macos_option_as_alt left
+{{- end }}
 
 shell /usr/local/bin/zsh
 
