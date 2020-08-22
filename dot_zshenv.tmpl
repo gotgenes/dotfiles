@@ -13,3 +13,4 @@ if [ -x /usr/libexec/path_helper ]; then
 fi
 eval $(/usr/local/bin/brew shellenv)
 {{- end  }}
+export PATH="$HOME/.local/bin:$PATH"
