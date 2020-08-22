@@ -14,9 +14,6 @@ fi
 eval $(/usr/local/bin/brew shellenv)
 {{- end  }}
 
-export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
 export PATH="$HOME/.local/bin:$PATH"
 
 if (( $+commands[repassh] )); then
