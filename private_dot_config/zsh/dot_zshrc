@@ -41,17 +41,16 @@ bindkey "^[[B" history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-if (( $+commands[pyenv] )); then
-    eval "$(pyenv init -)"
-fi
 
-if (( $+commands[nodenv] )); then
-    eval "$(nodenv init -)"
-fi
+# Set up nodenv, pyenv, and rbenv
+envs=("nodenv" "pyenv" "rbenv")
 
-if (( $+commands[rbenv] )); then
-    eval "$(rbenv init -)"
-fi
+for env in "${envs[@]}"; do
+    if (( $+commands[$env] )); then
+        eval "$($env init -)"
+    fi
+done
+
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
