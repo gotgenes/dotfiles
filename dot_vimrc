@@ -445,6 +445,10 @@ nnoremap <leader>dr :<C-u>Denite -resume<CR>
 let g:tex_flavor = 'latex'
 
 
+" vim-markdown configuration
+let g:vim_markdown_folding_disabled = 1
+
+
 " base16 configuration
 let g:base16colorspace=256
 
