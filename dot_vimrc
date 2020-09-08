@@ -463,3 +463,5 @@ if has('termguicolors')
 endif
 
 colorscheme base16-eighties
+highlight HtmlBold gui=bold
+highlight HtmlItalic gui=italic
