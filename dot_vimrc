@@ -1,5 +1,7 @@
 set nocompatible
 
+set conceallevel=2
+
 """""""""""""""""""""""
 " BEHAVIORAL SETTINGS "
 """""""""""""""""""""""
