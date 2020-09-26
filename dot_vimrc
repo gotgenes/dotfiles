@@ -1,7 +1,5 @@
 set nocompatible
 
-set conceallevel=2
-
 """""""""""""""""""""""
 " BEHAVIORAL SETTINGS "
 """""""""""""""""""""""
@@ -49,6 +47,13 @@ set undoreload=10000
 
 " Decrease the time to update the swap file
 set updatetime=500
+
+" Enable concealing, for example, rendering bold text in Markdown but hiding
+" the the asterisks
+set conceallevel=2
+
+" Disable the preview window
+set completeopt-=preview
 
 
 """"""""""""
@@ -157,6 +162,7 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('embear/vim-localvimrc')
   if has('nvim')
     call dein#add('norcalli/nvim-colorizer.lua')
+    call dein#add('ncm2/float-preview.nvim')
   endif
 
   " Git
@@ -307,6 +313,7 @@ let g:utl_cfg_hdl_scm_http_system = "silent !open %u"
 nnoremap <leader>gu :Utl openLink underCursor edit<CR>
 nnoremap <leader>cl :Utl copyLink underCursor<CR>
 
+
 " NERDCommenter configuration
 " Prevent NERDCommenter from complaining about unrecognized filetypes.
 let NERDShutUp=1
@@ -379,6 +386,10 @@ inoremap <expr> <C-G> deoplete#undo_completion()
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-N>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
+
+
+" float-preview configuration
+let g:float_preview#docked = 1
 
 
 " SimpylFold configuration
