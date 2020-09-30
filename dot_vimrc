@@ -354,7 +354,16 @@ let g:syntastic_check_on_wq = 0
 
 " LanguageClient configuration
 let g:LanguageClient_serverCommands = {
-      \ 'python': ['pyls']
+      \ 'python': ['pyls'],
+      \ 'javascript': ['javascript-typescript-stdio'],
+      \ 'typescript': ['javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['javascript-typescript-stdio'],
+      \ 'typescript.tsx': ['javascript-typescript-stdio'],
+      \ }
+
+let g:LanguageClient_rootMarkers = {
+      \ 'javascript': ['jsconfig.json'],
+      \ 'typescript': ['tsconfig.json'],
       \ }
 
 function LC_maps()
