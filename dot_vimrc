@@ -197,6 +197,9 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('hail2u/vim-css3-syntax')
   call dein#add('cakebaker/scss-syntax.vim')
 
+  " GraphQL
+  call dein#add('jparise/vim-graphql')
+
   " JavaScript
   call dein#add('pangloss/vim-javascript')
   call dein#add('maxmellon/vim-jsx-pretty')
