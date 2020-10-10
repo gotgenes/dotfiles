@@ -53,6 +53,10 @@ for env in "${envs[@]}"; do
     fi
 done
 
+export path=("$GOPATH/bin" $path)
+
+export path=("$HOME/.local/bin" $path)
+
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
