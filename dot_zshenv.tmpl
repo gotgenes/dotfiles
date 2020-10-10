@@ -15,9 +15,9 @@ eval $(/usr/local/bin/brew shellenv)
 {{- end  }}
 
 export GOPATH="$HOME/development/go"
-export PATH="$GOPATH/bin:$PATH"
+export path=("$GOPATH/bin" $path)
 
-export PATH="$HOME/.local/bin:$PATH"
+export path=("$HOME/.local/bin" $path)
 
 if (( $+commands[repassh] )); then
     export GIT_SSH="repassh"
