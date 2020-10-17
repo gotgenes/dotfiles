@@ -52,8 +52,8 @@ set updatetime=500
 " the the asterisks
 set conceallevel=2
 
-" Disable the preview window
-set completeopt-=preview
+" Set completion options
+set completeopt=menu,menuone,noinsert,noselect
 
 
 """"""""""""
