@@ -178,6 +178,7 @@ if dein#load_state('~/.cache/dein/')
 
   " Programming
   call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/echodoc.vim')
   call dein#add('autozimu/LanguageClient-neovim', {'build': 'bash install.sh'})
   call dein#add('scrooloose/syntastic')
   call dein#add('scrooloose/nerdcommenter')
@@ -397,6 +398,8 @@ call deoplete#custom#source('_', 'converters',
       \ 'converter_remove_paren',
       \ 'converter_auto_delimiter'])
 
+call deoplete#custom#option('num_processes', -1)
+
 autocmd FileType denite-filter
       \ call deoplete#custom#buffer_option('auto_complete', v:false)
 
@@ -408,7 +411,12 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
 
 
 " float-preview configuration
-let g:float_preview#docked = 1
+let g:float_preview#docked = 0
+
+
+" echodock configuration
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'floating'
 
 
 " SimpylFold configuration
