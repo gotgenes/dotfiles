@@ -151,7 +151,6 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('Shougo/neoyank.vim')
 
   call dein#add('schickling/vim-bufonly')
-  call dein#add('scrooloose/nerdtree')
   call dein#add('Shougo/defx.nvim')
   call dein#add('kristijanhusak/defx-icons')
   call dein#add('kristijanhusak/defx-git')
@@ -331,10 +330,6 @@ nnoremap <leader>cl :Utl copyLink underCursor<CR>
 " NERDCommenter configuration
 " Prevent NERDCommenter from complaining about unrecognized filetypes.
 let NERDShutUp=1
-
-
-" NERDTree configuration
-nnoremap <leader>nt :NERDTreeToggle<CR>
 
 
 " defx configuration
