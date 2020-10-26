@@ -262,36 +262,61 @@ endif
 """"""""""""""""""""""""""
 
 " lightline configuration
-let g:lightline = {
-      \ 'colorscheme': 'base16_eighties',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified'] ]
-      \ },
-      \ 'component_function': {
-      \   'filename': 'LightlineFilename',
-      \   'fugitive': 'LightlineFugitive',
-      \   'mode': 'LightlineMode',
-      \   'readonly': 'LightlineReadonly',
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \}
+let g:lightline = {}
+let g:lightline.colorscheme = 'base16_eighties'
+let g:lightline.active = {
+      \ 'left': [ [ 'mode', 'paste' ],
+      \           [ 'gitbranch', 'readonly', 'filename_active', 'modified'] ],
+      \ 'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ],
+      \            [ 'fileformat', 'fileencoding', 'filetype' ]]
+      \ }
+let g:lightline.inactive = {
+      \ 'left': [ [ 'filename_inactive' ] ],
+      \ 'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ] ]
+      \ }
+let g:lightline.component_function = {
+      \ 'fileencoding': 'LightlineFileEncoding',
+      \ 'fileformat': 'LightlineFileFormat',
+      \ 'filename_active': 'LightlineFileNameActive',
+      \ 'filename_inactive': 'LightlineFileNameInactive',
+      \ 'filetype': 'LightlineFileType',
+      \ 'gitbranch': 'LightlineGitBranch',
+      \ 'lineinfo': 'LightlineLineInfo',
+      \ 'mode': 'LightlineMode',
+      \ 'percent': 'LightlinePercent',
+      \ 'readonly': 'LightlineReadonly',
+      \ }
 
-function! LightlineReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'RO' : ''
+let lightline_ft_visible_condition = '&ft !~ "defx\\|denite\\|denite-filter\\|help\\|tagbar"'
+
+let g:lightline.component_function_visible_condition = {
+      \ 'fileencoding': lightline_ft_visible_condition,
+      \ 'fileformat': lightline_ft_visible_condition,
+      \ 'filetype': lightline_ft_visible_condition,
+      \ 'lineinfo': lightline_ft_visible_condition,
+      \ 'percent': lightline_ft_visible_condition
+      \ }
+
+let g:lightline.separator = { 'left': "", 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
+
+function! LightlineIsExcludedFileType()
+  return (&ft =~? 'defx\|denite\|denite-filter\|help\|tagbar')
 endfunction
 
-function! LightlineFilename()
-  return (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'denite' ? denite#get_status('sources') :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]')
+function! LightlineMode()
+  return (&ft == 'tagbar' ? 'Tagbar' :
+        \ &ft == 'defx' ? 'Defx' :
+        \ &ft == 'denite' ? 'Denite' :
+        \ &ft == 'help' ? 'Help' :
+        \ winwidth(0) > 60 ? lightline#mode() : '')
 endfunction
 
-function! LightlineFugitive()
+function! LightlineGitBranch()
   try
-    if expand('%:t') !~? 'denite\|Tagbar\|NERD' && exists('*FugitiveHead')
+    if !LightlineIsExcludedFileType() && exists('*FugitiveHead')
       let mark = ' '  " edit here for cool mark
       let branch = FugitiveHead()
       return branch !=# '' ? mark.branch : ''
@@ -301,23 +326,51 @@ function! LightlineFugitive()
   return ''
 endfunction
 
-function! LightlineMode()
-  let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'denite' ? 'Denite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
+function! LightlineReadonly()
+  return !LightlineIsExcludedFileType() && &readonly ? 'RO' : ''
 endfunction
 
-let g:tagbar_status_func = 'TagbarStatusFunc'
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-    let g:lightline.fname = a:fname
-  return lightline#statusline(0)
+function! LightlineFileNameActive()
+  return LightlineFileName(1)
+endfunction
+
+function! LightlineFileNameInactive()
+  return LightlineFileName(0)
+endfunction
+
+function! LightlineFileName(active)
+  return (&ft == 'defx' && a:active ? '' :
+        \ &ft == 'defx' && !a:active ? 'defx' :
+        \ &ft == 'tagbar' && a:active ? '' :
+        \ &ft == 'tagbar' && !a:active ? 'tagbar' :
+        \ &ft == 'denite' ? denite#get_status('sources') :
+        \ &ft == 'denite' ? denite#get_status('sources') :
+        \ expand('%:t') != '' ? expand('%:t') : '[No Name]')
+endfunction
+
+function! LightlineLineInfo()
+  return (LightlineIsExcludedFileType() ? '' :
+        \ printf('%3d:%-2d', line('.'), col('.')))
+endfunction
+
+function! LightlinePercent()
+  return (LightlineIsExcludedFileType() ? '' :
+        \ (100 * line('.') / line('$')) . '%')
+endfunction
+
+function! LightlineFileEncoding()
+  return (LightlineIsExcludedFileType() ? '' :
+        \ winwidth(0) > 70 ? &fileencoding : '')
+endfunction
+
+function! LightlineFileFormat()
+  return (LightlineIsExcludedFileType() ? '' :
+        \ winwidth(0) > 70 ? &fileformat : '')
+endfunction
+
+function! LightlineFileType()
+  return (LightlineIsExcludedFileType() ? '' :
+        \ winwidth(0) > 70 ? (&filetype !=# '' ? &filetype: '[No Filetype]') : '')
 endfunction
 
 
@@ -405,6 +458,7 @@ endfunction
 
 " Tagbar configuration
 nnoremap <leader>tb :TagbarToggle<CR>
+let g:tagbar_no_status_line = 1
 
 
 " UltiSnips configuration
@@ -520,6 +574,8 @@ function! s:denite_my_mappings() abort
   nnoremap <silent><buffer><expr> <Space>
     \ denite#do_map('toggle_select')
 endfunction
+
+call denite#custom#option('_', 'statusline', v:false)
 
 call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
 call denite#custom#source('file,file/rec', 'sorters', ['sorter/rank'])
