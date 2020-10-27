@@ -182,7 +182,6 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/echodoc.vim')
   call dein#add('autozimu/LanguageClient-neovim', {'build': 'bash install.sh'})
-  call dein#add('scrooloose/syntastic')
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('SirVer/ultisnips')
   call dein#add('honza/vim-snippets')
@@ -478,12 +477,6 @@ if has("autocmd")
 endif
 
 highlight link ExtraWhitespace Error
-
-
-" Syntastic configuration
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_wq = 0
 
 
 " LanguageClient configuration
