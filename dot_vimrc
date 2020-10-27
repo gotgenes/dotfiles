@@ -183,7 +183,6 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('Shougo/echodoc.vim')
   call dein#add('dense-analysis/ale')
   call dein#add('maximbaz/lightline-ale')
-  call dein#add('autozimu/LanguageClient-neovim', {'build': 'bash install.sh'})
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('SirVer/ultisnips')
   call dein#add('honza/vim-snippets')
@@ -513,31 +512,6 @@ nmap gd <Plug>(ale_go_to_definition)
 nmap gt <Plug>(ale_go_to_type_definition)
 nmap <leader>ai <Plug>(ale_import)
 nnoremap <silent> <leader>ar :ALERename<CR>
-
-
-" LanguageClient configuration
-let g:LanguageClient_serverCommands = {
-      \ 'python': ['pyls'],
-      \ 'javascript': ['javascript-typescript-stdio'],
-      \ 'typescript': ['javascript-typescript-stdio'],
-      \ 'javascript.jsx': ['javascript-typescript-stdio'],
-      \ 'typescript.tsx': ['javascript-typescript-stdio'],
-      \ }
-
-let g:LanguageClient_rootMarkers = {
-      \ 'javascript': ['jsconfig.json'],
-      \ 'typescript': ['tsconfig.json'],
-      \ }
-
-function LC_maps()
-  if has_key(g:LanguageClient_serverCommands, &filetype)
-    nnoremap <buffer> <silent> <leader>lcd :call LanguageClient#textDocument_hover()<cr>
-    nnoremap <buffer> <silent> <leader>lcg :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <buffer> <silent> <leader>lcr :call LanguageClient#textDocument_rename()<CR>
-  endif
-endfunction
-
-autocmd FileType * call LC_maps()
 
 
 " deoplete configuration
