@@ -181,6 +181,8 @@ if dein#load_state('~/.cache/dein/')
   " Programming
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/echodoc.vim')
+  call dein#add('dense-analysis/ale')
+  call dein#add('maximbaz/lightline-ale')
   call dein#add('autozimu/LanguageClient-neovim', {'build': 'bash install.sh'})
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('SirVer/ultisnips')
@@ -266,7 +268,7 @@ let g:lightline.colorscheme = 'base16_eighties'
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'gitbranch', 'readonly', 'filename_active', 'modified'] ],
-      \ 'right': [ [ 'lineinfo' ],
+      \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok', 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'fileformat', 'fileencoding', 'filetype' ]]
       \ }
@@ -274,6 +276,20 @@ let g:lightline.inactive = {
       \ 'left': [ [ 'filename_inactive' ] ],
       \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ] ]
+      \ }
+let g:lightline.component_expand = {
+      \ 'linter_checking': 'lightline#ale#checking',
+      \ 'linter_infos': 'lightline#ale#infos',
+      \ 'linter_warnings': 'lightline#ale#warnings',
+      \ 'linter_errors': 'lightline#ale#errors',
+      \ 'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \ 'linter_checking': 'right',
+      \ 'linter_infos': 'right',
+      \ 'linter_warnings': 'warning',
+      \ 'linter_errors': 'error',
+      \ 'linter_ok': 'right',
       \ }
 let g:lightline.component_function = {
       \ 'fileencoding': 'LightlineFileEncoding',
@@ -371,6 +387,13 @@ function! LightlineFileType()
   return (LightlineIsExcludedFileType() ? '' :
         \ winwidth(0) > 70 ? (&filetype !=# '' ? &filetype: '[No Filetype]') : '')
 endfunction
+
+" lightline-ale configuration
+let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_infos = "\uf129"
+let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "\uf05e"
+let g:lightline#ale#indicator_ok = "\uf00c"
 
 
 " utl configuration
@@ -477,6 +500,19 @@ if has("autocmd")
 endif
 
 highlight link ExtraWhitespace Error
+
+
+" ALE configuration
+let g:ale_linters = {
+      \ 'python': ['black', 'flake8', 'isort', 'mypy', 'pyls', 'pyright']
+      \ }
+let g:ale_sign_error = "\uf05e"
+let g:ale_sign_warning = "\uf071"
+nmap K <Plug>(ale_hover)
+nmap gd <Plug>(ale_go_to_definition)
+nmap gt <Plug>(ale_go_to_type_definition)
+nmap <leader>ai <Plug>(ale_import)
+nnoremap <silent> <leader>ar :ALERename<CR>
 
 
 " LanguageClient configuration
