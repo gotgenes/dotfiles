@@ -57,8 +57,6 @@ export path=("$GOPATH/bin" $path)
 
 export path=("$HOME/.local/bin" $path)
 
-typeset -U path
-
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -73,7 +71,15 @@ fi
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
+if [[ -d "$XDG_CONFIG_HOME/zsh/include/" ]]; then
+    for file in $XDG_CONFIG_HOME/zsh/include/*.zsh; do
+        source "$file"
+    done
+fi
+
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 
 autoload -Uz compinit
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+
+typeset -U path
