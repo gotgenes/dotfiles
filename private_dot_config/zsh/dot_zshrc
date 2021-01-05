@@ -44,8 +44,11 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 
-# Set up nodenv, pyenv, and rbenv
-envs=("nodenv" "pyenv" "rbenv")
+# Set up ALL THE ENVs
+export GOENV_ROOT="$HOME/.goenv"
+export path=("$GOENV_ROOT/bin" $path)
+
+envs=("goenv" "jenv" "nodenv" "pyenv" "rbenv")
 
 for env in "${envs[@]}"; do
     if (( $+commands[$env] )); then
@@ -53,7 +56,8 @@ for env in "${envs[@]}"; do
     fi
 done
 
-export path=("$GOPATH/bin" $path)
+export path=("$GOROOT/bin" $path)
+export path=($path "$GOPATH/bin")
 
 export path=("$HOME/.local/bin" $path)
 
