@@ -56,9 +56,6 @@ for env in "${envs[@]}"; do
     fi
 done
 
-export path=("$GOROOT/bin" $path)
-export path=($path "$GOPATH/bin")
-
 export path=("$HOME/.local/bin" $path)
 
 
