@@ -504,11 +504,15 @@ highlight link ExtraWhitespace Error
 
 
 " ALE configuration
-let g:ale_linters = {
-      \ 'python': ['black', 'flake8', 'isort', 'mypy', 'pyls', 'pyright']
-      \ }
 let g:ale_sign_error = "\uf05e"
 let g:ale_sign_warning = "\uf071"
+let g:ale_linters = {
+      \ 'python': ['black', 'flake8', 'isort', 'mypy', 'pyls', 'pyright'],
+      \ 'go': ['gofmt', 'golint', 'govet', 'gopls']
+      \ }
+let g:ale_fixers = {
+      \ 'go': ['gofmt', 'goimports']
+      \ }
 nmap K <Plug>(ale_hover)
 nmap gd <Plug>(ale_go_to_definition)
 nmap gt <Plug>(ale_go_to_type_definition)
