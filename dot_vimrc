@@ -223,6 +223,7 @@ if dein#load_state('~/.cache/dein/')
   " Python
   call dein#add('tmhedberg/SimpylFold')
   call dein#add('hynek/vim-python-pep8-indent')
+  call dein#add('vim-python/python-syntax')
 
   " Terraform
   call dein#add('hashivim/vim-terraform')
@@ -613,6 +614,10 @@ nnoremap <silent> <leader>dg :<C-u>Denite grep<CR><CR>
 nnoremap <silent> <leader>dh :<C-u>Denite -start-filter help<CR>
 nnoremap <silent> <leader>dy :<C-u>Denite neoyank<CR>
 nnoremap <silent> <leader>dr :<C-u>Denite -resume<CR>
+
+
+" vim-python configuration
+let g:python_highlight_all = 1
 
 
 " vim-go configuration
