@@ -506,6 +506,7 @@ highlight link ExtraWhitespace Error
 " ALE configuration
 let g:ale_sign_error = "\uf05e"
 let g:ale_sign_warning = "\uf071"
+let g:ale_floating_preview = 1
 let g:ale_linters = {
       \ 'python': ['black', 'flake8', 'isort', 'mypy', 'pyls', 'pyright'],
       \ 'go': ['gofmt', 'golint', 'govet', 'gopls']
