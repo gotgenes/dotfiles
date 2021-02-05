@@ -410,7 +410,9 @@ let NERDShutUp=1
 
 " defx configuration
 autocmd BufWritePost * call defx#redraw()
-nnoremap <silent><leader>dt :Defx -toggle -split=vertical -winwidth=50 -direction=topleft<CR>
+nnoremap <silent><leader>fl :Defx -split=vertical -winwidth=50 -direction=topleft<CR>
+nnoremap <silent><leader>ft :Defx -toggle -resume -split=vertical -winwidth=50 -direction=topleft<CR>
+nnoremap <silent><leader>fc :Defx -resume -split=vertical -winwidth=50 -direction=topleft -search=`expand('%:p')` `getcwd()`<CR>
 call defx#custom#option('_', {
       \ 'columns': 'indent:icons:filename:type:git',
       \ })
