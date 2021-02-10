@@ -520,7 +520,8 @@ nmap K <Plug>(ale_hover)
 nmap gd <Plug>(ale_go_to_definition)
 nmap gt <Plug>(ale_go_to_type_definition)
 nmap <leader>ai <Plug>(ale_import)
-nnoremap <silent> <leader>ar :ALERename<CR>
+nnoremap <silent> <leader>an :ALERename<CR>
+nmap <leader>ar <Plug>(ale_find_references)
 
 
 " deoplete configuration
