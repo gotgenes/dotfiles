@@ -564,7 +564,7 @@ nnoremap <silent> <leader>ntp :ProjectRootExe NERDTreeFind<CR>
 
 
 " fruzzy settings
-let g:fruzzy#usenative = 1
+let g:fruzzy#usenative = 0
 let g:fruzzy#sortonempty = 0
 
 
