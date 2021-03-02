@@ -514,7 +514,10 @@ let g:ale_linters = {
       \ 'go': ['gofmt', 'golint', 'govet', 'gopls']
       \ }
 let g:ale_fixers = {
-      \ 'go': ['gofmt', 'goimports']
+      \ 'go': ['gofmt', 'goimports'],
+      \ 'javascript': ['eslint', 'prettier'],
+      \ 'typescript': ['eslint', 'prettier'],
+      \ 'typescriptreact': ['eslint', 'prettier'],
       \ }
 nmap K <Plug>(ale_hover)
 nmap gd <Plug>(ale_go_to_definition)
