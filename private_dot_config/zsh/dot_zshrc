@@ -36,10 +36,6 @@ zinit ice depth=1
 zinit light romkatv/powerlevel10k
 
 zinit light zsh-users/zsh-history-substring-search
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
 
 zinit snippet OMZP::kubectl
 
@@ -53,6 +49,18 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f "$XDG_CONFIG_HOME/zsh/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/zsh/p10k.zsh"
+
+
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+MODE_CURSOR_VIINS="blinking bar"
+MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS red"
+MODE_CURSOR_VICMD="block"
+MODE_CURSOR_SEARCH="#ff00ff steady underline"
+MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady"
+MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
 
 
 # Set up ALL THE ENVs
