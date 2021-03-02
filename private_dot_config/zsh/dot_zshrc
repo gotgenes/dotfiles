@@ -25,7 +25,7 @@ zinit light zsh-users/zsh-completions
 
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
-zinit load jeffreytse/zsh-vi-mode
+zinit load softmoth/zsh-vim-mode
 
 zinit ice as"completion"
 zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
