@@ -57,6 +57,14 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 
+setopt APPEND_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_NO_STORE
+
+
 # Set up ALL THE ENVs
 export GOENV_ROOT="$HOME/.goenv"
 export path=("$GOENV_ROOT/bin" $path)
@@ -91,3 +99,5 @@ typeset -U path
 autoload -Uz compinit
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 zinit cdreplay -q
+
+# vi: filetype=zsh
