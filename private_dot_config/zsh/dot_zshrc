@@ -25,7 +25,7 @@ zinit light zsh-users/zsh-completions
 
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
-zinit load softmoth/zsh-vim-mode
+zinit load jeffreytse/zsh-vi-mode
 
 zinit ice as"completion"
 zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
@@ -55,12 +55,6 @@ bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
-MODE_CURSOR_VIINS="blinking bar"
-MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS red"
-MODE_CURSOR_VICMD="block"
-MODE_CURSOR_SEARCH="#ff00ff steady underline"
-MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady"
-MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
 
 
 # Set up ALL THE ENVs
