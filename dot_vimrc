@@ -516,6 +516,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
       \ 'go': ['gofmt', 'goimports'],
       \ 'javascript': ['eslint', 'prettier'],
+      \ 'python': ['autoimport', 'black', 'isort'],
       \ 'typescript': ['eslint', 'prettier'],
       \ 'typescriptreact': ['eslint', 'prettier'],
       \ }
