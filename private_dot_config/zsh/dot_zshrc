@@ -81,6 +81,9 @@ export path=("$HOME/.local/bin" $path)
 # autojump
 [[ -f /usr/local/etc/profile.d/autojump.sh ]] && source /usr/local/etc/profile.d/autojump.sh
 
+# fzf
+[[ -f "$XDG_CONFIG_HOME/fzf/fzf.zsh" ]] && source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
+
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 
 if [[ -d "$XDG_CONFIG_HOME/zsh/include/" ]]; then
