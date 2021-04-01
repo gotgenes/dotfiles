@@ -20,25 +20,8 @@ zinit light-mode for \
     zinit-zsh/z-a-bin-gem-node
 
 ### End of Zinit's installer chunk
-zinit ice blockf
-zinit light zsh-users/zsh-completions
-
-zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma/fast-syntax-highlighting
-zinit load jeffreytse/zsh-vi-mode
-
-zinit ice as"completion"
-zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
-zinit ice as"completion"
-zinit snippet "https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose"
-
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
-
-zinit light zsh-users/zsh-history-substring-search
-
-zinit snippet OMZP::kubectl
-
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -80,16 +63,31 @@ done
 export path=("$HOME/.local/bin" $path)
 
 
-# autojump
+# plugins
+zinit ice blockf
+zinit light zsh-users/zsh-completions
+
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma/fast-syntax-highlighting
+zinit light zsh-users/zsh-history-substring-search
+zinit light jeffreytse/zsh-vi-mode
+
+zinit ice as"completion"
+zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
+zinit ice as"completion"
+zinit snippet "https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose"
+zinit snippet OMZP::kubectl
+
 zinit snippet OMZP::autojump
 
-# fzf
 zinit ice lucid wait
 zinit snippet OMZP::fzf
 
 
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 
+# Files in $XDG_CONFIG_HOME/zsh/include allows host-specific configurations.
+# For example, these may be files not suitable to be tracked by version control.
 if [[ -d "$XDG_CONFIG_HOME/zsh/include/" ]]; then
     for file in $XDG_CONFIG_HOME/zsh/include/*.zsh; do
         source "$file"
