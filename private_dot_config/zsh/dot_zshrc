@@ -34,12 +34,6 @@ fi
 [[ ! -f "$XDG_CONFIG_HOME/zsh/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/zsh/p10k.zsh"
 
 
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-
-
 setopt APPEND_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
@@ -69,8 +63,14 @@ zinit light zsh-users/zsh-completions
 
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
+
 zinit light zsh-users/zsh-history-substring-search
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
+
 zinit light jeffreytse/zsh-vi-mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 zinit ice as"completion"
 zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
