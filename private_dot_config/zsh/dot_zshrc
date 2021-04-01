@@ -81,7 +81,7 @@ export path=("$HOME/.local/bin" $path)
 
 
 # autojump
-[[ -f /usr/local/etc/profile.d/autojump.sh ]] && source /usr/local/etc/profile.d/autojump.sh
+zinit snippet OMZP::autojump
 
 # fzf
 zinit ice lucid wait
