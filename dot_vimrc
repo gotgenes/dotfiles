@@ -598,6 +598,7 @@ call denite#custom#option('_', 'statusline', v:false)
 
 call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
 call denite#custom#source('file,file/rec', 'sorters', ['sorter/rank'])
+call denite#custom#source('grep', 'converters', ['converter/abbr_word'])
 
 if executable('rg')
   call denite#custom#var('file/rec', 'command',
