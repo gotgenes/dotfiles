@@ -84,6 +84,9 @@ zinit ice lucid wait
 zinit snippet OMZP::fzf
 
 
+[[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
+
+
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 
 # Files in $XDG_CONFIG_HOME/zsh/include allows host-specific configurations.
