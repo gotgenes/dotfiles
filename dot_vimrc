@@ -508,6 +508,7 @@ highlight link ExtraWhitespace Error
 " ALE configuration
 let g:ale_sign_error = "\uf05e"
 let g:ale_sign_warning = "\uf071"
+let g:ale_echo_msg_format = "[%linter%] %code: %%s"
 let g:ale_floating_preview = 1
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
 
