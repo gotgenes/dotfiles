@@ -69,8 +69,16 @@ bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 
 zinit light jeffreytse/zsh-vi-mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+function zvm_after_init() {
+    zvm_bindkey vicmd "j" history-substring-search-down
+    zvm_bindkey vicmd "k" history-substring-search-up
+    zvm_bindkey vicmd "^[[A" history-substring-search-up
+    zvm_bindkey vicmd "^[[B" history-substring-search-down
+    zvm_bindkey viins "^[[H" beginning-of-line
+    zvm_bindkey viins "^[[F" end-of-line
+    zvm_bindkey vicmd "^[[H" beginning-of-line
+    zvm_bindkey vicmd "^[[F" end-of-line
+}
 
 zinit ice as"completion"
 zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
