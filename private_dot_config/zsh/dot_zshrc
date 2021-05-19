@@ -43,9 +43,6 @@ setopt HIST_NO_STORE
 
 
 # Set up ALL THE ENVs
-export GOENV_ROOT="$HOME/.goenv"
-export path=("$GOENV_ROOT/bin" $path)
-
 envs=("goenv" "jenv" "nodenv" "pyenv" "rbenv")
 
 for env in "${envs[@]}"; do
