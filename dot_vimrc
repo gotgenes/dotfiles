@@ -105,6 +105,9 @@ nnoremap <leader>spl :setlocal spell!<CR>
 nnoremap <space> za
 vnoremap <space> zf
 
+" Close help window
+nnoremap <silent> <leader>hc :helpclose<CR>
+
 
 """"""""""""""""""""
 " autocmd settings "
