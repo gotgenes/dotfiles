@@ -234,7 +234,6 @@ if dein#load_state('~/.cache/dein/')
   " TypeScript
   call dein#add('leafgarland/typescript-vim')
   call dein#add('peitalin/vim-jsx-typescript')
-  call dein#add('Quramy/tsuquyomi')
 
   " Velocity
   call dein#add('lepture/vim-velocity')
