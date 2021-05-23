@@ -34,11 +34,7 @@ set noshowmode
 " Expand the status line for lightline
 set laststatus=2
 
-" Use the persistent undo feature
-" See :h persistent-undo
-" NOTE: the directory listed in undodir must exist; Vim will not create this
-" directory itself!
-set undodir=~/.vimundos
+" Use the persistent-undo feature
 set undofile
 " Maximum number of changes that can be undone
 set undolevels=1000
