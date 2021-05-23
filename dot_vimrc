@@ -166,6 +166,7 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired')
+  call dein#add('simnalamburt/vim-mundo')
   call dein#add('itchyny/lightline.vim')
   call dein#add('chriskempson/base16-vim')
   call dein#add('mike-hearn/base16-vim-lightline')
@@ -324,7 +325,7 @@ let g:lightline.separator = { 'left': "", 'right': '' }
 let g:lightline.subseparator = { 'left': '', 'right': '' }
 
 function! LightlineIsExcludedFileType()
-  return (&ft =~? 'defx\|denite\|denite-filter\|help\|tagbar')
+  return (&ft =~? 'defx\|denite\|denite-filter\|help\|tagbar\|Mundo\|MundoDiff')
 endfunction
 
 function! LightlineMode()
@@ -332,6 +333,8 @@ function! LightlineMode()
         \ &ft == 'defx' ? 'Defx' :
         \ &ft == 'denite' ? 'Denite' :
         \ &ft == 'help' ? 'Help' :
+        \ &ft == 'Mundo' ? 'Mundo' :
+        \ &ft == 'MundoDiff' ? 'MundoDiff' :
         \ winwidth(0) > 60 ? lightline#mode() : '')
 endfunction
 
@@ -366,6 +369,10 @@ function! LightlineFileName(active)
         \ &ft == 'tagbar' && !a:active ? 'tagbar' :
         \ &ft == 'denite' ? denite#get_status('sources') :
         \ &ft == 'denite' ? denite#get_status('sources') :
+        \ &ft == 'Mundo' && a:active ? '' :
+        \ &ft == 'Mundo' &&  !a:active ? 'Mundo' :
+        \ &ft == 'MundoDiff' && a:active ? '' :
+        \ &ft == 'MundoDiff' && !a:active ? 'MundoDiff' :
         \ expand('%:t') != '' ? expand('%:t') : '[No Name]')
 endfunction
 
@@ -489,6 +496,10 @@ endfunction
 " Tagbar configuration
 nnoremap <leader>tb :TagbarToggle<CR>
 let g:tagbar_no_status_line = 1
+
+
+" Mundo configuration
+let g:mundo_right = 1
 
 
 " UltiSnips configuration
