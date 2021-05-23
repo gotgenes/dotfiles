@@ -56,6 +56,9 @@ set conceallevel=2
 " (Helpful with SimpylFold)
 set foldlevelstart=2
 
+" Increase cmdheight
+set cmdheight=2
+
 " Set completion options
 set completeopt=menu,menuone,noinsert,noselect
 
