@@ -52,6 +52,10 @@ set updatetime=500
 " the the asterisks
 set conceallevel=2
 
+" Leave most folds open by default.
+" (Helpful with SimpylFold)
+set foldlevelstart=2
+
 " Set completion options
 set completeopt=menu,menuone,noinsert,noselect
 
