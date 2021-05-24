@@ -41,6 +41,13 @@ xterm*|rxvt*|gnome*|screen-256color)
     ;;
 esac
 
+# pyenv
+if [[ ! -v XONSH_VERSION ]]; then
+    if command -v pyenv > /dev/null; then
+        eval "$(pyenv init -)"
+    fi
+fi
+
 bash_completion_script="$(brew --prefix)/etc/profile.d/bash_completion.sh"
 if [[ -r "$bash_completion_script" ]]; then
     source "$bash_completion_script"
