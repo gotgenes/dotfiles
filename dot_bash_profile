@@ -7,10 +7,6 @@ export HISTSIZE=100000
 # with a space. See bash(1) for more options.
 export HISTCONTROL=erasedups:ignorespace
 
-# Bash completion
-export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
-
-
 # Use Neovim as the default editor.
 export EDITOR="nvim"
 
@@ -18,6 +14,10 @@ export EDITOR="nvim"
 # Prioritize /usr/local/bin for Homebrew
 export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/usr\/local\/bin/ {next} {print}' | sed 's/:*$//')
 export PATH="/usr/local/bin:${PATH}"
+
+
+# Bash completion
+export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
 
 
 # Local installations
