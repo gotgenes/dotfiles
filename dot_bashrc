@@ -41,12 +41,14 @@ xterm*|rxvt*|gnome*|screen-256color)
     ;;
 esac
 
-# pyenv
-if [[ ! -v XONSH_VERSION ]]; then
-    if command -v pyenv > /dev/null; then
-        eval "$(pyenv init -)"
+# Set up ALL THE ENVs
+envs=("goenv" "jenv" "nodenv" "pyenv" "rbenv")
+
+for env in "${envs[@]}"; do
+    if command -v $env &> /dev/null; then
+        eval "$($env init -)"
     fi
-fi
+done
 
 bash_completion_script="$(brew --prefix)/etc/profile.d/bash_completion.sh"
 if [[ -r "$bash_completion_script" ]]; then
