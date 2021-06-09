@@ -574,9 +574,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
 let g:float_preview#docked = 0
 
 
-" echodock configuration
+" echodoc configuration
 let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'floating'
+let g:echodoc#type = 'echo'
 
 
 " SimpylFold configuration
