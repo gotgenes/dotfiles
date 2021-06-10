@@ -540,6 +540,7 @@ let g:ale_fixers = {
       \ 'typescript': ['eslint', 'prettier'],
       \ 'typescriptreact': ['eslint', 'prettier'],
       \ }
+let g:ale_go_gopls_options = '-remote=auto'
 nmap K <Plug>(ale_hover)
 nmap gd <Plug>(ale_go_to_definition)
 nmap gt <Plug>(ale_go_to_type_definition)
