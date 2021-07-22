@@ -197,6 +197,11 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('majutsushi/tagbar')
   call dein#add('cohama/lexima.vim')
   call dein#add('Konfekt/FastFold')
+  if has('nvim')
+    call dein#add('neovim/nvim-lspconfig')
+    call dein#add('deoplete-plugins/deoplete-lsp')
+    call dein#add('nathunsmitty/nvim-ale-diagnostic')
+  endif
 
   " Go
   call dein#add('fatih/vim-go')
@@ -268,6 +273,11 @@ endif
 """"""""""""""""""""""""""
 " PLUGINS CONFIGURATIONS "
 """"""""""""""""""""""""""
+
+" nvim-lspconfig
+if has('nvim')
+  lua require('lsp-config')
+end
 
 " lightline configuration
 let g:lightline = {}
@@ -541,12 +551,16 @@ let g:ale_fixers = {
       \ 'typescriptreact': ['eslint', 'prettier'],
       \ }
 let g:ale_go_gopls_options = '-remote=auto'
-nmap K <Plug>(ale_hover)
-nmap gd <Plug>(ale_go_to_definition)
-nmap gt <Plug>(ale_go_to_type_definition)
-nmap <leader>ai <Plug>(ale_import)
-nnoremap <silent> <leader>an :ALERename<CR>
-nmap <leader>ar <Plug>(ale_find_references)
+if has('nvim')
+  let g:ale_disable_lsp = 1
+else
+  nmap K <Plug>(ale_hover)
+  nmap gd <Plug>(ale_go_to_definition)
+  nmap gt <Plug>(ale_go_to_type_definition)
+  nmap <leader>ai <Plug>(ale_import)
+  nnoremap <silent> <leader>an :ALERename<CR>
+  nmap <leader>ar <Plug>(ale_find_references)
+endif
 
 
 " deoplete configuration
