@@ -201,6 +201,9 @@ if dein#load_state('~/.cache/dein/')
     call dein#add('neovim/nvim-lspconfig')
     call dein#add('deoplete-plugins/deoplete-lsp')
     call dein#add('nathunsmitty/nvim-ale-diagnostic')
+    call dein#add('nvim-lua/popup.nvim')
+    call dein#add('nvim-lua/plenary.nvim')
+    call dein#add('nvim-telescope/telescope.nvim')
   endif
 
   " Go
@@ -277,6 +280,7 @@ endif
 " nvim-lspconfig
 if has('nvim')
   lua require('lsp-config')
+  lua require('telescope-config')
 end
 
 " lightline configuration
@@ -504,7 +508,6 @@ endfunction
 
 
 " Tagbar configuration
-nnoremap <leader>tb :TagbarToggle<CR>
 let g:tagbar_no_status_line = 1
 
 
@@ -575,7 +578,7 @@ call deoplete#custom#source('_', 'converters',
 
 call deoplete#custom#option('num_processes', 1)
 
-autocmd FileType denite-filter
+autocmd FileType denite-filter,TelescopePrompt
       \ call deoplete#custom#buffer_option('auto_complete', v:false)
 
 inoremap <expr> <C-G> deoplete#undo_completion()
