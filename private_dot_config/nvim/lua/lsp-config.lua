@@ -20,6 +20,7 @@ local on_attach = function(client, bufnr)
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Commands.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.cmd("command! LspDeclaration lua vim.lsp.buf.declaration()")
   vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
   vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
@@ -42,17 +43,12 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   local opts = { noremap=true, silent=true }
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  -- See telescope-config for other LSP mappings
   buf_set_keymap('n', 'gD', '<Cmd>LspDeclaration<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>LspDef<CR>', opts)
   buf_set_keymap('n', 'K', '<Cmd>LspHover<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>LspImplementation<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>LspSignatureHelp<CR>', opts)
   buf_set_keymap('n', '<leader>D', '<cmd>LspTypeDef<CR>', opts)
-  buf_set_keymap('n', '<leader>rn', '<cmd>LspRename<CR>', opts)
-  buf_set_keymap('n', '<leader>ca', '<cmd>LspCodeAction<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>LspRefs<CR>', opts)
-  buf_set_keymap('n', '<leader>e', '<cmd>LspDiagShow<CR>', opts)
+  buf_set_keymap('n', '<leader>cr', '<cmd>LspRename<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>LspDiagPrev<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>LspDiagNext<CR>', opts)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
