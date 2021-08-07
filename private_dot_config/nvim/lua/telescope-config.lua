@@ -16,7 +16,7 @@ require("telescope").setup {
   }
 }
 
-local function set_keymap(...) vim.api.nvim_set_keymap(bufnr, ...) end
+local function set_keymap(...) vim.api.nvim_set_keymap(...) end
 local opts = { noremap=true, silent=true }
 
 -- General keymaps
