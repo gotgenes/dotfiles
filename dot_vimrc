@@ -146,10 +146,8 @@ call dein#add('Shougo/dein.vim')
 call dein#add('haya14busa/dein-command.vim')
 
 " Productivity
-if !has('nvim')
-  call dein#add('roxma/vim-hug-neovim-rpc')
-  call dein#add('roxma/nvim-yarp')
-endif
+call dein#add('roxma/vim-hug-neovim-rpc')
+call dein#add('roxma/nvim-yarp')
 call dein#add('Shougo/denite.nvim')
 call dein#add('gotgenes/fruzzy', {'rev': 'increase-limit'})
 call dein#add('Shougo/neoyank.vim')
@@ -170,10 +168,6 @@ call dein#add('chriskempson/base16-vim')
 call dein#add('mike-hearn/base16-vim-lightline')
 call dein#add('AndrewRadev/splitjoin.vim')
 call dein#add('embear/vim-localvimrc')
-if has('nvim')
-  call dein#add('norcalli/nvim-colorizer.lua')
-  call dein#add('ncm2/float-preview.nvim')
-endif
 
 " Git
 call dein#add('tpope/vim-fugitive')
@@ -195,14 +189,6 @@ call dein#add('honza/vim-snippets')
 call dein#add('majutsushi/tagbar')
 call dein#add('cohama/lexima.vim')
 call dein#add('Konfekt/FastFold')
-if has('nvim')
-  call dein#add('neovim/nvim-lspconfig')
-  call dein#add('deoplete-plugins/deoplete-lsp')
-  call dein#add('nathunsmitty/nvim-ale-diagnostic')
-  call dein#add('nvim-lua/popup.nvim')
-  call dein#add('nvim-lua/plenary.nvim')
-  call dein#add('nvim-telescope/telescope.nvim')
-endif
 
 " Go
 call dein#add('fatih/vim-go')
@@ -272,12 +258,6 @@ endif
 """"""""""""""""""""""""""
 " PLUGINS CONFIGURATIONS "
 """"""""""""""""""""""""""
-
-" nvim-lspconfig
-if has('nvim')
-  lua require('lsp-config')
-  lua require('telescope-config')
-end
 
 " lightline configuration
 let g:lightline = {}
@@ -550,16 +530,12 @@ let g:ale_fixers = {
       \ 'typescriptreact': ['eslint', 'prettier'],
       \ }
 let g:ale_go_gopls_options = '-remote=auto'
-if has('nvim')
-  let g:ale_disable_lsp = 1
-else
-  nmap K <Plug>(ale_hover)
-  nmap gd <Plug>(ale_go_to_definition)
-  nmap gt <Plug>(ale_go_to_type_definition)
-  nmap <leader>ai <Plug>(ale_import)
-  nnoremap <silent> <leader>an :ALERename<CR>
-  nmap <leader>ar <Plug>(ale_find_references)
-endif
+nmap K <Plug>(ale_hover)
+nmap gd <Plug>(ale_go_to_definition)
+nmap gt <Plug>(ale_go_to_type_definition)
+nmap <leader>ai <Plug>(ale_import)
+nnoremap <silent> <leader>an :ALERename<CR>
+nmap <leader>ar <Plug>(ale_find_references)
 
 
 " deoplete configuration

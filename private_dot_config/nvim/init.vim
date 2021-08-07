@@ -1,3 +1,681 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
-source ~/.vimrc
+
+"""""""""""""""""""""""
+" BEHAVIORAL SETTINGS "
+"""""""""""""""""""""""
+
+" Show matching brackets.
+set showmatch
+" Do case insensitive matching
+set ignorecase
+" Do smart case matching
+set smartcase
+" Allow resizing of the window on session restore
+set sessionoptions+=resize
+" Give popup menus for a right mouse-click
+set mousemodel=popup
+" Hide buffers when they are not displayed; this prevents warning messages
+" about modified buffers when switching between them.
+set hidden
+" Set the spelling language to US English.
+set spelllang=en_us
+" Highlight the line on which the cursor lies
+set cursorline
+" Show line numbers
+set number
+" Don't show insert mode; taken care of by lightline
+set noshowmode
+
+" Use the persistent-undo feature
+set undofile
+" Maximum number of changes that can be undone
+set undolevels=1000
+" Maximum number lines to save for undo on a buffer reload
+set undoreload=10000
+
+" Decrease the time to update the swap file
+set updatetime=500
+
+" Enable concealing, for example, rendering bold text in Markdown but hiding
+" the the asterisks
+set conceallevel=2
+
+" Leave most folds open by default.
+" (Helpful with SimpylFold)
+set foldlevelstart=2
+
+" Increase cmdheight
+set cmdheight=2
+
+" Set completion options
+set completeopt=menu,menuone,noinsert,noselect
+
+
+""""""""""""
+" MAPPINGS "
+""""""""""""
+
+" Set the leader
+let mapleader = ','
+
+" Get to command mode easier
+nnoremap ; :
+vnoremap ; :
+
+" Easy access keystrokes for editing your Vim configuration
+nnoremap <leader>svrc :source $MYVIMRC<CR>
+nnoremap <leader>vrc :e $MYVIMRC<CR>
+
+" Quickly switch buffers
+nnoremap <silent> <leader>nn :bn<CR>
+nnoremap <silent> <leader>pp :bp<CR>
+nnoremap <silent> <leader>bd :bd<CR>
+
+" Change the current directory to the directory of the current buffer
+nnoremap <silent> <leader>cdb :lcd %:p:h<CR>
+
+" Change the current directory to the project directory
+
+" Let j and k move up and down over line-wrapped lines, too.
+nnoremap j gj
+nnoremap k gk
+
+" I want to quickly switch to text settings sometimes.
+nnoremap <leader>txt :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
+
+" Turn off highlighted search terms
+nnoremap <silent> <leader>/ :nohlsearch<CR>
+
+" Insert a timestamp
+nnoremap <F5> a<C-R>=strftime("%F")<CR><Esc>
+inoremap <F5> <C-R>=strftime("%F")<CR>
+
+" Quickly switch spelling on and off.
+nnoremap <leader>spl :setlocal spell!<CR>
+
+" Make it easy to toggle folding
+nnoremap <space> za
+vnoremap <space> zf
+
+" Close help window
+nnoremap <silent> <leader>hc :helpclose<CR>
+
+
+""""""""""""""""""""
+" autocmd settings "
+""""""""""""""""""""
+
+if has("autocmd")
+  " Start editing a previously opened file from the position of the most
+  " recent edit.
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+  " Recognize VTL
+  autocmd BufNewFile,BufRead *.vtl set ft=velocity
+endif
+
+" Help Neovim check if file has changed on disc
+" https://github.com/neovim/neovim/issues/2127
+augroup checktime
+    autocmd!
+    if !has("gui_running")
+        "silent! necessary otherwise throws errors when using command
+        "line window.
+        autocmd BufEnter,FocusGained,BufEnter,FocusLost,WinLeave * checktime
+    endif
+augroup END
+
+
+"""""""""""""""""""
+" INSTALL PLUGINS "
+"""""""""""""""""""
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+call dein#begin('~/.cache/dein')
+
+" Let dein manage dein
+call dein#add('Shougo/dein.vim')
+call dein#add('haya14busa/dein-command.vim')
+
+" Productivity
+call dein#add('Shougo/denite.nvim')
+call dein#add('gotgenes/fruzzy', {'rev': 'increase-limit'})
+call dein#add('Shougo/neoyank.vim')
+
+call dein#add('schickling/vim-bufonly')
+call dein#add('Shougo/defx.nvim')
+call dein#add('kristijanhusak/defx-icons')
+call dein#add('kristijanhusak/defx-git')
+call dein#add('ntpeters/vim-better-whitespace')
+call dein#add('dbakker/vim-projectroot')
+call dein#add('vim-scripts/utl.vim')
+call dein#add('tpope/vim-repeat')
+call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-unimpaired')
+call dein#add('simnalamburt/vim-mundo')
+call dein#add('itchyny/lightline.vim')
+call dein#add('chriskempson/base16-vim')
+call dein#add('mike-hearn/base16-vim-lightline')
+call dein#add('AndrewRadev/splitjoin.vim')
+call dein#add('embear/vim-localvimrc')
+call dein#add('norcalli/nvim-colorizer.lua')
+call dein#add('ncm2/float-preview.nvim')
+
+" Git
+call dein#add('tpope/vim-fugitive')
+call dein#add('airblade/vim-gitgutter')
+call dein#add('gregsexton/gitv')
+call dein#add('knsh14/vim-github-link')
+
+" CI
+call dein#add('martinda/Jenkinsfile-vim-syntax')
+
+" Programming
+call dein#add('Shougo/deoplete.nvim')
+call dein#add('Shougo/echodoc.vim')
+call dein#add('dense-analysis/ale')
+call dein#add('maximbaz/lightline-ale')
+call dein#add('scrooloose/nerdcommenter')
+call dein#add('SirVer/ultisnips')
+call dein#add('honza/vim-snippets')
+call dein#add('majutsushi/tagbar')
+call dein#add('cohama/lexima.vim')
+call dein#add('Konfekt/FastFold')
+call dein#add('neovim/nvim-lspconfig')
+call dein#add('deoplete-plugins/deoplete-lsp')
+call dein#add('nathunsmitty/nvim-ale-diagnostic')
+call dein#add('nvim-lua/popup.nvim')
+call dein#add('nvim-lua/plenary.nvim')
+call dein#add('nvim-telescope/telescope.nvim')
+
+" Go
+call dein#add('fatih/vim-go')
+call dein#add('gotgenes/golang-template.vim')
+
+" HTML
+call dein#add('tmhedberg/matchit')
+call dein#add('othree/html5.vim')
+call dein#add('alvan/vim-closetag')
+
+" CSS / SASS
+call dein#add('hail2u/vim-css3-syntax')
+call dein#add('cakebaker/scss-syntax.vim')
+
+" GraphQL
+call dein#add('jparise/vim-graphql')
+
+" JavaScript
+call dein#add('pangloss/vim-javascript')
+call dein#add('maxmellon/vim-jsx-pretty')
+
+" LaTeX
+call dein#add('lervag/vimtex')
+
+" Markdown
+call dein#add('godlygeek/tabular')
+call dein#add('plasticboy/vim-markdown')
+call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+      \ 'build': 'sh -c "cd app & yarn install"' })
+
+" Python
+call dein#add('tmhedberg/SimpylFold')
+call dein#add('hynek/vim-python-pep8-indent')
+call dein#add('vim-python/python-syntax')
+
+" Terraform
+call dein#add('hashivim/vim-terraform')
+
+" TOML
+call dein#add('cespare/vim-toml')
+
+" TypeScript
+call dein#add('leafgarland/typescript-vim')
+call dein#add('peitalin/vim-jsx-typescript')
+
+" Velocity
+call dein#add('lepture/vim-velocity')
+
+" xonsh
+call dein#add('meatballs/vim-xonsh')
+
+" C#
+call dein#add('OmniSharp/omnisharp-vim')
+
+" Required:
+call dein#end()
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+if dein#check_install()
+  call dein#install()
+endif
+
+
+""""""""""""""""""""""""""
+" PLUGINS CONFIGURATIONS "
+""""""""""""""""""""""""""
+
+" nvim-lspconfig
+lua require('lsp-config')
+lua require('telescope-config')
+
+" lightline configuration
+let g:lightline = {}
+let g:lightline.colorscheme = 'base16_eighties'
+let g:lightline.active = {
+      \ 'left': [ [ 'mode', 'paste' ],
+      \           [ 'gitbranch', 'readonly', 'filename_active', 'modified'] ],
+      \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok', 'lineinfo' ],
+      \            [ 'percent' ],
+      \            [ 'fileformat', 'fileencoding', 'filetype' ]]
+      \ }
+let g:lightline.inactive = {
+      \ 'left': [ [ 'filename_inactive' ] ],
+      \ 'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ] ]
+      \ }
+let g:lightline.component_expand = {
+      \ 'linter_checking': 'lightline#ale#checking',
+      \ 'linter_infos': 'lightline#ale#infos',
+      \ 'linter_warnings': 'lightline#ale#warnings',
+      \ 'linter_errors': 'lightline#ale#errors',
+      \ 'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \ 'linter_checking': 'right',
+      \ 'linter_infos': 'right',
+      \ 'linter_warnings': 'warning',
+      \ 'linter_errors': 'error',
+      \ 'linter_ok': 'right',
+      \ }
+let g:lightline.component_function = {
+      \ 'fileencoding': 'LightlineFileEncoding',
+      \ 'fileformat': 'LightlineFileFormat',
+      \ 'filename_active': 'LightlineFileNameActive',
+      \ 'filename_inactive': 'LightlineFileNameInactive',
+      \ 'filetype': 'LightlineFileType',
+      \ 'gitbranch': 'LightlineGitBranch',
+      \ 'lineinfo': 'LightlineLineInfo',
+      \ 'mode': 'LightlineMode',
+      \ 'percent': 'LightlinePercent',
+      \ 'readonly': 'LightlineReadonly',
+      \ }
+
+let lightline_ft_visible_condition = '&ft !~ "defx\\|denite\\|denite-filter\\|help\\|tagbar"'
+
+let g:lightline.component_function_visible_condition = {
+      \ 'fileencoding': lightline_ft_visible_condition,
+      \ 'fileformat': lightline_ft_visible_condition,
+      \ 'filetype': lightline_ft_visible_condition,
+      \ 'lineinfo': lightline_ft_visible_condition,
+      \ 'percent': lightline_ft_visible_condition
+      \ }
+
+let g:lightline.separator = { 'left': "", 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
+
+function! LightlineIsExcludedFileType()
+  return (&ft =~? 'defx\|denite\|denite-filter\|help\|tagbar\|Mundo\|MundoDiff')
+endfunction
+
+function! LightlineMode()
+  return (&ft == 'tagbar' ? 'Tagbar' :
+        \ &ft == 'defx' ? 'Defx' :
+        \ &ft == 'denite' ? 'Denite' :
+        \ &ft == 'help' ? 'Help' :
+        \ &ft == 'Mundo' ? 'Mundo' :
+        \ &ft == 'MundoDiff' ? 'MundoDiff' :
+        \ winwidth(0) > 60 ? lightline#mode() : '')
+endfunction
+
+function! LightlineGitBranch()
+  try
+    if !LightlineIsExcludedFileType() && exists('*FugitiveHead')
+      let mark = ' '  " edit here for cool mark
+      let branch = FugitiveHead()
+      return branch !=# '' ? mark.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightlineReadonly()
+  return !LightlineIsExcludedFileType() && &readonly ? 'RO' : ''
+endfunction
+
+function! LightlineFileNameActive()
+  return LightlineFileName(1)
+endfunction
+
+function! LightlineFileNameInactive()
+  return LightlineFileName(0)
+endfunction
+
+function! LightlineFileName(active)
+  return (&ft == 'defx' && a:active ? '' :
+        \ &ft == 'defx' && !a:active ? 'defx' :
+        \ &ft == 'tagbar' && a:active ? '' :
+        \ &ft == 'tagbar' && !a:active ? 'tagbar' :
+        \ &ft == 'denite' ? denite#get_status('sources') :
+        \ &ft == 'denite' ? denite#get_status('sources') :
+        \ &ft == 'Mundo' && a:active ? '' :
+        \ &ft == 'Mundo' &&  !a:active ? 'Mundo' :
+        \ &ft == 'MundoDiff' && a:active ? '' :
+        \ &ft == 'MundoDiff' && !a:active ? 'MundoDiff' :
+        \ expand('%:t') != '' ? expand('%:t') : '[No Name]')
+endfunction
+
+function! LightlineLineInfo()
+  return (LightlineIsExcludedFileType() ? '' :
+        \ printf('%3d:%-2d', line('.'), col('.')))
+endfunction
+
+function! LightlinePercent()
+  return (LightlineIsExcludedFileType() ? '' :
+        \ (100 * line('.') / line('$')) . '%')
+endfunction
+
+function! LightlineFileEncoding()
+  return (LightlineIsExcludedFileType() ? '' :
+        \ winwidth(0) > 70 ? &fileencoding : '')
+endfunction
+
+function! LightlineFileFormat()
+  return (LightlineIsExcludedFileType() ? '' :
+        \ winwidth(0) > 70 ? &fileformat : '')
+endfunction
+
+function! LightlineFileType()
+  return (LightlineIsExcludedFileType() ? '' :
+        \ winwidth(0) > 70 ? (&filetype !=# '' ? &filetype: '[No Filetype]') : '')
+endfunction
+
+" lightline-ale configuration
+let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_infos = "\uf129"
+let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "\uf05e"
+let g:lightline#ale#indicator_ok = "\uf00c"
+
+
+" utl configuration
+let g:utl_cfg_hdl_scm_http_system = "silent !open %u"
+nnoremap <leader>gu :Utl openLink underCursor edit<CR>
+nnoremap <leader>cl :Utl copyLink underCursor<CR>
+
+
+" NERDCommenter configuration
+" Prevent NERDCommenter from complaining about unrecognized filetypes.
+let NERDShutUp=1
+
+
+" defx configuration
+autocmd BufWritePost * call defx#redraw()
+nnoremap <silent><leader>fl :Defx -split=vertical -winwidth=50 -direction=topleft<CR>
+nnoremap <silent><leader>ft :Defx -toggle -resume -split=vertical -winwidth=50 -direction=topleft<CR>
+nnoremap <silent><leader>fc :Defx -resume -split=vertical -winwidth=50 -direction=topleft -search=`expand('%:p')` `getcwd()`<CR>
+call defx#custom#option('_', {
+      \ 'columns': 'indent:icons:filename:type:git',
+      \ })
+autocmd FileType defx call s:defx_my_settings()
+
+function! s:defx_my_settings() abort
+  " Define mappings
+  nnoremap <silent><buffer><expr> <CR>
+        \ defx#is_directory() ?
+        \ defx#do_action('open_tree', 'toggle') :
+        \ defx#do_action('drop')
+  nnoremap <silent><buffer><expr> c
+        \ defx#do_action('copy')
+  nnoremap <silent><buffer><expr> m
+        \ defx#do_action('move')
+  nnoremap <silent><buffer><expr> p
+        \ defx#do_action('paste')
+  nnoremap <silent><buffer><expr> l
+        \ defx#do_action('open')
+  nnoremap <silent><buffer><expr> E
+        \ defx#do_action('open', 'vsplit')
+  nnoremap <silent><buffer><expr> P
+        \ defx#do_action('preview')
+  nnoremap <silent><buffer><expr> o
+        \ defx#do_action('open_tree', 'toggle')
+  nnoremap <silent><buffer><expr> K
+        \ defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> N
+        \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> S
+        \ defx#do_action('toggle_sort', 'time')
+  nnoremap <silent><buffer><expr> d
+        \ defx#do_action('remove')
+  nnoremap <silent><buffer><expr> r
+        \ defx#do_action('rename')
+  nnoremap <silent><buffer><expr> !
+        \ defx#do_action('execute_command')
+  nnoremap <silent><buffer><expr> x
+        \ defx#do_action('execute_system')
+  nnoremap <silent><buffer><expr> yy
+        \ defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> .
+        \ defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> ;
+        \ defx#do_action('repeat')
+  nnoremap <silent><buffer><expr> h
+        \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> ~
+        \ defx#do_action('cd')
+  nnoremap <silent><buffer><expr> q
+        \ defx#do_action('quit')
+  nnoremap <silent><buffer><expr> <Space>
+        \ defx#do_action('toggle_select') . 'j'
+  nnoremap <silent><buffer><expr> *
+        \ defx#do_action('toggle_select_all')
+  nnoremap <silent><buffer><expr> j
+        \ line('.') == line('$') ? 'gg' : 'j'
+  nnoremap <silent><buffer><expr> k
+        \ line('.') == 1 ? 'G' : 'k'
+  nnoremap <silent><buffer><expr> <C-l>
+        \ defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> <C-g>
+        \ defx#do_action('print')
+  nnoremap <silent><buffer><expr> cd
+        \ defx#do_action('change_vim_cwd')
+endfunction
+
+
+" Tagbar configuration
+let g:tagbar_no_status_line = 1
+
+
+" Mundo configuration
+let g:mundo_right = 1
+
+
+" UltiSnips configuration
+let g:UltiSnipsExpandTrigger = "<C-S>"
+let g:UltiSnipsJumpForwardTrigger = "<C-,>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-.>"
+
+let g:ultisnips_python_style = "sphinx"
+
+
+" vim-better-whitespace configuration
+nnoremap <silent> <leader>rws :ToggleStripWhitespaceOnSave<CR>
+nnoremap <silent> <leader>hws :ToggleWhitespace<CR>
+
+if has("autocmd")
+  autocmd BufEnter * EnableStripWhitespaceOnSave
+endif
+
+highlight link ExtraWhitespace Error
+
+
+" ALE configuration
+let g:ale_completion_autoimport = 1
+let g:ale_sign_error = "\uf05e"
+let g:ale_sign_warning = "\uf071"
+let g:ale_echo_msg_format = "[%linter%] %code: %%s"
+let g:ale_floating_preview = 1
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
+
+let g:ale_linters = {
+      \ 'python': ['black', 'flake8', 'isort', 'mypy', 'pyls', 'pyright'],
+      \ 'go': ['gofmt', 'golint', 'govet', 'gopls']
+      \ }
+let g:ale_fixers = {
+      \ 'go': ['gofmt', 'goimports'],
+      \ 'javascript': ['eslint', 'prettier'],
+      \ 'python': ['autoimport', 'black', 'isort'],
+      \ 'typescript': ['eslint', 'prettier'],
+      \ 'typescriptreact': ['eslint', 'prettier'],
+      \ }
+let g:ale_go_gopls_options = '-remote=auto'
+let g:ale_disable_lsp = 1
+
+
+" deoplete configuration
+let g:deoplete#enable_at_startup = 1
+
+call deoplete#custom#source('_', 'converters',
+      \['converter_remove_overlap',
+      \ 'converter_truncate_abbr',
+      \ 'converter_truncate_menu',
+      \ 'converter_remove_paren',
+      \ 'converter_auto_delimiter'])
+
+call deoplete#custom#option('num_processes', 1)
+
+autocmd FileType denite-filter,TelescopePrompt
+      \ call deoplete#custom#buffer_option('auto_complete', v:false)
+
+inoremap <expr> <C-G> deoplete#undo_completion()
+" tab-completion
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-N>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
+
+
+" float-preview configuration
+let g:float_preview#docked = 0
+
+
+" echodoc configuration
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'echo'
+
+
+" SimpylFold configuration
+let g:SimpylFold_fold_docstring = 0
+
+
+" projectroot settings
+nnoremap <silent> <leader>cdp :ProjectRootCD<CR>
+nnoremap <silent> <leader>ntp :ProjectRootExe NERDTreeFind<CR>
+
+
+" fruzzy settings
+let g:fruzzy#usenative = 0
+let g:fruzzy#sortonempty = 0
+
+
+" Denite settings
+autocmd FileType denite call s:denite_my_mappings()
+function! s:denite_my_mappings() abort
+  nnoremap <silent><buffer><expr> <CR>
+    \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> q
+    \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> a
+    \ denite#do_map('choose_action')
+  nnoremap <silent><buffer><expr> dd
+    \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> <C-l>
+    \ denite#do_map('redraw')
+  nnoremap <silent><buffer><expr> i
+    \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+    \ denite#do_map('toggle_select')
+endfunction
+
+call denite#custom#option('_', 'statusline', v:false)
+
+call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
+call denite#custom#source('file,file/rec', 'sorters', ['sorter/rank'])
+call denite#custom#source('grep', 'converters', ['converter/abbr_word'])
+
+if executable('rg')
+  call denite#custom#var('file/rec', 'command',
+        \ ['rg', '--files', '--hidden', '--glob', '!.git', '--color', 'never'])
+  call denite#custom#var('grep', 'command', ['rg'])
+  call denite#custom#var('grep', 'default_opts',
+        \ ['-i', '--vimgrep', '--no-heading'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+elseif executable('ag')
+  call denite#custom#var('file/rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '--ignore', '.git', '-g', ''])
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'default_opts',
+        \ ['-i', '--vimgrep'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+endif
+
+nnoremap <silent> <leader>db :<C-u>Denite buffer<CR>
+nnoremap <silent> <leader>df :<C-u>Denite -start-filter file/rec<CR>
+nnoremap <silent> <leader>dp :<C-u>DeniteProjectDir -start-filter file/rec<CR>
+nnoremap <silent> <leader>dg :<C-u>Denite grep<CR><CR>
+nnoremap <silent> <leader>dh :<C-u>Denite -start-filter help<CR>
+nnoremap <silent> <leader>dy :<C-u>Denite neoyank<CR>
+nnoremap <silent> <leader>dr :<C-u>Denite -resume<CR>
+
+" lexima configuration
+autocmd FileType TelescopePrompt let b:lexima_disabled = 1
+
+
+" vim-python configuration
+let g:python_highlight_all = 1
+
+
+" vim-go configuration
+let g:go_code_completion_enabled = 0
+let g:go_doc_keywordprg_enabled = 0
+let g:go_def_mapping_enabled = 0
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 0
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 0
+
+
+
+" vimtex configuration
+let g:tex_flavor = 'latex'
+
+
+" vim-markdown configuration
+let g:vim_markdown_folding_disabled = 1
+
+
+" base16 configuration
+let g:base16colorspace=256
+
+""""""""""""""""""""""""""""""""""""""""""
+" Syntax highlighting and color settings "
+""""""""""""""""""""""""""""""""""""""""""
+
+if has('termguicolors')
+  set termguicolors
+endif
+
+colorscheme base16-eighties
+highlight HtmlBold gui=bold
+highlight HtmlItalic gui=italic
+highlight Operator guifg=#cc99cc ctermfg=05
