@@ -10,6 +10,7 @@ require("telescope").setup {
         },
         n = {
           ["dd"] = require("telescope.actions").delete_buffer,
+	  ["q"] = require("telescope.actions").close,
         }
       }
     }
