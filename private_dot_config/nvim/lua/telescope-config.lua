@@ -1,4 +1,11 @@
 require("telescope").setup {
+  defaults = {
+    mappings = {
+      n = {
+	["q"] = require("telescope.actions").close,
+      }
+    }
+  },
   pickers = {
     buffers = {
       sort_lastused = true,
@@ -10,9 +17,9 @@ require("telescope").setup {
         },
         n = {
           ["dd"] = require("telescope.actions").delete_buffer,
-	  ["q"] = require("telescope.actions").close,
         }
-      }
+      },
+      on_complete = { function() vim.cmd"stopinsert" end }
     }
   }
 }
