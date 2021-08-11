@@ -47,8 +47,10 @@ return require('packer').startup(function()
   use 'deoplete-plugins/deoplete-lsp'
   use 'nathunsmitty/nvim-ale-diagnostic'
   use 'nvim-lua/popup.nvim'
-  use 'nvim-lua/plenary.nvim'
-  use 'nvim-telescope/telescope.nvim'
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
+  }
 
   -- Go
   use 'fatih/vim-go'
