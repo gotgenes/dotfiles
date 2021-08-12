@@ -1,0 +1,21 @@
+version: 2
+root-markers:
+  - .git/
+tools:
+  eslint_d: &eslint_d
+    lint-command: 'eslint_d -f compact --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - "%f: line %l, col %c, %tarning - %m"
+      - "%f: line %l, col %c, %rror - %m"
+
+languages:
+  javascript:
+    - <<: *eslint_d
+  javascriptreact:
+    - <<: *eslint_d
+  typescript:
+    - <<: *eslint_d
+  typescriptreact:
+    - <<: *eslint_d
