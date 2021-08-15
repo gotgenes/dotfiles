@@ -35,22 +35,24 @@ return require('packer').startup(function()
   -- Programming
   use 'Shougo/deoplete.nvim'
   use 'Shougo/echodoc.vim'
-  use 'dense-analysis/ale'
-  use 'maximbaz/lightline-ale'
   use 'scrooloose/nerdcommenter'
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
   use 'majutsushi/tagbar'
   use 'cohama/lexima.vim'
   use 'Konfekt/FastFold'
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' }
+  }
   use 'neovim/nvim-lspconfig'
   use 'deoplete-plugins/deoplete-lsp'
-  use 'nathunsmitty/nvim-ale-diagnostic'
   use 'nvim-lua/popup.nvim'
   use {
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
   }
+  use 'folke/lsp-colors.nvim'
 
   -- Go
   use 'fatih/vim-go'

@@ -136,6 +136,7 @@ lua require('plugins')
 """"""""""""""""""""""""""
 
 " nvim-lspconfig
+lua require('null-ls-config')
 lua require('lsp-config')
 lua require('telescope-config')
 
@@ -145,7 +146,7 @@ let g:lightline.colorscheme = 'base16_eighties'
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'gitbranch', 'readonly', 'filename_active', 'modified'] ],
-      \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok', 'lineinfo' ],
+      \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'fileformat', 'fileencoding', 'filetype' ]]
       \ }
@@ -153,20 +154,6 @@ let g:lightline.inactive = {
       \ 'left': [ [ 'filename_inactive' ] ],
       \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ] ]
-      \ }
-let g:lightline.component_expand = {
-      \ 'linter_checking': 'lightline#ale#checking',
-      \ 'linter_infos': 'lightline#ale#infos',
-      \ 'linter_warnings': 'lightline#ale#warnings',
-      \ 'linter_errors': 'lightline#ale#errors',
-      \ 'linter_ok': 'lightline#ale#ok',
-      \ }
-let g:lightline.component_type = {
-      \ 'linter_checking': 'right',
-      \ 'linter_infos': 'right',
-      \ 'linter_warnings': 'warning',
-      \ 'linter_errors': 'error',
-      \ 'linter_ok': 'right',
       \ }
 let g:lightline.component_function = {
       \ 'fileencoding': 'LightlineFileEncoding',
@@ -270,14 +257,6 @@ function! LightlineFileType()
   return (LightlineIsExcludedFileType() ? '' :
         \ winwidth(0) > 70 ? (&filetype !=# '' ? &filetype: '[No Filetype]') : '')
 endfunction
-
-" lightline-ale configuration
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_infos = "\uf129"
-let g:lightline#ale#indicator_warnings = "\uf071"
-let g:lightline#ale#indicator_errors = "\uf05e"
-let g:lightline#ale#indicator_ok = "\uf00c"
-
 
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !open %u"
@@ -388,29 +367,6 @@ if has("autocmd")
 endif
 
 highlight link ExtraWhitespace Error
-
-
-" ALE configuration
-let g:ale_completion_autoimport = 1
-let g:ale_sign_error = "\uf05e"
-let g:ale_sign_warning = "\uf071"
-let g:ale_echo_msg_format = "[%linter%] %code: %%s"
-let g:ale_floating_preview = 1
-let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
-
-let g:ale_linters = {
-      \ 'python': ['black', 'flake8', 'isort', 'mypy', 'pyls', 'pyright'],
-      \ 'go': ['gofmt', 'golint', 'govet', 'gopls']
-      \ }
-let g:ale_fixers = {
-      \ 'go': ['gofmt', 'goimports'],
-      \ 'javascript': ['eslint', 'prettier'],
-      \ 'python': ['autoimport', 'black', 'isort'],
-      \ 'typescript': ['eslint', 'prettier'],
-      \ 'typescriptreact': ['eslint', 'prettier'],
-      \ }
-let g:ale_go_gopls_options = '-remote=auto'
-let g:ale_disable_lsp = 1
 
 
 " deoplete configuration
