@@ -1,18 +1,11 @@
 local nvim_lsp = require('lspconfig')
 
-require("nvim-ale-diagnostic")
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = false,
-    virtual_text = false,
-    signs = true,
-    update_in_insert = false,
-  }
-)
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  if client.resolved_capabilities.document_formatting then
+      vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+  end
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -55,9 +48,24 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>f", "<cmd>LspFormatting<CR>", opts)
 end
 
+local on_attach_no_format = function(client, buffnr)
+  client.resolved_capabilities.document_formatting = false
+  on_attach(client, buffnr)
+end
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "tsserver", "vimls" }
+local servers = { "pyright", "tsserver" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach_no_format,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
+
+local servers = { "null-ls", "vimls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -67,6 +75,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+
 nvim_lsp.gopls.setup {
   cmd = { "gopls", "-remote=auto" },
   on_attach = on_attach,
@@ -74,3 +83,9 @@ nvim_lsp.gopls.setup {
     debounce_text_changes = 150,
   }
 }
+
+local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+for type, icon in pairs(signs) do
+  local hl = "LspDiagnosticsSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
