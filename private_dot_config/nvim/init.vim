@@ -146,7 +146,7 @@ let g:lightline.colorscheme = 'base16_eighties'
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'gitbranch', 'readonly', 'filename_active', 'modified'] ],
-      \ 'right': [ [ 'lineinfo' ],
+      \ 'right': [ [ 'lsp_status', 'lsp_errors', 'lsp_warnings', 'lsp_info', 'lsp_hints', 'lsp_ok', 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'fileformat', 'fileencoding', 'filetype' ]]
       \ }
@@ -257,6 +257,14 @@ function! LightlineFileType()
   return (LightlineIsExcludedFileType() ? '' :
         \ winwidth(0) > 70 ? (&filetype !=# '' ? &filetype: '[No Filetype]') : '')
 endfunction
+
+" lightline-lsp configuration
+call lightline#lsp#register()
+let g:lightline#lsp#indicator_errors = "\uf05e"
+let g:lightline#lsp#indicator_warnings = "\uf071"
+let g:lightline#lsp#indicator_infos = "\uf129"
+let g:lightline#lsp#indicator_hints = "\u63541"
+let g:lightline#lsp#indicator_ok = "\uf00c"
 
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !open %u"

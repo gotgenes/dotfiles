@@ -46,6 +46,7 @@ return require('packer').startup(function()
     requires = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' }
   }
   use 'neovim/nvim-lspconfig'
+  use 'josa42/nvim-lightline-lsp'
   use 'deoplete-plugins/deoplete-lsp'
   use 'nvim-lua/popup.nvim'
   use {
