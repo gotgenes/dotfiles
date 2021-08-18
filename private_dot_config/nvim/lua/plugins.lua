@@ -25,9 +25,17 @@ return require('packer').startup(function()
 
   -- Git
   use 'tpope/vim-fugitive'
-  use 'airblade/vim-gitgutter'
   use 'gregsexton/gitv'
   use 'knsh14/vim-github-link'
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
 
   -- CI
   use 'martinda/Jenkinsfile-vim-syntax'
@@ -43,7 +51,10 @@ return require('packer').startup(function()
   use 'Konfekt/FastFold'
   use {
     'jose-elias-alvarez/null-ls.nvim',
-    requires = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' }
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'neovim/nvim-lspconfig',
+    }
   }
   use 'neovim/nvim-lspconfig'
   use 'josa42/nvim-lightline-lsp'
@@ -51,7 +62,10 @@ return require('packer').startup(function()
   use 'nvim-lua/popup.nvim'
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'kyazdani42/nvim-web-devicons',
+    }
   }
   use 'folke/lsp-colors.nvim'
 
