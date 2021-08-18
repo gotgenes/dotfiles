@@ -35,7 +35,7 @@ return require('packer').startup(function()
   -- Programming
   use 'Shougo/deoplete.nvim'
   use 'Shougo/echodoc.vim'
-  use 'scrooloose/nerdcommenter'
+  use 'b3nj5m1n/kommentary'
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
   use 'majutsushi/tagbar'
