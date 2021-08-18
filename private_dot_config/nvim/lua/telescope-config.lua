@@ -20,6 +20,9 @@ require("telescope").setup {
         }
       },
       on_complete = { function() vim.cmd"stopinsert" end }
+    },
+    lsp_code_actions = {
+      theme = "cursor"
     }
   }
 }
