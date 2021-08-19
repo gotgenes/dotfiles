@@ -122,6 +122,14 @@ return require('packer').startup(function()
   -- TypeScript
   use 'leafgarland/typescript-vim'
   use 'peitalin/vim-jsx-typescript'
+  use {
+    'jose-elias-alvarez/nvim-lsp-ts-utils',
+    requires = {
+      'neovim/nvim-lspconfig',
+      'jose-elias-alvarez/null-ls.nvim',
+      'nvim-lua/plenary.nvim'
+    }
+  }
 
   -- Velocity
   use 'lepture/vim-velocity'

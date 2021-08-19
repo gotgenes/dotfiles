@@ -60,28 +60,29 @@ end
 
 local on_attach_no_format = function(client, buffnr)
   client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
   on_attach(client, buffnr)
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "tsserver" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach_no_format,
-    flags = {
-      debounce_text_changes = 150,
+nvim_lsp.pyright.setup {
+  on_attach = on_attach_no_format,
+}
+
+nvim_lsp.tsserver.setup {
+  on_attach = function(client, buffnr)
+    local ts_utils = require("nvim-lsp-ts-utils")
+    ts_utils.setup {
+      enable_formatting = true
     }
-  }
-end
+    on_attach_no_format(client, buffnr)
+    ts_utils.setup_client(client)
+  end
+}
 
 local servers = { "null-ls", "vimls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
   }
 end
 
@@ -89,9 +90,6 @@ end
 nvim_lsp.gopls.setup {
   cmd = { "gopls", "-remote=auto" },
   on_attach = on_attach,
-  flags = {
-    debounce_text_changes = 150,
-  }
 }
 
 local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
