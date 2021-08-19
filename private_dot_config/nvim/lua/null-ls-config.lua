@@ -4,8 +4,6 @@ local formatting = null_ls.builtins.formatting
 
 null_ls.config {
   sources = {
-    diagnostics.eslint,
-    formatting.eslint,
     diagnostics.flake8,
     formatting.black,
   }
