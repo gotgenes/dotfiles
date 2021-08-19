@@ -67,6 +67,13 @@ return require('packer').startup(function()
       'kyazdani42/nvim-web-devicons',
     }
   }
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup()
+    end
+  }
   use 'folke/lsp-colors.nvim'
 
   -- Go

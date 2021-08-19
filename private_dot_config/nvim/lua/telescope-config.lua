@@ -1,8 +1,15 @@
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+
 require("telescope").setup {
   defaults = {
     mappings = {
+      i = {
+        ["<c-t>"] = trouble.open_with_trouble
+      },
       n = {
-	["q"] = require("telescope.actions").close,
+        ["q"] = actions.close,
+        ["<c-t>"] = trouble.open_with_trouble
       }
     }
   },
@@ -13,10 +20,10 @@ require("telescope").setup {
       previewer = false,
       mappings = {
         i = {
-          ["<c-d>"] = require("telescope.actions").delete_buffer,
+          ["<c-d>"] = actions.delete_buffer,
         },
         n = {
-          ["dd"] = require("telescope.actions").delete_buffer,
+          ["dd"] = actions.delete_buffer,
         }
       },
       on_complete = { function() vim.cmd"stopinsert" end }
@@ -35,10 +42,3 @@ set_keymap('n', '<leader>tb', '<cmd>Telescope buffers<CR>', opts)
 set_keymap('n', '<leader>tf', '<cmd>Telescope find_files<CR>', opts)
 set_keymap('n', '<leader>tg', '<cmd>Telescope live_grep<CR>', opts)
 set_keymap('n', '<leader>th', '<cmd>Telescope help_tags<CR>', opts)
-
--- LSP keymaps (see lsp-config for others)
-set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
-set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
-set_keymap('n', '<leader>ca', '<cmd>Telescope lsp_code_actions theme=get_cursor<CR>', opts)
-set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-set_keymap('n', '<leader>e', '<cmd>Telescope lsp_document_diagnostics<CR>', opts)

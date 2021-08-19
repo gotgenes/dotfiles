@@ -94,7 +94,7 @@ inoremap <F5> <C-R>=strftime("%F")<CR>
 nnoremap <leader>spl :setlocal spell!<CR>
 
 " Make it easy to toggle folding
-nnoremap <space> za
+nmap <space> za
 vnoremap <space> zf
 
 " Close help window
