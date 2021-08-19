@@ -35,8 +35,6 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
-
-  -- See telescope-config for other LSP mappings
   buf_set_keymap('n', 'gD', '<Cmd>LspDeclaration<CR>', opts)
   buf_set_keymap('n', 'K', '<Cmd>LspHover<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>LspSignatureHelp<CR>', opts)
@@ -44,8 +42,20 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>cr', '<cmd>LspRename<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>LspDiagPrev<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>LspDiagNext<CR>', opts)
-  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<leader>f", "<cmd>LspFormatting<CR>", opts)
+  buf_set_keymap('n', '<leader>f', '<cmd>LspFormatting<CR>', opts)
+  -- Provided by Telescope
+  buf_set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
+  buf_set_keymap('n', '<leader>ca', '<cmd>Telescope lsp_code_actions theme=get_cursor<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
+  buf_set_keymap('n', '<leader>e', '<cmd>Telescope lsp_document_diagnostics<CR>', opts)
+  -- Provided by Trouble
+  buf_set_keymap('n', '<leader>xx', '<cmd>Trouble<cr>', opts)
+  buf_set_keymap('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<cr>', opts)
+  buf_set_keymap('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<cr>', opts)
+  buf_set_keymap('n', '<leader>xl', '<cmd>Trouble loclist<cr>', opts)
+  buf_set_keymap('n', '<leader>xq', '<cmd>Trouble quickfix<cr>', opts)
+  buf_set_keymap('n', 'gR', '<cmd>Trouble lsp_references<cr>', opts)
 end
 
 local on_attach_no_format = function(client, buffnr)
