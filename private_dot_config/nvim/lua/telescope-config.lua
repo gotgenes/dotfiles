@@ -15,6 +15,7 @@ require("telescope").setup {
   },
   pickers = {
     buffers = {
+      initial_mode = "normal",
       sort_lastused = true,
       theme = "dropdown",
       previewer = false,
@@ -26,7 +27,6 @@ require("telescope").setup {
           ["dd"] = actions.delete_buffer,
         }
       },
-      on_complete = { function() vim.cmd"stopinsert" end }
     },
     lsp_code_actions = {
       theme = "cursor"
