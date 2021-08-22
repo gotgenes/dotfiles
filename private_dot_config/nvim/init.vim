@@ -37,7 +37,7 @@ set undoreload=10000
 set updatetime=500
 
 " Enable concealing, for example, rendering bold text in Markdown but hiding
-" the the asterisks
+" the asterisks
 set conceallevel=2
 
 " Leave most folds open by default.
@@ -74,14 +74,9 @@ nnoremap <silent> <leader>bd :bd<CR>
 " Change the current directory to the directory of the current buffer
 nnoremap <silent> <leader>cdb :lcd %:p:h<CR>
 
-" Change the current directory to the project directory
-
 " Let j and k move up and down over line-wrapped lines, too.
-nnoremap j gj
-nnoremap k gk
-
-" I want to quickly switch to text settings sometimes.
-nnoremap <leader>txt :setlocal ai et sts=4 sw=4 ts=4 tw=78 spell<CR>
+nnoremap <silent> j gj
+nnoremap <silent> k gk
 
 " Turn off highlighted search terms
 nnoremap <silent> <leader>/ :nohlsearch<CR>
