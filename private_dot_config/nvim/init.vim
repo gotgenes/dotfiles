@@ -48,7 +48,7 @@ set foldlevelstart=2
 set cmdheight=2
 
 " Set completion options
-set completeopt=menu,menuone,noinsert,noselect
+set completeopt=menuone,noselect
 
 
 """"""""""""
@@ -139,6 +139,7 @@ lua require('plugins')
 lua require('null-ls-config')
 lua require('lsp-config')
 lua require('telescope-config')
+
 
 " lightline configuration
 let g:lightline = {}
@@ -258,6 +259,7 @@ function! LightlineFileType()
         \ winwidth(0) > 70 ? (&filetype !=# '' ? &filetype: '[No Filetype]') : '')
 endfunction
 
+
 " lightline-lsp configuration
 call lightline#lsp#register()
 let g:lightline#lsp#indicator_errors = "\uf05e"
@@ -266,15 +268,11 @@ let g:lightline#lsp#indicator_infos = "\uf129"
 let g:lightline#lsp#indicator_hints = "\u63541"
 let g:lightline#lsp#indicator_ok = "\uf00c"
 
+
 " utl configuration
 let g:utl_cfg_hdl_scm_http_system = "silent !open %u"
 nnoremap <leader>gu :Utl openLink underCursor edit<CR>
 nnoremap <leader>cl :Utl copyLink underCursor<CR>
-
-
-" NERDCommenter configuration
-" Prevent NERDCommenter from complaining about unrecognized filetypes.
-let NERDShutUp=1
 
 
 " defx configuration
@@ -377,35 +375,20 @@ endif
 highlight link ExtraWhitespace Error
 
 
-" deoplete configuration
-let g:deoplete#enable_at_startup = 1
+" nvim-compe configuration
+" NOTE: Order is important. You can't lazy loading lexima.vim.
+let g:lexima_no_default_rules = v:true
+call lexima#set_default_rules()
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
-call deoplete#custom#source('_', 'converters',
-      \['converter_remove_overlap',
-      \ 'converter_truncate_abbr',
-      \ 'converter_truncate_menu',
-      \ 'converter_remove_paren',
-      \ 'converter_auto_delimiter'])
-
-call deoplete#custom#option('num_processes', 1)
-
-autocmd FileType denite-filter,TelescopePrompt
-      \ call deoplete#custom#buffer_option('auto_complete', v:false)
-
-inoremap <expr> <C-G> deoplete#undo_completion()
 " tab-completion
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-N>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
-
-
-" float-preview configuration
-let g:float_preview#docked = 0
-
-
-" echodoc configuration
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'echo'
 
 
 " SimpylFold configuration

@@ -4,6 +4,20 @@ return require('packer').startup(function()
   use {'gotgenes/fruzzy', branch = 'increase-limit'}
   use 'Shougo/neoyank.vim'
 
+  use {
+    'hrsh7th/nvim-compe',
+    config = function()
+      require('compe').setup {
+        source = {
+          path = true,
+          buffer = true,
+          calc = true,
+          nvim_lsp = true,
+          nvim_lua = true,
+        },
+      }
+    end
+  }
   use 'schickling/vim-bufonly'
   use 'Shougo/defx.nvim'
   use 'kristijanhusak/defx-icons'
@@ -21,7 +35,6 @@ return require('packer').startup(function()
   use 'AndrewRadev/splitjoin.vim'
   use 'embear/vim-localvimrc'
   use 'norcalli/nvim-colorizer.lua'
-  use 'ncm2/float-preview.nvim'
 
   -- Git
   use 'tpope/vim-fugitive'
@@ -41,8 +54,6 @@ return require('packer').startup(function()
   use 'martinda/Jenkinsfile-vim-syntax'
 
   -- Programming
-  use 'Shougo/deoplete.nvim'
-  use 'Shougo/echodoc.vim'
   use 'b3nj5m1n/kommentary'
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
@@ -58,7 +69,6 @@ return require('packer').startup(function()
   }
   use 'neovim/nvim-lspconfig'
   use 'josa42/nvim-lightline-lsp'
-  use 'deoplete-plugins/deoplete-lsp'
   use 'nvim-lua/popup.nvim'
   use {
     'nvim-telescope/telescope.nvim',
