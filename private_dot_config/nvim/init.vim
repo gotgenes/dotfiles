@@ -350,14 +350,6 @@ let g:tagbar_no_status_line = 1
 let g:mundo_right = 1
 
 
-" UltiSnips configuration
-let g:UltiSnipsExpandTrigger = "<C-S>"
-let g:UltiSnipsJumpForwardTrigger = "<C-,>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-.>"
-
-let g:ultisnips_python_style = "sphinx"
-
-
 " vim-better-whitespace configuration
 nnoremap <silent> <leader>rws :ToggleStripWhitespaceOnSave<CR>
 nnoremap <silent> <leader>hws :ToggleWhitespace<CR>
