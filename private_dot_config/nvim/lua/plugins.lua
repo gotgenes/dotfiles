@@ -18,6 +18,12 @@ return require('packer').startup(function(use)
       }
     end
   }
+  use {
+    'blackCauldron7/surround.nvim',
+    config = function()
+      require('surround').setup {}
+    end
+  }
   use 'schickling/vim-bufonly'
   use 'Shougo/defx.nvim'
   use 'kristijanhusak/defx-icons'
@@ -25,8 +31,6 @@ return require('packer').startup(function(use)
   use 'ntpeters/vim-better-whitespace'
   use 'dbakker/vim-projectroot'
   use 'vim-scripts/utl.vim'
-  use 'tpope/vim-repeat'
-  use 'tpope/vim-surround'
   use 'simnalamburt/vim-mundo'
   use 'itchyny/lightline.vim'
   use 'chriskempson/base16-vim'
