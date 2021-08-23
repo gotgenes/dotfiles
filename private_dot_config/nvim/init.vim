@@ -362,11 +362,8 @@ highlight link ExtraWhitespace Error
 
 
 " nvim-compe configuration
-" NOTE: Order is important. You can't lazy loading lexima.vim.
-let g:lexima_no_default_rules = v:true
-call lexima#set_default_rules()
 inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
+inoremap <silent><expr> <CR>      compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
@@ -445,9 +442,6 @@ nnoremap <silent> <leader>dg :<C-u>Denite grep<CR><CR>
 nnoremap <silent> <leader>dh :<C-u>Denite -start-filter help<CR>
 nnoremap <silent> <leader>dy :<C-u>Denite neoyank<CR>
 nnoremap <silent> <leader>dr :<C-u>Denite -resume<CR>
-
-" lexima configuration
-autocmd FileType TelescopePrompt let b:lexima_disabled = 1
 
 
 " vim-python configuration
