@@ -259,7 +259,7 @@ call lightline#lsp#register()
 let g:lightline#lsp#indicator_errors = "\uf05e"
 let g:lightline#lsp#indicator_warnings = "\uf071"
 let g:lightline#lsp#indicator_infos = "\uf129"
-let g:lightline#lsp#indicator_hints = "\u63541"
+let g:lightline#lsp#indicator_hints = "\uf835"
 let g:lightline#lsp#indicator_ok = "\uf00c"
 
 
