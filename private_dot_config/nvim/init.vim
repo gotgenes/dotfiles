@@ -122,6 +122,7 @@ augroup END
 " INSTALL PLUGINS "
 """""""""""""""""""
 lua require('plugins')
+autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 
 
 """"""""""""""""""""""""""
