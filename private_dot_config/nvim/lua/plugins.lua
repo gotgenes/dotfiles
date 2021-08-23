@@ -35,6 +35,7 @@ return require('packer').startup(function(use)
   use 'itchyny/lightline.vim'
   use 'chriskempson/base16-vim'
   use 'mike-hearn/base16-vim-lightline'
+  use 'zhou13/vim-easyescape'
   use 'AndrewRadev/splitjoin.vim'
   use 'embear/vim-localvimrc'
   use 'norcalli/nvim-colorizer.lua'

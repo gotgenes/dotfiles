@@ -135,6 +135,13 @@ lua require('configs.lsp')
 lua require('configs.telescope')
 
 
+" easyescape configuration
+let g:easyescape_chars = { "j": 1, "k": 1 }
+let g:easyescape_timeout = 300
+cnoremap jk <ESC>
+cnoremap kj <ESC>
+
+
 " lightline configuration
 let g:lightline = {}
 let g:lightline.colorscheme = 'base16_eighties'
