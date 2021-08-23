@@ -54,8 +54,6 @@ return require('packer').startup(function(use)
 
   -- Programming
   use 'b3nj5m1n/kommentary'
-  use 'SirVer/ultisnips'
-  use 'honza/vim-snippets'
   use 'majutsushi/tagbar'
   use 'cohama/lexima.vim'
   use 'Konfekt/FastFold'
