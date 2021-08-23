@@ -100,23 +100,21 @@ nnoremap <silent> <leader>hc :helpclose<CR>
 " autocmd settings "
 """"""""""""""""""""
 
-if has("autocmd")
-  " Start editing a previously opened file from the position of the most
-  " recent edit.
-  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
-  " Recognize VTL
-  autocmd BufNewFile,BufRead *.vtl set ft=velocity
-endif
+" Start editing a previously opened file from the position of the most
+" recent edit.
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+" Recognize VTL
+autocmd BufNewFile,BufRead *.vtl set ft=velocity
 
-" Help Neovim check if file has changed on disc
+" Help Neovim check if file has changed on disk
 " https://github.com/neovim/neovim/issues/2127
 augroup checktime
-    autocmd!
-    if !has("gui_running")
-        "silent! necessary otherwise throws errors when using command
-        "line window.
-        autocmd BufEnter,FocusGained,BufEnter,FocusLost,WinLeave * checktime
-    endif
+  autocmd!
+  if !has("gui_running")
+    "silent! necessary otherwise throws errors when using command
+    "line window.
+    autocmd BufEnter,FocusGained,BufEnter,FocusLost,WinLeave * checktime
+  endif
 augroup END
 
 
