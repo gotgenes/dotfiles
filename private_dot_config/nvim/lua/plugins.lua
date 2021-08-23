@@ -27,7 +27,6 @@ return require('packer').startup(function(use)
   use 'vim-scripts/utl.vim'
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
-  use 'tpope/vim-unimpaired'
   use 'simnalamburt/vim-mundo'
   use 'itchyny/lightline.vim'
   use 'chriskempson/base16-vim'
