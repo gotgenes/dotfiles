@@ -131,9 +131,9 @@ lua require('plugins')
 """"""""""""""""""""""""""
 
 " nvim-lspconfig
-lua require('null-ls-config')
-lua require('lsp-config')
-lua require('telescope-config')
+lua require('configs.null-ls')
+lua require('configs.lsp')
+lua require('configs.telescope')
 
 
 " lightline configuration
