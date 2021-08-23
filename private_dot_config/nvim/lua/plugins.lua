@@ -55,7 +55,12 @@ return require('packer').startup(function(use)
   -- Programming
   use 'b3nj5m1n/kommentary'
   use 'majutsushi/tagbar'
-  use 'cohama/lexima.vim'
+  use {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup {}
+    end
+  }
   use 'Konfekt/FastFold'
   use {
     'jose-elias-alvarez/null-ls.nvim',
