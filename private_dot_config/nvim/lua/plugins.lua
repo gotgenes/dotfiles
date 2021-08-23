@@ -1,4 +1,4 @@
-return require('packer').startup(function()
+return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'Shougo/denite.nvim'
   use {'gotgenes/fruzzy', branch = 'increase-limit'}
