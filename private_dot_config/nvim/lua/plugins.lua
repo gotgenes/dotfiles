@@ -38,7 +38,15 @@ return require('packer').startup(function(use)
   use 'zhou13/vim-easyescape'
   use 'AndrewRadev/splitjoin.vim'
   use 'embear/vim-localvimrc'
-  use 'norcalli/nvim-colorizer.lua'
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require 'colorizer'.setup {
+        { '*' },
+        { names = false }
+      }
+    end
+  }
 
   -- Git
   use 'tpope/vim-fugitive'
