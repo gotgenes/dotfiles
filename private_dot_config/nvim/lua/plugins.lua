@@ -41,10 +41,15 @@ return require('packer').startup(function(use)
   use {
     'norcalli/nvim-colorizer.lua',
     config = function()
-      require 'colorizer'.setup {
-        { '*' },
-        { names = false }
-      }
+      require 'colorizer'.setup(
+        {
+          '*',
+          '!packer',
+        },
+        {
+          names = false,
+        }
+      )
     end
   }
 
