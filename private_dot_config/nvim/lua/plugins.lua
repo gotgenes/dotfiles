@@ -33,7 +33,7 @@ return require('packer').startup(function(use)
   use 'vim-scripts/utl.vim'
   use 'simnalamburt/vim-mundo'
   use 'itchyny/lightline.vim'
-  use 'chriskempson/base16-vim'
+  use 'RRethy/nvim-base16'
   use 'mike-hearn/base16-vim-lightline'
   use 'zhou13/vim-easyescape'
   use 'AndrewRadev/splitjoin.vim'
