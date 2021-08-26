@@ -483,11 +483,8 @@ let g:base16colorspace=256
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
 
-if has('termguicolors')
-  set termguicolors
-endif
+set termguicolors
 
 colorscheme base16-eighties
 highlight HtmlBold gui=bold
 highlight HtmlItalic gui=italic
-highlight Operator guifg=#cc99cc ctermfg=05
