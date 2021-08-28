@@ -22,10 +22,6 @@ return require('packer').startup(function(use)
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.close(),
-          ['<CR>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = true,
-          })
         },
         sources = {
           { name = 'buffer' },
@@ -93,8 +89,13 @@ return require('packer').startup(function(use)
   use 'majutsushi/tagbar'
   use {
     'windwp/nvim-autopairs',
+    after = 'nvim-cmp',
     config = function()
       require('nvim-autopairs').setup {}
+      require("nvim-autopairs.completion.cmp").setup({
+        map_cr = true, --  map <CR> on insert mode
+        auto_select = true -- automatically select the first item
+      })
     end
   }
   use 'Konfekt/FastFold'
