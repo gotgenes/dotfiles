@@ -91,11 +91,7 @@ return require('packer').startup(function(use)
     'windwp/nvim-autopairs',
     after = 'nvim-cmp',
     config = function()
-      require('nvim-autopairs').setup {}
-      require("nvim-autopairs.completion.cmp").setup({
-        map_cr = true, --  map <CR> on insert mode
-        auto_select = true -- automatically select the first item
-      })
+      require('configs.nvim-autopairs')
     end
   }
   use 'Konfekt/FastFold'
