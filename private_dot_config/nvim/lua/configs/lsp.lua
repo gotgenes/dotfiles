@@ -79,12 +79,9 @@ nvim_lsp.tsserver.setup {
   end
 }
 
-local servers = { "null-ls", "vimls" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-  }
-end
+nvim_lsp.vimls.setup {
+  on_attach = on_attach,
+}
 
 
 nvim_lsp.gopls.setup {

@@ -129,12 +129,6 @@ autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 " PLUGINS CONFIGURATIONS "
 """"""""""""""""""""""""""
 
-" nvim-lspconfig
-lua require('configs.null-ls')
-lua require('configs.lsp')
-lua require('configs.telescope')
-
-
 " easyescape configuration
 let g:easyescape_chars = { "j": 1, "k": 1 }
 let g:easyescape_timeout = 300
