@@ -100,9 +100,18 @@ return require('packer').startup(function(use)
     requires = {
       'nvim-lua/plenary.nvim',
       'neovim/nvim-lspconfig',
-    }
+    },
+    config = function()
+      require('configs.null-ls')
+      require("lspconfig")["null-ls"].setup {}
+    end
   }
-  use 'neovim/nvim-lspconfig'
+  use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('configs.lsp')
+    end
+  }
   use 'josa42/nvim-lightline-lsp'
   use 'nvim-lua/popup.nvim'
   use {
@@ -110,7 +119,10 @@ return require('packer').startup(function(use)
     requires = {
       'nvim-lua/plenary.nvim',
       'kyazdani42/nvim-web-devicons',
-    }
+    },
+    config = function()
+      require('configs.telescope')
+    end
   }
   use {
     "folke/trouble.nvim",
