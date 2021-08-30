@@ -56,11 +56,11 @@ local function on_attach(client, bufnr)
   if client.resolved_capabilities.document_formatting then
       vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   end
-  if vim.b.lsp_keymaps_set then
+  if vim.b.lsp_buffer_set_up then
     return
   end
 
-  vim.b.lsp_keymaps_set = 1
+  vim.b.lsp_buffer_set_up = 1
 
   --Enable completion triggered by <c-x><c-o>
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -68,6 +68,7 @@ local function on_attach(client, bufnr)
 
   set_commands()
   set_keymaps(bufnr)
+  require('illuminate').on_attach(client)
 end
 
 local function on_attach_no_format (client, bufnr)
