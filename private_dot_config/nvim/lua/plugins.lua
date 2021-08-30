@@ -103,13 +103,15 @@ return require('packer').startup(function(use)
     },
     config = function()
       require('configs.null-ls')
-      require("lspconfig")["null-ls"].setup {}
+      require('lspconfig')['null-ls'].setup {
+        on_attach = require('configs.lsp').on_attach
+      }
     end
   }
   use {
     'neovim/nvim-lspconfig',
     config = function()
-      require('configs.lsp')
+      require('configs.lsp').setup()
     end
   }
   use 'josa42/nvim-lightline-lsp'
