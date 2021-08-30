@@ -108,6 +108,7 @@ return require('packer').startup(function(use)
       }
     end
   }
+  use 'RRethy/vim-illuminate'
   use {
     'neovim/nvim-lspconfig',
     config = function()
