@@ -463,9 +463,6 @@ let g:tex_flavor = 'latex'
 let g:vim_markdown_folding_disabled = 1
 
 
-" base16 configuration
-let g:base16colorspace=256
-
 """"""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
