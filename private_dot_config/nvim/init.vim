@@ -438,6 +438,11 @@ nnoremap <silent> <leader>dy :<C-u>Denite neoyank<CR>
 nnoremap <silent> <leader>dr :<C-u>Denite -resume<CR>
 
 
+" vim-illuminate configuration
+let g:Illuminate_delay = 500
+let g:Illuminate_ftblacklist = ['defx', 'help', 'Mundo', 'MundoDiff', 'TelescopePrompt']
+
+
 " vim-python configuration
 let g:python_highlight_all = 1
 
