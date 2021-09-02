@@ -32,12 +32,7 @@ return require('packer').startup(function(use)
       }
     end
   }
-  use {
-    'blackCauldron7/surround.nvim',
-    config = function()
-      require('surround').setup {}
-    end
-  }
+  use 'machakann/vim-sandwich'
   use 'schickling/vim-bufonly'
   use 'Shougo/defx.nvim'
   use 'kristijanhusak/defx-icons'
