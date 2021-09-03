@@ -1,17 +1,17 @@
-local npairs = require'nvim-autopairs'
-npairs.setup {}
-require("nvim-autopairs.completion.cmp").setup({
+local npairs = require('nvim-autopairs')
+npairs.setup({})
+require('nvim-autopairs.completion.cmp').setup({
   map_cr = true, --  map <CR> on insert mode
-  auto_select = true -- automatically select the first item
+  auto_select = true, -- automatically select the first item
 })
 
-local Rule = require'nvim-autopairs.rule'
-local cond = require'nvim-autopairs.conds'
+local Rule = require('nvim-autopairs.rule')
+local cond = require('nvim-autopairs.conds')
 
-npairs.add_rules {
+npairs.add_rules({
   Rule(' ', ' ')
     :with_pair(function(opts)
-      local pair = opts.line:sub(opts.col -1, opts.col)
+      local pair = opts.line:sub(opts.col - 1, opts.col)
       return vim.tbl_contains({ '()', '{}', '[]' }, pair)
     end)
     :with_move(cond.none())
@@ -23,23 +23,28 @@ npairs.add_rules {
     end),
   Rule('', ' )')
     :with_pair(cond.none())
-    :with_move(function(opts) return opts.char == ')' end)
+    :with_move(function(opts)
+      return opts.char == ')'
+    end)
     :with_cr(cond.none())
     :with_del(cond.none())
     :use_key(')'),
   Rule('', ' }')
     :with_pair(cond.none())
-    :with_move(function(opts) return opts.char == '}' end)
+    :with_move(function(opts)
+      return opts.char == '}'
+    end)
     :with_cr(cond.none())
     :with_del(cond.none())
     :use_key('}'),
   Rule('', ' ]')
     :with_pair(cond.none())
-    :with_move(function(opts) return opts.char == ']' end)
+    :with_move(function(opts)
+      return opts.char == ']'
+    end)
     :with_cr(cond.none())
     :with_del(cond.none())
     :use_key(']'),
-}
+})
 
-npairs.get_rule('"')
-  :with_pair(cond.not_filetypes({ 'vim' }))
+npairs.get_rule('"'):with_pair(cond.not_filetypes({ 'vim' }))
