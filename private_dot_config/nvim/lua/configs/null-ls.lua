@@ -6,5 +6,6 @@ null_ls.config {
   sources = {
     diagnostics.flake8,
     formatting.black,
+    formatting.stylua,
   }
 }
