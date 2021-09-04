@@ -4,6 +4,7 @@ local formatting = null_ls.builtins.formatting
 
 null_ls.config({
   sources = {
+    diagnostics.codespell,
     diagnostics.flake8,
     formatting.black,
     formatting.stylua,
