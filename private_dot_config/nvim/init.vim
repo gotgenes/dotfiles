@@ -351,6 +351,32 @@ let g:tagbar_no_status_line = 1
 let g:mundo_right = 1
 
 
+" vim-sandwich configuration
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+let g:sandwich#recipes += [
+      \ {'buns': ['{ ', ' }'], 'nesting': 1, 'match_syntax': 1,
+      \  'kind': ['add', 'replace'], 'action': ['add'], 'input': ['{']},
+      \
+      \ {'buns': ['[ ', ' ]'], 'nesting': 1, 'match_syntax': 1,
+      \  'kind': ['add', 'replace'], 'action': ['add'], 'input': ['[']},
+      \
+      \ {'buns': ['( ', ' )'], 'nesting': 1, 'match_syntax': 1,
+      \  'kind': ['add', 'replace'], 'action': ['add'], 'input': ['(']},
+      \
+      \ {'buns': ['{\s*', '\s*}'],   'nesting': 1, 'regex': 1,
+      \  'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'],
+      \  'action': ['delete'], 'input': ['{']},
+      \
+      \ {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1,
+      \  'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'],
+      \  'action': ['delete'], 'input': ['[']},
+      \
+      \ {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1,
+      \  'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'],
+      \  'action': ['delete'], 'input': ['(']},
+      \ ]
+
+
 " vim-better-whitespace configuration
 nnoremap <silent> <leader>rws :ToggleStripWhitespaceOnSave<CR>
 nnoremap <silent> <leader>hws :ToggleWhitespace<CR>
