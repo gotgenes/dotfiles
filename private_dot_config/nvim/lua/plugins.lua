@@ -5,6 +5,12 @@ return require('packer').startup(function(use)
   use('Shougo/neoyank.vim')
 
   use({
+    'folke/which-key.nvim',
+    config = function()
+      require('which-key').setup()
+    end,
+  })
+  use({
     'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-buffer',
