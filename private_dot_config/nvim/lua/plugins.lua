@@ -84,6 +84,7 @@ return require('packer').startup(function(use)
     end,
   })
   use('majutsushi/tagbar')
+  use('andymass/vim-matchup')
   use({
     'windwp/nvim-autopairs',
     after = 'nvim-cmp',
