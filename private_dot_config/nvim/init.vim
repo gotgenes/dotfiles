@@ -50,6 +50,9 @@ set cmdheight=2
 " Set completion options
 set completeopt=menuone,noselect
 
+" Set 24-bit colors
+set termguicolors
+
 
 """"""""""""
 " MAPPINGS "
@@ -497,8 +500,6 @@ let g:vim_markdown_folding_disabled = 1
 """"""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
-
-set termguicolors
 
 colorscheme base16-eighties
 highlight HtmlBold gui=bold
