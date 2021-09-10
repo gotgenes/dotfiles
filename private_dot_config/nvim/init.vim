@@ -169,7 +169,7 @@ let g:lightline.component_function = {
       \ 'readonly': 'LightlineReadonly',
       \ }
 
-let lightline_ft_visible_condition = '&ft !~ "defx\\|denite\\|denite-filter\\|help\\|tagbar"'
+let lightline_ft_visible_condition = '&ft !~ "defx\\|help\\|tagbar"'
 
 let g:lightline.component_function_visible_condition = {
       \ 'fileencoding': lightline_ft_visible_condition,
@@ -183,13 +183,12 @@ let g:lightline.separator = { 'left': "", 'right': '' }
 let g:lightline.subseparator = { 'left': '', 'right': '' }
 
 function! LightlineIsExcludedFileType()
-  return (&ft =~? 'defx\|denite\|denite-filter\|help\|tagbar\|Mundo\|MundoDiff')
+  return (&ft =~? 'defx\|help\|tagbar\|Mundo\|MundoDiff')
 endfunction
 
 function! LightlineMode()
   return (&ft == 'tagbar' ? 'Tagbar' :
         \ &ft == 'defx' ? 'Defx' :
-        \ &ft == 'denite' ? 'Denite' :
         \ &ft == 'help' ? 'Help' :
         \ &ft == 'Mundo' ? 'Mundo' :
         \ &ft == 'MundoDiff' ? 'MundoDiff' :
@@ -225,8 +224,6 @@ function! LightlineFileName(active)
         \ &ft == 'defx' && !a:active ? 'defx' :
         \ &ft == 'tagbar' && a:active ? '' :
         \ &ft == 'tagbar' && !a:active ? 'tagbar' :
-        \ &ft == 'denite' ? denite#get_status('sources') :
-        \ &ft == 'denite' ? denite#get_status('sources') :
         \ &ft == 'Mundo' && a:active ? '' :
         \ &ft == 'Mundo' &&  !a:active ? 'Mundo' :
         \ &ft == 'MundoDiff' && a:active ? '' :
@@ -411,62 +408,6 @@ nnoremap <silent> <leader>ntp :ProjectRootExe NERDTreeFind<CR>
 " fruzzy settings
 let g:fruzzy#usenative = 0
 let g:fruzzy#sortonempty = 0
-
-
-" Denite settings
-autocmd FileType denite call s:denite_my_mappings()
-function! s:denite_my_mappings() abort
-  nnoremap <silent><buffer><expr> <CR>
-    \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> q
-    \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> a
-    \ denite#do_map('choose_action')
-  nnoremap <silent><buffer><expr> dd
-    \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> <C-l>
-    \ denite#do_map('redraw')
-  nnoremap <silent><buffer><expr> i
-    \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-    \ denite#do_map('toggle_select')
-endfunction
-
-call denite#custom#option('_', 'statusline', v:false)
-
-call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
-call denite#custom#source('file,file/rec', 'sorters', ['sorter/rank'])
-call denite#custom#source('grep', 'converters', ['converter/abbr_word'])
-
-if executable('rg')
-  call denite#custom#var('file/rec', 'command',
-        \ ['rg', '--files', '--hidden', '--glob', '!.git', '--color', 'never'])
-  call denite#custom#var('grep', 'command', ['rg'])
-  call denite#custom#var('grep', 'default_opts',
-        \ ['-i', '--vimgrep', '--no-heading'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
-elseif executable('ag')
-  call denite#custom#var('file/rec', 'command',
-        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '--ignore', '.git', '-g', ''])
-  call denite#custom#var('grep', 'command', ['ag'])
-  call denite#custom#var('grep', 'default_opts',
-        \ ['-i', '--vimgrep'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', [])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
-endif
-
-nnoremap <silent> <leader>db :<C-u>Denite buffer<CR>
-nnoremap <silent> <leader>df :<C-u>Denite -start-filter file/rec<CR>
-nnoremap <silent> <leader>dp :<C-u>DeniteProjectDir -start-filter file/rec<CR>
-nnoremap <silent> <leader>dg :<C-u>Denite grep<CR><CR>
-nnoremap <silent> <leader>dh :<C-u>Denite -start-filter help<CR>
-nnoremap <silent> <leader>dy :<C-u>Denite neoyank<CR>
-nnoremap <silent> <leader>dr :<C-u>Denite -resume<CR>
 
 
 " vim-illuminate configuration

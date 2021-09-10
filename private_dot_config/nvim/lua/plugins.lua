@@ -1,8 +1,5 @@
 return require('packer').startup(function(use)
   use('wbthomason/packer.nvim')
-  use('Shougo/denite.nvim')
-  use({ 'gotgenes/fruzzy', branch = 'increase-limit' })
-  use('Shougo/neoyank.vim')
 
   use({
     'folke/which-key.nvim',
