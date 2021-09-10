@@ -31,9 +31,20 @@ return require('packer').startup(function(use)
   use('dbakker/vim-projectroot')
   use('vim-scripts/utl.vim')
   use('simnalamburt/vim-mundo')
-  use('itchyny/lightline.vim')
   use('RRethy/nvim-base16')
-  use('mike-hearn/base16-vim-lightline')
+  use({
+    'mike-hearn/base16-vim-lightline',
+    requires = {
+      'itchyny/lightline.vim',
+    },
+  })
+  use({
+    'Pocco81/Catppuccino.nvim',
+    requires = {
+      'itchyny/lightline.vim',
+    },
+  })
+  use('itchyny/lightline.vim')
   use('zhou13/vim-easyescape')
   use('AndrewRadev/splitjoin.vim')
   use('embear/vim-localvimrc')
