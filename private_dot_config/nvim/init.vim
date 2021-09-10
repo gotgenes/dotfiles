@@ -53,6 +53,8 @@ set completeopt=menuone,noselect
 " Set 24-bit colors
 set termguicolors
 
+let &t_ut=''
+
 
 """"""""""""
 " MAPPINGS "
@@ -141,7 +143,7 @@ cnoremap kj <ESC>
 
 " lightline configuration
 let g:lightline = {}
-let g:lightline.colorscheme = 'base16_eighties'
+let g:lightline.colorscheme = 'catppuccino'
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'gitbranch', 'readonly', 'filename_active', 'modified'] ],
@@ -501,6 +503,6 @@ let g:vim_markdown_folding_disabled = 1
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
 
-colorscheme base16-eighties
+colorscheme catppuccino
 highlight HtmlBold gui=bold
 highlight HtmlItalic gui=italic
