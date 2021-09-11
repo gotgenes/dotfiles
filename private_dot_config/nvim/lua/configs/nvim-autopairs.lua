@@ -1,9 +1,14 @@
 local npairs = require('nvim-autopairs')
-npairs.setup({})
+npairs.setup({
+  check_ts = true,
+})
 require('nvim-autopairs.completion.cmp').setup({
   map_cr = true, --  map <CR> on insert mode
   auto_select = true, -- automatically select the first item
 })
+
+npairs.add_rules(require('nvim-autopairs.rules.endwise-lua'))
+npairs.add_rules(require('nvim-autopairs.rules.endwise-ruby'))
 
 local Rule = require('nvim-autopairs.rule')
 local cond = require('nvim-autopairs.conds')
