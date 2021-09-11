@@ -92,7 +92,10 @@ return require('packer').startup(function(use)
   use('andymass/vim-matchup')
   use({
     'windwp/nvim-autopairs',
-    after = 'nvim-cmp',
+    requires = {
+      'hrsh7th/nvim-cmp',
+      'nvim-treesitter/nvim-treesitter',
+    },
     config = function()
       require('configs.nvim-autopairs')
     end,
