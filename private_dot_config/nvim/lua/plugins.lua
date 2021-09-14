@@ -14,9 +14,17 @@ return require('packer').startup(function(use)
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-path',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
     },
     config = function()
       require('configs.nvim-cmp')
+    end,
+  })
+  use({
+    'L3MON4D3/LuaSnip',
+    config = function()
+      require('configs.luasnip')
     end,
   })
   use('machakann/vim-sandwich')
