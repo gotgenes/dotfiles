@@ -390,12 +390,6 @@ endif
 highlight link ExtraWhitespace Error
 
 
-" tab-completion
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-N>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
-
-
 " SimpylFold configuration
 let g:SimpylFold_fold_docstring = 0
 
@@ -429,7 +423,6 @@ let g:go_highlight_function_parameters = 1
 let g:go_highlight_function_calls = 0
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 0
-
 
 
 " vimtex configuration
