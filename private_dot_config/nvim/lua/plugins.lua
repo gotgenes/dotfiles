@@ -1,3 +1,6 @@
+require('packer').init({
+  max_jobs = 70,
+})
 return require('packer').startup(function(use)
   use('wbthomason/packer.nvim')
 
