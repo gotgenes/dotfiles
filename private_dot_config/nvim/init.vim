@@ -143,7 +143,7 @@ cnoremap kj <ESC>
 
 " lightline configuration
 let g:lightline = {}
-let g:lightline.colorscheme = 'catppuccino'
+let g:lightline.colorscheme = 'sonokai'
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'gitbranch', 'readonly', 'filename_active', 'modified'] ],
@@ -437,6 +437,6 @@ let g:vim_markdown_folding_disabled = 1
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
 
-colorscheme catppuccino
+colorscheme sonokai
 highlight HtmlBold gui=bold
 highlight HtmlItalic gui=italic

@@ -36,6 +36,7 @@ return require('packer').startup(function(use)
   use('dbakker/vim-projectroot')
   use('vim-scripts/utl.vim')
   use('simnalamburt/vim-mundo')
+  use('sainnhe/sonokai')
   use('RRethy/nvim-base16')
   use({
     'mike-hearn/base16-vim-lightline',
