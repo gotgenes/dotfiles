@@ -1,5 +1,8 @@
 local nvim_lsp = require('lspconfig')
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 local function set_commands()
   -- Commands.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -95,10 +98,12 @@ table.insert(runtime_path, 'lua/?/init.lua')
 
 local function setup()
   nvim_lsp.pyright.setup({
+    capabilities = capabilities,
     on_attach = on_attach_no_format,
   })
 
   nvim_lsp.tsserver.setup({
+    capabilities = capabilities,
     on_attach = function(client, bufnr)
       local ts_utils = require('nvim-lsp-ts-utils')
       ts_utils.setup({
@@ -110,10 +115,12 @@ local function setup()
   })
 
   nvim_lsp.vimls.setup({
+    capabilities = capabilities,
     on_attach = on_attach,
   })
 
   nvim_lsp.gopls.setup({
+    capabilities = capabilities,
     cmd = { 'gopls', '-remote=auto' },
     on_attach = on_attach,
   })
@@ -122,6 +129,7 @@ local function setup()
 end
 
 return {
+  capabilities = capabilities,
   on_attach = on_attach,
   on_attach_no_format = on_attach_no_format,
   setup = setup,
