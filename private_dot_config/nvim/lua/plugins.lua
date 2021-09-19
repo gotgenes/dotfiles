@@ -164,7 +164,18 @@ return require('packer').startup(function(use)
   use('folke/lsp-colors.nvim')
 
   -- Go
-  use('fatih/vim-go')
+  use({
+    'ray-x/go.nvim',
+    config = function()
+      local lsp_config = require('configs.lsp')
+      require('go').setup({
+        lsp_cfg = {
+          capabilities = lsp_config.capabilities,
+        },
+        lsp_on_attach = lsp_config.on_attach_no_format,
+      })
+    end
+  })
   use('gotgenes/golang-template.vim')
 
   -- HTML
