@@ -119,12 +119,6 @@ local function setup()
     on_attach = on_attach,
   })
 
-  nvim_lsp.gopls.setup({
-    capabilities = capabilities,
-    cmd = { 'gopls', '-remote=auto' },
-    on_attach = on_attach,
-  })
-
   set_signs()
 end
 
