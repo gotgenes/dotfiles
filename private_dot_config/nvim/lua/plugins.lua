@@ -68,6 +68,14 @@ return require('packer').startup(function(use)
       })
     end,
   })
+  use({
+    'lukas-reineke/indent-blankline.nvim',
+    config = function()
+      require('indent_blankline').setup({
+        buftype_exclude = { 'help', 'packer' },
+      })
+    end,
+  })
 
   -- Git
   use('tpope/vim-fugitive')
@@ -174,7 +182,7 @@ return require('packer').startup(function(use)
         },
         lsp_on_attach = lsp_config.on_attach_no_format,
       })
-    end
+    end,
   })
   use('gotgenes/golang-template.vim')
 
