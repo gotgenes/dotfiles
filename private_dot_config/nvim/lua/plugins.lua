@@ -76,6 +76,7 @@ return require('packer').startup(function(use)
       })
     end,
   })
+  use('AndrewRadev/inline_edit.vim')
 
   -- Git
   use('tpope/vim-fugitive')
