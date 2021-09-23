@@ -181,7 +181,7 @@ return require('packer').startup(function(use)
         lsp_cfg = {
           capabilities = lsp_config.capabilities,
         },
-        lsp_on_attach = lsp_config.on_attach_no_format,
+        lsp_on_attach = lsp_config.on_attach,
       })
     end,
   })
