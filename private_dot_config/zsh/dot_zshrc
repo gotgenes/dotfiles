@@ -42,21 +42,6 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_NO_STORE
 
 
-# Set up ALL THE ENVs
-export GOENV_ROOT="$HOME/.goenv"
-export path=("$GOENV_ROOT/bin" $path)
-
-envs=("goenv" "jenv" "nodenv" "pyenv" "rbenv")
-
-for env in "${envs[@]}"; do
-    if (( $+commands[$env] )); then
-        eval "$($env init -)"
-    fi
-done
-
-export path=("$HOME/.local/bin" $path)
-
-
 # plugins
 zinit ice blockf
 zinit light zsh-users/zsh-completions
@@ -91,6 +76,8 @@ zinit snippet OMZP::autojump
 zinit ice lucid wait
 zinit snippet OMZP::fzf
 
+zinit snippet OMZP::asdf
+
 
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
 
@@ -105,10 +92,14 @@ if [[ -d "$XDG_CONFIG_HOME/zsh/include/" ]]; then
     done
 fi
 
-typeset -U path
-
 autoload -Uz compinit
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 zinit cdreplay -q
+
+
+# ensure ~/.local/bin is earliest in PATH
+export path=("$HOME/.local/bin" $path)
+
+typeset -U path
 
 # vi: filetype=zsh

@@ -7,7 +7,9 @@ export HISTFILE="$XDG_DATA_HOME/zsh/history"
 
 export EDITOR="nvim"
 
-{{- if eq .chezmoi.os "darwin" }}
+export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
+
+{{ if eq .chezmoi.os "darwin" -}}
 if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
 fi
@@ -21,8 +23,4 @@ export path=("$HOME/.local/bin" $path)
 
 if (( $+commands[repassh] )); then
     export GIT_SSH="repassh"
-fi
-
-if (( $+commands[pyenv] )); then
-    eval "$(pyenv init --path)"
 fi
