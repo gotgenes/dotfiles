@@ -43,7 +43,6 @@ local function set_keymaps(bufnr)
   -- Provided by Telescope
   buf_set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
-  buf_set_keymap('n', '<leader>ca', '<cmd>Telescope lsp_code_actions theme=get_cursor<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
   buf_set_keymap('n', '<leader>e', '<cmd>Telescope lsp_document_diagnostics<CR>', opts)
   -- Provided by Trouble
@@ -53,6 +52,8 @@ local function set_keymaps(bufnr)
   buf_set_keymap('n', '<leader>xl', '<cmd>Trouble loclist<cr>', opts)
   buf_set_keymap('n', '<leader>xq', '<cmd>Trouble quickfix<cr>', opts)
   buf_set_keymap('n', 'gR', '<cmd>Trouble lsp_references<cr>', opts)
+  -- Provided by nvim-code-action-menu
+  buf_set_keymap('n', '<leader>ca', '<cmd>CodeActionMenu<CR>', opts)
 end
 
 -- Use an on_attach function to only map the following keys

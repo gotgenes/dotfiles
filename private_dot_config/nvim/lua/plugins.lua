@@ -137,6 +137,13 @@ return require('packer').startup(function(use)
       })
     end,
   })
+  use({
+    'weilbith/nvim-code-action-menu',
+    requires = {
+      'neovim/nvim-lspconfig',
+    },
+    cmd = 'CodeActionMenu',
+  })
   use('RRethy/vim-illuminate')
   use({
     'folke/lua-dev.nvim',
