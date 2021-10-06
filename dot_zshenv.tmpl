@@ -16,9 +16,6 @@ fi
 eval $(/usr/local/bin/brew shellenv)
 {{- end  }}
 
-export GOPATH="$HOME/development/go"
-export path=("$GOPATH/bin" $path)
-
 export path=("$HOME/.local/bin" $path)
 
 if (( $+commands[repassh] )); then
