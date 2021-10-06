@@ -76,10 +76,9 @@ zinit snippet OMZP::autojump
 zinit ice lucid wait
 zinit snippet OMZP::fzf
 
-zinit snippet OMZP::asdf
-
 
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
+[[ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]] && source "/usr/local/opt/asdf/libexec/asdf.sh"
 
 
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
