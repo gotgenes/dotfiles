@@ -79,8 +79,11 @@ zinit snippet OMZP::fzf
 
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
 [[ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]] && source "/usr/local/opt/asdf/libexec/asdf.sh"
+# Remove shims and let asdf-direnv set the paths. See
+# https://github.com/asdf-community/asdf-direnv
 export path=( ${path[@]:#*shims*} )
 if asdf which direnv >& /dev/null; then
+    # Remember to `asdf install direnv latest` and `asdf reshim`
     eval "$(asdf exec direnv hook zsh)"
     direnv() { asdf exec direnv "$@"; }
 fi
