@@ -13,8 +13,12 @@ export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
 fi
+{{- if eq .chezmoi.arch "arm64" }}
+eval $(/opt/homebrew/bin/brew shellenv)
+{{- else }}
 eval $(/usr/local/bin/brew shellenv)
-{{- end  }}
+{{- end }}
+{{- end }}
 
 export GOPATH="$HOME/development/go"
 export path=("$GOPATH/bin" $path)
