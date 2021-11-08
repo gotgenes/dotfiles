@@ -78,7 +78,12 @@ zinit snippet OMZP::fzf
 
 
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
+{{- if eq .chezmoi.arch "arm64" }}
+[[ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]] && source "/opt/homebrew/opt/asdf/libexec/asdf.sh"
+{{- else }}
+eval $(/usr/local/bin/brew shellenv)
 [[ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]] && source "/usr/local/opt/asdf/libexec/asdf.sh"
+{{- end }}
 # Remove shims and let asdf-direnv set the paths. See
 # https://github.com/asdf-community/asdf-direnv
 export path=( ${path[@]:#*shims*} )
