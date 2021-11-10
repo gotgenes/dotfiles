@@ -274,7 +274,7 @@ nnoremap <leader>cl :Utl copyLink underCursor<CR>
 autocmd BufWritePost * call defx#redraw()
 nnoremap <silent><leader>fl :Defx -split=vertical -winwidth=50 -direction=topleft<CR>
 nnoremap <silent><leader>ft :Defx -toggle -resume -split=vertical -winwidth=50 -direction=topleft<CR>
-nnoremap <silent><leader>fc :Defx -resume -split=vertical -winwidth=50 -direction=topleft -search=`expand('%:p')` `getcwd()`<CR>
+nnoremap <silent><leader>fc :Defx -split=vertical -winwidth=50 -direction=topleft -search-recursive=`expand('%')`<CR>
 call defx#custom#option('_', {
       \ 'columns': 'indent:icons:filename:type:git',
       \ })
