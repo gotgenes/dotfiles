@@ -50,5 +50,3 @@ npairs.add_rules({
     :with_del(cond.none())
     :use_key(']'),
 })
-
-npairs.get_rule('"'):with_pair(cond.not_filetypes({ 'vim' }))
