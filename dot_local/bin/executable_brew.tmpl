@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+{{ if eq .chezmoi.arch "arm64" -}}
+BREW="/opt/homebrew/bin/brew"
+{{- else }}
+BREW="/usr/local/bin/brew"
+{{- end }}
+
+# check if asdf is available
+if command -v asdf 1>/dev/null 2>&1; then
+  /usr/bin/env PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/asdf/ {next} {print}' | sed 's/:*$//') $BREW "$@"
+else
+  $BREW "$@"
+fi
+
+# vi: filetype=zsh
