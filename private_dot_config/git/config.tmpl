@@ -27,3 +27,6 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[credential "https://github.com"]
+	helper = 
+	helper = !gh auth git-credential
