@@ -125,11 +125,6 @@ return require('packer').startup(function(use)
     },
     config = function()
       require('configs.null-ls')
-      local lsp_config = require('configs.lsp')
-      require('lspconfig')['null-ls'].setup({
-        capabilities = lsp_config.capabilities,
-        on_attach = lsp_config.on_attach,
-      })
     end,
   })
   use({
