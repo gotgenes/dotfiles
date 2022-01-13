@@ -4,8 +4,6 @@ local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
 local lsp_config = require('configs.lsp')
 
-local node_local = { prefer_local = 'node_modules/.bin' }
-
 null_ls.setup({
   sources = {
     diagnostics.codespell,
