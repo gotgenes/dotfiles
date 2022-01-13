@@ -12,9 +12,9 @@ null_ls.setup({
     diagnostics.flake8,
     formatting.black,
     formatting.stylua,
-    diagnostics.eslint_d.with(node_local),
-    code_actions.eslint_d.with(node_local),
-    null_ls.builtins.formatting.prettierd.with(node_local),
+    diagnostics.eslint_d,
+    code_actions.eslint_d,
+    formatting.prettierd,
   },
   on_attach = lsp_config.on_attach,
 })

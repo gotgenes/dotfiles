@@ -233,6 +233,9 @@ return require('packer').startup(function(use)
       'jose-elias-alvarez/null-ls.nvim',
       'nvim-lua/plenary.nvim',
     },
+    config = function()
+      require('configs/nvim-lsp-ts-utils')
+    end,
   })
 
   -- Velocity
