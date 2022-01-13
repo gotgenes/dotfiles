@@ -103,18 +103,6 @@ local function setup()
     on_attach = on_attach_no_format,
   })
 
-  nvim_lsp.tsserver.setup({
-    capabilities = capabilities,
-    on_attach = function(client, bufnr)
-      local ts_utils = require('nvim-lsp-ts-utils')
-      ts_utils.setup({
-        enable_formatting = true,
-      })
-      on_attach_no_format(client, bufnr)
-      ts_utils.setup_client(client)
-    end,
-  })
-
   nvim_lsp.vimls.setup({
     capabilities = capabilities,
     on_attach = on_attach,
