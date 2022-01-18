@@ -141,7 +141,7 @@ let g:easyescape_timeout = 300
 
 " lightline configuration
 let g:lightline = {}
-let g:lightline.colorscheme = 'sonokai'
+let g:lightline.colorscheme = 'catppuccin'
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'gitbranch', 'readonly', 'filename_active', 'modified'] ],
@@ -435,6 +435,15 @@ let g:vim_markdown_folding_disabled = 1
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""
 
-colorscheme sonokai
+lua << EOF
+require('catppuccin').setup({
+  styles = {
+    functions = 'NONE',
+    variables = 'NONE',
+  },
+})
+EOF
+
+colorscheme catppuccin
 highlight HtmlBold gui=bold
 highlight HtmlItalic gui=italic
