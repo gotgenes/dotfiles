@@ -47,7 +47,10 @@ return require('packer').startup(function(use)
       'itchyny/lightline.vim',
     },
   })
-  use('catppuccin/nvim')
+  use({
+    'catppuccin/nvim',
+    as = 'catppuccin',
+  })
   use('itchyny/lightline.vim')
   use('zhou13/vim-easyescape')
   use('AndrewRadev/splitjoin.vim')
