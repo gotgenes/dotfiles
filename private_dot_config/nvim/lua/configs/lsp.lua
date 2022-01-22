@@ -108,6 +108,13 @@ local function setup()
     on_attach = on_attach,
   })
 
+  local omnisharp_path = vim.fn.stdpath('data') .. '/omnisharp/OmniSharp'
+  nvim_lsp.omnisharp.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    cmd = { omnisharp_path, '--languageserver' },
+  })
+
   set_signs()
 end
 
