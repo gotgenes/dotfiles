@@ -44,7 +44,26 @@ return require('packer').startup(function(use)
   })
 
   -- Statusline and Visual Components
-  use('itchyny/lightline.vim')
+  use({
+    'nvim-lualine/lualine.nvim',
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+      'lewis6991/gitsigns.nvim',
+      'SmiteshP/nvim-gps',
+    },
+    config = function()
+      require('configs.lualine')
+    end,
+  })
+  use({
+    'SmiteshP/nvim-gps',
+    requires = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      require('nvim-gps').setup()
+    end,
+  })
   use({
     'lukas-reineke/indent-blankline.nvim',
     config = function()
@@ -167,7 +186,6 @@ return require('packer').startup(function(use)
     end,
   })
 
-  use('josa42/nvim-lightline-lsp')
   use({
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
