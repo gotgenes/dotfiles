@@ -156,6 +156,12 @@ return require('packer').startup(function(use)
 
   -- LSP
   use({
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('configs.lsp').setup()
+    end,
+  })
+  use({
     'jose-elias-alvarez/null-ls.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
@@ -180,9 +186,9 @@ return require('packer').startup(function(use)
     end,
   })
   use({
-    'neovim/nvim-lspconfig',
+    'j-hui/fidget.nvim',
     config = function()
-      require('configs.lsp').setup()
+      require('fidget').setup()
     end,
   })
 
