@@ -4,12 +4,7 @@ require('packer').init({
 return require('packer').startup(function(use)
   use('wbthomason/packer.nvim')
 
-  use({
-    'folke/which-key.nvim',
-    config = function()
-      require('which-key').setup()
-    end,
-  })
+  -- Completion
   use({
     'hrsh7th/nvim-cmp',
     requires = {
@@ -30,23 +25,12 @@ return require('packer').startup(function(use)
       require('configs.luasnip')
     end,
   })
-  use('machakann/vim-sandwich')
-  use('schickling/vim-bufonly')
-  use('Shougo/defx.nvim')
-  use('kristijanhusak/defx-icons')
-  use('kristijanhusak/defx-git')
-  use('ntpeters/vim-better-whitespace')
-  use('dbakker/vim-projectroot')
-  use('vim-scripts/utl.vim')
-  use('simnalamburt/vim-mundo')
+
+  -- Colors and Themes
   use({
     'catppuccin/nvim',
     as = 'catppuccin',
   })
-  use('itchyny/lightline.vim')
-  use('zhou13/vim-easyescape')
-  use('AndrewRadev/splitjoin.vim')
-  use('embear/vim-localvimrc')
   use({
     'norcalli/nvim-colorizer.lua',
     config = function()
@@ -58,6 +42,9 @@ return require('packer').startup(function(use)
       })
     end,
   })
+
+  -- Statusline and Visual Components
+  use('itchyny/lightline.vim')
   use({
     'lukas-reineke/indent-blankline.nvim',
     config = function()
@@ -66,7 +53,38 @@ return require('packer').startup(function(use)
       })
     end,
   })
+  use('Shougo/defx.nvim')
+  use('kristijanhusak/defx-icons')
+  use('kristijanhusak/defx-git')
+  use('simnalamburt/vim-mundo')
+  use('nvim-lua/popup.nvim')
+
+  -- Productivity
+  use({
+    'folke/which-key.nvim',
+    config = function()
+      require('which-key').setup()
+    end,
+  })
+  use({
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function()
+      require('configs.telescope')
+    end,
+  })
+  use('machakann/vim-sandwich')
+  use('ntpeters/vim-better-whitespace')
+  use('dbakker/vim-projectroot')
+  use('vim-scripts/utl.vim')
+  use('embear/vim-localvimrc')
+  use('schickling/vim-bufonly')
   use('AndrewRadev/inline_edit.vim')
+  use('zhou13/vim-easyescape')
+  use('AndrewRadev/splitjoin.vim')
 
   -- Git
   use('tpope/vim-fugitive')
@@ -82,10 +100,8 @@ return require('packer').startup(function(use)
     end,
   })
 
-  -- CI
-  use('martinda/Jenkinsfile-vim-syntax')
-
   -- Programming
+  use('majutsushi/tagbar')
   use({
     'nvim-treesitter/nvim-treesitter',
     config = function()
@@ -106,8 +122,6 @@ return require('packer').startup(function(use)
       require('kommentary.config').configure_language('default', { prefer_single_line_comments = true })
     end,
   })
-  use('majutsushi/tagbar')
-  use('andymass/vim-matchup')
   use({
     'windwp/nvim-autopairs',
     requires = {
@@ -118,7 +132,10 @@ return require('packer').startup(function(use)
       require('configs.nvim-autopairs')
     end,
   })
-  use('Konfekt/FastFold')
+  use('andymass/vim-matchup')
+  use('RRethy/vim-illuminate')
+
+  -- LSP
   use({
     'jose-elias-alvarez/null-ls.nvim',
     requires = {
@@ -136,7 +153,6 @@ return require('packer').startup(function(use)
     },
     cmd = 'CodeActionMenu',
   })
-  use('RRethy/vim-illuminate')
   use({
     'folke/lua-dev.nvim',
     requires = 'neovim/nvim-lspconfig',
@@ -150,18 +166,8 @@ return require('packer').startup(function(use)
       require('configs.lsp').setup()
     end,
   })
+
   use('josa42/nvim-lightline-lsp')
-  use('nvim-lua/popup.nvim')
-  use({
-    'nvim-telescope/telescope.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'kyazdani42/nvim-web-devicons',
-    },
-    config = function()
-      require('configs.telescope')
-    end,
-  })
   use({
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
@@ -169,6 +175,10 @@ return require('packer').startup(function(use)
       require('trouble').setup()
     end,
   })
+
+  -- CSS / SASS
+  use('hail2u/vim-css3-syntax')
+  use('cakebaker/scss-syntax.vim')
 
   -- Go
   use({
@@ -190,9 +200,8 @@ return require('packer').startup(function(use)
   use('othree/html5.vim')
   use('alvan/vim-closetag')
 
-  -- CSS / SASS
-  use('hail2u/vim-css3-syntax')
-  use('cakebaker/scss-syntax.vim')
+  -- Jenkinsfile
+  use('martinda/Jenkinsfile-vim-syntax')
 
   -- GraphQL
   use('jparise/vim-graphql')
