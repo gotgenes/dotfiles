@@ -73,6 +73,16 @@ return require('packer').startup(function(use)
     end,
   })
   use({
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function()
+      require('configs.telescope')
+    end,
+  })
+  use({
     'kyazdani42/nvim-tree.lua',
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icon
@@ -93,16 +103,6 @@ return require('packer').startup(function(use)
     'folke/which-key.nvim',
     config = function()
       require('which-key').setup()
-    end,
-  })
-  use({
-    'nvim-telescope/telescope.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'kyazdani42/nvim-web-devicons',
-    },
-    config = function()
-      require('configs.telescope')
     end,
   })
   use('machakann/vim-sandwich')
