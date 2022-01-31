@@ -72,9 +72,19 @@ return require('packer').startup(function(use)
       })
     end,
   })
-  use('Shougo/defx.nvim')
-  use('kristijanhusak/defx-icons')
-  use('kristijanhusak/defx-git')
+  use({
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    },
+    config = function()
+      require('nvim-tree').setup({
+        view = {
+          width = 40,
+        },
+      })
+    end,
+  })
   use('simnalamburt/vim-mundo')
   use('nvim-lua/popup.nvim')
 
