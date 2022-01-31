@@ -130,7 +130,6 @@ return require('packer').startup(function(use)
   })
 
   -- Programming
-  use('majutsushi/tagbar')
   use({
     'nvim-treesitter/nvim-treesitter',
     config = function()
@@ -187,6 +186,17 @@ return require('packer').startup(function(use)
       'neovim/nvim-lspconfig',
     },
     cmd = 'CodeActionMenu',
+  })
+  use({
+    'simrat39/symbols-outline.nvim',
+    requires = {
+      'neovim/nvim-lspconfig',
+    },
+    cmd = {
+      'SymbolsOutline',
+      'SymbolsOutlineOpen',
+      'SymbolsOutlineClose',
+    },
   })
   use({
     'folke/lua-dev.nvim',
