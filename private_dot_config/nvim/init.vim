@@ -61,7 +61,7 @@ let &t_ut=''
 """"""""""""
 
 " Set the leader
-let mapleader = ','
+let mapleader = "\<Space>"
 
 " Get to command mode easier
 nnoremap ; :
@@ -94,8 +94,8 @@ inoremap <F5> <C-R>=strftime("%F")<CR>
 nnoremap <leader>spl :setlocal spell!<CR>
 
 " Make it easy to toggle folding
-nmap <space> za
-vnoremap <space> zf
+nmap <leader><space> za
+vnoremap <leader><space> zf
 
 " Close help window
 nnoremap <silent> <leader>hc :helpclose<CR>
