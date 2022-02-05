@@ -112,6 +112,12 @@ return require('packer').startup(function(use)
   use('embear/vim-localvimrc')
   use('schickling/vim-bufonly')
   use('AndrewRadev/inline_edit.vim')
+  use({
+    'ggandor/lightspeed.nvim',
+    requires = {
+      'tpope/vim-repeat',
+    },
+  })
   use('zhou13/vim-easyescape')
   use('AndrewRadev/splitjoin.vim')
 
