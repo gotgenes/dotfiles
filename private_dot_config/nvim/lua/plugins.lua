@@ -121,20 +121,6 @@ return require('packer').startup(function(use)
   use('zhou13/vim-easyescape')
   use('AndrewRadev/splitjoin.vim')
 
-  -- Git
-  use('tpope/vim-fugitive')
-  use('gregsexton/gitv')
-  use('knsh14/vim-github-link')
-  use({
-    'lewis6991/gitsigns.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-    },
-    config = function()
-      require('gitsigns').setup()
-    end,
-  })
-
   -- Programming
   use({
     'nvim-treesitter/nvim-treesitter',
@@ -223,6 +209,20 @@ return require('packer').startup(function(use)
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
       require('trouble').setup()
+    end,
+  })
+
+  -- Git
+  use('tpope/vim-fugitive')
+  use('gregsexton/gitv')
+  use('knsh14/vim-github-link')
+  use({
+    'lewis6991/gitsigns.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+    },
+    config = function()
+      require('gitsigns').setup()
     end,
   })
 
