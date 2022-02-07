@@ -45,6 +45,12 @@ return require('packer').startup(function(use)
 
   -- Statusline and Visual Components
   use({
+    'rcarriga/nvim-notify',
+    config = function()
+      vim.notify = require('notify')
+    end,
+  })
+  use({
     'nvim-lualine/lualine.nvim',
     requires = {
       'kyazdani42/nvim-web-devicons',
@@ -203,7 +209,6 @@ return require('packer').startup(function(use)
       require('fidget').setup()
     end,
   })
-
   use({
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
