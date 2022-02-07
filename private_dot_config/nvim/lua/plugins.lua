@@ -212,6 +212,33 @@ return require('packer').startup(function(use)
     end,
   })
 
+  -- DAP
+  use({
+    'rcarriga/nvim-dap-ui',
+    requires = 'mfussenegger/nvim-dap',
+    config = function()
+      require('configs.dapui')
+    end,
+  })
+  use({
+    'Pocco81/DAPInstall.nvim',
+    requires = 'mfussenegger/nvim-dap',
+    config = function()
+      require('dap-install').setup({})
+    end,
+  })
+  use({
+    'mfussenegger/nvim-dap-python',
+    requires = 'mfussenegger/nvim-dap',
+  })
+  use({
+    'leoluz/nvim-dap-go',
+    requires = 'mfussenegger/nvim-dap',
+    config = function()
+      require('dap-go').setup()
+    end,
+  })
+
   -- Git
   use('tpope/vim-fugitive')
   use('gregsexton/gitv')

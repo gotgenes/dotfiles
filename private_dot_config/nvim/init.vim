@@ -140,6 +140,10 @@ autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 " PLUGINS CONFIGURATIONS "
 """"""""""""""""""""""""""
 
+" DAP
+lua require('configs.dap')
+
+
 " easyescape configuration
 let g:easyescape_chars = { "j": 1, "k": 1 }
 let g:easyescape_timeout = 300
