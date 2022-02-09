@@ -63,10 +63,6 @@ let &t_ut=''
 " Set the leader
 let mapleader = "\<Space>"
 
-" Get to command mode easier
-nnoremap ; :
-vnoremap ; :
-
 " Easy access keystrokes for editing your Vim configuration
 nnoremap <leader>svrc :source $MYVIMRC<CR>
 nnoremap <leader>vrc :e $MYVIMRC<CR>
