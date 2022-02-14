@@ -64,8 +64,8 @@ let &t_ut=''
 let mapleader = "\<Space>"
 
 " Easy access keystrokes for editing your Vim configuration
-nnoremap <leader>svrc :source $MYVIMRC<CR>
-nnoremap <leader>vrc :e $MYVIMRC<CR>
+nnoremap <leader>vrcs :source $MYVIMRC<CR>
+nnoremap <leader>vrce :e $MYVIMRC<CR>
 
 " Quickly switch buffers
 nnoremap <silent> <leader>nn :bn<CR>
@@ -208,8 +208,8 @@ let g:sandwich#recipes += [
 
 
 " vim-better-whitespace configuration
-nnoremap <silent> <leader>rws :ToggleStripWhitespaceOnSave<CR>
-nnoremap <silent> <leader>hws :ToggleWhitespace<CR>
+nnoremap <silent> <leader>wss :ToggleStripWhitespaceOnSave<CR>
+nnoremap <silent> <leader>wsh :ToggleWhitespace<CR>
 
 if has("autocmd")
   autocmd BufEnter * EnableStripWhitespaceOnSave
