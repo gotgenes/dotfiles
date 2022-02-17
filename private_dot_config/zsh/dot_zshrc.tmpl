@@ -79,6 +79,7 @@ zinit snippet OMZP::fzf
 
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
 {{- if eq .chezmoi.arch "arm64" }}
+eval $(/opt/homebrew/bin/brew shellenv)
 [[ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]] && source "/opt/homebrew/opt/asdf/libexec/asdf.sh"
 {{- else }}
 eval $(/usr/local/bin/brew shellenv)
