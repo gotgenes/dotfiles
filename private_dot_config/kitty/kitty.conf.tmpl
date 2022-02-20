@@ -27,7 +27,6 @@ tab_bar_style fade
 enabled_layouts tall:mirrored=true, tall:mirrored=false
 
 {{ if eq .chezmoi.os "darwin" -}}
-macos_titlebar_color system
 macos_show_window_title_in window
 macos_option_as_alt right
 
@@ -40,14 +39,12 @@ shell /usr/local/bin/zsh
 
 allow_remote_control yes
 
-include base16-eighties-256.conf
-
 map kitty_mod+t new_tab_with_cwd !neighbor
 map kitty_mod+enter launch --cwd=current
 map super+t new_tab_with_cwd !neighbor
 
 
 # BEGIN_KITTY_THEME
-# Base-16 Eighties 256-color
+# Catppuccin
 include current-theme.conf
 # END_KITTY_THEME
