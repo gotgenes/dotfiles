@@ -45,6 +45,7 @@ zinit light zsh-users/zsh-history-substring-search
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 
+export ZVM_VI_SURROUND_BINDKEY="s-prefix"
 zinit light jeffreytse/zsh-vi-mode
 function zvm_after_init() {
     zvm_bindkey vicmd "j" history-substring-search-down
