@@ -46,7 +46,6 @@ bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 
 export ZVM_VI_SURROUND_BINDKEY="s-prefix"
-zinit light jeffreytse/zsh-vi-mode
 function zvm_after_init() {
     zvm_bindkey vicmd "j" history-substring-search-down
     zvm_bindkey vicmd "k" history-substring-search-up
@@ -57,6 +56,8 @@ function zvm_after_init() {
     zvm_bindkey vicmd "^[[H" beginning-of-line
     zvm_bindkey vicmd "^[[F" end-of-line
 }
+zinit ice lucid wait
+zinit load jeffreytse/zsh-vi-mode
 
 zinit ice as"completion"
 zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
@@ -64,6 +65,7 @@ zinit ice as"completion"
 zinit snippet "https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose"
 zinit snippet OMZP::kubectl
 
+zinit ice lucid wait
 zinit snippet OMZP::autojump
 
 zinit ice lucid wait
