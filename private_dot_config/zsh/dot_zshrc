@@ -76,7 +76,7 @@ zinit snippet OMZP::fzf
 
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
 
-zinit ice id-as"brew-shellenv" if"[[ -v HOMEBREW_PREFIX ]]" atpull \
+zinit ice id-as"brew-shellenv" if"[[ -v HOMEBREW_PREFIX ]]" run-atpull atpull \
     eval"$HOMEBREW_PREFIX/bin/brew shellenv"
 zinit light zdharma-continuum/null
 
@@ -86,9 +86,14 @@ else
     [[ -f "$HOME/.asdf/asdf.sh" ]] && source "$HOME/.asdf/asdf.sh"
 fi
 
-zinit ice id-as"direnv-hook" has"direnv" atpull \
+zinit ice id-as"direnv-hook" has"direnv" run-atpull atpull \
     eval"direnv hook zsh"
 zinit light zdharma-continuum/null
+
+zinit ice as"completion" id-as"poetry-completion" has"poetry" run-atpull \
+    atclone"poetry completions zsh > _poetry" atpull"%atclone"
+zinit light zdharma-continuum/null
+
 
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 
