@@ -58,8 +58,7 @@ function zvm_after_init() {
     zvm_bindkey vicmd "^[[H" beginning-of-line
     zvm_bindkey vicmd "^[[F" end-of-line
 }
-zinit ice lucid wait
-zinit load jeffreytse/zsh-vi-mode
+zinit light jeffreytse/zsh-vi-mode
 
 zinit ice as"completion"
 zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
