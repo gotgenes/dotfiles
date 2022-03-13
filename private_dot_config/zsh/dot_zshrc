@@ -105,14 +105,13 @@ if [[ -d "$XDG_CONFIG_HOME/zsh/include/" ]]; then
     done
 fi
 
-autoload -Uz compinit
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
-zinit cdreplay -q
-
-
 # ensure ~/.local/bin is earliest in PATH
 export path=("$HOME/.local/bin" $path)
 
 typeset -U path
+
+
+# Load autocompletions
+source "$XDG_CONFIG_HOME/zsh/completion.zsh"
 
 # vi: filetype=zsh
