@@ -57,6 +57,7 @@ function zvm_after_init() {
     zvm_bindkey viins "^[[F" end-of-line
     zvm_bindkey vicmd "^[[H" beginning-of-line
     zvm_bindkey vicmd "^[[F" end-of-line
+    zvm_bindkey viins "^[[Z" reverse-menu-complete
 }
 zinit light jeffreytse/zsh-vi-mode
 
