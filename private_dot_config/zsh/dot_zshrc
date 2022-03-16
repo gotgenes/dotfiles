@@ -44,21 +44,33 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 
 zinit light zsh-users/zsh-history-substring-search
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
 
-export ZVM_VI_SURROUND_BINDKEY="s-prefix"
-function zvm_after_init() {
+function zvm_config() {
+    ZVM_VI_SURROUND_BINDKEY="s-prefix"
+}
+
+function set_insert_keybindings() {
+    zvm_bindkey viins "^[[H" beginning-of-line
+    zvm_bindkey viins "^[[F" end-of-line
+    zvm_bindkey viins "^[[Z" reverse-menu-complete
+    zvm_bindkey viins "^[[A" history-substring-search-up
+    zvm_bindkey viins "^[[B" history-substring-search-down
+}
+
+function set_normal_mode_keybindings() {
     zvm_bindkey vicmd "j" history-substring-search-down
     zvm_bindkey vicmd "k" history-substring-search-up
     zvm_bindkey vicmd "^[[A" history-substring-search-up
     zvm_bindkey vicmd "^[[B" history-substring-search-down
-    zvm_bindkey viins "^[[H" beginning-of-line
-    zvm_bindkey viins "^[[F" end-of-line
     zvm_bindkey vicmd "^[[H" beginning-of-line
     zvm_bindkey vicmd "^[[F" end-of-line
-    zvm_bindkey viins "^[[Z" reverse-menu-complete
 }
+
+function zvm_before_init() {
+    zvm_after_init_commands+=(set_insert_keybindings)
+    zvm_before_lazy_keybindings_commands+=(set_normal_mode_keybindings)
+}
+
 zinit light jeffreytse/zsh-vi-mode
 
 zinit ice as"completion"
