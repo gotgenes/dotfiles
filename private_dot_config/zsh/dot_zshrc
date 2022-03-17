@@ -102,8 +102,14 @@ zinit ice id-as"direnv-hook" has"direnv" run-atpull atpull \
     eval"direnv hook zsh"
 zinit light zdharma-continuum/null
 
-zinit ice id-as"poetry-completion" has"poetry" run-atpull \
-    atclone"poetry completions zsh > _poetry" atpull"%atclone"
+zinit ice \
+    as"completion" \
+    id-as"poetry-completion" \
+    has"poetry" \
+    atclone"poetry completions zsh > _poetry" \
+    atpull"%atclone" \
+    run-atpull \
+    nocompile
 zinit light zdharma-continuum/null
 
 
