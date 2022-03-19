@@ -88,8 +88,13 @@ zinit snippet OMZP::fzf
 
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
 
-zinit ice id-as"brew-shellenv" if"[[ -v HOMEBREW_PREFIX ]]" run-atpull atpull \
-    eval"$HOMEBREW_PREFIX/bin/brew shellenv"
+zinit ice \
+    id-as"brew-shellenv" \
+    if"[[ -v HOMEBREW_PREFIX ]]" \
+    run-atpull \
+    atpull \
+    eval"$HOMEBREW_PREFIX/bin/brew shellenv" \
+    nocompile
 zinit light zdharma-continuum/null
 
 if [[ -v HOMEBREW_PREFIX ]]; then
@@ -98,8 +103,13 @@ else
     [[ -f "$HOME/.asdf/asdf.sh" ]] && source "$HOME/.asdf/asdf.sh"
 fi
 
-zinit ice id-as"direnv-hook" has"direnv" run-atpull atpull \
-    eval"direnv hook zsh"
+zinit ice \
+    id-as"direnv-hook" \
+    has"direnv" \
+    run-atpull \
+    atpull \
+    eval"direnv hook zsh" \
+    nocompile
 zinit light zdharma-continuum/null
 
 zinit ice \
