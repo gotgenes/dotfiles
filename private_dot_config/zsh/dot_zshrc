@@ -123,6 +123,17 @@ zinit ice \
 zinit light zdharma-continuum/null
 
 
+zinit ice \
+    as"completion" \
+    id-as"gh-completion" \
+    has"gh" \
+    atclone"gh -s zsh completion > _gh" \
+    atpull"%atclone" \
+    run-atpull \
+    nocompile
+zinit light zdharma-continuum/null
+
+
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 
 # Files in $XDG_CONFIG_HOME/zsh/include allows host-specific configurations.
