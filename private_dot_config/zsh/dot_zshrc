@@ -80,7 +80,7 @@ zinit snippet "https://github.com/docker/compose/blob/master/contrib/completion/
 zinit snippet OMZP::kubectl
 
 zinit ice lucid wait
-zinit snippet OMZP::autojump
+zinit load agkozak/zsh-z
 
 zinit ice lucid wait
 zinit snippet OMZP::fzf
@@ -147,7 +147,7 @@ fi
 # ensure ~/.local/bin is earliest in PATH
 export path=("$HOME/.local/bin" $path)
 
-typeset -U path
+typeset -aU path
 
 
 # Load autocompletions
