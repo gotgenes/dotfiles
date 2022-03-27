@@ -9,6 +9,9 @@ export EDITOR="nvim"
 
 export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 
+export ZSHZ_DATA="$XDG_DATA_HOME/z"
+export ZSHZ_CASE="smart"
+
 {{ if eq .chezmoi.os "darwin" -}}
 if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
