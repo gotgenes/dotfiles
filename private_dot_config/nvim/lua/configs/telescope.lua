@@ -3,6 +3,7 @@ local trouble = require('trouble.providers.telescope')
 
 require('telescope').setup({
   defaults = {
+    path_display = { 'smart' },
     mappings = {
       i = {
         ['<c-t>'] = trouble.open_with_trouble,
