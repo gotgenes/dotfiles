@@ -1,5 +1,6 @@
 local actions = require('telescope.actions')
 local trouble = require('trouble.providers.telescope')
+local wk = require('which-key')
 
 require('telescope').setup({
   defaults = {
@@ -35,14 +36,16 @@ require('telescope').setup({
   },
 })
 
-local function set_keymap(...)
-  vim.api.nvim_set_keymap(...)
-end
-local opts = { noremap = true, silent = true }
-
 -- General keymaps
-set_keymap('n', '<leader>tb', '<cmd>Telescope buffers<CR>', opts)
-set_keymap('n', '<leader>tf', '<cmd>Telescope find_files<CR>', opts)
-set_keymap('n', '<leader>tg', '<cmd>Telescope live_grep<CR>', opts)
-set_keymap('n', '<leader>th', '<cmd>Telescope help_tags<CR>', opts)
-set_keymap('n', '<leader>tr', '<cmd>Telescope resume<CR>', opts)
+wk.register({
+  t = {
+    name = 'Telescope',
+    b = { '<cmd>Telescope buffers<CR>', 'search buffers' },
+    f = { '<cmd>Telescope find_files<CR>', 'search files' },
+    g = { '<cmd>Telescope live_grep<CR>', 'grep' },
+    h = { '<cmd>Telescope help_tags<CR>', 'search help' },
+    r = { '<cmd>Telescope resume<CR>', 'resume last search' },
+  },
+}, {
+  prefix = '<leader>',
+})
