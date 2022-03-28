@@ -103,12 +103,17 @@ else
     [[ -f "$HOME/.asdf/asdf.sh" ]] && source "$HOME/.asdf/asdf.sh"
 fi
 
+# Remove shims and let asdf-direnv set the paths. See
+# https://github.com/asdf-community/asdf-direnv
+export path=( ${path[@]:#*asdf/shims*} )
+direnv() { asdf exec direnv "$@"; }
+
 zinit ice \
     id-as"direnv-hook" \
-    has"direnv" \
+    if"asdf which direnv >& /dev/null" \
     run-atpull \
     atpull \
-    eval"direnv hook zsh" \
+    eval"asdf exec direnv hook zsh" \
     nocompile
 zinit light zdharma-continuum/null
 
