@@ -8,10 +8,16 @@ require('telescope').setup({
     mappings = {
       i = {
         ['<c-t>'] = trouble.open_with_trouble,
+        ['<c-f>'] = actions.preview_scrolling_down,
+        ['<c-b>'] = actions.preview_scrolling_up,
+        ['<c-u>'] = false,
+        ['<c-d>'] = false,
       },
       n = {
         ['q'] = actions.close,
         ['<c-t>'] = trouble.open_with_trouble,
+        ['<c-f>'] = actions.preview_scrolling_down,
+        ['<c-b>'] = actions.preview_scrolling_up,
       },
     },
   },
