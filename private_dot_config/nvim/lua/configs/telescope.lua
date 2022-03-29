@@ -4,7 +4,7 @@ local wk = require('which-key')
 
 require('telescope').setup({
   defaults = {
-    path_display = { 'smart' },
+    path_display = { 'truncate' },
     mappings = {
       i = {
         ['<c-t>'] = trouble.open_with_trouble,
