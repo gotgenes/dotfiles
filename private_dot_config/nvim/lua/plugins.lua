@@ -313,6 +313,9 @@ return require('packer').startup(function(use)
   -- Terraform
   use('hashivim/vim-terraform')
 
+  -- Thrift
+  use('solarnz/thrift.vim')
+
   -- TOML
   use('cespare/vim-toml')
 
