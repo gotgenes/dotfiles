@@ -1,4 +1,5 @@
 local nvim_lsp = require('lspconfig')
+local wk = require('which-key')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -23,23 +24,37 @@ local function set_commands()
 end
 
 local function set_keymaps(bufnr)
-  local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
-  -- Mappings.
-  local opts = { noremap = true, silent = true }
-  buf_set_keymap('n', 'gD', '<Cmd>LspDeclaration<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>LspHover<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>LspSignatureHelp<CR>', opts)
-  buf_set_keymap('n', '<leader>D', '<cmd>LspTypeDef<CR>', opts)
-  buf_set_keymap('n', '<leader>cr', '<cmd>LspRename<CR>', opts)
-  buf_set_keymap('n', '<leader>f', '<cmd>LspFormatting<CR>', opts)
-  -- Provided by Telescope
-  buf_set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-  -- Provided by nvim-code-action-menu
-  buf_set_keymap('n', '<leader>ca', '<cmd>CodeActionMenu<CR>', opts)
+  wk.register({
+    g = {
+      name = 'LSP goto',
+      d = { '<cmd>Telescope lsp_definitions<CR>', 'definitions' },
+      D = { '<cmd>LspTypeDef<CR>', 'type definition' },
+      L = { '<cmd>LspDeclaration<CR>', 'declaration' },
+      i = { '<cmd>Telescope lsp_implementations<CR>', 'implementations' },
+      r = { '<cmd>Telescope lsp_references<CR>', 'references' },
+    },
+    c = {
+      name = 'LSP code changes',
+      f = { '<cmd>LspFormatting<CR>', 'format' },
+      a = { '<cmd>CodeActionMenu<CR>', 'code actions' },
+      r = { '<cmd>LspRename<CR>', 'rename variable' },
+    },
+  }, {
+    prefix = '<leader>',
+    buffer = bufnr,
+  })
+  wk.register({
+    K = { '<cmd>LspHover<CR>', 'LSP hover' },
+    ['<C-S>'] = { '<cmd>LspSignatureHelp<CR>', 'LSP signature help' },
+  }, {
+    buffer = bufnr,
+  })
+  wk.register({
+    ['<C-S>'] = { '<cmd>LspSignatureHelp<CR>', 'LSP signature help' },
+  }, {
+    mode = 'i',
+    buffer = bufnr,
+  })
 end
 
 -- Use an on_attach function to only map the following keys
