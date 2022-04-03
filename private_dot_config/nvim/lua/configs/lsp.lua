@@ -16,10 +16,6 @@ local function set_commands()
   vim.cmd('command! LspRefs lua vim.lsp.buf.references()')
   vim.cmd('command! LspTypeDef lua vim.lsp.buf.type_definition()')
   vim.cmd('command! LspImplementation lua vim.lsp.buf.implementation()')
-  vim.cmd('command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()')
-  vim.cmd('command! LspDiagShow lua vim.lsp.diagnostic.show_line_diagnostics()')
-  vim.cmd('command! LspDiagNext lua vim.lsp.diagnostic.goto_next()')
-  vim.cmd('command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()')
   vim.cmd('command! LspSignatureHelp lua vim.lsp.buf.signature_help()')
   vim.cmd('command! LspWorkspaceList lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))')
   vim.cmd('command! LspWorkspaceAdd lua vim.lsp.buf.add_workspace_folder()')
@@ -37,8 +33,6 @@ local function set_keymaps(bufnr)
   buf_set_keymap('n', '<C-k>', '<cmd>LspSignatureHelp<CR>', opts)
   buf_set_keymap('n', '<leader>D', '<cmd>LspTypeDef<CR>', opts)
   buf_set_keymap('n', '<leader>cr', '<cmd>LspRename<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>LspDiagPrev<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>LspDiagNext<CR>', opts)
   buf_set_keymap('n', '<leader>f', '<cmd>LspFormatting<CR>', opts)
   -- Provided by Telescope
   buf_set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
@@ -77,14 +71,6 @@ local function on_attach_no_format(client, bufnr)
   on_attach(client, bufnr)
 end
 
-local function set_signs()
-  local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
-  for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-  end
-end
-
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
@@ -106,8 +92,6 @@ local function setup()
     on_attach = on_attach,
     cmd = { omnisharp_path, '--languageserver' },
   })
-
-  set_signs()
 end
 
 return {
