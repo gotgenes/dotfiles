@@ -136,6 +136,9 @@ autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 " PLUGINS CONFIGURATIONS "
 """"""""""""""""""""""""""
 
+" Diagnostic
+lua require('configs.diagnostic').setup()
+
 " DAP
 lua require('configs.dap')
 
