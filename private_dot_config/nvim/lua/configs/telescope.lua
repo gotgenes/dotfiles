@@ -49,6 +49,7 @@ wk.register({
     b = { '<cmd>Telescope buffers<CR>', 'search buffers' },
     f = { '<cmd>Telescope find_files<CR>', 'search files' },
     g = { '<cmd>Telescope live_grep<CR>', 'grep' },
+    G = { '<cmd>Telescope grep_string<CR>', 'grep word under cursor' },
     h = { '<cmd>Telescope help_tags<CR>', 'search help' },
     r = { '<cmd>Telescope resume<CR>', 'resume last search' },
   },
