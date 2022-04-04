@@ -275,7 +275,7 @@ return require('packer').startup(function(use)
         lsp_on_attach = lsp_config.on_attach,
       })
     end,
-    ft = { 'go', 'godoc', 'gotmpl', 'gotmplhtml' },
+    ft = { 'go', 'godoc', 'gomod', 'gotmplhtml', 'gotexttmpl' },
   })
   use('gotgenes/golang-template.vim')
 
