@@ -106,7 +106,7 @@ fi
 # Remove shims and let asdf-direnv set the paths. See
 # https://github.com/asdf-community/asdf-direnv
 export path=( ${path[@]:#*asdf/shims*} )
-direnv() { asdf exec direnv "$@"; }
+[[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
 zinit ice \
     id-as"direnv-hook" \
