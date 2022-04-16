@@ -107,6 +107,7 @@ fi
 # https://github.com/asdf-community/asdf-direnv
 export path=( ${path[@]:#*asdf/shims*} )
 [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+direnv() { asdf exec direnv "$@"; }
 
 zinit ice \
     id-as"direnv-hook" \
