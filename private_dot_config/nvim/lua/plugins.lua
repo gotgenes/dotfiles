@@ -131,7 +131,7 @@ return require('packer').startup(function(use)
   use({
     'nvim-treesitter/nvim-treesitter',
     config = function()
-      require('configs.nvim-treesitter')
+      require('configs.nvim-treesitter').setup()
     end,
     run = ':TSUpdate',
   })
