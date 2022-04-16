@@ -155,7 +155,7 @@ return require('packer').startup(function(use)
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('configs.nvim-autopairs')
+      require('configs.nvim-autopairs').setup()
     end,
   })
   use('andymass/vim-matchup')
