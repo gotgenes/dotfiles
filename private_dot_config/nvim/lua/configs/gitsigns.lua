@@ -1,7 +1,7 @@
+local M = {}
+
 local gs = require('gitsigns')
 local wk = require('which-key')
-
-local M = {}
 
 local function set_keymaps(bufnr)
   wk.register({

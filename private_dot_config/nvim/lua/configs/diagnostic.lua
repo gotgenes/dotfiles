@@ -1,6 +1,6 @@
-local wk = require('which-key')
-
 local M = {}
+
+local wk = require('which-key')
 
 local function set_commands()
   vim.cmd('command! DiagnosticPrev lua vim.diagnostic.goto_prev()')
