@@ -139,9 +139,6 @@ autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 " Diagnostic
 lua require('configs.diagnostic').setup()
 
-" DAP
-lua require('configs.dap').setup()
-
 
 " easyescape configuration
 let g:easyescape_chars = { "j": 1, "k": 1 }
