@@ -1,13 +1,26 @@
+local M = {}
+
 local luasnip = require('luasnip')
-luasnip.config.setup({
-  history = true,
-})
+local wk = require('which-key')
 
-local opts = {}
-vim.api.nvim_set_keymap('i', '<C-s>', '<Plug>luasnip-expand-snippet', opts)
-vim.api.nvim_set_keymap('i', '<C-j>', '<Plug>luasnip-jump-next', opts)
-vim.api.nvim_set_keymap('i', '<C-l>', '<Plug>luasnip-jump-prev', opts)
+local function set_keymaps()
+  wk.register({
+    ['<C-s>'] = { '<Plug>luasnip-expand-snippet', 'expand snippet (luasnip)' },
+    ['<C-j>'] = { '<Plug>luasnip-jump-next', 'jump next position (luasnip)' },
+    ['<C-l>'] = { '<Plug>luasnip-jump-prev', 'jump previous position (luasnip)' },
+  }, { mode = 'i' })
+  wk.register({
+    ['<C-s>'] = { '<Plug>luasnip-expand-snippet', 'expand snippet (luasnip)' },
+    ['<C-j>'] = { '<Plug>luasnip-jump-next', 'jump next position (luasnip)' },
+    ['<C-l>'] = { '<Plug>luasnip-jump-prev', 'jump previous position (luasnip)' },
+  }, { mode = 's' })
+end
 
-vim.api.nvim_set_keymap('s', '<C-s>', '<Plug>luasnip-expand-snippet', opts)
-vim.api.nvim_set_keymap('s', '<C-j>', '<Plug>luasnip-jump-next', opts)
-vim.api.nvim_set_keymap('s', '<C-l>', '<Plug>luasnip-jump-prev', opts)
+function M.setup()
+  luasnip.config.setup({
+    history = true,
+  })
+  set_keymaps()
+end
+
+return M

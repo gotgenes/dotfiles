@@ -1,8 +1,10 @@
+local M = {}
+
 local nvim_lsp = require('lspconfig')
 local wk = require('which-key')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+M.capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local function set_commands()
   -- Commands.
@@ -59,7 +61,7 @@ end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local function on_attach(client, bufnr)
+function M.on_attach(client, bufnr)
   if client.resolved_capabilities.document_formatting then
     vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
   end
@@ -80,38 +82,29 @@ local function on_attach(client, bufnr)
   require('illuminate').on_attach(client)
 end
 
-local function on_attach_no_format(client, bufnr)
+function M.on_attach_no_format(client, bufnr)
   client.resolved_capabilities.document_formatting = false
   client.resolved_capabilities.document_range_formatting = false
-  on_attach(client, bufnr)
+  M.on_attach(client, bufnr)
 end
 
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
-
-local function setup()
+function M.setup()
   nvim_lsp.pyright.setup({
-    capabilities = capabilities,
-    on_attach = on_attach_no_format,
+    capabilities = M.capabilities,
+    on_attach = M.on_attach_no_format,
   })
 
   nvim_lsp.vimls.setup({
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = M.on_attach,
   })
 
   local omnisharp_path = vim.fn.stdpath('data') .. '/omnisharp/OmniSharp'
   nvim_lsp.omnisharp.setup({
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = M.on_attach,
     cmd = { omnisharp_path, '--languageserver' },
   })
 end
 
-return {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  on_attach_no_format = on_attach_no_format,
-  setup = setup,
-}
+return M

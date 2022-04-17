@@ -140,7 +140,7 @@ autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 lua require('configs.diagnostic').setup()
 
 " DAP
-lua require('configs.dap')
+lua require('configs.dap').setup()
 
 
 " easyescape configuration

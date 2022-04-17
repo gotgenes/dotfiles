@@ -1,8 +1,8 @@
+local M = {}
+
 local npairs = require('nvim-autopairs')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local cmp = require('cmp')
-
-local M = {}
 
 function M.setup()
   npairs.setup({

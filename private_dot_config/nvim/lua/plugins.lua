@@ -16,13 +16,13 @@ return require('packer').startup(function(use)
       'saadparwaiz1/cmp_luasnip',
     },
     config = function()
-      require('configs.nvim-cmp')
+      require('configs.nvim-cmp').setup()
     end,
   })
   use({
     'L3MON4D3/LuaSnip',
     config = function()
-      require('configs.luasnip')
+      require('configs.luasnip').setup()
     end,
   })
 
@@ -58,7 +58,7 @@ return require('packer').startup(function(use)
       'SmiteshP/nvim-gps',
     },
     config = function()
-      require('configs.lualine')
+      require('configs.lualine').setup()
     end,
   })
   use({
@@ -85,7 +85,7 @@ return require('packer').startup(function(use)
       'kyazdani42/nvim-web-devicons',
     },
     config = function()
-      require('configs.telescope')
+      require('configs.telescope').setup()
     end,
   })
   use({
@@ -175,7 +175,7 @@ return require('packer').startup(function(use)
       'neovim/nvim-lspconfig',
     },
     config = function()
-      require('configs.null-ls')
+      require('configs.null-ls').setup()
     end,
   })
   use({
@@ -200,7 +200,7 @@ return require('packer').startup(function(use)
     'folke/lua-dev.nvim',
     requires = 'neovim/nvim-lspconfig',
     config = function()
-      require('configs.lua-dev')
+      require('configs.lua-dev').setup()
     end,
   })
   use({
@@ -213,7 +213,6 @@ return require('packer').startup(function(use)
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-      require('trouble').setup()
       require('configs.trouble').setup()
     end,
   })
@@ -223,7 +222,7 @@ return require('packer').startup(function(use)
     'rcarriga/nvim-dap-ui',
     requires = 'mfussenegger/nvim-dap',
     config = function()
-      require('configs.dapui')
+      require('configs.dapui').setup()
     end,
   })
   use({
@@ -331,7 +330,7 @@ return require('packer').startup(function(use)
       'nvim-lua/plenary.nvim',
     },
     config = function()
-      require('configs/nvim-lsp-ts-utils')
+      require('configs/nvim-lsp-ts-utils').setup()
     end,
   })
 

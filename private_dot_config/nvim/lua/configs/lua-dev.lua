@@ -1,12 +1,24 @@
-local sumneko_lua_root = vim.fn.stdpath('data') .. '/lua-language-server/'
-local luadev = require('lua-dev').setup({
-  lspconfig = {
-    cmd = {
-      sumneko_lua_root .. 'bin/lua-language-server',
-      '-E',
-      sumneko_lua_root .. 'main.lua',
+local M = {}
+
+local lua_dev = require('lua-dev')
+
+function M.setup()
+  local runtime_path = vim.split(package.path, ';')
+  table.insert(runtime_path, 'lua/?.lua')
+  table.insert(runtime_path, 'lua/?/init.lua')
+
+  local sumneko_lua_root = vim.fn.stdpath('data') .. '/lua-language-server/'
+  local luadev = lua_dev.setup({
+    lspconfig = {
+      cmd = {
+        sumneko_lua_root .. 'bin/lua-language-server',
+        '-E',
+        sumneko_lua_root .. 'main.lua',
+      },
+      on_attach = require('configs.lsp').on_attach_no_format,
     },
-    on_attach = require('configs.lsp').on_attach_no_format,
-  },
-})
-require('lspconfig')['sumneko_lua'].setup(luadev)
+  })
+  require('lspconfig')['sumneko_lua'].setup(luadev)
+end
+
+return M
