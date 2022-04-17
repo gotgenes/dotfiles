@@ -219,6 +219,12 @@ return require('packer').startup(function(use)
 
   -- DAP
   use({
+    'mfussenegger/nvim-dap',
+    config = function()
+      require('configs.dap').setup()
+    end,
+  })
+  use({
     'rcarriga/nvim-dap-ui',
     requires = 'mfussenegger/nvim-dap',
     config = function()
@@ -229,19 +235,29 @@ return require('packer').startup(function(use)
     'Pocco81/DAPInstall.nvim',
     requires = 'mfussenegger/nvim-dap',
     config = function()
-      require('dap-install').setup({})
+      require('dap-install').setup()
     end,
+    cmd = {
+      'DIInstall',
+      'DIUninstall',
+      'DIList',
+    },
   })
   use({
     'mfussenegger/nvim-dap-python',
     requires = 'mfussenegger/nvim-dap',
+    config = function()
+      require('configs.dap-python').setup()
+    end,
+    ft = { 'python' },
   })
   use({
     'leoluz/nvim-dap-go',
     requires = 'mfussenegger/nvim-dap',
     config = function()
-      require('dap-go').setup()
+      require('configs.dap-go').setup()
     end,
+    ft = { 'go' },
   })
 
   -- Git
