@@ -126,6 +126,7 @@ return require('packer').startup(function(use)
   })
   use('zhou13/vim-easyescape')
   use('AndrewRadev/splitjoin.vim')
+  use('wsdjeg/vim-fetch')
 
   -- Programming
   use({
