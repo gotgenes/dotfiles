@@ -1,5 +1,6 @@
 local M = {}
 
+local lsp_util = require('vim.lsp.util')
 local nvim_lsp = require('lspconfig')
 local wk = require('which-key')
 
@@ -37,7 +38,6 @@ local function set_keymaps(bufnr)
     },
     c = {
       name = 'LSP code changes',
-      f = { '<cmd>LspFormatting<CR>', 'format' },
       a = { '<cmd>CodeActionMenu<CR>', 'code actions' },
       r = { '<cmd>LspRename<CR>', 'rename variable' },
     },
@@ -59,12 +59,32 @@ local function set_keymaps(bufnr)
   })
 end
 
+local function make_formatting_request(client, bufnr)
+  local params = lsp_util.make_formatting_params({})
+  client.request('textDocument/formatting', params, nil, bufnr)
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 function M.on_attach(client, bufnr)
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
-  end
+  wk.register({
+    c = {
+      f = { '<cmd>LspFormatting<CR>', 'format' },
+    },
+  }, {
+    prefix = '<leader>',
+    buffer = bufnr,
+  })
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    buffer = bufnr,
+    callback = function()
+      make_formatting_request(client, bufnr)
+    end,
+  })
+  M.on_attach_no_format(client, bufnr)
+end
+
+function M.on_attach_no_format(client, bufnr)
   if vim.b.lsp_buffer_set_up then
     return
   end
@@ -80,12 +100,6 @@ function M.on_attach(client, bufnr)
   set_commands()
   set_keymaps(bufnr)
   require('illuminate').on_attach(client)
-end
-
-function M.on_attach_no_format(client, bufnr)
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
-  M.on_attach(client, bufnr)
 end
 
 function M.setup()
