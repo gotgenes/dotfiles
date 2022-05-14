@@ -19,6 +19,10 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias ssh='repassh'
-alias scp='BINARY_SSH=scp repassh'
-alias rsync='BINARY_SSH=rsync repassh'
+if (( $+commands[repassh] )); then
+    alias ssh='repassh'
+    alias scp='BINARY_SSH=scp repassh'
+    alias rsync='BINARY_SSH=rsync repassh'
+fi
+
+# vi: filetype=zsh
