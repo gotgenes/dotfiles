@@ -145,12 +145,6 @@ let g:easyescape_chars = { "j": 1, "k": 1 }
 let g:easyescape_timeout = 300
 
 
-" utl configuration
-let g:utl_cfg_hdl_scm_http_system = "silent !open %u"
-nnoremap <leader>gu :Utl openLink underCursor edit<CR>
-nnoremap <leader>cl :Utl copyLink underCursor<CR>
-
-
 " nvim-tree configuration
 nnoremap <silent> <leader>ntt :NvimTreeToggle<CR>
 nnoremap <silent> <leader>ntc :NvimTreeFindFile<CR>
@@ -224,16 +218,6 @@ let g:matchup_matchparen_offscreen = {'method': 'popup'}
 
 " SimpylFold configuration
 let g:SimpylFold_fold_docstring = 0
-
-
-" projectroot settings
-nnoremap <silent> <leader>cdp :ProjectRootCD<CR>
-nnoremap <silent> <leader>ntp :ProjectRootExe NERDTreeFind<CR>
-
-
-" fruzzy settings
-let g:fruzzy#usenative = 0
-let g:fruzzy#sortonempty = 0
 
 
 " vim-illuminate configuration
