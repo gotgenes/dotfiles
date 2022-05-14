@@ -25,11 +25,17 @@ function M.setup()
       }),
     }),
     sources = {
-      { name = 'buffer' },
-      { name = 'nvim_lsp' },
+      {
+        name = 'nvim_lsp',
+        max_item_count = 8,
+      },
       { name = 'nvim_lua' },
-      { name = 'path' },
       { name = 'luasnip' },
+      {
+        name = 'buffer',
+        max_item_count = 5,
+      },
+      { name = 'path' },
     },
   })
   cmp.setup.cmdline('/', {
