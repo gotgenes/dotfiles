@@ -122,10 +122,10 @@ return require('packer').startup(function(use)
   use('schickling/vim-bufonly')
   use('AndrewRadev/inline_edit.vim')
   use({
-    'ggandor/lightspeed.nvim',
-    requires = {
-      'tpope/vim-repeat',
-    },
+    'ggandor/leap.nvim',
+    config = function()
+      require('leap').set_default_keymaps()
+    end,
   })
   use('zhou13/vim-easyescape')
   use('AndrewRadev/splitjoin.vim')
