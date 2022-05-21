@@ -101,9 +101,6 @@ nnoremap <silent> <leader>hc :helpclose<CR>
 " autocmd settings "
 """"""""""""""""""""
 
-" Start editing a previously opened file from the position of the most
-" recent edit.
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 " Recognize VTL
 autocmd BufNewFile,BufRead *.vtl set ft=velocity
 
