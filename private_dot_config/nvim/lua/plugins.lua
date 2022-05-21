@@ -110,7 +110,7 @@ return require('packer').startup(function(use)
   use('simnalamburt/vim-mundo')
   use('nvim-lua/popup.nvim')
 
-  -- Productivity
+  -- Productivity and Quality of Life
   use({
     'folke/which-key.nvim',
     config = function()
@@ -130,6 +130,12 @@ return require('packer').startup(function(use)
   use('zhou13/vim-easyescape')
   use('AndrewRadev/splitjoin.vim')
   use('wsdjeg/vim-fetch')
+  use({
+    'vladdoster/remember.nvim',
+    config = function()
+      require('remember').setup({})
+    end,
+  })
 
   -- Programming
   use({
