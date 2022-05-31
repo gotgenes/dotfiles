@@ -39,9 +39,9 @@ shell /usr/local/bin/zsh
 
 allow_remote_control yes
 
-map kitty_mod+t new_tab_with_cwd !neighbor
-map kitty_mod+enter launch --cwd=current
-map super+t new_tab_with_cwd !neighbor
+map kitty_mod+t launch --type=tab --cwd=oldest
+map kitty_mod+enter launch --cwd=oldest
+map super+t launch --type=tab --cwd=oldest
 
 
 # BEGIN_KITTY_THEME
