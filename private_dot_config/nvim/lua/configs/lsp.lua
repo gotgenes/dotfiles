@@ -1,6 +1,6 @@
 local M = {}
 
-local lsp_util = require('vim.lsp.util')
+local lsp_format = require('lsp-format')
 local nvim_lsp = require('lspconfig')
 local wk = require('which-key')
 
@@ -39,6 +39,7 @@ local function set_keymaps(bufnr)
     c = {
       name = 'LSP code changes',
       a = { '<cmd>CodeActionMenu<CR>', 'code actions' },
+      f = { '<cmd>Format<CR>', 'format' },
       r = { '<cmd>LspRename<CR>', 'rename variable' },
     },
   }, {
@@ -59,28 +60,8 @@ local function set_keymaps(bufnr)
   })
 end
 
-local function make_formatting_request(client, bufnr)
-  local params = lsp_util.make_formatting_params({})
-  client.request('textDocument/formatting', params, nil, bufnr)
-end
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
 function M.on_attach(client, bufnr)
-  wk.register({
-    c = {
-      f = { '<cmd>LspFormatting<CR>', 'format' },
-    },
-  }, {
-    prefix = '<leader>',
-    buffer = bufnr,
-  })
-  vim.api.nvim_create_autocmd('BufWritePre', {
-    buffer = bufnr,
-    callback = function()
-      make_formatting_request(client, bufnr)
-    end,
-  })
+  lsp_format.on_attach(client)
   M.on_attach_no_format(client, bufnr)
 end
 

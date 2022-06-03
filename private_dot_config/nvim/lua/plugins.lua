@@ -179,6 +179,12 @@ return require('packer').startup(function(use)
     end,
   })
   use({
+    'lukas-reineke/lsp-format.nvim',
+    config = function()
+      require('configs.lsp-format')
+    end,
+  })
+  use({
     'jose-elias-alvarez/null-ls.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
