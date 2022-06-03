@@ -24,12 +24,12 @@ local function set_keymaps(bufnr)
         },
         t = { gs.toggle_current_line_blame, 'toggle blame' },
       },
-      d = { gs.diffthis, 'diff' },
+      d = { gs.diffthis, 'diff against index' },
       D = {
         function()
           gs.diffthis('~')
         end,
-        'diff',
+        'diff against commit',
       },
       x = { gs.toggle_deleted, 'toggel deleted' },
     },
