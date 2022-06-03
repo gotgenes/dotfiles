@@ -31,7 +31,7 @@ local function set_keymaps(bufnr)
         end,
         'diff against commit',
       },
-      x = { gs.toggle_deleted, 'toggel deleted' },
+      x = { gs.toggle_deleted, 'toggle deleted' },
     },
   }, {
     prefix = '<leader>',
