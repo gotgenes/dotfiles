@@ -45,6 +45,7 @@ function M.setup()
       buffers = {
         initial_mode = 'normal',
         sort_lastused = true,
+        sort_mru = true,
         theme = 'dropdown',
         previewer = false,
         mappings = {
