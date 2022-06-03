@@ -3,6 +3,7 @@ local M = {}
 local lsp_format = require('lsp-format')
 local nvim_lsp = require('lspconfig')
 local wk = require('which-key')
+local illuminate = require('illuminate')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -70,17 +71,14 @@ function M.on_attach_no_format(client, bufnr)
     return
   end
 
-  vim.b.lsp_buffer_set_up = 1
-
   --Enable completion triggered by <c-x><c-o>
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   set_commands()
   set_keymaps(bufnr)
-  require('illuminate').on_attach(client)
+  illuminate.on_attach(client)
+
+  vim.b.lsp_buffer_set_up = 1
 end
 
 function M.setup()
