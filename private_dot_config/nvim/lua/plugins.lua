@@ -108,7 +108,6 @@ return require('packer').startup(function(use)
     end,
   })
   use('simnalamburt/vim-mundo')
-  use('nvim-lua/popup.nvim')
 
   -- Productivity and Quality of Life
   use({
