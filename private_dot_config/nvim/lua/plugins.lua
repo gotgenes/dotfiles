@@ -79,6 +79,15 @@ return require('packer').startup(function(use)
     end,
   })
   use({
+    'petertriho/nvim-scrollbar',
+    requires = {
+      'kevinhwang91/nvim-hlslens',
+    },
+    config = function()
+      require('configs.scrollbar').setup()
+    end,
+  })
+  use({
     'nvim-telescope/telescope.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
