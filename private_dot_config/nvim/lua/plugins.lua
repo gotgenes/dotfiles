@@ -178,6 +178,10 @@ return require('packer').startup(function(use)
   })
   use('andymass/vim-matchup')
   use('RRethy/vim-illuminate')
+  use({
+    'AndrewRadev/linediff.vim',
+    cmd = { 'Linediff', 'LinediffReset' },
+  })
 
   -- LSP
   use({
