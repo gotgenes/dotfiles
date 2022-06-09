@@ -1,5 +1,3 @@
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-
 """""""""""""""""""""""
 " BEHAVIORAL SETTINGS "
 """""""""""""""""""""""
