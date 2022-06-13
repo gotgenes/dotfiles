@@ -218,8 +218,10 @@ let g:SimpylFold_fold_docstring = 0
 
 
 " vim-illuminate configuration
-let g:Illuminate_delay = 500
-let g:Illuminate_ftblacklist = ['defx', 'help', 'Mundo', 'MundoDiff', 'TelescopePrompt']
+let g:Illuminate_delay = 1000
+let g:Illuminate_ftblacklist = [
+      \ 'packer', 'help', 'Mundo', 'MundoDiff', 'TelescopePrompt', 'git', 'gitcommit',
+      \ 'qf', 'markdown', 'fugitive']
 
 
 " vim-python configuration
