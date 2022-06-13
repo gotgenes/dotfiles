@@ -186,7 +186,14 @@ return require('packer').startup(function(use)
   -- LSP
   use({
     'neovim/nvim-lspconfig',
+    config = function() end,
+  })
+  use({
+    'williamboman/nvim-lsp-installer',
     config = function()
+      require('nvim-lsp-installer').setup({
+        automatic_installation = true,
+      })
       require('configs.lsp').setup()
     end,
   })
