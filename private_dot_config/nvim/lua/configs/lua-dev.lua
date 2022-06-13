@@ -1,6 +1,7 @@
 local M = {}
 
 local lua_dev = require('lua-dev')
+local nvim_lsp = require('lspconfig')
 
 function M.setup()
   local runtime_path = vim.split(package.path, ';')
@@ -18,7 +19,7 @@ function M.setup()
       on_attach = require('configs.lsp').on_attach_no_format,
     },
   })
-  require('lspconfig')['sumneko_lua'].setup(luadev)
+  nvim_lsp.sumneko_lua.setup(luadev)
 end
 
 return M
