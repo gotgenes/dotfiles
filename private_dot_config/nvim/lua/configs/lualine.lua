@@ -23,7 +23,7 @@ function M.setup()
     sections = {
       lualine_a = { 'mode' },
       lualine_b = {
-        'filename',
+        { 'filename', path = 1 },
         { 'b:gitsigns_head', icon = '' },
         {
           'diff',
