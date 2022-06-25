@@ -5,7 +5,7 @@ local dapui = require('dapui')
 
 function M.setup()
   dapui.setup({
-    sidebar = {
+    layouts = {
       elements = {
         { id = 'watches', size = 0.20 },
         { id = 'breakpoints', size = 0.20 },
@@ -14,6 +14,14 @@ function M.setup()
       },
       size = 50,
       position = 'right',
+    },
+    {
+      elements = {
+        'repl',
+        'console',
+      },
+      size = 10,
+      position = 'bottom',
     },
   })
 
