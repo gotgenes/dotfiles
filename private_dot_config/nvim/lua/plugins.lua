@@ -161,6 +161,16 @@ return require('packer').startup(function(use)
     run = ':TSInstall query',
   })
   use({
+    'ThePrimeagen/refactoring.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      require('configs.refactoring').setup()
+    end,
+  })
+  use({
     'b3nj5m1n/kommentary',
     config = function()
       require('kommentary.config').configure_language('default', { prefer_single_line_comments = true })
