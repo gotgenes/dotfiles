@@ -321,6 +321,9 @@ return require('packer').startup(function(use)
     end,
   })
 
+  -- bats
+  use('aliou/bats.vim')
+
   -- CSS / SASS
   use('hail2u/vim-css3-syntax')
   use('cakebaker/scss-syntax.vim')
