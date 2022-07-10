@@ -329,15 +329,13 @@ return require('packer').startup(function(use)
   use({
     'ray-x/go.nvim',
     config = function()
-      local lsp_config = require('configs.lsp')
-      require('go').setup({
-        lsp_cfg = {
-          capabilities = lsp_config.capabilities,
-        },
-        lsp_on_attach = lsp_config.on_attach,
-      })
+      require('configs.go').setup()
     end,
     ft = { 'go', 'godoc', 'gomod', 'gotmplhtml', 'gotexttmpl' },
+    requires = {
+      'neovim/nvim-lspconfig',
+      'williamboman/nvim-lsp-installer',
+    },
   })
   use('gotgenes/golang-template.vim')
 
