@@ -195,10 +195,6 @@ return require('packer').startup(function(use)
 
   -- LSP
   use({
-    'neovim/nvim-lspconfig',
-    config = function() end,
-  })
-  use({
     'williamboman/nvim-lsp-installer',
     config = function()
       require('nvim-lsp-installer').setup({
@@ -206,6 +202,9 @@ return require('packer').startup(function(use)
       })
       require('configs.lsp').setup()
     end,
+    requires = {
+      'neovim/nvim-lspconfig',
+    },
   })
   use({
     'lukas-reineke/lsp-format.nvim',
@@ -243,7 +242,10 @@ return require('packer').startup(function(use)
   })
   use({
     'folke/lua-dev.nvim',
-    requires = 'neovim/nvim-lspconfig',
+    requires = {
+      'neovim/nvim-lspconfig',
+      'williamboman/nvim-lsp-installer',
+    },
     config = function()
       require('configs.lua-dev').setup()
     end,
