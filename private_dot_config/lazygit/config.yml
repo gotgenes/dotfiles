@@ -1,0 +1,5 @@
+gui:
+  theme:
+    selectedLineBgColor:
+      - black
+  showIcons: true
