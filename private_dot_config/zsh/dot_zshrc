@@ -66,10 +66,8 @@ function set_normal_mode_keybindings() {
     zvm_bindkey vicmd "^[[F" end-of-line
 }
 
-function zvm_before_init() {
-    zvm_after_init_commands+=(set_insert_keybindings)
-    zvm_before_lazy_keybindings_commands+=(set_normal_mode_keybindings)
-}
+zvm_after_init_commands+=(set_insert_keybindings)
+zvm_before_lazy_keybindings_commands+=(set_normal_mode_keybindings)
 
 zinit light jeffreytse/zsh-vi-mode
 
