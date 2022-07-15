@@ -41,6 +41,7 @@ function M.setup()
       diagnostics.codespell,
       diagnostics.flake8,
       formatting.black,
+      formatting.isort,
       formatting.stylua,
       diagnostics.eslint_d,
       code_actions.eslint_d,
