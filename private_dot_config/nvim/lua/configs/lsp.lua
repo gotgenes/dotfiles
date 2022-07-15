@@ -84,7 +84,7 @@ end
 function M.setup()
   nvim_lsp.pyright.setup({
     capabilities = M.capabilities,
-    on_attach = M.on_attach_no_format,
+    on_attach = M.on_attach,
   })
 
   nvim_lsp.vimls.setup({
