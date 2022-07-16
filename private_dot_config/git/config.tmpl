@@ -29,13 +29,13 @@
 	logs = log --decorate --stat
 	log1 = log --oneline --decorate
 	glog = log --graph --pretty=format:'%C(auto)%h -%d %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --date-order
-	pushup = push -u origin HEAD
 [submodule]
 	recurse = true
 [pull]
 	rebase = false
 [push]
 	default = simple
+	autoSetupRemote = true
 	recurseSubmodules = check
 [init]
 	defaultBranch = main
