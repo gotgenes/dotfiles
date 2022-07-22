@@ -1,2 +1,2 @@
-vim.keymap.del('n', 'j', { buffer = true })
-vim.keymap.del('n', 'k', { buffer = true })
+vim.keymap.set('n', 'j', 'j', { buffer = true })
+vim.keymap.set('n', 'k', 'k', { buffer = true })
