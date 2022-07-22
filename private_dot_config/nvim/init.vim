@@ -255,8 +255,8 @@ let g:vim_markdown_folding_disabled = 1
 lua << EOF
 require('catppuccin').setup({
   styles = {
-    functions = 'NONE',
-    variables = 'NONE',
+    functions = {},
+    variables = {},
   },
 })
 EOF
