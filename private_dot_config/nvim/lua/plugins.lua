@@ -3,7 +3,14 @@ require('packer').init({
 })
 return require('packer').startup({
   function(use)
+    -- Core
     use('wbthomason/packer.nvim')
+    use({
+      'williamboman/mason.nvim',
+      config = function()
+        require('mason').setup()
+      end,
+    })
 
     -- Completion
     use({
@@ -196,9 +203,9 @@ return require('packer').startup({
 
     -- LSP
     use({
-      'williamboman/nvim-lsp-installer',
+      'williamboman/mason-lspconfig.nvim',
       config = function()
-        require('nvim-lsp-installer').setup({
+        require('mason-lspconfig').setup({
           automatic_installation = true,
         })
         require('configs.lsp').setup()
@@ -245,7 +252,7 @@ return require('packer').startup({
       'folke/lua-dev.nvim',
       requires = {
         'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer',
+        'williamboman/mason-lspconfig',
       },
       config = function()
         require('configs.lua-dev').setup()
@@ -338,7 +345,7 @@ return require('packer').startup({
       ft = { 'go', 'godoc', 'gomod', 'gotmplhtml', 'gotexttmpl' },
       requires = {
         'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer',
+        'williamboman/mason-lspconfig',
       },
     })
     use('gotgenes/golang-template.vim')
