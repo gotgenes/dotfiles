@@ -125,6 +125,12 @@ return require('packer').startup({
       end,
     })
     use('simnalamburt/vim-mundo')
+    use({
+      'edluffy/specs.nvim',
+      config = function()
+        require('configs.specs').setup()
+      end,
+    })
 
     -- Productivity and Quality of Life
     use({
