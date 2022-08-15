@@ -224,10 +224,6 @@ let g:Illuminate_ftblacklist = [
       \ 'qf', 'markdown', 'fugitive']
 
 
-" vim-python configuration
-let g:python_highlight_all = 1
-
-
 " vim-go configuration
 let g:go_code_completion_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
