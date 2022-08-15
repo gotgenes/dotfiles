@@ -213,10 +213,6 @@ highlight link ExtraWhitespace Error
 let g:matchup_matchparen_offscreen = {'method': 'popup'}
 
 
-" SimpylFold configuration
-let g:SimpylFold_fold_docstring = 0
-
-
 " vim-illuminate configuration
 let g:Illuminate_delay = 1000
 let g:Illuminate_ftblacklist = [
