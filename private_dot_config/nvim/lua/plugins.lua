@@ -386,7 +386,6 @@ return require('packer').startup({
     -- Python
     use('tmhedberg/SimpylFold')
     use('hynek/vim-python-pep8-indent')
-    use('vim-python/python-syntax')
 
     -- Terraform
     use('hashivim/vim-terraform')
