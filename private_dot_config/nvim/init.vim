@@ -39,8 +39,7 @@ set updatetime=500
 set conceallevel=2
 
 " Leave most folds open by default.
-" (Helpful with SimpylFold)
-set foldlevelstart=2
+set foldlevelstart=3
 
 " Increase cmdheight
 set cmdheight=2
