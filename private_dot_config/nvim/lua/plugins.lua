@@ -384,7 +384,7 @@ return require('packer').startup({
     })
 
     -- Python
-    use('hynek/vim-python-pep8-indent')
+    use('jeetsukumaran/vim-python-indent-black')
 
     -- Terraform
     use('hashivim/vim-terraform')
