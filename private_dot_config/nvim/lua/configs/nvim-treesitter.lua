@@ -58,6 +58,8 @@ function M.setup()
       enable = true,
     },
   })
+  vim.wo.foldmethod = 'expr'
+  vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 end
 
 return M
