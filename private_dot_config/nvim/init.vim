@@ -39,7 +39,7 @@ set updatetime=500
 set conceallevel=2
 
 " Leave most folds open by default.
-set foldlevelstart=3
+set foldlevelstart=10
 
 " Increase cmdheight
 set cmdheight=2
