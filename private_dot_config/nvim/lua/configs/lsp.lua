@@ -4,6 +4,7 @@ local lsp_format = require('lsp-format')
 local nvim_lsp = require('lspconfig')
 local wk = require('which-key')
 local illuminate = require('illuminate')
+local navic = require('nvim-navic')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -69,6 +70,7 @@ function M.on_attach(client, bufnr)
   end
 
   illuminate.on_attach(client)
+  navic.attach(client, bufnr)
   vim.b.lsp_symbol_support_loaded = 1
 end
 
