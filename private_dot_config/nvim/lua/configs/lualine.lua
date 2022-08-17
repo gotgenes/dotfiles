@@ -1,7 +1,7 @@
 local M = {}
 
 local lualine = require('lualine')
-local gps = require('nvim-gps')
+local navic = require('nvim-navic')
 
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
@@ -32,8 +32,8 @@ function M.setup()
       },
       lualine_c = {
         {
-          gps.get_location,
-          cond = gps.is_available,
+          navic.get_location,
+          cond = navic.is_available,
         },
       },
       lualine_x = {

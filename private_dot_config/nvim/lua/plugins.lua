@@ -63,19 +63,19 @@ return require('packer').startup({
       requires = {
         'kyazdani42/nvim-web-devicons',
         'lewis6991/gitsigns.nvim',
-        'SmiteshP/nvim-gps',
+        'SmiteshP/nvim-navic',
       },
       config = function()
         require('configs.lualine').setup()
       end,
     })
     use({
-      'SmiteshP/nvim-gps',
+      'SmiteshP/nvim-navic',
       requires = {
         'nvim-treesitter/nvim-treesitter',
       },
       config = function()
-        require('nvim-gps').setup()
+        require('nvim-navic').setup()
       end,
     })
     use({
