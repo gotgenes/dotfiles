@@ -17,7 +17,7 @@ function M.setup()
         update_imports_on_move = true,
       })
       ts_utils.setup_client(client)
-      lsp_config.on_attach_no_format(client, bufnr)
+      lsp_config.on_attach(client, bufnr)
     end,
   })
 end
