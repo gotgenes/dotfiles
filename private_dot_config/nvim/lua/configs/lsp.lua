@@ -62,11 +62,18 @@ local function set_keymaps(bufnr)
 end
 
 function M.on_attach(client, bufnr)
-  lsp_format.on_attach(client)
-  M.on_attach_no_format(client, bufnr)
+  M.on_attach_no_symbols(client, bufnr)
+
+  if vim.b.lsp_symbol_support_loaded then
+    return
+  end
+
+  illuminate.on_attach(client)
+  vim.b.lsp_symbol_support_loaded = 1
 end
 
-function M.on_attach_no_format(client, bufnr)
+function M.on_attach_no_symbols(client, bufnr)
+  lsp_format.on_attach(client)
   if vim.b.lsp_buffer_set_up then
     return
   end
@@ -76,7 +83,6 @@ function M.on_attach_no_format(client, bufnr)
 
   set_commands()
   set_keymaps(bufnr)
-  illuminate.on_attach(client)
 
   vim.b.lsp_buffer_set_up = 1
 end

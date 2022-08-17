@@ -12,7 +12,7 @@ function M.setup()
   local luadev = lua_dev.setup({
     lspconfig = {
       capabilities = lsp_config.capabilities,
-      on_attach = lsp_config.on_attach_no_format,
+      on_attach = lsp_config.on_attach,
     },
   })
   nvim_lsp.sumneko_lua.setup(luadev)
