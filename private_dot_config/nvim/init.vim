@@ -134,6 +134,10 @@ autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 lua require('configs.diagnostic').setup()
 
 
+" python.vim builtin
+let g:no_python_maps = 1
+
+
 " easyescape configuration
 let g:easyescape_chars = { "j": 1, "k": 1 }
 let g:easyescape_timeout = 300
