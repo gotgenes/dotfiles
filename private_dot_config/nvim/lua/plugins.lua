@@ -175,6 +175,15 @@ return require('packer').startup({
       run = ':TSInstall query',
     })
     use({
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      requires = {
+        'nvim-treesitter/nvim-treesitter',
+      },
+      config = function()
+        require('configs.nvim-treesitter-textobjects').setup()
+      end,
+    })
+    use({
       'ThePrimeagen/refactoring.nvim',
       requires = {
         'nvim-lua/plenary.nvim',
