@@ -184,6 +184,15 @@ return require('packer').startup({
       end,
     })
     use({
+      'ziontee113/syntax-tree-surfer',
+      requires = {
+        'nvim-treesitter/nvim-treesitter',
+      },
+      config = function()
+        require('configs.syntax-tree-surfer').setup()
+      end,
+    })
+    use({
       'ThePrimeagen/refactoring.nvim',
       requires = {
         'nvim-lua/plenary.nvim',
