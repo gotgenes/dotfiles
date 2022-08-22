@@ -219,7 +219,12 @@ return require('packer').startup({
       end,
     })
     use('andymass/vim-matchup')
-    use('RRethy/vim-illuminate')
+    use({
+      'RRethy/vim-illuminate',
+      config = function()
+        require('configs.illuminate').setup()
+      end,
+    })
     use({
       'AndrewRadev/linediff.vim',
       cmd = { 'Linediff', 'LinediffReset' },
