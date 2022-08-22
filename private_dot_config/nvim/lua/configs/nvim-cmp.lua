@@ -1,6 +1,7 @@
 local M = {}
 
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 local luasnip = require('luasnip')
 
 function M.setup()
@@ -37,6 +38,17 @@ function M.setup()
       },
       { name = 'path' },
     }),
+    formatting = {
+      format = lspkind.cmp_format({
+        menu = {
+          buffer = '[Buffer]',
+          luasnip = '[LuaSnip]',
+          nvim_lsp = '[LSP]',
+          nvim_lua = '[Lua]',
+          path = '[Path]',
+        },
+      }),
+    },
   })
   cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
