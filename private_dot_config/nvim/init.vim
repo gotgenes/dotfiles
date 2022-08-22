@@ -216,13 +216,6 @@ highlight link ExtraWhitespace Error
 let g:matchup_matchparen_offscreen = {'method': 'popup'}
 
 
-" vim-illuminate configuration
-let g:Illuminate_delay = 1000
-let g:Illuminate_ftblacklist = [
-      \ 'packer', 'help', 'Mundo', 'MundoDiff', 'TelescopePrompt', 'git', 'gitcommit',
-      \ 'qf', 'markdown', 'fugitive']
-
-
 " vim-go configuration
 let g:go_code_completion_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
