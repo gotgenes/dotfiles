@@ -24,25 +24,25 @@ function M.setup()
         behavior = cmp.ConfirmBehavior.Replace,
       }),
     }),
-    sources = {
+    sources = cmp.config.sources({
       {
         name = 'nvim_lsp',
-        max_item_count = 8,
       },
-      { name = 'nvim_lua' },
       { name = 'luasnip' },
+    }, {
+      { name = 'nvim_lua' },
+    }, {
       {
         name = 'buffer',
-        max_item_count = 5,
       },
       { name = 'path' },
-    },
+    }),
   })
   cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = {
+    sources = cmp.config.sources({
       { name = 'buffer' },
-    },
+    }),
   })
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
