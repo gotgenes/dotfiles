@@ -9,6 +9,7 @@ function M.setup()
       'Mundo',
       'MundoDiff',
       'TelescopePrompt',
+      'alpha',
       'fugitive',
       'git',
       'gitcommit',
