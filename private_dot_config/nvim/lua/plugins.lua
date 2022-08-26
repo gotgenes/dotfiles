@@ -54,6 +54,12 @@ return require('packer').startup({
 
     -- Statusline and Visual Components
     use({
+      'goolord/alpha-nvim',
+      config = function()
+        require('configs.alpha').setup()
+      end,
+    })
+    use({
       'rcarriga/nvim-notify',
       config = function()
         vim.notify = require('notify')
@@ -84,6 +90,7 @@ return require('packer').startup({
       config = function()
         require('indent_blankline').setup({
           buftype_exclude = { 'help', 'packer' },
+          filetype_exclude = { 'alpha' },
         })
       end,
     })
