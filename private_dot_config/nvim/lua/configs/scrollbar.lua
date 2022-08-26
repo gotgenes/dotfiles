@@ -16,7 +16,11 @@ local function set_keymaps()
 end
 
 function M.setup()
-  scrollbar.setup()
+  scrollbar.setup({
+    handle = {
+      highlight = 'ColorColumn',
+    },
+  })
   scrollbar_search.setup({
     calm_down = true,
   })
