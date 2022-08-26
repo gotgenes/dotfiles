@@ -8,11 +8,11 @@ local function set_keymaps()
     x = {
       name = 'Trouble',
       x = { '<cmd>TroubleToggle<cr>', 'toggle' },
-      w = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'workspace diagnostics' },
-      d = { '<cmd>TroubleToggle document_diagnostics<cr>', 'document_diagnostics' },
-      l = { '<cmd>TroubleToggle loclist<cr>', 'location list' },
-      q = { '<cmd>TroubleToggle quickfix<cr>', 'quickfix' },
-      r = { '<cmd>TroubleToggle lsp_references<cr>', 'LSP references' },
+      w = { '<cmd>Trouble workspace_diagnostics<cr>', 'workspace diagnostics' },
+      d = { '<cmd>Trouble document_diagnostics<cr>', 'document_diagnostics' },
+      l = { '<cmd>Trouble loclist<cr>', 'location list' },
+      q = { '<cmd>Trouble quickfix<cr>', 'quickfix' },
+      r = { '<cmd>Trouble lsp_references<cr>', 'LSP references' },
     },
   }, {
     prefix = '<leader>',
