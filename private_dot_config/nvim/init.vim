@@ -232,10 +232,6 @@ let g:go_highlight_fields = 0
 let g:tex_flavor = 'latex'
 
 
-" vim-markdown configuration
-let g:vim_markdown_folding_disabled = 1
-
-
 """"""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and color settings "
 """"""""""""""""""""""""""""""""""""""""""

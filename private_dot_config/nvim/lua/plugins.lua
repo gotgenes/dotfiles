@@ -407,7 +407,6 @@ return require('packer').startup({
 
     -- Markdown
     use('godlygeek/tabular')
-    use('plasticboy/vim-markdown')
     use({
       'iamcco/markdown-preview.nvim',
       ft = { 'markdown', 'pandoc.markdown', 'rmd' },
