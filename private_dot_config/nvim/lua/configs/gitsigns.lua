@@ -7,14 +7,12 @@ local function set_keymaps(bufnr)
   wk.register({
     h = {
       name = 'Gitsigns',
-      n = { '<CMD>Gitsigns next_hunk<CR>', 'next hunk' },
-      p = { '<CMD>Gitsigns prev_hunk<CR>', 'previous hunk' },
-      s = { '<CMD>Gitsigns stage_hunk<CR>', 'stage hunk' },
-      r = { '<CMD>Gitsigns reset_hunk<CR>', 'reset hunk' },
+      s = { gs.stage_hunk, 'stage hunk' },
+      r = { gs.reset_hunk, 'reset hunk' },
       S = { gs.stage_buffer, 'stage buffer' },
       u = { gs.undo_stage_hunk, 'undo stage hunk' },
       R = { gs.reset_buffer, 'reset buffer' },
-      P = { gs.preview_hunk, 'preview hunk' },
+      p = { gs.preview_hunk, 'preview hunk' },
       b = {
         l = {
           function()
@@ -37,6 +35,10 @@ local function set_keymaps(bufnr)
     prefix = '<leader>',
     buffer = bufnr,
   })
+  wk.register({
+    [']h'] = { gs.next_hunk, 'Next hunk (gitsigns)' },
+    ['[h'] = { gs.prev_hunk, 'Previous hunk (gitsigns)' },
+  }, { buffer = bufnr })
   wk.register({
     h = {
       name = 'Gitsigns',
