@@ -1,6 +1,7 @@
 local M = {}
 
 local telescope = require('telescope')
+local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local trouble = require('trouble.providers.telescope')
 local wk = require('which-key')
@@ -9,12 +10,12 @@ local function set_keymaps()
   wk.register({
     t = {
       name = 'Telescope',
-      b = { '<cmd>Telescope buffers<CR>', 'search buffers' },
-      f = { '<cmd>Telescope find_files<CR>', 'search files' },
-      g = { '<cmd>Telescope live_grep<CR>', 'grep' },
-      G = { '<cmd>Telescope grep_string<CR>', 'grep word under cursor' },
-      h = { '<cmd>Telescope help_tags<CR>', 'search help' },
-      r = { '<cmd>Telescope resume<CR>', 'resume last search' },
+      b = { builtin.buffers, 'search buffers' },
+      f = { builtin.find_files, 'search files' },
+      g = { builtin.live_grep, 'grep' },
+      G = { builtin.grep_string, 'grep word under cursor' },
+      h = { builtin.help_tags, 'search help' },
+      r = { builtin.resume, 'resume last search' },
     },
   }, {
     prefix = '<leader>',
@@ -28,16 +29,18 @@ function M.setup()
       mappings = {
         i = {
           ['<c-t>'] = trouble.open_with_trouble,
-          ['<c-f>'] = actions.preview_scrolling_down,
-          ['<c-b>'] = actions.preview_scrolling_up,
+          ['<c-f>'] = actions.results_scrolling_down,
+          ['<c-b>'] = actions.results_scrolling_up,
           ['<c-u>'] = false,
           ['<c-d>'] = false,
         },
         n = {
           ['q'] = actions.close,
           ['<c-t>'] = trouble.open_with_trouble,
-          ['<c-f>'] = actions.preview_scrolling_down,
-          ['<c-b>'] = actions.preview_scrolling_up,
+          ['<c-f>'] = actions.results_scrolling_down,
+          ['<c-b>'] = actions.results_scrolling_up,
+          ['<c-d>'] = actions.preview_scrolling_down,
+          ['<c-u>'] = actions.preview_scrolling_up,
         },
       },
     },
