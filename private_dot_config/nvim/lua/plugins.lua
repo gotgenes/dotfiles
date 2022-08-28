@@ -226,6 +226,15 @@ return require('packer').startup({
         require('configs.nvim-autopairs').setup()
       end,
     })
+    use({
+      'windwp/nvim-ts-autotag',
+      requires = {
+        'nvim-treesitter/nvim-treesitter',
+      },
+      config = function()
+        require('nvim-ts-autotag').setup()
+      end,
+    })
     use('andymass/vim-matchup')
     use({
       'RRethy/vim-illuminate',
@@ -386,11 +395,6 @@ return require('packer').startup({
       },
     })
     use('gotgenes/golang-template.vim')
-
-    -- HTML
-    use('tmhedberg/matchit')
-    use('othree/html5.vim')
-    use('alvan/vim-closetag')
 
     -- Jenkinsfile
     use('martinda/Jenkinsfile-vim-syntax')

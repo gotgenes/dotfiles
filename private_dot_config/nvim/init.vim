@@ -247,5 +247,3 @@ require('catppuccin').setup({
 EOF
 
 colorscheme catppuccin
-highlight HtmlBold gui=bold
-highlight HtmlItalic gui=italic
