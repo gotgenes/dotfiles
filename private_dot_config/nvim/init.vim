@@ -237,6 +237,7 @@ let g:tex_flavor = 'latex'
 """"""""""""""""""""""""""""""""""""""""""
 
 lua << EOF
+vim.g.catppuccin_flavour = "mocha"
 require('catppuccin').setup({
   styles = {
     functions = {},
