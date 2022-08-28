@@ -399,13 +399,6 @@ return require('packer').startup({
     -- Jenkinsfile
     use('martinda/Jenkinsfile-vim-syntax')
 
-    -- GraphQL
-    use('jparise/vim-graphql')
-
-    -- JavaScript
-    use('pangloss/vim-javascript')
-    use('maxmellon/vim-jsx-pretty')
-
     -- LaTeX
     use('lervag/vimtex')
 
