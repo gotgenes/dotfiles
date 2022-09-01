@@ -139,14 +139,14 @@ return require('packer').startup({
         require('configs.specs').setup()
       end,
     })
-
-    -- Productivity and Quality of Life
     use({
       'folke/which-key.nvim',
       config = function()
         require('which-key').setup()
       end,
     })
+
+    -- Productivity and Quality of Life
     use('machakann/vim-sandwich')
     use('ntpeters/vim-better-whitespace')
     use('schickling/vim-bufonly')
