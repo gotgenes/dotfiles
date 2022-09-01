@@ -166,6 +166,7 @@ return require('packer').startup({
         require('remember').setup({})
       end,
     })
+    use('gpanders/editorconfig.nvim')
 
     -- Programming
     use({
