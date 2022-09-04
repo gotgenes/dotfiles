@@ -3,6 +3,14 @@ local M = {}
 local dap = require('dap')
 local dapui = require('dapui')
 
+local function set_hlgroups()
+  local sign = vim.fn.sign_define
+
+  sign('DapBreakpoint', { text = '●', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+  sign('DapBreakpointCondition', { text = '●', texthl = 'DapBreakpointCondition', linehl = '', numhl = '' })
+  sign('DapLogPoint', { text = '◆', texthl = 'DapLogPoint', linehl = '', numhl = '' })
+end
+
 function M.setup()
   dapui.setup({
     layouts = {
@@ -34,6 +42,8 @@ function M.setup()
   dap.listeners.before.event_exited['dapui_config'] = function()
     dapui.close()
   end
+
+  set_hlgroups()
 end
 
 return M

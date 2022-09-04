@@ -7,6 +7,9 @@ function M.setup()
     text = {
       spinner = 'dots',
     },
+    window = {
+      blend = 0,
+    },
   })
 end
 
