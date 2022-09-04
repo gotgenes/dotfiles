@@ -200,15 +200,12 @@ let g:sandwich#recipes += [
 
 
 " vim-better-whitespace configuration
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
 let g:better_whitespace_filetypes_blacklist=[
       \ 'packer', 'diff', 'git', 'gitcommit', 'qf', 'help', 'markdown', 'fugitive']
 nnoremap <silent> <leader>wss :ToggleStripWhitespaceOnSave<CR>
 nnoremap <silent> <leader>wsh :ToggleWhitespace<CR>
-
-if has("autocmd")
-  autocmd BufEnter * EnableStripWhitespaceOnSave
-endif
-
 highlight link ExtraWhitespace Error
 
 
