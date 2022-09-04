@@ -230,20 +230,3 @@ let g:go_highlight_fields = 0
 
 " vimtex configuration
 let g:tex_flavor = 'latex'
-
-
-""""""""""""""""""""""""""""""""""""""""""
-" Syntax highlighting and color settings "
-""""""""""""""""""""""""""""""""""""""""""
-
-lua << EOF
-vim.g.catppuccin_flavour = "mocha"
-require('catppuccin').setup({
-  styles = {
-    functions = {},
-    variables = {},
-  },
-})
-EOF
-
-colorscheme catppuccin
