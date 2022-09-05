@@ -46,12 +46,7 @@ return require('packer').startup({
     use({
       'NvChad/nvim-colorizer.lua',
       config = function()
-        require('colorizer').setup({
-          '*',
-          '!packer',
-        }, {
-          names = false,
-        })
+        require('configs.colorizer').setup()
       end,
     })
 
