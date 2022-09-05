@@ -60,18 +60,6 @@ let &t_ut=''
 " Set the leader
 let mapleader = "\<Space>"
 
-" Easy access keystrokes for editing your Vim configuration
-nnoremap <leader>vrcs :source $MYVIMRC<CR>
-nnoremap <leader>vrce :e $MYVIMRC<CR>
-
-" Quickly switch buffers
-nnoremap <silent> <leader>nn :bn<CR>
-nnoremap <silent> <leader>pp :bp<CR>
-nnoremap <silent> <leader>bd :bd<CR>
-
-" Change the current directory to the directory of the current buffer
-nnoremap <silent> <leader>cdb :lcd %:p:h<CR>
-
 " Let j and k move up and down over line-wrapped lines, too.
 nnoremap <silent> j gj
 nnoremap <silent> k gk
@@ -82,9 +70,6 @@ nnoremap <silent> <leader>/ :nohlsearch<CR>
 " Insert a timestamp
 nnoremap <F5> a<C-R>=strftime("%F")<CR><Esc>
 inoremap <F5> <C-R>=strftime("%F")<CR>
-
-" Quickly switch spelling on and off.
-nnoremap <leader>spl :setlocal spell!<CR>
 
 " Make it easy to toggle folding
 nmap <leader><space> za
