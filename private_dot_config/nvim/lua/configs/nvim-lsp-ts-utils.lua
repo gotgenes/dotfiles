@@ -1,7 +1,7 @@
 local M = {}
 
 local nvim_lsp = require('lspconfig')
-local lsp_config = require('configs/lsp')
+local lsp_config = require('configs.lsp')
 local ts_utils = require('nvim-lsp-ts-utils')
 
 function M.setup()
