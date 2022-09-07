@@ -287,6 +287,9 @@ return require('packer').startup({
       requires = {
         'neovim/nvim-lspconfig',
       },
+      config = function ()
+        require('symbols-outline').setup()
+      end,
       cmd = {
         'SymbolsOutline',
         'SymbolsOutlineOpen',
