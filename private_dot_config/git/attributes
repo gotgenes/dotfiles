@@ -1,0 +1,16 @@
+*.bash	diff=bash
+*.c	diff=cpp
+*.cpp	diff=cpp
+*.cs	diff=csharp
+*.css	diff=css
+*.go	diff=golang
+*.html	diff=html
+*.java	diff=java
+*.latex	diff=tex
+*.md	diff=markdown
+*.py	diff=python
+*.rs	diff=rust
+*.rslib	diff=rust
+*.sh	diff=bash
+*.tex	diff=tex
+*.zsh	diff=bash
