@@ -138,6 +138,12 @@ return require('packer').startup({
       end,
     })
     use({
+      'https://gitlab.com/yorickpeterse/nvim-window',
+      config = function()
+        require('configs.nvim-window').setup()
+      end,
+    })
+    use({
       'folke/which-key.nvim',
       config = function()
         require('which-key').setup()
