@@ -7,7 +7,8 @@ local function set_keymaps()
   wk.register({
     x = {
       name = 'Trouble',
-      x = { '<cmd>TroubleToggle<cr>', 'toggle' },
+      x = { '<cmd>Trouble<cr>', 'open / jump to' },
+      c = { '<cmd>TroubleClose<cr>', 'close' },
       w = { '<cmd>Trouble workspace_diagnostics<cr>', 'workspace diagnostics' },
       d = { '<cmd>Trouble document_diagnostics<cr>', 'document_diagnostics' },
       l = { '<cmd>Trouble loclist<cr>', 'location list' },
