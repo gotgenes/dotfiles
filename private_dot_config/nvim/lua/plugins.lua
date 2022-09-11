@@ -418,9 +418,6 @@ return require('packer').startup({
       run = 'cd app & yarn install',
     })
 
-    -- Python
-    use('jeetsukumaran/vim-python-indent-black')
-
     -- Terraform
     use('hashivim/vim-terraform')
 
