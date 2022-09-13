@@ -1,4 +1,5 @@
 gui:
+  scrollHeight: 12
   theme:
     selectedLineBgColor:
       - black
