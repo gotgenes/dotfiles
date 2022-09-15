@@ -216,6 +216,12 @@ return require('packer').startup({
       end,
     })
     use({
+      'yioneko/nvim-yati',
+      config = function()
+        require('configs.yati').setup()
+      end,
+    })
+    use({
       'b3nj5m1n/kommentary',
       config = function()
         require('kommentary.config').configure_language('default', { prefer_single_line_comments = true })
@@ -417,6 +423,9 @@ return require('packer').startup({
       ft = { 'markdown', 'pandoc.markdown', 'rmd' },
       run = 'cd app & yarn install',
     })
+
+    -- Python
+    use('jeetsukumaran/vim-python-indent-black')
 
     -- Terraform
     use('hashivim/vim-terraform')
