@@ -3,18 +3,14 @@ local M = {}
 local npairs = require('nvim-autopairs')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local cmp = require('cmp')
+local Rule = require('nvim-autopairs.rule')
+local cond = require('nvim-autopairs.conds')
 
 function M.setup()
   npairs.setup({
     check_ts = true,
   })
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-
-  npairs.add_rules(require('nvim-autopairs.rules.endwise-lua'))
-  npairs.add_rules(require('nvim-autopairs.rules.endwise-ruby'))
-
-  local Rule = require('nvim-autopairs.rule')
-  local cond = require('nvim-autopairs.conds')
 
   npairs.add_rules({
     Rule(' ', ' ')

@@ -238,6 +238,16 @@ return require('packer').startup({
       end,
     })
     use({
+      'RRethy/nvim-treesitter-endwise',
+      config = function()
+        require('nvim-treesitter.configs').setup({
+          endwise = {
+            enable = true,
+          },
+        })
+      end,
+    })
+    use({
       'windwp/nvim-ts-autotag',
       requires = {
         'nvim-treesitter/nvim-treesitter',
