@@ -267,6 +267,12 @@ return require('packer').startup({
       'AndrewRadev/linediff.vim',
       cmd = { 'Linediff', 'LinediffReset' },
     })
+    use({
+      'sindrets/diffview.nvim',
+      config = function()
+        require('configs.diffview')
+      end,
+    })
 
     -- LSP
     use({
