@@ -162,7 +162,12 @@ return require('packer').startup({
         require('leap').set_default_keymaps()
       end,
     })
-    use('zhou13/vim-easyescape')
+    use({
+      'max397574/better-escape.nvim',
+      config = function()
+        require('configs.better-escape').setup()
+      end,
+    })
     use('AndrewRadev/splitjoin.vim')
     use('wsdjeg/vim-fetch')
     use({

@@ -123,11 +123,6 @@ lua require('configs.diagnostic').setup()
 let g:no_python_maps = 1
 
 
-" easyescape configuration
-let g:easyescape_chars = { "j": 1, "k": 1 }
-let g:easyescape_timeout = 300
-
-
 " nvim-tree configuration
 nnoremap <silent> <leader>ntt :NvimTreeToggle<CR>
 nnoremap <silent> <leader>ntc :NvimTreeFindFile<CR>
