@@ -60,9 +60,6 @@ function M.setup()
           },
         },
       },
-      lsp_code_actions = {
-        theme = 'cursor',
-      },
     },
   })
   set_keymaps()
