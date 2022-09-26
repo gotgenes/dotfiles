@@ -42,6 +42,7 @@ return require('packer').startup({
       config = function()
         require('configs.catppuccin').setup()
       end,
+      run = ':CatppuccinCompile',
     })
     use({
       'NvChad/nvim-colorizer.lua',
