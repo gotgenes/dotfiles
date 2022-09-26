@@ -414,10 +414,6 @@ return require('packer').startup({
     -- bats
     use('aliou/bats.vim')
 
-    -- CSS / SASS
-    use('hail2u/vim-css3-syntax')
-    use('cakebaker/scss-syntax.vim')
-
     -- Go
     use({
       'ray-x/go.nvim',
