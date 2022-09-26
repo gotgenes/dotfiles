@@ -53,12 +53,6 @@ local function set_keymaps(bufnr)
   }, {
     buffer = bufnr,
   })
-  wk.register({
-    ['<C-S>'] = { '<cmd>LspSignatureHelp<CR>', 'LSP signature help' },
-  }, {
-    mode = 'i',
-    buffer = bufnr,
-  })
 end
 
 function M.on_attach(client, bufnr)
