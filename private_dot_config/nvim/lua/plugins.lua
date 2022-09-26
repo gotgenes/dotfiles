@@ -322,13 +322,8 @@ return require('packer').startup({
         'neovim/nvim-lspconfig',
       },
       config = function()
-        require('symbols-outline').setup()
+        require('configs.symbols-outline').setup()
       end,
-      cmd = {
-        'SymbolsOutline',
-        'SymbolsOutlineOpen',
-        'SymbolsOutlineClose',
-      },
     })
     use({
       'folke/lua-dev.nvim',

@@ -128,11 +128,6 @@ nnoremap <silent> <leader>ntt :NvimTreeToggle<CR>
 nnoremap <silent> <leader>ntc :NvimTreeFindFile<CR>
 
 
-" Symbols Outline configuration
-let g:symbols_outline = { "auto_preview": v:false }
-nnoremap <silent> <leader>ot :SymbolsOutline<CR>
-
-
 " Mundo configuration
 let g:mundo_right = 1
 
