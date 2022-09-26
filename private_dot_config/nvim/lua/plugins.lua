@@ -399,7 +399,6 @@ return require('packer').startup({
 
     -- Git
     use('tpope/vim-fugitive')
-    use('gregsexton/gitv')
     use('knsh14/vim-github-link')
     use({
       'lewis6991/gitsigns.nvim',
