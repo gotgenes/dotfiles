@@ -3,8 +3,8 @@ local M = {}
 local ts_configs = require('nvim-treesitter.configs')
 
 local function set_folding()
-  vim.opt_local.foldmethod = 'expr'
-  vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'
+  vim.opt.foldmethod = 'expr'
+  vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 end
 
 function M.setup()
