@@ -317,12 +317,9 @@ return require('packer').startup({
       cmd = 'CodeActionMenu',
     })
     use({
-      'simrat39/symbols-outline.nvim',
-      requires = {
-        'neovim/nvim-lspconfig',
-      },
+      'stevearc/aerial.nvim',
       config = function()
-        require('configs.symbols-outline').setup()
+        require('configs.aerial').setup()
       end,
     })
     use({
