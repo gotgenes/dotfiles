@@ -1,12 +1,10 @@
 local M = {}
 
+local cmp_lsp = require('cmp_nvim_lsp')
 local lsp_format = require('lsp-format')
 local nvim_lsp = require('lspconfig')
 local navic = require('nvim-navic')
 local wk = require('which-key')
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local function set_commands()
   -- Commands.
@@ -55,6 +53,15 @@ local function set_keymaps(bufnr)
   })
 end
 
+local function set_capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+  M.capabilities = cmp_lsp.update_capabilities(capabilities)
+end
+
 function M.on_attach(client, bufnr)
   M.on_attach_no_symbols(client, bufnr)
 
@@ -82,18 +89,19 @@ function M.on_attach_no_symbols(client, bufnr)
 end
 
 function M.setup()
+  set_capabilities()
   nvim_lsp.pyright.setup({
     capabilities = M.capabilities,
     on_attach = M.on_attach,
   })
 
   nvim_lsp.vimls.setup({
-    capabilities = capabilities,
+    capabilities = M.capabilities,
     on_attach = M.on_attach,
   })
 
   nvim_lsp.omnisharp.setup({
-    capabilities = capabilities,
+    capabilities = M.capabilities,
     on_attach = M.on_attach,
   })
 end

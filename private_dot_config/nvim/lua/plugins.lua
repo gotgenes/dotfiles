@@ -323,6 +323,15 @@ return require('packer').startup({
       end,
     })
     use({
+      'kevinhwang91/nvim-ufo',
+      requires = {
+        'kevinhwang91/promise-async',
+      },
+      config = function()
+        require('configs.ufo').setup()
+      end,
+    })
+    use({
       'folke/lua-dev.nvim',
       requires = {
         'neovim/nvim-lspconfig',

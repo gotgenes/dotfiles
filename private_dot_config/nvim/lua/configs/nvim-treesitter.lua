@@ -2,11 +2,6 @@ local M = {}
 
 local ts_configs = require('nvim-treesitter.configs')
 
-local function set_folding()
-  vim.opt.foldmethod = 'expr'
-  vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-end
-
 function M.setup()
   ts_configs.setup({
     ensure_installed = {
@@ -68,7 +63,6 @@ function M.setup()
       enable = true,
     },
   })
-  set_folding()
 end
 
 return M
