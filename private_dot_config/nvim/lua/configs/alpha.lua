@@ -9,11 +9,11 @@ local buttons = {
   val = {
     { type = 'text', val = 'Quick links', opts = { hl = 'SpecialComment', position = 'center' } },
     { type = 'padding', val = 1 },
-    dashboard.button('e', '  New file', '<cmd>ene<CR>'),
-    dashboard.button('SPC t f', '  Find file'),
-    dashboard.button('SPC t g', '  Live grep'),
-    dashboard.button('u', '  Update plugins', '<cmd>PackerSync<CR>'),
-    dashboard.button('q', '  Quit', '<cmd>qa<CR>'),
+    dashboard.button('e', '  New file', '<Cmd>ene<CR>'),
+    dashboard.button('f', '  Find file', '<Cmd>Telescope find_files<CR>'),
+    dashboard.button('g', '  Live grep', '<Cmd>Telescope live_grep<CR>'),
+    dashboard.button('u', '  Update plugins', '<Cmd>PackerSync<CR>'),
+    dashboard.button('q', '  Quit', '<Cmd>qa<CR>'),
   },
   position = 'center',
 }
