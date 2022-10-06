@@ -148,6 +148,7 @@ local buttons = {
     { type = 'padding', val = 1 },
     dashboard.button('f', '  Find file', '<Cmd>Telescope find_files<CR>'),
     dashboard.button('g', '  Live grep', '<Cmd>Telescope live_grep<CR>'),
+    dashboard.button('m', '  Mason', '<Cmd>Mason<CR>'),
     dashboard.button('u', '  Update plugins', '<Cmd>PackerSync<CR>'),
     dashboard.button('q', '  Quit', '<Cmd>qa<CR>'),
   },
