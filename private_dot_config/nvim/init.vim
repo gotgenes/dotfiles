@@ -11,7 +11,7 @@ set smartcase
 " Allow resizing of the window on session restore
 set sessionoptions+=resize
 " Give popup menus for a right mouse-click
-set mousemodel=popup
+set mousemodel=popup_setpos
 " Hide buffers when they are not displayed; this prevents warning messages
 " about modified buffers when switching between them.
 set hidden
