@@ -55,11 +55,14 @@ end
 
 local function set_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- Add capabilities for nvim-ufo
   capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true,
   }
-  M.capabilities = cmp_lsp.update_capabilities(capabilities)
+  -- Add capabilities for nvim-cmp
+  capabilities = cmp_lsp.update_capabilities(capabilities)
+  M.capabilities = capabilities
 end
 
 function M.on_attach(client, bufnr)
