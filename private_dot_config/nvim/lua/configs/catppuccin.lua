@@ -6,7 +6,6 @@ function M.setup()
   vim.g.catppuccin_flavour = 'mocha'
 
   catppuccin.setup({
-    compile = { enabled = true },
     styles = {
       comments = { 'italic' },
       conditionals = { 'italic' },
@@ -53,7 +52,7 @@ function M.setup()
     },
   })
 
-  vim.cmd([[colorscheme catppuccin]])
+  vim.cmd.colorscheme('catppuccin')
 end
 
 return M
