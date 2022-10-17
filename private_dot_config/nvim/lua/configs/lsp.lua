@@ -54,14 +54,13 @@ local function set_keymaps(bufnr)
 end
 
 local function set_capabilities()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- Add capabilities for nvim-cmp
+  local capabilities = cmp_lsp.default_capabilities()
   -- Add capabilities for nvim-ufo
   capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true,
   }
-  -- Add capabilities for nvim-cmp
-  capabilities = cmp_lsp.update_capabilities(capabilities)
   M.capabilities = capabilities
 end
 
