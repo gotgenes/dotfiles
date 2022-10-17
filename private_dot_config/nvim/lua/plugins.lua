@@ -331,13 +331,13 @@ return require('packer').startup({
       end,
     })
     use({
-      'folke/lua-dev.nvim',
+      'folke/neodev.nvim',
       requires = {
         'neovim/nvim-lspconfig',
         'williamboman/mason-lspconfig',
       },
       config = function()
-        require('configs.lua-dev').setup()
+        require('configs.neodev').setup()
       end,
     })
     use({
