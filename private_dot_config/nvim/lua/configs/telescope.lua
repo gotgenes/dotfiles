@@ -12,10 +12,25 @@ local function set_keymaps()
       name = 'Telescope',
       b = { builtin.buffers, 'search buffers' },
       f = { builtin.find_files, 'search files' },
-      g = { builtin.live_grep, 'grep' },
       G = { builtin.grep_string, 'grep word under cursor' },
       h = { builtin.help_tags, 'search help' },
       r = { builtin.resume, 'resume last search' },
+      g = {
+        name = 'grep',
+        a = { builtin.live_grep, 'search all' },
+        p = {
+          function()
+            builtin.live_grep({ glob_pattern = { '!*test*' } })
+          end,
+          'search production (exclude test files)',
+        },
+        t = {
+          function()
+            builtin.live_grep({ glob_pattern = { '*test*' } })
+          end,
+          'search tests',
+        },
+      },
     },
   }, {
     prefix = '<leader>',
