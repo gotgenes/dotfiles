@@ -3,9 +3,8 @@ local M = {}
 local catppuccin = require('catppuccin')
 
 function M.setup()
-  vim.g.catppuccin_flavour = 'mocha'
-
   catppuccin.setup({
+    flavor = 'mocha',
     styles = {
       comments = { 'italic' },
       conditionals = { 'italic' },
