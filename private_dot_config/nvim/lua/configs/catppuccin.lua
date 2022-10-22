@@ -21,6 +21,7 @@ function M.setup()
       operators = {},
     },
     integrations = {
+      aerial = true,
       cmp = true,
       dap = {
         enabled = true,
@@ -45,7 +46,6 @@ function M.setup()
       },
       notify = true,
       nvimtree = true,
-      symbols_outline = true,
       telescope = true,
       treesitter = true,
       which_key = true,
