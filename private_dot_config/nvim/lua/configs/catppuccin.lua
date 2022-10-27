@@ -4,7 +4,7 @@ local catppuccin = require('catppuccin')
 
 function M.setup()
   catppuccin.setup({
-    flavor = 'mocha',
+    flavour = 'mocha',
     styles = {
       comments = { 'italic' },
       conditionals = { 'italic' },
