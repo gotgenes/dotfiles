@@ -12,6 +12,21 @@ return require('packer').startup({
       end,
     })
 
+    -- Colors and Themes
+    use({
+      'catppuccin/nvim',
+      as = 'catppuccin',
+      config = function()
+        require('configs.catppuccin').setup()
+      end,
+    })
+    use({
+      'NvChad/nvim-colorizer.lua',
+      config = function()
+        require('configs.colorizer').setup()
+      end,
+    })
+
     -- Completion
     use({
       'hrsh7th/nvim-cmp',
@@ -32,21 +47,6 @@ return require('packer').startup({
       'L3MON4D3/LuaSnip',
       config = function()
         require('configs.luasnip').setup()
-      end,
-    })
-
-    -- Colors and Themes
-    use({
-      'catppuccin/nvim',
-      as = 'catppuccin',
-      config = function()
-        require('configs.catppuccin').setup()
-      end,
-    })
-    use({
-      'NvChad/nvim-colorizer.lua',
-      config = function()
-        require('configs.colorizer').setup()
       end,
     })
 
