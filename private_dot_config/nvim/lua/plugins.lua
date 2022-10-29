@@ -175,6 +175,12 @@ return require('packer').startup({
         require('remember').setup({})
       end,
     })
+    use({
+      'olimorris/persisted.nvim',
+      config = function()
+        require('persisted').setup()
+      end,
+    })
     use('gpanders/editorconfig.nvim')
 
     -- Programming
