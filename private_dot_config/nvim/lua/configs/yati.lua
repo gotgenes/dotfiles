@@ -7,7 +7,12 @@ function M.setup()
     indent = {
       enable = false,
     },
-    yati = { enable = true },
+    yati = {
+      enable = true,
+      default_fallback = function(lnum, computed, bufnr)
+        return require('tmindent').get_indent(lnum, bufnr) + computed
+      end,
+    },
   })
 end
 
