@@ -228,6 +228,14 @@ return require('packer').startup({
     })
     use({
       'yioneko/nvim-yati',
+      requires = {
+        {
+          'yioneko/vim-tmindent',
+          config = function()
+            require('tmindent').setup({})
+          end,
+        },
+      },
       config = function()
         require('configs.yati').setup()
       end,
