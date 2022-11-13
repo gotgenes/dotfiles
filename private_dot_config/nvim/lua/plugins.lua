@@ -182,6 +182,12 @@ return require('packer').startup({
       end,
     })
     use('gpanders/editorconfig.nvim')
+    use({
+      'klen/nvim-config-local',
+      config = function()
+        require('config-local').setup()
+      end,
+    })
 
     -- Programming
     use({
