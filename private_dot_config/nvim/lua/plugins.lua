@@ -158,7 +158,7 @@ return require('packer').startup({
     use({
       'ggandor/leap.nvim',
       config = function()
-        require('leap').set_default_keymaps()
+        require('leap').add_default_mappings()
       end,
     })
     use({
