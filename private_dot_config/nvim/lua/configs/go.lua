@@ -1,11 +1,12 @@
 local M = {}
 
-local path = require('nvim-lsp-installer.core.path')
+local install_root_dir = require('mason.settings').current.install_root_dir
+local path = require('mason-core.path')
 local lsp_config = require('configs.lsp')
 local go = require('go')
 
 function M.setup()
-  local gopls_path = path.concat({ vim.fn.stdpath('data'), 'lsp_servers', 'gopls', 'gopls' })
+  local gopls_path = path.concat({ install_root_dir, 'bin', 'gopls' })
   go.setup({
     lsp_cfg = {
       capabilities = lsp_config.capabilities,
