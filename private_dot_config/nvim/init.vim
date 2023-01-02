@@ -1,56 +1,54 @@
-"""""""""""""""""""""""
-" BEHAVIORAL SETTINGS "
-"""""""""""""""""""""""
+lua << EOF
+------------------------
+-- BEHAVIORAL SETTINGS -
+------------------------
 
-" Show matching brackets.
-set showmatch
-" Do case insensitive matching
-set ignorecase
-" Do smart case matching
-set smartcase
-" Allow resizing of the window on session restore
-set sessionoptions+=resize
-" Give popup menus for a right mouse-click
-set mousemodel=popup_setpos
-" Hide buffers when they are not displayed; this prevents warning messages
-" about modified buffers when switching between them.
-set hidden
-" Set the spelling language to US English.
-set spelllang=en_us
-" Highlight the line on which the cursor lies
-set cursorline
-" Show line numbers
-set number
-" Don't show insert mode; taken care of by lightline
-set noshowmode
+-- Show matching brackets.
+vim.o.showmatch = true
+-- Do smart case matching
+vim.o.smartcase = true
+-- Allow resizing of the window on session restore
+vim.opt.sessionoptions:append({ 'resize' })
+-- Give popup menus for a right mouse-click
+vim.o.mousemodel = 'popup_setpos'
+-- Hide buffers when they are not displayed; this prevents warning messages
+-- about modified buffers when switching between them.
+vim.o.hidden = true
+-- Set the spelling language to US English.
+vim.o.spelllang = 'en_us'
+-- Highlight the line on which the cursor lies
+vim.o.cursorline = true
+-- Show line numbers
+vim.o.number = true
+-- Don't show insert mode; taken care of by lualine
+vim.o.showmode = false
 
-" Use the persistent-undo feature
-set undofile
-" Maximum number of changes that can be undone
-set undolevels=1000
-" Maximum number lines to save for undo on a buffer reload
-set undoreload=10000
+-- Use the persistent-undo feature
+vim.o.undofile = true
+-- Maximum number of changes that can be undone
+vim.o.undolevels = 1000
+-- Maximum number lines to save for undo on a buffer reload
+vim.o.undoreload=10000
 
-" Decrease the time to update the swap file
-set updatetime=500
+-- Decrease the time to update the swap file
+vim.o.updatetime=500
 
-" Enable concealing, for example, rendering bold text in Markdown but hiding
-" the asterisks
-set conceallevel=2
+-- Enable concealing, for example, rendering bold text in Markdown but hiding
+-- the asterisks
+vim.o.conceallevel=2
 
-" Leave most folds open by default.
-set foldlevelstart=99
+-- Leave most folds open by default.
+vim.o.foldlevelstart=99
 
-" Increase cmdheight
-set cmdheight=2
+-- Increase cmdheight
+vim.o.cmdheight=2
 
-" Set completion options
-set completeopt=menuone,noselect
+-- Set completion options
+vim.opt.completeopt={'menuone', 'noselect'}
 
-" Set 24-bit colors
-set termguicolors
-
-let &t_ut=''
+-- Set 24-bit colors
+vim.o.termguicolors = true
+EOF
 
 
 """"""""""""
@@ -58,7 +56,7 @@ let &t_ut=''
 """"""""""""
 
 " Set the leader
-let mapleader = "\<Space>"
+lua vim.g.mapleader = ' '
 
 " Let j and k move up and down over line-wrapped lines, too.
 nnoremap <silent> j gj
