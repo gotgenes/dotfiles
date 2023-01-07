@@ -2,7 +2,7 @@ local M = {}
 
 local install_root_dir = require('mason.settings').current.install_root_dir
 local path = require('mason-core.path')
-local lsp_config = require('configs.lsp')
+local lsp_config = require('configs.plugins.lsp')
 local go = require('go')
 
 function M.setup()
