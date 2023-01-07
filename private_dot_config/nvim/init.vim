@@ -114,7 +114,7 @@ autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 """"""""""""""""""""""""""
 
 " Diagnostic
-lua require('configs.diagnostic').setup()
+lua require('configs.plugins.diagnostic').setup()
 
 
 " python.vim builtin

@@ -17,13 +17,13 @@ return require('packer').startup({
       'catppuccin/nvim',
       as = 'catppuccin',
       config = function()
-        require('configs.catppuccin').setup()
+        require('configs.plugins.catppuccin').setup()
       end,
     })
     use({
       'NvChad/nvim-colorizer.lua',
       config = function()
-        require('configs.colorizer').setup()
+        require('configs.plugins.colorizer').setup()
       end,
     })
 
@@ -40,13 +40,13 @@ return require('packer').startup({
         'onsails/lspkind.nvim',
       },
       config = function()
-        require('configs.nvim-cmp').setup()
+        require('configs.plugins.nvim-cmp').setup()
       end,
     })
     use({
       'L3MON4D3/LuaSnip',
       config = function()
-        require('configs.luasnip').setup()
+        require('configs.plugins.luasnip').setup()
       end,
     })
 
@@ -54,7 +54,7 @@ return require('packer').startup({
     use({
       'goolord/alpha-nvim',
       config = function()
-        require('configs.alpha').setup()
+        require('configs.plugins.alpha').setup()
       end,
     })
     use({
@@ -71,7 +71,7 @@ return require('packer').startup({
         'SmiteshP/nvim-navic',
       },
       config = function()
-        require('configs.lualine').setup()
+        require('configs.plugins.lualine').setup()
       end,
     })
     use({
@@ -98,7 +98,7 @@ return require('packer').startup({
         'kevinhwang91/nvim-hlslens',
       },
       config = function()
-        require('configs.scrollbar').setup()
+        require('configs.plugins.scrollbar').setup()
       end,
     })
     use({
@@ -108,7 +108,7 @@ return require('packer').startup({
         'kyazdani42/nvim-web-devicons',
       },
       config = function()
-        require('configs.telescope').setup()
+        require('configs.plugins.telescope').setup()
       end,
     })
     use({
@@ -134,13 +134,13 @@ return require('packer').startup({
     use({
       'edluffy/specs.nvim',
       config = function()
-        require('configs.specs').setup()
+        require('configs.plugins.specs').setup()
       end,
     })
     use({
       'https://gitlab.com/yorickpeterse/nvim-window',
       config = function()
-        require('configs.nvim-window').setup()
+        require('configs.plugins.nvim-window').setup()
       end,
     })
     use({
@@ -164,7 +164,7 @@ return require('packer').startup({
     use({
       'max397574/better-escape.nvim',
       config = function()
-        require('configs.better-escape').setup()
+        require('configs.plugins.better-escape').setup()
       end,
     })
     use('AndrewRadev/splitjoin.vim')
@@ -193,7 +193,7 @@ return require('packer').startup({
     use({
       'nvim-treesitter/nvim-treesitter',
       config = function()
-        require('configs.nvim-treesitter').setup()
+        require('configs.plugins.nvim-treesitter').setup()
       end,
       run = ':TSUpdate',
     })
@@ -210,7 +210,7 @@ return require('packer').startup({
         'nvim-treesitter/nvim-treesitter',
       },
       config = function()
-        require('configs.nvim-treesitter-textobjects').setup()
+        require('configs.plugins.nvim-treesitter-textobjects').setup()
       end,
     })
     use({
@@ -219,7 +219,7 @@ return require('packer').startup({
         'nvim-treesitter/nvim-treesitter',
       },
       config = function()
-        require('configs.syntax-tree-surfer').setup()
+        require('configs.plugins.syntax-tree-surfer').setup()
       end,
     })
     use({
@@ -229,7 +229,7 @@ return require('packer').startup({
         'nvim-treesitter/nvim-treesitter',
       },
       config = function()
-        require('configs.refactoring').setup()
+        require('configs.plugins.refactoring').setup()
       end,
     })
     use({
@@ -243,7 +243,7 @@ return require('packer').startup({
         },
       },
       config = function()
-        require('configs.yati').setup()
+        require('configs.plugins.yati').setup()
       end,
     })
     use({
@@ -259,7 +259,7 @@ return require('packer').startup({
         'nvim-treesitter/nvim-treesitter',
       },
       config = function()
-        require('configs.nvim-autopairs').setup()
+        require('configs.plugins.nvim-autopairs').setup()
       end,
     })
     use({
@@ -285,7 +285,7 @@ return require('packer').startup({
     use({
       'RRethy/vim-illuminate',
       config = function()
-        require('configs.illuminate').setup()
+        require('configs.plugins.illuminate').setup()
       end,
     })
     use({
@@ -295,7 +295,7 @@ return require('packer').startup({
     use({
       'sindrets/diffview.nvim',
       config = function()
-        require('configs.diffview')
+        require('configs.plugins.diffview')
       end,
     })
 
@@ -306,7 +306,7 @@ return require('packer').startup({
         require('mason-lspconfig').setup({
           automatic_installation = true,
         })
-        require('configs.lsp').setup()
+        require('configs.plugins.lsp').setup()
       end,
       requires = {
         'neovim/nvim-lspconfig',
@@ -315,7 +315,7 @@ return require('packer').startup({
     use({
       'lukas-reineke/lsp-format.nvim',
       config = function()
-        require('configs.lsp-format')
+        require('configs.plugins.lsp-format')
       end,
     })
     use({
@@ -325,7 +325,7 @@ return require('packer').startup({
         'neovim/nvim-lspconfig',
       },
       config = function()
-        require('configs.null-ls').setup()
+        require('configs.plugins.null-ls').setup()
       end,
     })
     use({
@@ -338,7 +338,7 @@ return require('packer').startup({
     use({
       'stevearc/aerial.nvim',
       config = function()
-        require('configs.aerial').setup()
+        require('configs.plugins.aerial').setup()
       end,
     })
     use({
@@ -347,7 +347,7 @@ return require('packer').startup({
         'kevinhwang91/promise-async',
       },
       config = function()
-        require('configs.ufo').setup()
+        require('configs.plugins.ufo').setup()
       end,
     })
     use({
@@ -357,20 +357,20 @@ return require('packer').startup({
         'williamboman/mason-lspconfig',
       },
       config = function()
-        require('configs.neodev').setup()
+        require('configs.plugins.neodev').setup()
       end,
     })
     use({
       'j-hui/fidget.nvim',
       config = function()
-        require('configs.fidget').setup()
+        require('configs.plugins.fidget').setup()
       end,
     })
     use({
       'folke/trouble.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
       config = function()
-        require('configs.trouble').setup()
+        require('configs.plugins.trouble').setup()
       end,
     })
 
@@ -378,14 +378,14 @@ return require('packer').startup({
     use({
       'mfussenegger/nvim-dap',
       config = function()
-        require('configs.dap').setup()
+        require('configs.plugins.dap').setup()
       end,
     })
     use({
       'rcarriga/nvim-dap-ui',
       requires = 'mfussenegger/nvim-dap',
       config = function()
-        require('configs.dapui').setup()
+        require('configs.plugins.dapui').setup()
       end,
     })
     use({
@@ -404,7 +404,7 @@ return require('packer').startup({
       'mfussenegger/nvim-dap-python',
       requires = 'mfussenegger/nvim-dap',
       config = function()
-        require('configs.dap-python').setup()
+        require('configs.plugins.dap-python').setup()
       end,
       ft = { 'python' },
     })
@@ -412,7 +412,7 @@ return require('packer').startup({
       'leoluz/nvim-dap-go',
       requires = 'mfussenegger/nvim-dap',
       config = function()
-        require('configs.dap-go').setup()
+        require('configs.plugins.dap-go').setup()
       end,
       ft = { 'go' },
     })
@@ -426,7 +426,7 @@ return require('packer').startup({
         'nvim-lua/plenary.nvim',
       },
       config = function()
-        require('configs.gitsigns').setup()
+        require('configs.plugins.gitsigns').setup()
       end,
     })
 
@@ -437,7 +437,7 @@ return require('packer').startup({
     use({
       'ray-x/go.nvim',
       config = function()
-        require('configs.go').setup()
+        require('configs.plugins.go').setup()
       end,
       ft = { 'go', 'godoc', 'gomod', 'gotmplhtml', 'gotexttmpl' },
       requires = {
@@ -484,7 +484,7 @@ return require('packer').startup({
         'nvim-lua/plenary.nvim',
       },
       config = function()
-        require('configs/nvim-lsp-ts-utils').setup()
+        require('configs.plugins.nvim-lsp-ts-utils').setup()
       end,
     })
 

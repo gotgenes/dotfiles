@@ -1,7 +1,7 @@
 local M = {}
 
 local null_ls = require('null-ls')
-local lsp_config = require('configs.lsp')
+local lsp_config = require('configs.plugins.lsp')
 
 function M.setup()
   local code_actions = null_ls.builtins.code_actions
