@@ -48,33 +48,10 @@ vim.opt.completeopt={'menuone', 'noselect'}
 
 -- Set 24-bit colors
 vim.o.termguicolors = true
+
+-- Set the leader key to <space>
+vim.g.mapleader = ' '
 EOF
-
-
-""""""""""""
-" MAPPINGS "
-""""""""""""
-
-" Set the leader
-lua vim.g.mapleader = ' '
-
-" Let j and k move up and down over line-wrapped lines, too.
-nnoremap <silent> j gj
-nnoremap <silent> k gk
-
-" Turn off highlighted search terms
-nnoremap <silent> <leader>/ :nohlsearch<CR>
-
-" Insert a timestamp
-nnoremap <F5> a<C-R>=strftime("%F")<CR><Esc>
-inoremap <F5> <C-R>=strftime("%F")<CR>
-
-" Make it easy to toggle folding
-nmap <leader><space> za
-vnoremap <leader><space> zf
-
-" Close help window
-nnoremap <silent> <leader>hc :helpclose<CR>
 
 
 """"""""""""""""""""
@@ -107,6 +84,8 @@ let g:operator_sandwich_no_default_key_mappings = 1
 """""""""""""""""""
 lua require('plugins')
 autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+
+lua require('configs.keymaps').setup()
 
 
 """"""""""""""""""""""""""
