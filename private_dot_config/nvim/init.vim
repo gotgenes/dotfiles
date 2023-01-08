@@ -54,23 +54,7 @@ vim.g.mapleader = ' '
 EOF
 
 
-""""""""""""""""""""
-" autocmd settings "
-""""""""""""""""""""
-
-" Recognize VTL
-autocmd BufNewFile,BufRead *.vtl set ft=velocity
-
-" Help Neovim check if file has changed on disk
-" https://github.com/neovim/neovim/issues/2127
-augroup checktime
-  autocmd!
-  if !has("gui_running")
-    "silent! necessary otherwise throws errors when using command
-    "line window.
-    autocmd BufEnter,FocusGained,BufEnter,FocusLost,WinLeave * checktime
-  endif
-augroup END
+lua require('configs.autocmds').setup()
 
 
 """"""""""""""""""""""""""""""""""""""""""""
