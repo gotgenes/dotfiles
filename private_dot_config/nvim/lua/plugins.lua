@@ -151,7 +151,15 @@ return require('packer').startup({
     })
 
     -- Productivity and Quality of Life
-    use('machakann/vim-sandwich')
+    use({
+      'machakann/vim-sandwich',
+      setup = function()
+        vim.g.operator_sandwich_no_default_key_mappings = 1
+      end,
+      config = function()
+        require('configs.plugins.vim-sandwich').setup()
+      end,
+    })
     use('ntpeters/vim-better-whitespace')
     use('schickling/vim-bufonly')
     use('AndrewRadev/inline_edit.vim')
