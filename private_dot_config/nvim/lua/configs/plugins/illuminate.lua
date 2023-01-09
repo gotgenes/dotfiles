@@ -4,7 +4,7 @@ local illuminate = require('illuminate')
 
 function M.setup()
   illuminate.configure({
-    delay = 1000,
+    delay = 2500,
     filetypes_denylist = {
       'Mundo',
       'MundoDiff',
