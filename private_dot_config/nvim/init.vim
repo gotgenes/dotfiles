@@ -57,15 +57,10 @@ EOF
 lua require('configs.autocmds').setup()
 
 
-""""""""""""""""""""""""""""""""""""""""""""
-" SETTINGS REQUIRED BEFORE LOADING PLUGINS "
-""""""""""""""""""""""""""""""""""""""""""""
-let g:operator_sandwich_no_default_key_mappings = 1
-
-
 """""""""""""""""""
 " INSTALL PLUGINS "
 """""""""""""""""""
+let g:operator_sandwich_no_default_key_mappings = 1
 lua require('plugins')
 
 lua require('configs.keymaps').setup()
@@ -90,48 +85,6 @@ nnoremap <silent> <leader>ntc :NvimTreeFindFile<CR>
 
 " Mundo configuration
 let g:mundo_right = 1
-
-
-" vim-sandwich configuration
-" define mappings
-" add
-silent! nmap <unique> <leader>sa <Plug>(sandwich-add)
-silent! xmap <unique> <leader>sa <Plug>(sandwich-add)
-silent! omap <unique> <leader>sa <Plug>(sandwich-add)
-
-" delete
-silent! nmap <unique> <leader>sd <Plug>(sandwich-delete)
-silent! xmap <unique> <leader>sd <Plug>(sandwich-delete)
-silent! nmap <unique> <leader>sdb <Plug>(sandwich-delete-auto)
-
-" replace
-silent! nmap <unique> <leader>sr <Plug>(sandwich-replace)
-silent! xmap <unique> <leader>sr <Plug>(sandwich-replace)
-silent! nmap <unique> <leader>srb <Plug>(sandwich-replace-auto)
-
-let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-let g:sandwich#recipes += [
-      \ {'buns': ['{ ', ' }'], 'nesting': 1, 'match_syntax': 1,
-      \  'kind': ['add', 'replace'], 'action': ['add'], 'input': ['{']},
-      \
-      \ {'buns': ['[ ', ' ]'], 'nesting': 1, 'match_syntax': 1,
-      \  'kind': ['add', 'replace'], 'action': ['add'], 'input': ['[']},
-      \
-      \ {'buns': ['( ', ' )'], 'nesting': 1, 'match_syntax': 1,
-      \  'kind': ['add', 'replace'], 'action': ['add'], 'input': ['(']},
-      \
-      \ {'buns': ['{\s*', '\s*}'],   'nesting': 1, 'regex': 1,
-      \  'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'],
-      \  'action': ['delete'], 'input': ['{']},
-      \
-      \ {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1,
-      \  'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'],
-      \  'action': ['delete'], 'input': ['[']},
-      \
-      \ {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1,
-      \  'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'],
-      \  'action': ['delete'], 'input': ['(']},
-      \ ]
 
 
 " vim-better-whitespace configuration
