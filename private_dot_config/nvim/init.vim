@@ -86,17 +86,5 @@ let g:mundo_right = 1
 let g:matchup_matchparen_offscreen = {'method': 'popup'}
 
 
-" vim-go configuration
-let g:go_code_completion_enabled = 0
-let g:go_doc_keywordprg_enabled = 0
-let g:go_def_mapping_enabled = 0
-let g:go_highlight_operators = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_function_calls = 0
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 0
-
-
 " vimtex configuration
 let g:tex_flavor = 'latex'
