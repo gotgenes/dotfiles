@@ -87,14 +87,6 @@ nnoremap <silent> <leader>ntc :NvimTreeFindFile<CR>
 let g:mundo_right = 1
 
 
-" vim-better-whitespace configuration
-let g:better_whitespace_enabled=1
-let g:strip_whitespace_on_save=1
-let g:better_whitespace_filetypes_blacklist=[
-      \ 'packer', 'diff', 'git', 'gitcommit', 'qf', 'help', 'markdown', 'fugitive']
-highlight link ExtraWhitespace Error
-
-
 " vim-matchup configuration
 let g:matchup_matchparen_offscreen = {'method': 'popup'}
 

@@ -152,6 +152,12 @@ return require('packer').startup({
 
     -- Productivity and Quality of Life
     use({
+      'echasnovski/mini.nvim',
+      config = function()
+        require('mini.surround').setup()
+      end,
+    })
+    use({
       'machakann/vim-sandwich',
       setup = function()
         vim.g.operator_sandwich_no_default_key_mappings = 1
@@ -160,7 +166,12 @@ return require('packer').startup({
         require('configs.plugins.vim-sandwich').setup()
       end,
     })
-    use('ntpeters/vim-better-whitespace')
+    use({
+      'ntpeters/vim-better-whitespace',
+      config = function()
+        require('configs.plugins.vim-better-whitespace').setup()
+      end,
+    })
     use('schickling/vim-bufonly')
     use('AndrewRadev/inline_edit.vim')
     use({
