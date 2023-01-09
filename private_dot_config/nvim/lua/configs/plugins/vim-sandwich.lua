@@ -90,6 +90,7 @@ local function set_keymaps()
   }, {
     mode = 'n',
     prefix = '<leader>s',
+    remap = true,
   })
 end
 
