@@ -67,7 +67,6 @@ let g:operator_sandwich_no_default_key_mappings = 1
 " INSTALL PLUGINS "
 """""""""""""""""""
 lua require('plugins')
-autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 
 lua require('configs.keymaps').setup()
 
