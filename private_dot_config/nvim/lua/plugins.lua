@@ -123,11 +123,7 @@ return require('packer').startup({
         'kyazdani42/nvim-web-devicons', -- optional, for file icon
       },
       config = function()
-        require('nvim-tree').setup({
-          view = {
-            width = 40,
-          },
-        })
+        require('configs.plugins.nvim-tree').setup()
       end,
     })
     use('simnalamburt/vim-mundo')
