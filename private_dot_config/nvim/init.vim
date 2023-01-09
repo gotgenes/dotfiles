@@ -78,11 +78,6 @@ lua require('configs.plugins.diagnostic').setup()
 let g:no_python_maps = 1
 
 
-" nvim-tree configuration
-nnoremap <silent> <leader>ntt :NvimTreeToggle<CR>
-nnoremap <silent> <leader>ntc :NvimTreeFindFile<CR>
-
-
 " Mundo configuration
 let g:mundo_right = 1
 
