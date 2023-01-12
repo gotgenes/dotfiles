@@ -1,3 +1,5 @@
+vim.g.no_python_maps = 1
+
 require('packer').init({
   max_jobs = 60,
 })
@@ -126,7 +128,12 @@ return require('packer').startup({
         require('configs.plugins.nvim-tree').setup()
       end,
     })
-    use('simnalamburt/vim-mundo')
+    use({
+      'simnalamburt/vim-mundo',
+      config = function()
+        vim.g.mundo_right = 1
+      end,
+    })
     use({
       'edluffy/specs.nvim',
       config = function()
@@ -296,7 +303,12 @@ return require('packer').startup({
         require('nvim-ts-autotag').setup()
       end,
     })
-    use('andymass/vim-matchup')
+    use({
+      'andymass/vim-matchup',
+      config = function()
+        vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+      end
+    })
     use({
       'RRethy/vim-illuminate',
       config = function()
