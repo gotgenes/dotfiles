@@ -60,7 +60,6 @@ lua require('configs.autocmds').setup()
 """""""""""""""""""
 " INSTALL PLUGINS "
 """""""""""""""""""
-let g:operator_sandwich_no_default_key_mappings = 1
 lua require('plugins')
 
 lua require('configs.keymaps').setup()
@@ -72,19 +71,3 @@ lua require('configs.keymaps').setup()
 
 " Diagnostic
 lua require('configs.plugins.diagnostic').setup()
-
-
-" python.vim builtin
-let g:no_python_maps = 1
-
-
-" Mundo configuration
-let g:mundo_right = 1
-
-
-" vim-matchup configuration
-let g:matchup_matchparen_offscreen = {'method': 'popup'}
-
-
-" vimtex configuration
-let g:tex_flavor = 'latex'
