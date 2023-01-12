@@ -155,12 +155,6 @@ return require('packer').startup({
 
     -- Productivity and Quality of Life
     use({
-      'echasnovski/mini.nvim',
-      config = function()
-        require('mini.surround').setup()
-      end,
-    })
-    use({
       'machakann/vim-sandwich',
       setup = function()
         vim.g.operator_sandwich_no_default_key_mappings = 1
@@ -307,7 +301,7 @@ return require('packer').startup({
       'andymass/vim-matchup',
       config = function()
         vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-      end
+      end,
     })
     use({
       'RRethy/vim-illuminate',
