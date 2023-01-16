@@ -2,7 +2,7 @@ require('configs.settings').setup()
 
 require('configs.autocmds').setup()
 
-require('plugins')
+require('plugins').setup()
 
 require('configs.keymaps').setup()
 
