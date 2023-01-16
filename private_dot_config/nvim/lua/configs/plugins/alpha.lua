@@ -152,7 +152,7 @@ local buttons = {
     dashboard.button('f', '  Find file', '<Cmd>Telescope find_files<CR>'),
     dashboard.button('g', '  Live grep', '<Cmd>Telescope live_grep<CR>'),
     dashboard.button('m', '  Mason', '<Cmd>Mason<CR>'),
-    dashboard.button('u', '  Update plugins', '<Cmd>PackerSync<CR>'),
+    dashboard.button('u', '  Check for plugin updates', '<Cmd>Lazy check<CR>'),
     dashboard.button('q', '  Quit', '<Cmd>qa<CR>'),
   },
   position = 'center',
