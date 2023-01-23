@@ -6,7 +6,8 @@ function M.setup()
   colorizer.setup({
     filetypes = {
       '*',
-      '!packer',
+      '!lazy',
+      '!mason',
     },
     user_default_options = {
       names = false,
