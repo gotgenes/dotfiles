@@ -32,6 +32,7 @@ function M.setup()
       'make',
       'markdown',
       'markdown_inline',
+      'mermaid',
       'ninja',
       'perl',
       'python',
