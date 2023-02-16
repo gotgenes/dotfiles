@@ -16,11 +16,6 @@ local function create_automcmds()
       command = 'checktime',
     })
   end
-
-  vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
-    pattern = 'plugins.lua',
-    command = 'source <afile> | PackerCompile',
-  })
 end
 
 function M.setup()
