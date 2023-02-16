@@ -6,7 +6,7 @@ local lsp_config = require('configs.plugins.lsp')
 
 function M.setup()
   neodev.setup()
-  nvim_lsp.sumneko_lua.setup({
+  nvim_lsp.lua_ls.setup({
     capabilities = lsp_config.capabilities,
     on_attach = lsp_config.on_attach,
   })
