@@ -526,10 +526,16 @@ local function ensure_lazy_installed()
   end
 end
 
+local function configure_lazy_keymapping()
+  local ViewConfig = require('lazy.view.config')
+  ViewConfig.keys.profile_filter = '<C-p>'
+end
+
 function M.setup()
   vim.g.no_python_maps = 1
 
   ensure_lazy_installed()
+  configure_lazy_keymapping()
   require('lazy').setup(spec)
 end
 
