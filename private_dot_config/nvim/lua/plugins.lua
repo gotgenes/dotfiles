@@ -418,7 +418,10 @@ local spec = {
   },
   {
     'mfussenegger/nvim-dap-python',
-    dependencies = 'mfussenegger/nvim-dap',
+    dependencies = {
+      'mfussenegger/nvim-dap',
+      'rcarriga/nvim-dap-ui',
+    },
     config = function()
       require('configs.plugins.dap-python').setup()
     end,

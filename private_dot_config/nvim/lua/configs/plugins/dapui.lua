@@ -14,22 +14,24 @@ end
 function M.setup()
   dapui.setup({
     layouts = {
-      elements = {
-        { id = 'watches', size = 0.20 },
-        { id = 'breakpoints', size = 0.20 },
-        { id = 'stacks', size = 0.25 },
-        { id = 'scopes', size = 0.35 },
+      {
+        elements = {
+          { id = 'watches', size = 0.20 },
+          { id = 'breakpoints', size = 0.20 },
+          { id = 'stacks', size = 0.25 },
+          { id = 'scopes', size = 0.35 },
+        },
+        size = 50,
+        position = 'right',
       },
-      size = 50,
-      position = 'right',
-    },
-    {
-      elements = {
-        'repl',
-        'console',
+      {
+        elements = {
+          { id = 'repl', size = 0.5 },
+          { id = 'console', size = 0.5 },
+        },
+        size = 10,
+        position = 'bottom',
       },
-      size = 10,
-      position = 'bottom',
     },
   })
 
