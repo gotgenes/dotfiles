@@ -310,6 +310,7 @@ local spec = {
   },
   {
     'sindrets/diffview.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('configs.plugins.diffview')
     end,
