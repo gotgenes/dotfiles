@@ -21,7 +21,7 @@ function M.setup()
           { id = 'stacks', size = 0.25 },
           { id = 'scopes', size = 0.35 },
         },
-        size = 50,
+        size = 80,
         position = 'right',
       },
       {
