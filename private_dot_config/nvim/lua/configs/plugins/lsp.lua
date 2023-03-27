@@ -65,17 +65,9 @@ local function set_capabilities()
 end
 
 function M.on_attach(client, bufnr)
-  M.on_attach_no_symbols(client, bufnr)
-
-  if vim.b.lsp_symbol_support_loaded then
-    return
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
   end
-
-  navic.attach(client, bufnr)
-  vim.b.lsp_symbol_support_loaded = 1
-end
-
-function M.on_attach_no_symbols(client, bufnr)
   lsp_format.on_attach(client)
   if vim.b.lsp_buffer_set_up then
     return

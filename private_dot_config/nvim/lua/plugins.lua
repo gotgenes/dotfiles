@@ -74,7 +74,7 @@ local spec = {
   {
     'SmiteshP/nvim-navic',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
+      'neovim/nvim-lspconfig',
     },
     config = function()
       require('nvim-navic').setup()
@@ -319,18 +319,21 @@ local spec = {
   -- LSP
   {
     'williamboman/mason-lspconfig.nvim',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+    },
     config = function()
       require('mason-lspconfig').setup({
         automatic_installation = true,
       })
       require('configs.plugins.lsp').setup()
     end,
-    dependencies = {
-      'neovim/nvim-lspconfig',
-    },
   },
   {
     'lukas-reineke/lsp-format.nvim',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+    },
     config = function()
       require('configs.plugins.lsp-format')
     end,

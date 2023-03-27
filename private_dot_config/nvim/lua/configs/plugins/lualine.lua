@@ -32,7 +32,9 @@ function M.setup()
       },
       lualine_c = {
         {
-          navic.get_location,
+          function()
+            return navic.get_location()
+          end,
           cond = navic.is_available,
         },
       },
