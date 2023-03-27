@@ -18,7 +18,7 @@ function M.setup()
       code_actions.eslint_d,
       formatting.prettierd,
     },
-    on_attach = lsp_config.on_attach_no_symbols,
+    on_attach = lsp_config.on_attach,
   })
 end
 
