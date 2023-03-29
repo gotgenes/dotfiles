@@ -19,8 +19,7 @@ local function set_keymaps(bufnr)
 end
 
 function M.setup()
-  local debugpy_install_path = vim.fn.stdpath('data') .. '/mason/packages/debugpy/venv/bin/python'
-  dap_python.setup(debugpy_install_path)
+  dap_python.setup()
   dap_python.test_runner = 'pytest'
   _G.set_dap_python_keybindings = function()
     local buf = vim.api.nvim_get_current_buf()
