@@ -29,7 +29,7 @@ function M.setup()
           { id = 'repl', size = 0.5 },
           { id = 'console', size = 0.5 },
         },
-        size = 10,
+        size = 14,
         position = 'bottom',
       },
     },
