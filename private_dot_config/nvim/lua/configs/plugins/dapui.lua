@@ -11,7 +11,26 @@ local function set_hlgroups()
   sign('DapLogPoint', { text = '◆', texthl = 'DapLogPoint', linehl = '', numhl = '' })
 end
 
+local function set_keymaps()
+  local wk = require('which-key')
+  wk.register({
+    d = {
+      O = { dapui.open, 'Open Debug UI' },
+      C = { dapui.close, 'Close Debug UI' },
+    },
+  }, {
+    prefix = '<leader>',
+  })
+end
+
+local function set_commands()
+  vim.api.nvim_create_user_command('DapUIOpen', dapui.open, {})
+  vim.api.nvim_create_user_command('DapUIClose', dapui.close, {})
+end
+
 function M.setup()
+  set_commands()
+  set_keymaps()
   dapui.setup({
     layouts = {
       {
@@ -42,7 +61,7 @@ function M.setup()
     dapui.close()
   end
   dap.listeners.before.event_exited['dapui_config'] = function()
-    dapui.close()
+    -- dapui.close()
   end
 
   set_hlgroups()
