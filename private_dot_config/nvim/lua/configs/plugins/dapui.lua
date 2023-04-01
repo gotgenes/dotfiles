@@ -15,8 +15,7 @@ local function set_keymaps()
   local wk = require('which-key')
   wk.register({
     d = {
-      O = { dapui.open, 'Open Debug UI' },
-      C = { dapui.close, 'Close Debug UI' },
+      T = { dapui.toggle, 'Toggle Debug UI' },
     },
   }, {
     prefix = '<leader>',
@@ -26,6 +25,7 @@ end
 local function set_commands()
   vim.api.nvim_create_user_command('DapUIOpen', dapui.open, {})
   vim.api.nvim_create_user_command('DapUIClose', dapui.close, {})
+  vim.api.nvim_create_user_command('DapUIToggle', dapui.toggle, {})
 end
 
 function M.setup()
