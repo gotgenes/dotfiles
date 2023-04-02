@@ -1,9 +1,7 @@
 local M = {}
 
-local dap_go = require('dap-go')
-local wk = require('which-key')
-
-local function set_keymaps(bufnr)
+function M.set_keymaps(bufnr)
+  local wk = require('which-key')
   wk.register({
     d = {
       t = {
@@ -18,11 +16,7 @@ local function set_keymaps(bufnr)
 end
 
 function M.setup()
-  dap_go.setup()
-  _G.set_dap_go_keybindings = function()
-    local buf = vim.api.nvim_get_current_buf()
-    set_keymaps(buf)
-  end
+  require('dap-go').setup()
 end
 
 return M
