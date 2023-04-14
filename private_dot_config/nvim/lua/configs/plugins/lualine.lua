@@ -52,7 +52,15 @@ function M.setup()
       lualine_z = {},
     },
     tabline = {},
-    extensions = { 'fugitive', 'nvim-tree' },
+    extensions = {
+      'aerial',
+      'fugitive',
+      'lazy',
+      'mundo',
+      'nvim-dap-ui',
+      'nvim-tree',
+      'trouble',
+    },
     winbar = {
       lualine_a = {},
       lualine_b = {},
