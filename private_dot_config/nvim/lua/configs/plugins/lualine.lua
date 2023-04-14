@@ -30,14 +30,7 @@ function M.setup()
           source = diff_source,
         },
       },
-      lualine_c = {
-        {
-          function()
-            return navic.get_location()
-          end,
-          cond = navic.is_available,
-        },
-      },
+      lualine_c = {},
       lualine_x = {
         {
           'diagnostics',
@@ -60,6 +53,21 @@ function M.setup()
     },
     tabline = {},
     extensions = { 'fugitive', 'nvim-tree' },
+    winbar = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {
+        {
+          function()
+            return navic.get_location()
+          end,
+          cond = navic.is_available,
+        },
+      },
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {},
+    },
   })
 end
 
