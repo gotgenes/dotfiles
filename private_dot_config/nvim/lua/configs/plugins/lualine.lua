@@ -18,6 +18,10 @@ function M.setup()
   lualine.setup({
     options = {
       theme = 'catppuccin',
+      disabled_filetypes = {
+        statusline = { 'alpha' },
+        winbar = { 'alpha' },
+      },
       globalstatus = true,
     },
     sections = {
