@@ -192,7 +192,6 @@ local spec = {
       require('persisted').setup()
     end,
   },
-  { 'gpanders/editorconfig.nvim' },
   {
     'klen/nvim-config-local',
     config = function()
