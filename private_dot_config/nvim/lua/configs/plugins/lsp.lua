@@ -93,11 +93,6 @@ function M.setup()
     capabilities = M.capabilities,
     on_attach = M.on_attach,
   })
-
-  nvim_lsp.omnisharp.setup({
-    capabilities = M.capabilities,
-    on_attach = M.on_attach,
-  })
 end
 
 return M
