@@ -1,8 +1,5 @@
 local M = {}
 
-local lualine = require('lualine')
-local navic = require('nvim-navic')
-
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
   if gitsigns then
@@ -15,6 +12,7 @@ local function diff_source()
 end
 
 function M.setup()
+  local lualine = require('lualine')
   lualine.setup({
     options = {
       theme = 'catppuccin',
@@ -59,14 +57,7 @@ function M.setup()
     winbar = {
       lualine_a = {},
       lualine_b = { 'filename' },
-      lualine_c = {
-        {
-          function()
-            return navic.get_location()
-          end,
-          cond = navic.is_available,
-        },
-      },
+      lualine_c = { 'navic' },
       lualine_x = {},
       lualine_y = {},
       lualine_z = {},
