@@ -95,15 +95,6 @@ zinit ice \
     nocompile
 zinit light zdharma-continuum/null
 
-if [[ -v HOMEBREW_PREFIX ]]; then
-    [[ -f "$(brew --prefix asdf)/libexec/asdf.sh" ]] && source "$(brew --prefix asdf)/libexec/asdf.sh"
-else
-    [[ -f "$HOME/.asdf/asdf.sh" ]] && source "$HOME/.asdf/asdf.sh"
-fi
-
-# Remove shims and let asdf-direnv set the paths. See
-# https://github.com/asdf-community/asdf-direnv
-export path=( ${path[@]:#*asdf/shims*} )
 [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
 zinit ice \
