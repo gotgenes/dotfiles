@@ -37,7 +37,7 @@ function M.setup()
         {
           'diagnostics',
           sources = { 'nvim_diagnostic' },
-          symbols = { error = ' ', warn = ' ', hint = ' ', info = ' ' },
+          symbols = { error = '󰅚 ', warn = '󰀪 ', hint = '󰌶 ', info = ' ' },
         },
       },
       lualine_y = { 'filetype' },
