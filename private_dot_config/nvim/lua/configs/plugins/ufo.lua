@@ -4,7 +4,7 @@ local ufo = require('ufo')
 
 local function fold_text_handler(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
-  local suffix = ('  %d '):format(endLnum - lnum)
+  local suffix = (' 󰁂 %d '):format(endLnum - lnum)
   local sufWidth = vim.fn.strdisplaywidth(suffix)
   local targetWidth = width - sufWidth
   local curWidth = 0
