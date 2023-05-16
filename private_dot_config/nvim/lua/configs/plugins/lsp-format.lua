@@ -7,6 +7,9 @@ function M.setup()
     python = {
       sync = true,
     },
+    lua = {
+      order = { 'lua_ls', 'null-ls' },
+    },
   })
 end
 
