@@ -334,7 +334,7 @@ local spec = {
       'neovim/nvim-lspconfig',
     },
     config = function()
-      require('configs.plugins.lsp-format')
+      require('configs.plugins.lsp-format').setup()
     end,
   },
   {
