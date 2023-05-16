@@ -136,7 +136,7 @@ local spec = {
     end,
   },
   {
-    'https://gitlab.com/yorickpeterse/nvim-window',
+    'yorickpeterse/nvim-window',
     config = function()
       require('configs.plugins.nvim-window').setup()
     end,
