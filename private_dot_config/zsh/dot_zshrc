@@ -45,6 +45,11 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 
 zinit light zsh-users/zsh-history-substring-search
 
+export ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true
+export ZSH_TAB_TITLE_CONCAT_FOLDER_PROCESS=true
+export ZSH_TAB_TITLE_ADDITIONAL_TERMS='kitty'
+zinit light trystan2k/zsh-tab-title
+
 function zvm_config() {
     ZVM_VI_SURROUND_BINDKEY="s-prefix"
 }
