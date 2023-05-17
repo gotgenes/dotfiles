@@ -3,4 +3,4 @@ gui:
   theme:
     selectedLineBgColor:
       - black
-  showIcons: true
+  showIcons: false
