@@ -314,6 +314,14 @@ local spec = {
       require('configs.plugins.diffview')
     end,
   },
+  {
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    config = function()
+      require('configs.plugins.copilot').setup()
+    end,
+  },
 
   -- LSP
   {
