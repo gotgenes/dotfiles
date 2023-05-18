@@ -19,11 +19,23 @@ function M.setup()
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.close(),
+      ['<C-e>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.close()
+        else
+          fallback()
+        end
+      end, { 'i' }),
       ['<CR>'] = cmp.mapping.confirm({
         select = true,
         behavior = cmp.ConfirmBehavior.Replace,
       }),
+      ['<C-y>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          return cmp.mapping.confirm({ selecet = false })
+        end
+        fallback()
+      end, { 'i' }),
     }),
     sources = cmp.config.sources({
       {
@@ -64,6 +76,13 @@ function M.setup()
       { name = 'cmdline' },
     }),
   })
+  cmp.event:on('menu_opened', function()
+    vim.b.copilot_suggestion_hidden = true
+  end)
+
+  cmp.event:on('menu_closed', function()
+    vim.b.copilot_suggestion_hidden = false
+  end)
 end
 
 return M
