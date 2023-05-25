@@ -5,12 +5,6 @@ function M.setup()
   copilot.setup({
     suggestion = {
       auto_trigger = true,
-      keymap = {
-        accept = '<C-y>',
-        next = '<C-)>',
-        prev = '<C-(>',
-        dismiss = '<C-e>',
-      },
     },
   })
 end
