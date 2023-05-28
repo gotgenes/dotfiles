@@ -1,10 +1,7 @@
 local M = {}
 
-local scrollbar = require('scrollbar')
-local scrollbar_search = require('scrollbar.handlers.search')
-local wk = require('which-key')
-
 local function set_keymaps()
+  local wk = require('which-key')
   wk.register({
     ['n'] = { [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], '* search' },
     ['N'] = { [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], '* search' },
@@ -16,6 +13,8 @@ local function set_keymaps()
 end
 
 function M.setup()
+  local scrollbar = require('scrollbar')
+  local scrollbar_search = require('scrollbar.handlers.search')
   scrollbar.setup({
     handle = {
       highlight = 'ColorColumn',

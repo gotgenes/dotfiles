@@ -1,8 +1,7 @@
 local M = {}
 
-local specs = require('specs')
-
 function M.setup()
+  local specs = require('specs')
   specs.setup({
     min_jump = 10,
     popup = {

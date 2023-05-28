@@ -1,11 +1,5 @@
 local M = {}
 
-local cmp_lsp = require('cmp_nvim_lsp')
-local lsp_format = require('lsp-format')
-local nvim_lsp = require('lspconfig')
-local navic = require('nvim-navic')
-local wk = require('which-key')
-
 local function set_commands()
   -- Commands.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -26,6 +20,7 @@ local function set_commands()
 end
 
 local function set_keymaps(bufnr)
+  local wk = require('which-key')
   wk.register({
     g = {
       name = 'LSP goto',
@@ -54,6 +49,7 @@ local function set_keymaps(bufnr)
 end
 
 local function set_capabilities()
+  local cmp_lsp = require('cmp_nvim_lsp')
   -- Add capabilities for nvim-cmp
   local capabilities = cmp_lsp.default_capabilities()
   -- Add capabilities for nvim-ufo
@@ -65,6 +61,8 @@ local function set_capabilities()
 end
 
 function M.on_attach(client, bufnr)
+  local navic = require('nvim-navic')
+  local lsp_format = require('lsp-format')
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
@@ -83,6 +81,8 @@ function M.on_attach(client, bufnr)
 end
 
 function M.setup()
+  local nvim_lsp = require('lspconfig')
+
   set_capabilities()
   nvim_lsp.pyright.setup({
     capabilities = M.capabilities,

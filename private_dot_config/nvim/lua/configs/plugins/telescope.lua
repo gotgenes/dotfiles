@@ -1,12 +1,8 @@
 local M = {}
 
-local telescope = require('telescope')
-local builtin = require('telescope.builtin')
-local actions = require('telescope.actions')
-local trouble = require('trouble.providers.telescope')
-local wk = require('which-key')
-
 local function set_keymaps()
+  local builtin = require('telescope.builtin')
+  local wk = require('which-key')
   wk.register({
     t = {
       name = 'Telescope',
@@ -38,6 +34,10 @@ local function set_keymaps()
 end
 
 function M.setup()
+  local telescope = require('telescope')
+  local actions = require('telescope.actions')
+  local trouble = require('trouble.providers.telescope')
+
   telescope.setup({
     defaults = {
       path_display = { 'truncate' },

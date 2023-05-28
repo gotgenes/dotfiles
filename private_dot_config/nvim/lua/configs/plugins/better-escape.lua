@@ -1,8 +1,7 @@
 local M = {}
 
-local better_escape = require('better_escape')
-
 function M.setup()
+  local better_escape = require('better_escape')
   better_escape.setup({
     mapping = { 'jk', 'jj', 'kj' },
     keys = function()

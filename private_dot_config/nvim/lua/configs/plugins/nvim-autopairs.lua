@@ -1,12 +1,10 @@
 local M = {}
 
-local npairs = require('nvim-autopairs')
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local cmp = require('cmp')
-local Rule = require('nvim-autopairs.rule')
-local cond = require('nvim-autopairs.conds')
-
 function M.setup()
+  local npairs = require('nvim-autopairs')
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  local cmp = require('cmp')
+  local Rule = require('nvim-autopairs.rule')
   npairs.setup({
     check_ts = true,
   })

@@ -1,8 +1,7 @@
 local M = {}
 
-local ts_configs = require('nvim-treesitter.configs')
-
 function M.setup()
+  local ts_configs = require('nvim-treesitter.configs')
   ts_configs.setup({
     ensure_installed = {
       'bash',

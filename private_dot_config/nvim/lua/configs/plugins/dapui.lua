@@ -1,8 +1,5 @@
 local M = {}
 
-local dap = require('dap')
-local dapui = require('dapui')
-
 local function set_hlgroups()
   local sign = vim.fn.sign_define
 
@@ -12,6 +9,7 @@ local function set_hlgroups()
 end
 
 local function set_keymaps()
+  local dapui = require('dapui')
   local wk = require('which-key')
   wk.register({
     d = {
@@ -23,12 +21,16 @@ local function set_keymaps()
 end
 
 local function set_commands()
+  local dapui = require('dapui')
   vim.api.nvim_create_user_command('DapUIOpen', dapui.open, {})
   vim.api.nvim_create_user_command('DapUIClose', dapui.close, {})
   vim.api.nvim_create_user_command('DapUIToggle', dapui.toggle, {})
 end
 
 function M.setup()
+  local dap = require('dap')
+  local dapui = require('dapui')
+
   set_commands()
   set_keymaps()
   dapui.setup({

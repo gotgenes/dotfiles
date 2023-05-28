@@ -1,10 +1,10 @@
 local M = {}
 
-local cmp = require('cmp')
-local lspkind = require('lspkind')
-local luasnip = require('luasnip')
-
 function M.setup()
+  local cmp = require('cmp')
+  local lspkind = require('lspkind')
+  local luasnip = require('luasnip')
+
   cmp.setup({
     snippet = {
       expand = function(args)

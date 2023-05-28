@@ -1,7 +1,5 @@
 local M = {}
 
-local ufo = require('ufo')
-
 local function fold_text_handler(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
   local suffix = (' 󰁂 %d '):format(endLnum - lnum)
@@ -31,6 +29,7 @@ local function fold_text_handler(virtText, lnum, endLnum, width, truncate)
 end
 
 function M.setup()
+  local ufo = require('ufo')
   ufo.setup({
     fold_virt_text_handler = fold_text_handler,
   })

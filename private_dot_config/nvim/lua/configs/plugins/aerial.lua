@@ -1,9 +1,7 @@
 local M = {}
 
-local aerial = require('aerial')
-local wk = require('which-key')
-
 local function set_keymaps(bufnr)
+  local wk = require('which-key')
   wk.register({
     a = {
       name = 'Aerial',
@@ -24,6 +22,7 @@ local function set_keymaps(bufnr)
 end
 
 function M.setup()
+  local aerial = require('aerial')
   aerial.setup({
     layout = {
       min_width = 20,

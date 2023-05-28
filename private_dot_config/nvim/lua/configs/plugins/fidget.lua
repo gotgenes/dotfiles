@@ -1,8 +1,7 @@
 local M = {}
 
-local fidget = require('fidget')
-
 function M.setup()
+  local fidget = require('fidget')
   fidget.setup({
     text = {
       spinner = 'dots',

@@ -1,9 +1,7 @@
 local M = {}
 
-local luasnip = require('luasnip')
-local wk = require('which-key')
-
 local function set_keymaps()
+  local wk = require('which-key')
   wk.register({
     ['<C-s>'] = { '<Plug>luasnip-expand-snippet', 'expand snippet (luasnip)' },
     ['<C-j>'] = { '<Plug>luasnip-jump-next', 'jump next position (luasnip)' },
@@ -17,6 +15,7 @@ local function set_keymaps()
 end
 
 function M.setup()
+  local luasnip = require('luasnip')
   luasnip.config.setup({
     history = true,
   })
