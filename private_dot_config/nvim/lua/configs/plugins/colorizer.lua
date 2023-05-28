@@ -1,8 +1,7 @@
 local M = {}
 
-local colorizer = require('colorizer')
-
 function M.setup()
+  local colorizer = require('colorizer')
   colorizer.setup({
     filetypes = {
       '*',

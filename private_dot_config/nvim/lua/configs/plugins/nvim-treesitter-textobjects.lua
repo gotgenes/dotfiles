@@ -1,9 +1,7 @@
 local M = {}
 
-local ts_configs = require('nvim-treesitter.configs')
-local wk = require('which-key')
-
 local function set_keymaps()
+  local wk = require('which-key')
   local mappings = {
     [']m'] = { '<cmd>TSTextobjectGotoNextStart @function.outer<CR>', 'Go to next function start' },
     ['[m'] = { '<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>', 'Go to previous function start' },
@@ -20,6 +18,7 @@ local function set_keymaps()
 end
 
 function M.setup()
+  local ts_configs = require('nvim-treesitter.configs')
   ts_configs.setup({
     textobjects = {
       select = {

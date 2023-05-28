@@ -1,9 +1,7 @@
 local M = {}
 
-local refactoring = require('refactoring')
-local wk = require('which-key')
-
 local function set_keymaps()
+  local wk = require('which-key')
   wk.register({
     r = {
       name = 'refactoring',
@@ -36,6 +34,7 @@ local function set_keymaps()
 end
 
 function M.setup()
+  local refactoring = require('refactoring')
   refactoring.setup({})
   set_keymaps()
 end

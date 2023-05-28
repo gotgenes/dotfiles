@@ -1,9 +1,8 @@
 local M = {}
 
-local null_ls = require('null-ls')
-local lsp_config = require('configs.plugins.lsp')
-
 function M.setup()
+  local null_ls = require('null-ls')
+  local lsp_config = require('configs.plugins.lsp')
   local code_actions = null_ls.builtins.code_actions
   local diagnostics = null_ls.builtins.diagnostics
   local formatting = null_ls.builtins.formatting

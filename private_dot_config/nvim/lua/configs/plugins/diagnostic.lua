@@ -1,7 +1,5 @@
 local M = {}
 
-local wk = require('which-key')
-
 local function set_commands()
   vim.cmd('command! DiagnosticPrev lua vim.diagnostic.goto_prev()')
   vim.cmd('command! DiagnosticNext lua vim.diagnostic.goto_next()')
@@ -9,6 +7,7 @@ local function set_commands()
 end
 
 local function set_keymaps()
+  local wk = require('which-key')
   wk.register({
     e = {
       name = 'Diagnostic',

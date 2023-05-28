@@ -1,8 +1,7 @@
 local M = {}
 
-local wk = require('which-key')
-
 local function set_keymaps()
+  local wk = require('which-key')
   wk.register({
     d = {
       name = 'debugger',

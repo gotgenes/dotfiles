@@ -1,8 +1,7 @@
 local M = {}
 
-local catppuccin = require('catppuccin')
-
 function M.setup()
+  local catppuccin = require('catppuccin')
   catppuccin.setup({
     flavour = 'mocha',
     styles = {

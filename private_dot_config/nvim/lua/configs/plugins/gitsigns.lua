@@ -1,9 +1,8 @@
 local M = {}
 
-local gs = require('gitsigns')
-local wk = require('which-key')
-
 local function set_keymaps(bufnr)
+  local gs = require('gitsigns')
+  local wk = require('which-key')
   wk.register({
     h = {
       name = 'Gitsigns',
@@ -65,6 +64,7 @@ local function set_keymaps(bufnr)
 end
 
 function M.setup()
+  local gs = require('gitsigns')
   gs.setup({ on_attach = set_keymaps })
 end
 

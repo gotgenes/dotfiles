@@ -1,8 +1,7 @@
 local M = {}
 
-local illuminate = require('illuminate')
-
 function M.setup()
+  local illuminate = require('illuminate')
   illuminate.configure({
     delay = 2500,
     filetypes_denylist = {

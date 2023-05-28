@@ -1,8 +1,7 @@
 local M = {}
 
-local lsp_format = require('lsp-format')
-
 function M.setup()
+  local lsp_format = require('lsp-format')
   lsp_format.setup({
     python = {
       sync = true,
