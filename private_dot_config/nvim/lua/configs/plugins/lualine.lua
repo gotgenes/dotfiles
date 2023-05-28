@@ -11,14 +11,24 @@ local function diff_source()
   end
 end
 
+local disabled_filetypes = {
+  'alpha',
+  'dap-repl',
+  'dapui_breakpoints',
+  'dapui_console',
+  'dapui_scopes',
+  'dapui_stacks',
+  'dapui_watches',
+}
+
 function M.setup()
   local lualine = require('lualine')
   lualine.setup({
     options = {
       theme = 'catppuccin',
       disabled_filetypes = {
-        statusline = { 'alpha' },
-        winbar = { 'alpha' },
+        statusline = disabled_filetypes,
+        winbar = disabled_filetypes,
       },
       globalstatus = true,
     },
