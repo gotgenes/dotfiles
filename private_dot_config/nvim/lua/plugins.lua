@@ -83,10 +83,7 @@ local spec = {
   {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
-      require('indent_blankline').setup({
-        buftype_exclude = { 'help', 'packer' },
-        filetype_exclude = { 'alpha' },
-      })
+      require('configs.plugins.indent-blankline').setup()
     end,
   },
   {
