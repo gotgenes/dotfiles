@@ -87,6 +87,13 @@ function M.setup()
   nvim_lsp.pyright.setup({
     capabilities = M.capabilities,
     on_attach = M.on_attach,
+    settings = {
+      python = {
+        analysis = {
+          diagnosticMode = 'openFilesOnly',
+        },
+      },
+    },
   })
 
   nvim_lsp.vimls.setup({
