@@ -50,6 +50,7 @@ local spec = {
   -- Statusline and Visual Components
   {
     'goolord/alpha-nvim',
+    event = 'VimEnter',
     config = function()
       require('configs.plugins.alpha').setup()
     end,

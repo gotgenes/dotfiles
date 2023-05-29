@@ -161,6 +161,22 @@ local function make_buttons()
   return buttons
 end
 
+local function make_footer()
+  local lazy = require('lazy')
+  local stats = lazy.stats()
+  local footer = {
+    type = 'text',
+    val = {
+      '󰏖  plugins loaded: ' .. stats.loaded .. '/' .. stats.count,
+    },
+    opts = {
+      position = 'center',
+      hl = 'Comment',
+    },
+  }
+  return footer
+end
+
 local config = {
   layout = {
     { type = 'padding', val = 3 },
@@ -169,6 +185,8 @@ local config = {
     section_mru,
     { type = 'padding', val = 2 },
     make_buttons(),
+    { type = 'padding', val = 4 },
+    make_footer(),
   },
   opts = {
     margin = 5,
