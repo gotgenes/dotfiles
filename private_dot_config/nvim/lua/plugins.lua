@@ -492,15 +492,6 @@ local spec = {
   -- Python
   { 'jeetsukumaran/vim-python-indent-black' },
 
-  -- Terraform
-  { 'hashivim/vim-terraform' },
-
-  -- Thrift
-  { 'solarnz/thrift.vim' },
-
-  -- TOML
-  { 'cespare/vim-toml' },
-
   -- TypeScript
   {
     'jose-elias-alvarez/nvim-lsp-ts-utils',
