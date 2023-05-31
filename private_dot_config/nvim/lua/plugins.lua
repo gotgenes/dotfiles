@@ -196,6 +196,7 @@ local spec = {
       require('config-local').setup()
     end,
   },
+  { 'shortcuts/no-neck-pain.nvim' },
 
   -- Programming
   {
