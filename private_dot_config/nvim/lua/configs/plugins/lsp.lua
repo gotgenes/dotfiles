@@ -61,11 +61,7 @@ local function set_capabilities()
 end
 
 function M.on_attach(client, bufnr)
-  local navic = require('nvim-navic')
   local lsp_format = require('lsp-format')
-  if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
-  end
   lsp_format.on_attach(client)
   if vim.b.lsp_buffer_set_up then
     return
