@@ -21,7 +21,6 @@ function M.setup()
       'go',
       'gomod',
       'graphql',
-      'help',
       'html',
       'http',
       'ini',
@@ -57,6 +56,7 @@ function M.setup()
       'tsx',
       'typescript',
       'vim',
+      'vimdoc',
       'yaml',
     },
     highlight = {
