@@ -39,6 +39,15 @@ return {
     event = 'VeryLazy',
   },
   {
+    'utilyre/barbecue.nvim',
+    name = 'barbecue',
+    dependencies = {
+      'SmiteshP/nvim-navic',
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = {},
+  },
+  {
     'SmiteshP/nvim-navic',
     dependencies = {
       'neovim/nvim-lspconfig',
