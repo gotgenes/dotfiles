@@ -37,14 +37,21 @@ return {
     config = function()
       require('configs.plugins.lualine').setup()
     end,
+    event = 'VeryLazy',
   },
   {
     'SmiteshP/nvim-navic',
     dependencies = {
       'neovim/nvim-lspconfig',
     },
-    config = function()
-      require('nvim-navic').setup()
+    lazy = true,
+    init = function()
+      vim.g.navic_silence = true
+      require('helpers').on_lsp_attach(function(client, buffer)
+        if client.server_capabilities.documentSymbolProvider then
+          require('nvim-navic').attach(client, buffer)
+        end
+      end)
     end,
   },
   {
@@ -52,6 +59,7 @@ return {
     config = function()
       require('configs.plugins.indent-blankline').setup()
     end,
+    event = { 'BufReadPost', 'BufNewFile' },
   },
   {
     'petertriho/nvim-scrollbar',
@@ -61,6 +69,7 @@ return {
     config = function()
       require('configs.plugins.scrollbar').setup()
     end,
+    event = { 'BufReadPost', 'BufNewFile' },
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -77,6 +86,17 @@ return {
     dependencies = {
       'nvim-telescope/telescope.nvim',
     },
+    lazy = true,
+    init = function()
+      vim.ui.select = function(...)
+        require('lazy').load({ plugins = { 'dressing.nvim' } })
+        return vim.ui.select(...)
+      end
+      vim.ui.input = function(...)
+        require('lazy').load({ plugins = { 'dressing.nvim' } })
+        return vim.ui.input(...)
+      end
+    end,
   },
   {
     'kyazdani42/nvim-tree.lua',
@@ -110,5 +130,6 @@ return {
     config = function()
       require('which-key').setup()
     end,
+    event = 'VeryLazy',
   },
 }
