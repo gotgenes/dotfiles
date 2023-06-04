@@ -70,7 +70,7 @@ return {
   },
   {
     'folke/trouble.nvim',
-    dependencies = 'kyazdani42/nvim-web-devicons',
+    dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
       require('configs.plugins.trouble').setup()
     end,
