@@ -30,9 +30,8 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     dependencies = {
-      'kyazdani42/nvim-web-devicons',
+      'nvim-tree/nvim-web-devicons',
       'lewis6991/gitsigns.nvim',
-      'SmiteshP/nvim-navic',
     },
     config = function()
       require('configs.plugins.lualine').setup()
@@ -75,7 +74,7 @@ return {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'kyazdani42/nvim-web-devicons',
+      'nvim-tree/nvim-web-devicons',
     },
     config = function()
       require('configs.plugins.telescope').setup()
@@ -99,9 +98,9 @@ return {
     end,
   },
   {
-    'kyazdani42/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     dependencies = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+      'nvim-tree/nvim-web-devicons', -- optional, for file icon
     },
     config = function()
       require('configs.plugins.nvim-tree').setup()
