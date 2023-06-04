@@ -28,7 +28,6 @@ function M.setup()
       theme = 'catppuccin',
       disabled_filetypes = {
         statusline = disabled_filetypes,
-        winbar = disabled_filetypes,
       },
       globalstatus = true,
     },
@@ -64,14 +63,6 @@ function M.setup()
       lualine_z = {},
     },
     tabline = {},
-    winbar = {
-      lualine_a = {},
-      lualine_b = { 'filename' },
-      lualine_c = { 'navic' },
-      lualine_x = {},
-      lualine_y = {},
-      lualine_z = {},
-    },
     extensions = {
       'aerial',
       'fugitive',
