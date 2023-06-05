@@ -64,6 +64,7 @@ function M.setup()
         initial_mode = 'normal',
         sort_lastused = true,
         sort_mru = true,
+        selection_strategy = 'closest',
         theme = 'dropdown',
         previewer = false,
         mappings = {
