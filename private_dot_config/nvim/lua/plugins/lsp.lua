@@ -76,6 +76,40 @@ return {
     end,
   },
   {
+    'SmiteshP/nvim-navbuddy',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'SmiteshP/nvim-navic',
+      'MunifTanjim/nui.nvim',
+      'numToStr/Comment.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+    event = 'User NavicInit',
+    command = 'Navbuddy',
+    keys = {
+      {
+        '<enter>',
+        function()
+          require('nvim-navbuddy').open()
+        end,
+        desc = 'Open navbuddy',
+        mode = 'n',
+      },
+    },
+    init = function()
+      require('helpers').on_lsp_attach(function(client, buffer)
+        if client.server_capabilities.documentSymbolProvider then
+          require('nvim-navbuddy').attach(client, buffer)
+        end
+      end)
+    end,
+    opts = {
+      lsp = {
+        auto_attach = true,
+      },
+    },
+  },
+  {
     'utilyre/barbecue.nvim',
     name = 'barbecue',
     dependencies = {
