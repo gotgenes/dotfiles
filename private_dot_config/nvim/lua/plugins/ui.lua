@@ -39,50 +39,6 @@ return {
     event = 'VeryLazy',
   },
   {
-    'utilyre/barbecue.nvim',
-    name = 'barbecue',
-    dependencies = {
-      'SmiteshP/nvim-navic',
-      'nvim-tree/nvim-web-devicons',
-    },
-    event = 'User NavicInit',
-    opts = {
-      attach_navic = false,
-      exclude_filetypes = {
-        'NvimTree',
-        'Trouble',
-        'alpha',
-        'dap-repl',
-        'dapui_breakpoints',
-        'dapui_console',
-        'dapui_scopes',
-        'dapui_stacks',
-        'dapui_watches',
-        'lazy',
-        'mason',
-        'notify',
-      },
-    },
-  },
-  {
-    'SmiteshP/nvim-navic',
-    dependencies = {
-      'neovim/nvim-lspconfig',
-    },
-    lazy = true,
-    init = function()
-      vim.g.navic_silence = true
-      require('helpers').on_lsp_attach(function(client, buffer)
-        if client.server_capabilities.documentSymbolProvider then
-          require('nvim-navic').attach(client, buffer)
-          vim.api.nvim_exec_autocmds('User', {
-            pattern = 'NavicInit',
-          })
-        end
-      end)
-    end,
-  },
-  {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
       require('configs.plugins.indent-blankline').setup()
