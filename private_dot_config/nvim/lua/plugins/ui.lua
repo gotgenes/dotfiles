@@ -45,7 +45,24 @@ return {
       'SmiteshP/nvim-navic',
       'nvim-tree/nvim-web-devicons',
     },
-    opts = {},
+    event = 'User NavicInit',
+    opts = {
+      attach_navic = false,
+      exclude_filetypes = {
+        'NvimTree',
+        'Trouble',
+        'alpha',
+        'dap-repl',
+        'dapui_breakpoints',
+        'dapui_console',
+        'dapui_scopes',
+        'dapui_stacks',
+        'dapui_watches',
+        'lazy',
+        'mason',
+        'notify',
+      },
+    },
   },
   {
     'SmiteshP/nvim-navic',
@@ -58,6 +75,9 @@ return {
       require('helpers').on_lsp_attach(function(client, buffer)
         if client.server_capabilities.documentSymbolProvider then
           require('nvim-navic').attach(client, buffer)
+          vim.api.nvim_exec_autocmds('User', {
+            pattern = 'NavicInit',
+          })
         end
       end)
     end,
