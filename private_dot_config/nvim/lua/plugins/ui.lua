@@ -61,6 +61,76 @@ return {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
     },
+    cmd = 'Telescope',
+    keys = {
+      {
+        '<leader>tb',
+        function()
+          require('telescope.builtin').buffers()
+        end,
+        desc = 'search buffers',
+      },
+      {
+        '<leader>tf',
+        function()
+          require('telescope.builtin').find_files()
+        end,
+        desc = 'search files',
+      },
+      {
+        '<leader>tG',
+        function()
+          require('telescope.builtin').grep_string()
+        end,
+        desc = 'grep word under cursor',
+      },
+      {
+        '<leader>th',
+        function()
+          require('telescope.builtin').help_tags()
+        end,
+        desc = 'search help',
+      },
+      {
+        '<leader>tr',
+        function()
+          require('telescope.builtin').resume()
+        end,
+        desc = 'resume last search',
+      },
+      {
+        '<leader>tga',
+        function()
+          require('telescope.builtin').live_grep()
+        end,
+        desc = 'grep search all',
+      },
+      {
+        '<leader>tgp',
+        function()
+          require('telescope.builtin').live_grep({
+            glob_pattern = {
+              '!*test*',
+            },
+          })
+        end,
+        desc = 'grep search production (exclude test files)',
+      },
+      {
+        '<leader>tgt',
+        function()
+          require('telescope.builtin').live_grep({ glob_pattern = { '*test*' } })
+        end,
+        'search tests',
+      },
+      {
+        '<leader>th',
+        function()
+          require('telescope.builtin').help_tags()
+        end,
+        desc = 'search help',
+      },
+    },
     config = function()
       require('configs.plugins.telescope').setup()
     end,

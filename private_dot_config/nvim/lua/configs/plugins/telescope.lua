@@ -1,38 +1,5 @@
 local M = {}
 
-local function set_keymaps()
-  local builtin = require('telescope.builtin')
-  local wk = require('which-key')
-  wk.register({
-    t = {
-      name = 'Telescope',
-      b = { builtin.buffers, 'search buffers' },
-      f = { builtin.find_files, 'search files' },
-      G = { builtin.grep_string, 'grep word under cursor' },
-      h = { builtin.help_tags, 'search help' },
-      r = { builtin.resume, 'resume last search' },
-      g = {
-        name = 'grep',
-        a = { builtin.live_grep, 'search all' },
-        p = {
-          function()
-            builtin.live_grep({ glob_pattern = { '!*test*' } })
-          end,
-          'search production (exclude test files)',
-        },
-        t = {
-          function()
-            builtin.live_grep({ glob_pattern = { '*test*' } })
-          end,
-          'search tests',
-        },
-      },
-    },
-  }, {
-    prefix = '<leader>',
-  })
-end
-
 function M.setup()
   local telescope = require('telescope')
   local actions = require('telescope.actions')
@@ -78,7 +45,6 @@ function M.setup()
       },
     },
   })
-  set_keymaps()
 end
 
 return M
