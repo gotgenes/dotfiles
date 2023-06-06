@@ -26,6 +26,7 @@ return {
       'nvim-lua/plenary.nvim',
       'neovim/nvim-lspconfig',
     },
+    event = 'BufRead',
     config = function()
       require('configs.plugins.null-ls').setup()
     end,
@@ -51,6 +52,7 @@ return {
     dependencies = {
       'kevinhwang91/promise-async',
     },
+    event = 'BufRead',
     config = function()
       require('configs.plugins.ufo').setup()
     end,
@@ -61,12 +63,19 @@ return {
       'neovim/nvim-lspconfig',
       'williamboman/mason-lspconfig',
     },
+    ft = { 'lua' },
     config = function()
       require('configs.plugins.neodev').setup()
     end,
   },
   {
     'j-hui/fidget.nvim',
+    lazy = true,
+    init = function()
+      require('helpers').on_lsp_attach(function()
+        require('fidget')
+      end)
+    end,
     config = function()
       require('configs.plugins.fidget').setup()
     end,
