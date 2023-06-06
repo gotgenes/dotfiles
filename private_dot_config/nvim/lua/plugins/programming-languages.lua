@@ -1,6 +1,9 @@
 return {
   -- bats
-  { 'aliou/bats.vim' },
+  {
+    'aliou/bats.vim',
+    ft = { 'bats' },
+  },
 
   -- Go
   {
@@ -14,16 +17,28 @@ return {
       'williamboman/mason-lspconfig',
     },
   },
-  { 'gotgenes/golang-template.vim' },
+  {
+    'gotgenes/golang-template.vim',
+    ft = { 'gotmplhtml', 'gotexttmpl' },
+  },
 
   -- Jenkinsfile
-  { 'martinda/Jenkinsfile-vim-syntax' },
+  {
+    'martinda/Jenkinsfile-vim-syntax',
+    ft = 'jenkinsfile',
+  },
 
   -- LaTeX
-  { 'lervag/vimtex' },
+  {
+    'lervag/vimtex',
+    ft = { 'tex', 'plaintex' },
+  },
 
   -- Markdown
-  { 'godlygeek/tabular' },
+  {
+    'godlygeek/tabular',
+    ft = { 'markdown', 'pandoc.markdown', 'rmd' },
+  },
   {
     'iamcco/markdown-preview.nvim',
     ft = { 'markdown', 'pandoc.markdown', 'rmd' },
@@ -31,7 +46,10 @@ return {
   },
 
   -- Python
-  { 'jeetsukumaran/vim-python-indent-black' },
+  {
+    'jeetsukumaran/vim-python-indent-black',
+    ft = 'python',
+  },
 
   -- TypeScript
   {
@@ -41,14 +59,21 @@ return {
       'jose-elias-alvarez/null-ls.nvim',
       'nvim-lua/plenary.nvim',
     },
+    ft = { 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript', 'javascriptreact', 'javascript.jsx' },
     config = function()
       require('configs.plugins.nvim-lsp-ts-utils').setup()
     end,
   },
 
   -- Velocity
-  { 'lepture/vim-velocity' },
+  {
+    'lepture/vim-velocity',
+    ft = 'velocity',
+  },
 
   -- xonsh
-  { 'meatballs/vim-xonsh' },
+  {
+    'meatballs/vim-xonsh',
+    ft = 'xonsh',
+  },
 }
