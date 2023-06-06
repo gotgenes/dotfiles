@@ -4,18 +4,40 @@ local function set_keymaps(bufnr)
   local wk = require('which-key')
   wk.register({
     a = {
-      name = 'Aerial',
-      t = { '<Cmd>AerialToggle<CR>', 'toggle' },
+      function()
+        require('aerial').toggle()
+      end,
+      'Aerial toggle',
     },
   }, {
     prefix = '<leader>',
     buffer = bufnr,
   })
   wk.register({
-    [']a'] = { '<Cmd>AerialNext<CR>', 'aerial next' },
-    ['[a'] = { '<Cmd>AerialPrev<CR>', 'aerial previous' },
-    [']A'] = { '<Cmd>AerialNextUp<CR>', 'aerial next up' },
-    ['[A'] = { '<Cmd>AerialPrevUp<CR>', 'aerial previous up' },
+    [']a'] = {
+      function()
+        require('aerial').next()
+      end,
+      'Aerial next',
+    },
+    ['[a'] = {
+      function()
+        require('aerial').prev()
+      end,
+      'Aerial previous',
+    },
+    [']A'] = {
+      function()
+        require('aerial').next_up()
+      end,
+      'Aerial next up',
+    },
+    ['[A'] = {
+      function()
+        require('aerial').prev_up()
+      end,
+      'Aerial previous up',
+    },
   }, {
     buffer = bufnr,
   })
@@ -29,7 +51,6 @@ function M.setup()
     },
     on_attach = set_keymaps,
   })
-  set_keymaps()
 end
 
 return M
