@@ -39,6 +39,9 @@ return {
   },
   {
     'stevearc/aerial.nvim',
+    keys = { { '<leader>a' }, { ']a' }, { '[a' }, { ']A' }, { '[A' } },
+    cmd = { 'AerialToggle', 'AerialNext', 'AerialPrev', 'AerialNextUp', 'AerialPrevUp' },
+    event = 'BufRead',
     config = function()
       require('configs.plugins.aerial').setup()
     end,
