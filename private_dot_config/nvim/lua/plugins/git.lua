@@ -6,6 +6,7 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       require('configs.plugins.gitsigns').setup()
     end,
