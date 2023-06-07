@@ -83,9 +83,22 @@ return {
   {
     'folke/trouble.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('configs.plugins.trouble').setup()
-    end,
+    cmd = {
+      'Trouble',
+      'TroubleClose',
+      'TroubleRefresh',
+      'TroubleToggle',
+    },
+    keys = {
+      { '<leader>xx', '<Cmd>Trouble<CR>', desc = 'open or jump to Trouble' },
+      { '<leader>xc', '<Cmd>TroubleClose<CR>', desc = 'close Trouble' },
+      { '<leader>xw', '<Cmd>Trouble workspace_diagnostics<CR>', desc = 'workspace diagnostics' },
+      { '<leader>xd', '<Cmd>Trouble document_diagnostics<CR>', desc = 'document diagnostics' },
+      { '<leader>xl', '<Cmd>Trouble loclist<CR>', desc = 'location list' },
+      { '<leader>xq', '<Cmd>Trouble quickfix<CR>', desc = 'quickfix' },
+      { '<leader>xr', '<Cmd>Trouble lsp_references<CR>', desc = 'LSP references' },
+    },
+    opts = {},
   },
   {
     'SmiteshP/nvim-navbuddy',
