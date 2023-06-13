@@ -43,6 +43,17 @@ return {
     end,
   },
   {
+    'axkirillov/hbac.nvim',
+    dependencies = {
+      -- these are optional, add them, if you want the telescope module
+      'nvim-telescope/telescope.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = {},
+    event = { 'BufRead', 'BufNewFile' },
+  },
+  {
     'klen/nvim-config-local',
     config = function()
       require('config-local').setup()
