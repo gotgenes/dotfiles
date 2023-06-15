@@ -44,6 +44,20 @@ return {
       require('configs.plugins.indent-blankline').setup()
     end,
     event = { 'BufReadPost', 'BufNewFile' },
+    opts = {
+      buftype_exclude = {
+        'help',
+      },
+      filetype_exclude = {
+        'NvimTree',
+        'Trouble',
+        'aerial',
+        'alpha',
+        'lazy',
+        'mason',
+        'notify',
+      },
+    },
   },
   {
     'petertriho/nvim-scrollbar',
