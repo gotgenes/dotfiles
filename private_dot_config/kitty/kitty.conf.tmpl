@@ -40,6 +40,14 @@ map kitty_mod+s launch --type=tab
 map kitty_mod+enter launch --cwd=oldest
 map super+t launch --type=tab --cwd=oldest --location=neighbor
 
+# moves the window into the tab at the left of the active tab
+map f2 detach_window tab-left
+# moves the window into the previously active tab
+map f3 detach_window tab-prev
+# moves the window into a new tab
+map f4 detach_window new-tab
+# asks which tab to move the window into
+map f5 detach_window ask
 
 # BEGIN_KITTY_THEME
 include current-theme.conf
