@@ -40,9 +40,6 @@ return {
   },
   {
     'lukas-reineke/indent-blankline.nvim',
-    config = function()
-      require('configs.plugins.indent-blankline').setup()
-    end,
     event = { 'BufReadPost', 'BufNewFile' },
     opts = {
       buftype_exclude = {
