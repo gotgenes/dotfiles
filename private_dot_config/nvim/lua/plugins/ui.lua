@@ -42,14 +42,12 @@ return {
     'lukas-reineke/indent-blankline.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
     opts = {
-      buftype_exclude = {
-        'help',
-      },
       filetype_exclude = {
         'NvimTree',
         'Trouble',
         'aerial',
         'alpha',
+        'help',
         'lazy',
         'mason',
         'notify',
