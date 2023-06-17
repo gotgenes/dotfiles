@@ -30,6 +30,8 @@ ensure_lazy_installed()
 configure_lazy_keymapping()
 require('lazy').setup('plugins')
 
+vim.cmd.colorscheme('catppuccin')
+
 require('configs.keymaps').setup()
 
 require('configs.plugins.diagnostic').setup()
