@@ -9,6 +9,12 @@ return {
     priority = 1000,
   },
   {
+    'mcchrish/zenbones.nvim',
+    dependencies = {
+      'rktjmp/lush.nvim',
+    },
+  },
+  {
     'NvChad/nvim-colorizer.lua',
     config = function()
       require('configs.plugins.colorizer').setup()
