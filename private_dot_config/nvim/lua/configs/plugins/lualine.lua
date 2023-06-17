@@ -25,7 +25,7 @@ function M.setup()
   local lualine = require('lualine')
   lualine.setup({
     options = {
-      theme = 'catppuccin',
+      theme = 'auto',
       disabled_filetypes = {
         statusline = disabled_filetypes,
       },
