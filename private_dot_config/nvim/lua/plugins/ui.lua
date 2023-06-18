@@ -124,6 +124,24 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
+      {
+        'danielfalk/smart-open.nvim',
+        opts = {},
+        config = function()
+          require('telescope').load_extension('smart_open')
+        end,
+        dependencies = {
+          'kkharji/sqlite.lua',
+          'nvim-telescope/telescope-fzy-native.nvim',
+        },
+        keys = { {
+          '<leader>tf',
+          function()
+            require('telescope').extensions.smart_open.smart_open()
+          end,
+          desc = 'search files by frecency',
+        } },
+      },
     },
     cmd = 'Telescope',
     keys = {
@@ -135,7 +153,7 @@ return {
         desc = 'search buffers',
       },
       {
-        '<leader>tf',
+        '<leader>tF',
         function()
           require('telescope.builtin').find_files()
         end,
