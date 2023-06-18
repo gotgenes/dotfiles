@@ -59,10 +59,15 @@ return {
     },
   },
   {
-    'NvChad/nvim-colorizer.lua',
-    config = function()
-      require('configs.plugins.colorizer').setup()
-    end,
+    'uga-rosa/ccc.nvim',
+    opts = {},
+    cmd = {
+      'CccPick',
+      'CccConvert',
+      'CccHighlighterEnable',
+      'CccHighlighterDisable',
+      'CccHighlighterToggle',
+    },
   },
   {
     'goolord/alpha-nvim',
