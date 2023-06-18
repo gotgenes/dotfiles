@@ -134,15 +134,81 @@ return {
           'kkharji/sqlite.lua',
           'nvim-telescope/telescope-fzy-native.nvim',
         },
-        keys = { {
-          '<leader>tf',
-          function()
-            require('telescope').extensions.smart_open.smart_open()
-          end,
-          desc = 'search files by frecency',
-        } },
+        keys = {
+          {
+            '<leader>tf',
+            function()
+              require('telescope').extensions.smart_open.smart_open()
+            end,
+            desc = 'search files by frecency',
+          },
+        },
       },
     },
+    opts = function()
+      return {
+        defaults = {
+          path_display = { 'truncate' },
+          mappings = {
+            i = {
+              ['<c-t>'] = function(...)
+                return require('trouble.providers.telescope').open_with_trouble(...)
+              end,
+              ['<c-f>'] = function(...)
+                return require('telescope.actions').results_scrolling_down(...)
+              end,
+              ['<c-b>'] = function(...)
+                return require('telescope.actions').results_scrolling_up(...)
+              end,
+              ['<c-u>'] = false,
+              ['<c-d>'] = false,
+            },
+            n = {
+              ['q'] = function(...)
+                return require('telescope.actions').close(...)
+              end,
+              ['<c-t>'] = function(...)
+                return require('trouble.providers.telescope').open_with_trouble(...)
+              end,
+              ['<c-f>'] = function(...)
+                return require('telescope.actions').results_scrolling_down(...)
+              end,
+              ['<c-b>'] = function(...)
+                return require('telescope.actions').results_scrolling_up(...)
+              end,
+              ['<c-d>'] = function(...)
+                return require('telescope.actions').preview_scrolling_down(...)
+              end,
+              ['<c-u>'] = function(...)
+                return require('telescope.actions').preview_scrolling_up(...)
+              end,
+            },
+          },
+        },
+        pickers = {
+          buffers = {
+            initial_mode = 'normal',
+            sort_lastused = true,
+            sort_mru = true,
+            selection_strategy = 'closest',
+            theme = 'dropdown',
+            previewer = false,
+            mappings = {
+              i = {
+                ['<c-d>'] = function(...)
+                  return require('telescope.actions').delete_buffer(...)
+                end,
+              },
+              n = {
+                ['dd'] = function(...)
+                  return require('telescope.actions').delete_buffer(...)
+                end,
+              },
+            },
+          },
+        },
+      }
+    end,
     cmd = 'Telescope',
     keys = {
       {
@@ -213,9 +279,6 @@ return {
         desc = 'search help',
       },
     },
-    config = function()
-      require('configs.plugins.telescope').setup()
-    end,
   },
   {
     'stevearc/dressing.nvim',
