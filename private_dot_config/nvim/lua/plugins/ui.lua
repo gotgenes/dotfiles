@@ -233,9 +233,69 @@ return {
     end,
   },
   {
-    'yorickpeterse/nvim-window',
-    config = function()
-      require('configs.plugins.nvim-window').setup()
+    's1n7ax/nvim-window-picker',
+    keys = {
+      {
+        '<leader>w',
+        function()
+          local selected_window = require('window-picker').pick_window()
+          if selected_window ~= nil then
+            vim.api.nvim_set_current_win(selected_window)
+          end
+        end,
+        desc = 'pick window',
+      },
+    },
+    opts = function()
+      local palette = require('catppuccin.palettes').get_palette()
+      return {
+        hint = 'floating-big-letter',
+        selection_chars = 'uhetonaspg.c,r',
+        picker_config = {
+          statusline_winbar_picker = {
+            use_winbar = 'auto',
+          },
+        },
+        autoselect_one = true,
+        include_current = false,
+        show_prompt = false,
+        filter_rules = {
+          -- filter using buffer options
+          bo = {
+            -- if the file type is one of following, the window will be ignored
+            filetype = { 'NvimTree', 'fidget', 'neo-tree', 'neo-tree-popup', 'notify' },
+
+            -- if the buffer type is one of following, the window will be ignored
+            buftype = { 'terminal', 'quickfix' },
+          },
+        },
+        highlights = {
+          statusline = {
+            focused = {
+              fg = palette.text,
+              bg = palette.surface1,
+              bold = true,
+            },
+            unfocused = {
+              fg = palette.text,
+              bg = palette.blue,
+              bold = true,
+            },
+          },
+          winbar = {
+            focused = {
+              fg = palette.text,
+              bg = palette.rosewater,
+              bold = true,
+            },
+            unfocused = {
+              fg = '#ededed',
+              bg = palette.blue,
+              bold = true,
+            },
+          },
+        },
+      }
     end,
   },
   {
