@@ -150,7 +150,7 @@ local function make_buttons()
       { type = 'text', val = 'Quick links', opts = { hl = 'SpecialComment', position = 'center' } },
       { type = 'padding', val = 1 },
       dashboard.button('s', '󰉉  Load previous session', '<Cmd>SessionLoad<CR>'),
-      dashboard.button('f', '󰈞  Find file', '<Cmd>Telescope find_files<CR>'),
+      dashboard.button('f', '󰈞  Find file', '<Cmd>Telescope smart_open<CR>'),
       dashboard.button('g', '󱎸  Live grep', '<Cmd>Telescope live_grep<CR>'),
       dashboard.button('m', '󱁤  Mason', '<Cmd>Mason<CR>'),
       dashboard.button('u', '󰚰  Check for plugin updates', '<Cmd>Lazy check<CR>'),
