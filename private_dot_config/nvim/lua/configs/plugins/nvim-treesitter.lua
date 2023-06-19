@@ -70,6 +70,14 @@ function M.setup()
       enable = true,
     },
   })
+  require('nvim-treesitter.install').compilers = {
+    vim.fn.getenv('CC'),
+    'clang',
+    'gcc',
+    'cc',
+    'cl',
+    'zig',
+  }
 end
 
 return M
