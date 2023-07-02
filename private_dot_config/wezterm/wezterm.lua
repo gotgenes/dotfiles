@@ -32,6 +32,7 @@ local my_config = {
   font_size = 12.0,
   line_height = 1.1,
   color_scheme = 'Catppuccin Macchiato',
+  hide_tab_bar_if_only_one_tab = true,
 }
 
 local config = table_merge(wezterm.config_builder(), my_config)
