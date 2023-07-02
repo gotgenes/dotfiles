@@ -1,6 +1,22 @@
 local wezterm = require('wezterm')
 local mux = wezterm.mux
 
+-- from https://stackoverflow.com/a/1283608/38140
+function table_merge(t1, t2)
+  for k, v in pairs(t2) do
+    if type(v) == 'table' then
+      if type(t1[k] or false) == 'table' then
+        table_merge(t1[k] or {}, t2[k] or {})
+      else
+        t1[k] = v
+      end
+    else
+      t1[k] = v
+    end
+  end
+  return t1
+end
+
 wezterm.on('gui-attached', function(domain)
   -- maximize all displayed windows on startup
   local workspace = mux.get_active_workspace()
@@ -11,11 +27,13 @@ wezterm.on('gui-attached', function(domain)
   end
 end)
 
-local config = wezterm.config_builder()
+local my_config = {
+  font = wezterm.font('JetBrainsMono Nerd Font', { weight = 'Regular' }),
+  font_size = 12.0,
+  line_height = 1.1,
+  color_scheme = 'Catppuccin Macchiato',
+}
 
-config.font = wezterm.font('JetBrainsMono Nerd Font', { weight = 'Regular' })
-config.font_size = 12.0
-config.line_height = 1.05
-config.color_scheme = 'Catppuccin Macchiato'
+local config = table_merge(wezterm.config_builder(), my_config)
 
 return config
