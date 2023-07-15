@@ -26,7 +26,14 @@ return {
       'neovim/nvim-lspconfig',
     },
     event = 'BufRead',
-    config = function()
+    opts = function()
+      return {
+        python = {
+          formatter = require('efmls-configs.formatters.black'),
+        },
+      }
+    end,
+    config = function(_, opts)
       local lsp_configs = require('configs.plugins.lsp')
       local efmls_configs = require('efmls-configs')
 
@@ -38,9 +45,7 @@ return {
           documentFormatting = true,
         },
       })
-      efmls_configs.setup({
-        python = {},
-      })
+      efmls_configs.setup(opts)
     end,
   },
   {
