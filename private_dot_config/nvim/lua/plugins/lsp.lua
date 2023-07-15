@@ -21,14 +21,26 @@ return {
     end,
   },
   {
-    'jose-elias-alvarez/null-ls.nvim',
+    'creativenull/efmls-configs-nvim',
     dependencies = {
-      'nvim-lua/plenary.nvim',
       'neovim/nvim-lspconfig',
     },
     event = 'BufRead',
     config = function()
-      require('configs.plugins.null-ls').setup()
+      local lsp_configs = require('configs.plugins.lsp')
+      local efmls_configs = require('efmls-configs')
+
+      efmls_configs.init({
+        default_config = true,
+        on_attach = lsp_configs.on_attach,
+        -- Enable formatting provided by efm langserver
+        init_options = {
+          documentFormatting = true,
+        },
+      })
+      efmls_configs.setup({
+        python = {},
+      })
     end,
   },
   {
