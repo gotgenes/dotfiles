@@ -53,16 +53,20 @@ return {
 
   -- TypeScript
   {
-    'jose-elias-alvarez/nvim-lsp-ts-utils',
+    'pmizio/typescript-tools.nvim',
     dependencies = {
       'neovim/nvim-lspconfig',
-      'jose-elias-alvarez/null-ls.nvim',
       'nvim-lua/plenary.nvim',
     },
-    ft = { 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript', 'javascriptreact', 'javascript.jsx' },
-    config = function()
-      require('configs.plugins.nvim-lsp-ts-utils').setup()
-    end,
+    ft = {
+      'typescript',
+      'typescriptreact',
+      'typescript.tsx',
+      'javascript',
+      'javascriptreact',
+      'javascript.jsx',
+    },
+    opts = {},
   },
 
   -- Velocity
