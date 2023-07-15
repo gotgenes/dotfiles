@@ -92,6 +92,11 @@ function M.setup()
     },
   })
 
+  nvim_lsp.ruff_lsp.setup({
+    capabilities = M.capabilities,
+    on_attach = M.on_attach,
+  })
+
   nvim_lsp.vimls.setup({
     capabilities = M.capabilities,
     on_attach = M.on_attach,
