@@ -7,7 +7,7 @@ function M.setup()
       sync = true,
     },
     lua = {
-      order = { 'lua_ls', 'null-ls' },
+      order = { 'lua_ls', 'efm' },
     },
   })
 end
