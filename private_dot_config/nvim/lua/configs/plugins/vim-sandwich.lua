@@ -67,7 +67,7 @@ end
 local function set_keymaps()
   local wk = require('which-key')
   wk.register({
-    s = {
+    a = {
       name = 'Surround (sandwich)',
       {
         a = { '<Plug>(sandwich-add)', 'add', mode = { 'n', 'x', 'o' } },
@@ -89,7 +89,7 @@ local function set_keymaps()
     },
   }, {
     mode = 'n',
-    prefix = '<leader>s',
+    prefix = '<leader>a',
     remap = true,
   })
 end

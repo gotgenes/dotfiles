@@ -3,7 +3,7 @@ local M = {}
 local function set_keymaps(bufnr)
   local wk = require('which-key')
   wk.register({
-    a = {
+    o = {
       function()
         require('aerial').toggle()
       end,
@@ -48,8 +48,13 @@ function M.setup()
   aerial.setup({
     layout = {
       min_width = 20,
+      placement = 'edge',
     },
+    attach_mode = 'global',
     on_attach = set_keymaps,
+    keymaps = {
+      ['<leader>o'] = 'actions.close',
+    },
   })
 end
 
