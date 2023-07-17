@@ -6,7 +6,7 @@ return {
     },
     config = function()
       require('mason-lspconfig').setup({
-        automatic_installation = true,
+        automatic_installation = false,
       })
       require('configs.plugins.lsp').setup()
     end,
