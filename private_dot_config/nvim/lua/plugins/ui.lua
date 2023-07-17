@@ -136,7 +136,7 @@ return {
         },
         keys = {
           {
-            '<leader>tf',
+            '<leader>sf',
             function()
               require('telescope').extensions.smart_open.smart_open()
             end,
