@@ -212,49 +212,49 @@ return {
     cmd = 'Telescope',
     keys = {
       {
-        '<leader>tb',
+        '<leader>sb',
         function()
           require('telescope.builtin').buffers()
         end,
         desc = 'search buffers',
       },
       {
-        '<leader>tF',
+        '<leader>sF',
         function()
           require('telescope.builtin').find_files()
         end,
         desc = 'search files',
       },
       {
-        '<leader>tG',
+        '<leader>sG',
         function()
           require('telescope.builtin').grep_string()
         end,
         desc = 'grep word under cursor',
       },
       {
-        '<leader>th',
+        '<leader>sh',
         function()
           require('telescope.builtin').help_tags()
         end,
         desc = 'search help',
       },
       {
-        '<leader>tr',
+        '<leader>sr',
         function()
           require('telescope.builtin').resume()
         end,
         desc = 'resume last search',
       },
       {
-        '<leader>tga',
+        '<leader>sga',
         function()
           require('telescope.builtin').live_grep()
         end,
         desc = 'grep search all',
       },
       {
-        '<leader>tgp',
+        '<leader>sgp',
         function()
           require('telescope.builtin').live_grep({
             glob_pattern = {
@@ -265,14 +265,14 @@ return {
         desc = 'grep search production (exclude test files)',
       },
       {
-        '<leader>tgt',
+        '<leader>sgt',
         function()
           require('telescope.builtin').live_grep({ glob_pattern = { '*test*' } })
         end,
         'search tests',
       },
       {
-        '<leader>th',
+        '<leader>sh',
         function()
           require('telescope.builtin').help_tags()
         end,
