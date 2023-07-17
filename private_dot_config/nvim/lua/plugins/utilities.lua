@@ -10,7 +10,7 @@ return {
   },
   {
     'ntpeters/vim-better-whitespace',
-    config = function()
+    init = function()
       require('configs.plugins.vim-better-whitespace').setup()
     end,
   },
