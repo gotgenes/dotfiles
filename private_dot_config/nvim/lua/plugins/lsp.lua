@@ -57,12 +57,54 @@ return {
   },
   {
     'stevearc/aerial.nvim',
-    keys = { { '<leader>o' }, { ']a' }, { '[a' }, { ']A' }, { '[A' } },
+    keys = {
+      {
+        '<leader>o',
+        function()
+          require('aerial').toggle()
+        end,
+        desc = 'Aerial toggle',
+      },
+      {
+        ']a',
+        function()
+          require('aerial').next()
+        end,
+        desc = 'Aerial next',
+      },
+      {
+        '[a',
+        function()
+          require('aerial').prev()
+        end,
+        desc = 'Aerial previous',
+      },
+      {
+        ']A',
+        function()
+          require('aerial').next_up()
+        end,
+        desc = 'Aerial next up',
+      },
+      {
+        '[A',
+        function()
+          require('aerial').prev_up()
+        end,
+        desc = 'Aerial previous up',
+      },
+    },
     cmd = { 'AerialToggle', 'AerialNext', 'AerialPrev', 'AerialNextUp', 'AerialPrevUp' },
-    event = 'BufRead',
-    config = function()
-      require('configs.plugins.aerial').setup()
-    end,
+    opts = {
+      layout = {
+        min_width = 20,
+        placement = 'edge',
+      },
+      attach_mode = 'global',
+      keymaps = {
+        ['<leader>o'] = 'actions.close',
+      },
+    },
   },
   {
     'kevinhwang91/nvim-ufo',
