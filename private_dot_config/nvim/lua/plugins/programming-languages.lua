@@ -14,7 +14,7 @@ return {
     ft = { 'go', 'godoc', 'gomod', 'gotmplhtml', 'gotexttmpl' },
     dependencies = {
       'neovim/nvim-lspconfig',
-      'williamboman/mason-lspconfig',
+      'williamboman/mason-lspconfig.nvim',
     },
   },
   {
