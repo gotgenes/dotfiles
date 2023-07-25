@@ -126,7 +126,7 @@ return {
     'folke/neodev.nvim',
     dependencies = {
       'neovim/nvim-lspconfig',
-      'williamboman/mason-lspconfig',
+      'williamboman/mason-lspconfig.nvim',
     },
     ft = { 'lua' },
     config = function()
