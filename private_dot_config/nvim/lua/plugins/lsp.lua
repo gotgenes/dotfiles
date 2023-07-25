@@ -29,7 +29,13 @@ return {
     opts = function()
       return {
         python = {
-          formatter = require('efmls-configs.formatters.black'),
+          formatter = {
+            require('efmls-configs.formatters.black'),
+            {
+              formatCommand = 'isort --quiet --stdout --profile black -',
+              formatStdin = true,
+            },
+          },
         },
       }
     end,
