@@ -1,6 +1,14 @@
 local M = {}
 
 function M.setup()
+  require('nvim-treesitter.install').compilers = {
+    vim.fn.getenv('CC'),
+    'clang',
+    'gcc',
+    'cc',
+    'cl',
+    'zig',
+  }
   local ts_configs = require('nvim-treesitter.configs')
   ts_configs.setup({
     ensure_installed = {
@@ -70,14 +78,6 @@ function M.setup()
       enable = true,
     },
   })
-  require('nvim-treesitter.install').compilers = {
-    vim.fn.getenv('CC'),
-    'clang',
-    'gcc',
-    'cc',
-    'cl',
-    'zig',
-  }
 end
 
 return M
