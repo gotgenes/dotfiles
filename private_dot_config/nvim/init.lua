@@ -35,3 +35,9 @@ vim.cmd.colorscheme('catppuccin')
 require('configs.keymaps').setup()
 
 require('configs.plugins.diagnostic').setup()
+
+vim.api.nvim_create_autocmd({ "VimLeave" }, {
+  callback = function()
+    vim.cmd("sleep 10m")
+  end,
+})
