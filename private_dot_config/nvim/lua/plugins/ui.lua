@@ -133,12 +133,13 @@ return {
         dependencies = {
           'kkharji/sqlite.lua',
           'nvim-telescope/telescope-fzy-native.nvim',
+          'nvim-tree/nvim-web-devicons',
         },
         keys = {
           {
             '<leader>sf',
             function()
-              require('telescope').extensions.smart_open.smart_open()
+              require('telescope').extensions.smart_open.smart_open({ cwd_only = true })
             end,
             desc = 'search files by frecency',
           },
