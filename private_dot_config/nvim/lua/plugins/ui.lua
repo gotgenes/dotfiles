@@ -47,6 +47,7 @@ return {
         telescope = true,
         treesitter = true,
         which_key = true,
+        window_picker = true,
       },
     },
     lazy = false,
