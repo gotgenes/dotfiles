@@ -27,31 +27,32 @@ return {
     },
     event = 'BufRead',
     opts = function()
-      return {
+      local languages = vim.tbl_extend('force', require('efmls-configs.defaults').languages(), {
         python = {
-          formatter = {
-            require('efmls-configs.formatters.black'),
-            {
-              formatCommand = 'isort --quiet --stdout --profile black -',
-              formatStdin = true,
-            },
-          },
+          require('efmls-configs.formatters.isort'),
+          require('efmls-configs.formatters.black'),
         },
+      })
+      return {
+        languages = languages,
       }
     end,
     config = function(_, opts)
       local lsp_configs = require('configs.plugins.lsp')
-      local efmls_configs = require('efmls-configs')
 
-      efmls_configs.init({
-        default_config = true,
+      require('lspconfig').efm.setup({
+        filetypes = vim.tbl_keys(opts.languages),
+        settings = {
+          rootMarkers = { '.git/' },
+          languages = opts.languages,
+        },
         on_attach = lsp_configs.on_attach,
         -- Enable formatting provided by efm langserver
         init_options = {
           documentFormatting = true,
+          documentRangeFormatting = true,
         },
       })
-      efmls_configs.setup(opts)
     end,
   },
   {
