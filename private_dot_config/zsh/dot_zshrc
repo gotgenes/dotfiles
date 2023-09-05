@@ -112,12 +112,21 @@ zinit ice \
     nocompile
 zinit light zdharma-continuum/null
 
-
 zinit ice \
     as"completion" \
     id-as"gh-completion" \
     has"gh" \
     atclone"gh -s zsh completion > _gh" \
+    atpull"%atclone" \
+    run-atpull \
+    nocompile
+zinit light zdharma-continuum/null
+
+zinit ice \
+    as"completion" \
+    id-as"bw-completion" \
+    has"bw" \
+    atclone"bw completion --shell zsh > _bw" \
     atpull"%atclone" \
     run-atpull \
     nocompile
