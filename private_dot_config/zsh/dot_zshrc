@@ -124,6 +124,16 @@ zinit light zdharma-continuum/null
 
 zinit ice \
     as"completion" \
+    id-as"aws-vault-completion" \
+    has"aws-vault" \
+    atclone"aws-vault --completion-script-zsh > _aws-vault" \
+    atpull"%atclone" \
+    run-atpull \
+    nocompile
+zinit light zdharma-continuum/null
+
+zinit ice \
+    as"completion" \
     id-as"bw-completion" \
     has"bw" \
     atclone"bw completion --shell zsh > _bw" \
