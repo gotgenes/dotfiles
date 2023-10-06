@@ -97,16 +97,19 @@ return {
   {
     'lukas-reineke/indent-blankline.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
+    main = 'ibl',
     opts = {
-      filetype_exclude = {
-        'NvimTree',
-        'Trouble',
-        'aerial',
-        'alpha',
-        'help',
-        'lazy',
-        'mason',
-        'notify',
+      exclude = {
+        filetypes = {
+          'NvimTree',
+          'Trouble',
+          'aerial',
+          'alpha',
+          'help',
+          'lazy',
+          'mason',
+          'notify',
+        },
       },
     },
   },
