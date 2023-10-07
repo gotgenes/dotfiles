@@ -86,6 +86,7 @@ zinit load agkozak/zsh-z
 zinit ice lucid wait
 zinit snippet OMZP::fzf
 
+zinit snippet "https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh"
 
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
 
