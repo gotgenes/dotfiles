@@ -55,9 +55,8 @@ return {
   },
   {
     'klen/nvim-config-local',
-    config = function()
-      require('config-local').setup()
-    end,
+    opts = {},
+    main = 'config-local',
   },
   {
     'shortcuts/no-neck-pain.nvim',
