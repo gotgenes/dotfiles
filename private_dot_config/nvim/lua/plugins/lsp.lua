@@ -30,6 +30,7 @@ return {
       local languages = vim.tbl_extend('force', require('efmls-configs.defaults').languages(), {
         python = {
           require('efmls-configs.formatters.isort'),
+          require('efmls-configs.formatters.ruff'),
           require('efmls-configs.formatters.black'),
         },
       })
