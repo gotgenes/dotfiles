@@ -143,9 +143,20 @@ return {
         require('fidget')
       end)
     end,
-    config = function()
-      require('configs.plugins.fidget').setup()
-    end,
+    opts = {
+      progress = {
+        display = {
+          progress_icon = {
+            pattern = 'dots',
+          },
+        },
+      },
+      notification = {
+        window = {
+          winblend = 0,
+        },
+      },
+    },
   },
   {
     'folke/trouble.nvim',
