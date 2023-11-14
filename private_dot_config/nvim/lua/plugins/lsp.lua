@@ -148,6 +148,7 @@ return {
         display = {
           progress_icon = {
             pattern = 'dots',
+            period = 1,
           },
         },
       },
