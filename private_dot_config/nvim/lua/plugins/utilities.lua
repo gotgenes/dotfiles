@@ -59,6 +59,9 @@ return {
     main = 'config-local',
   },
   {
+    'gpanders/editorconfig.nvim',
+  },
+  {
     'shortcuts/no-neck-pain.nvim',
     cmd = {
       'NoNeckPain',
