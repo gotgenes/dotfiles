@@ -12,6 +12,9 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 ### End of Zinit's installer chunk
+autoload -U bashcompinit
+bashcompinit
+
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
 
@@ -136,6 +139,16 @@ zinit ice \
     id-as"bw-completion" \
     has"bw" \
     atclone"bw completion --shell zsh > _bw" \
+    atpull"%atclone" \
+    run-atpull \
+    nocompile
+zinit light zdharma-continuum/null
+
+zinit ice \
+    as"completion" \
+    id-as"pipx-completion" \
+    has"pipx" \
+    atclone"register-python-argcomplete pipx > _pipx" \
     atpull"%atclone" \
     run-atpull \
     nocompile
