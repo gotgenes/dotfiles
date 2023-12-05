@@ -18,9 +18,6 @@ local function set_keymaps()
   }, {
     prefix = '<leader>',
   })
-  wk.register({
-    E = { '<cmd>DiagnosticLine<CR>', 'show diagnostic for current line' },
-  })
 end
 
 local function set_signs()
