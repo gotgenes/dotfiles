@@ -8,7 +8,7 @@ return {
     },
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
-      require('configs.plugins.gitsigns').setup()
+      require('config.plugins.gitsigns').setup()
     end,
   },
 }

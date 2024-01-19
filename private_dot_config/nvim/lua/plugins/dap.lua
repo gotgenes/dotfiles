@@ -2,14 +2,14 @@ return {
   {
     'mfussenegger/nvim-dap',
     config = function()
-      require('configs.plugins.dap').setup()
+      require('config.plugins.dap').setup()
     end,
   },
   {
     'rcarriga/nvim-dap-ui',
     dependencies = 'mfussenegger/nvim-dap',
     config = function()
-      require('configs.plugins.dapui').setup()
+      require('config.plugins.dapui').setup()
     end,
   },
   {
@@ -31,7 +31,7 @@ return {
       'rcarriga/nvim-dap-ui',
     },
     config = function()
-      require('configs.plugins.dap-python').setup()
+      require('config.plugins.dap-python').setup()
     end,
     ft = { 'python' },
   },
@@ -39,7 +39,7 @@ return {
     'leoluz/nvim-dap-go',
     dependencies = 'mfussenegger/nvim-dap',
     config = function()
-      require('configs.plugins.dap-go').setup()
+      require('config.plugins.dap-go').setup()
     end,
     ft = { 'go' },
   },

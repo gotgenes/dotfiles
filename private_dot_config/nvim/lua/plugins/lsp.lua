@@ -8,7 +8,7 @@ return {
       require('mason-lspconfig').setup({
         automatic_installation = false,
       })
-      require('configs.plugins.lsp').setup()
+      require('config.plugins.lsp').setup()
     end,
   },
   {
@@ -17,7 +17,7 @@ return {
       'neovim/nvim-lspconfig',
     },
     config = function()
-      require('configs.plugins.lsp-format').setup()
+      require('config.plugins.lsp-format').setup()
     end,
   },
   {
@@ -27,11 +27,11 @@ return {
     },
     event = 'BufRead',
     opts = function()
-      local languages = vim.tbl_extend('force', require('efmls-configs.defaults').languages(), {
+      local languages = vim.tbl_extend('force', require('efmls-config.defaults').languages(), {
         python = {
-          require('efmls-configs.formatters.isort'),
-          require('efmls-configs.formatters.ruff'),
-          require('efmls-configs.formatters.black'),
+          require('efmls-config.formatters.isort'),
+          require('efmls-config.formatters.ruff'),
+          require('efmls-config.formatters.black'),
         },
       })
       return {
@@ -39,7 +39,7 @@ return {
       }
     end,
     config = function(_, opts)
-      local lsp_configs = require('configs.plugins.lsp')
+      local lsp_configs = require('config.plugins.lsp')
 
       require('lspconfig').efm.setup({
         filetypes = vim.tbl_keys(opts.languages),
@@ -121,7 +121,7 @@ return {
     },
     event = 'BufRead',
     config = function()
-      require('configs.plugins.ufo').setup()
+      require('config.plugins.ufo').setup()
     end,
   },
   {
@@ -132,7 +132,7 @@ return {
     },
     ft = { 'lua' },
     config = function()
-      require('configs.plugins.neodev').setup()
+      require('config.plugins.neodev').setup()
     end,
   },
   {

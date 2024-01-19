@@ -12,13 +12,13 @@ return {
       'onsails/lspkind.nvim',
     },
     config = function()
-      require('configs.plugins.nvim-cmp').setup()
+      require('config.plugins.nvim-cmp').setup()
     end,
   },
   {
     'L3MON4D3/LuaSnip',
     config = function()
-      require('configs.plugins.luasnip').setup()
+      require('config.plugins.luasnip').setup()
     end,
   },
 }

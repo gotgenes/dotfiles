@@ -1,6 +1,6 @@
-require('configs.settings').setup()
+require('config.options').setup()
 
-require('configs.autocmds').setup()
+require('config.autocmds').setup()
 
 local function ensure_lazy_installed()
   local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -32,9 +32,9 @@ require('lazy').setup('plugins')
 
 vim.cmd.colorscheme('catppuccin')
 
-require('configs.keymaps').setup()
+require('config.keymaps').setup()
 
-require('configs.plugins.diagnostic').setup()
+require('config.plugins.diagnostic').setup()
 
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
   callback = function()

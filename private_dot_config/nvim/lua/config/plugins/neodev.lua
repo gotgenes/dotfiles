@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
   local neodev = require('neodev')
   local nvim_lsp = require('lspconfig')
-  local lsp_config = require('configs.plugins.lsp')
+  local lsp_config = require('config.plugins.lsp')
   neodev.setup({})
   nvim_lsp.lua_ls.setup({
     capabilities = lsp_config.capabilities,
