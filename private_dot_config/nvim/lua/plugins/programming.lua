@@ -8,7 +8,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     config = function()
-      require('configs.plugins.nvim-treesitter').setup()
+      require('config.plugins.nvim-treesitter').setup()
     end,
     build = ':TSUpdate',
   },
@@ -25,7 +25,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('configs.plugins.nvim-treesitter-textobjects').setup()
+      require('config.plugins.nvim-treesitter-textobjects').setup()
     end,
   },
   {
@@ -34,7 +34,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('configs.plugins.syntax-tree-surfer').setup()
+      require('config.plugins.syntax-tree-surfer').setup()
     end,
   },
   {
@@ -44,7 +44,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('configs.plugins.refactoring').setup()
+      require('config.plugins.refactoring').setup()
     end,
   },
   {
@@ -58,7 +58,7 @@ return {
       },
     },
     config = function()
-      require('configs.plugins.yati').setup()
+      require('config.plugins.yati').setup()
     end,
   },
   {
@@ -74,7 +74,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('configs.plugins.nvim-autopairs').setup()
+      require('config.plugins.nvim-autopairs').setup()
     end,
   },
   {
@@ -105,7 +105,7 @@ return {
   {
     'RRethy/vim-illuminate',
     config = function()
-      require('configs.plugins.illuminate').setup()
+      require('config.plugins.illuminate').setup()
     end,
   },
   {
@@ -116,7 +116,7 @@ return {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-      require('configs.plugins.diffview')
+      require('config.plugins.diffview')
     end,
   },
   {
@@ -124,7 +124,7 @@ return {
     cmd = 'Copilot',
     event = 'InsertEnter',
     config = function()
-      require('configs.plugins.copilot').setup()
+      require('config.plugins.copilot').setup()
     end,
   },
 }

@@ -74,7 +74,7 @@ return {
     'goolord/alpha-nvim',
     event = 'VimEnter',
     config = function()
-      require('configs.plugins.alpha').setup()
+      require('config.plugins.alpha').setup()
     end,
   },
   {
@@ -90,7 +90,7 @@ return {
       'lewis6991/gitsigns.nvim',
     },
     config = function()
-      require('configs.plugins.lualine').setup()
+      require('config.plugins.lualine').setup()
     end,
     event = 'VeryLazy',
   },
@@ -119,7 +119,7 @@ return {
       'kevinhwang91/nvim-hlslens',
     },
     config = function()
-      require('configs.plugins.scrollbar').setup()
+      require('config.plugins.scrollbar').setup()
     end,
     event = { 'BufReadPost', 'BufNewFile' },
   },
@@ -308,7 +308,7 @@ return {
       'nvim-tree/nvim-web-devicons', -- optional, for file icon
     },
     config = function()
-      require('configs.plugins.nvim-tree').setup()
+      require('config.plugins.nvim-tree').setup()
     end,
   },
   {
@@ -320,7 +320,7 @@ return {
   {
     'edluffy/specs.nvim',
     config = function()
-      require('configs.plugins.specs').setup()
+      require('config.plugins.specs').setup()
     end,
   },
   {

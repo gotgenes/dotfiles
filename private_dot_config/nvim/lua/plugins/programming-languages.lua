@@ -9,7 +9,7 @@ return {
   {
     'ray-x/go.nvim',
     config = function()
-      require('configs.plugins.go').setup()
+      require('config.plugins.go').setup()
     end,
     ft = { 'go', 'godoc', 'gomod', 'gotmplhtml', 'gotexttmpl' },
     dependencies = {

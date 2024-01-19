@@ -5,13 +5,13 @@ return {
       vim.g.operator_sandwich_no_default_key_mappings = 1
     end,
     config = function()
-      require('configs.plugins.vim-sandwich').setup()
+      require('config.plugins.vim-sandwich').setup()
     end,
   },
   {
     'ntpeters/vim-better-whitespace',
     init = function()
-      require('configs.plugins.vim-better-whitespace').setup()
+      require('config.plugins.vim-better-whitespace').setup()
     end,
   },
   { 'schickling/vim-bufonly' },
@@ -25,7 +25,7 @@ return {
   {
     'max397574/better-escape.nvim',
     config = function()
-      require('configs.plugins.better-escape').setup()
+      require('config.plugins.better-escape').setup()
     end,
   },
   { 'AndrewRadev/splitjoin.vim' },
