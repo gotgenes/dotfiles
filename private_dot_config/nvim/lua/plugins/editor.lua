@@ -54,6 +54,12 @@ return {
           },
         },
       },
+      pickers = {
+        buffers = {
+          theme = "dropdown",
+          previewer = false,
+        },
+      },
     },
     keys = {
       {
