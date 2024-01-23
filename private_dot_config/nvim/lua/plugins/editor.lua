@@ -123,4 +123,18 @@ return {
   {
     "gpanders/editorconfig.nvim",
   },
+  {
+    "echasnovski/mini.surround",
+    opts = {
+      mappings = {
+        add = "<leader>aa",
+        delete = "<leader>ad",
+        find = "<leader>af",
+        find_left = "<leader>aF",
+        highlight = "<leader>ah",
+        replace = "<leader>ar",
+        update_n_lines = "<leader>an",
+      },
+    },
+  },
 }
