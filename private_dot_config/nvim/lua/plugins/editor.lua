@@ -1,3 +1,4 @@
+local Util = require("lazyvim.util")
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -136,5 +137,40 @@ return {
         update_n_lines = "<leader>an",
       },
     },
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    keys = function()
+      return {
+        {
+          "<leader>ef",
+          function()
+            require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
+          end,
+          desc = "Explorer NeoTree (root dir)",
+        },
+        {
+          "<leader>eF",
+          function()
+            require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+          end,
+          desc = "Explorer NeoTree (cwd)",
+        },
+        {
+          "<leader>eg",
+          function()
+            require("neo-tree.command").execute({ source = "git_status", toggle = true })
+          end,
+          desc = "Git explorer",
+        },
+        {
+          "<leader>eb",
+          function()
+            require("neo-tree.command").execute({ source = "buffers", toggle = true })
+          end,
+          desc = "Buffer explorer",
+        },
+      }
+    end,
   },
 }
