@@ -36,4 +36,23 @@ return {
       require("config.plugins.diffview")
     end,
   },
+  {
+    "zbirenbaum/copilot.lua",
+    opts = {
+      panel = {
+        enabled = true,
+      },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        filetypes = {
+          markdown = true,
+        },
+      },
+    },
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    enabled = false,
+  },
 }
