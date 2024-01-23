@@ -103,7 +103,6 @@ return {
       require("config.plugins.better-escape").setup()
     end,
   },
-  { "AndrewRadev/splitjoin.vim" },
   { "wsdjeg/vim-fetch" },
   {
     "axkirillov/hbac.nvim",
@@ -123,23 +122,5 @@ return {
   },
   {
     "gpanders/editorconfig.nvim",
-  },
-  {
-    "shortcuts/no-neck-pain.nvim",
-    cmd = {
-      "NoNeckPain",
-      "NoNeckPainResize",
-      "NoNeckPainWidthUp",
-      "NoNeckPainWidthDown",
-      "NoNeckPainScratchPad",
-    },
-    opts = {
-      width = 130,
-      buffers = {
-        colors = {
-          background = require("catppuccin.palettes").get_palette().crust,
-        },
-      },
-    },
   },
 }
