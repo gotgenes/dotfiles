@@ -152,4 +152,22 @@ return {
       }
     end,
   },
+  {
+    "shortcuts/no-neck-pain.nvim",
+    cmd = {
+      "NoNeckPain",
+      "NoNeckPainResize",
+      "NoNeckPainWidthUp",
+      "NoNeckPainWidthDown",
+      "NoNeckPainScratchPad",
+    },
+    opts = {
+      width = 130,
+      buffers = {
+        colors = {
+          background = require("catppuccin.palettes").get_palette().crust,
+        },
+      },
+    },
+  },
 }
