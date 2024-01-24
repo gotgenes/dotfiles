@@ -46,13 +46,13 @@ return {
         enabled = true,
         auto_trigger = true,
         keymap = {
-          accept = "<C-y>",
+          accept = "<C-.>",
         },
       },
     },
     event = "InsertEnter",
     keys = {
-      { "<C-y>", desc = "Accept Copilot suggestion" },
+      { "<C-.>", desc = "Accept Copilot suggestion", mode = "i" },
     },
   },
   {
