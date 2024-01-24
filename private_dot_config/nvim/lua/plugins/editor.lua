@@ -8,10 +8,39 @@ return {
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping.select_next_item(),
         ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
       })
     end,
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    keys = {
+      {
+        "<C-n>",
+        function()
+          require("luasnip").jump(1)
+        end,
+        desc = "Jump to next snippet location",
+        mode = { "i", "s" },
+      },
+      {
+        "<C-p>",
+        function()
+          require("luasnip").jump(-1)
+        end,
+        desc = "Jump to previous snippet location",
+        mode = { "i", "s" },
+      },
+      {
+        "<Tab>",
+        false,
+        mode = { "i", "s" },
+      },
+      {
+        "<S-Tab>",
+        false,
+        mode = { "i", "s" },
+      },
+    },
   },
   {
     "nvim-telescope/telescope.nvim",
