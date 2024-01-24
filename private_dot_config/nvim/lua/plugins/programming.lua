@@ -50,6 +50,10 @@ return {
         },
       },
     },
+    event = "InsertEnter",
+    keys = {
+      { "<C-y>", desc = "Accept Copilot suggestion" },
+    },
   },
   {
     "zbirenbaum/copilot-cmp",
