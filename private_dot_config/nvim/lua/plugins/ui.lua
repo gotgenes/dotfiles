@@ -60,6 +60,14 @@ return {
     },
   },
   {
+    "folke/noice.nvim",
+    opts = {
+      presets = {
+        command_palette = false,
+      },
+    },
+  },
+  {
     "uga-rosa/ccc.nvim",
     opts = {},
     cmd = {
