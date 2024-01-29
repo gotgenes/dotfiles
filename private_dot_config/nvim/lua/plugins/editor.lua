@@ -177,6 +177,8 @@ return {
       },
     },
     keys = {
+      { "<leader>fr", Util.telescope("oldfiles", { only_cwd = true }), desc = "Recent (cwd)" },
+      { "<leader>fR", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       {
         "<leader>sG",
         function()
