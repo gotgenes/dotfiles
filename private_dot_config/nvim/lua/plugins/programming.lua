@@ -1,5 +1,88 @@
 return {
   {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "bash",
+        "c",
+        "c_sharp",
+        "cmake",
+        "comment",
+        "cpp",
+        "css",
+        "dockerfile",
+        "dot",
+        "git_config",
+        "git_rebase",
+        "gitattributes",
+        "gitcommit",
+        "gitignore",
+        "go",
+        "gomod",
+        "graphql",
+        "html",
+        "http",
+        "ini",
+        "java",
+        "javascript",
+        "jsdoc",
+        "json",
+        "json5",
+        "jsonc",
+        "kotlin",
+        "latex",
+        "lua",
+        "make",
+        "markdown",
+        "markdown_inline",
+        "mermaid",
+        "ninja",
+        "perl",
+        "proto",
+        "python",
+        "query",
+        "r",
+        "regex",
+        "rst",
+        "ruby",
+        "rust",
+        "scss",
+        "sql",
+        "swift",
+        "terraform",
+        "thrift",
+        "toml",
+        "tsx",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "yaml",
+      },
+    },
+    config = function(_, opts)
+      require("nvim-treesitter.install").compilers = {
+        vim.fn.getenv("CC"),
+        "clang",
+        "gcc",
+        "cc",
+        "cl",
+        "zig",
+      }
+      if type(opts.ensure_installed) == "table" then
+        ---@type table<string, boolean>
+        local added = {}
+        opts.ensure_installed = vim.tbl_filter(function(lang)
+          if added[lang] then
+            return false
+          end
+          added[lang] = true
+          return true
+        end, opts.ensure_installed)
+      end
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+  {
     "nvim-treesitter/playground",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
