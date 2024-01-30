@@ -6,6 +6,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+local LazyViewConfig = require("lazy.view.config")
+LazyViewConfig.keys.profile_filter = "<C-p>"
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
