@@ -173,6 +173,7 @@ return {
         buffers = {
           theme = "dropdown",
           previewer = false,
+          initial_mode = "normal",
         },
       },
     },
