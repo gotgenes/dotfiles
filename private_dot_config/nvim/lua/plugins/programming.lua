@@ -142,4 +142,39 @@ return {
     "zbirenbaum/copilot-cmp",
     enabled = false,
   },
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      {
+        "rcarriga/nvim-dap-ui",
+        keys = {
+          { "<leader>du", nil },
+          {
+            "<leader>dT",
+            function()
+              require("dapui").toggle({})
+            end,
+            desc = "Dap UI",
+          },
+        },
+      },
+    },
+    keys = {
+      { "<leader>dO", nil },
+      {
+        "<leader>dn",
+        function()
+          require("dap").step_over()
+        end,
+        desc = "Step Over",
+      },
+      {
+        "<leader>dq",
+        function()
+          require("dap").terminate()
+        end,
+        desc = "Terminate",
+      },
+    },
+  },
 }
