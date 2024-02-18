@@ -143,10 +143,65 @@ return {
   {
     "petertriho/nvim-scrollbar",
     dependencies = {
-      "kevinhwang91/nvim-hlslens",
+      {
+        "kevinhwang91/nvim-hlslens",
+        keys = {
+          {
+            "n",
+            function()
+              if vim.v.searchforward == 1 then
+                vim.cmd("normal! ngv")
+              else
+                vim.cmd("normal! Ngv")
+              end
+              require("hlslens").start()
+            end,
+            desc = "Next search result",
+          },
+          {
+            "N",
+            function()
+              if vim.v.searchforward == 1 then
+                vim.cmd("normal! Ngv")
+              else
+                vim.cmd("normal! ngv")
+              end
+              require("hlslens").start()
+            end,
+            desc = "Next search result",
+          },
+          {
+            "*",
+            [[*<Cmd>lua require('hlslens').start()<CR>]],
+          },
+          {
+            "#",
+            [[#<Cmd>lua require('hlslens').start()<CR>]],
+          },
+          {
+            "g*",
+            [[g*<Cmd>lua require('hlslens').start()<CR>]],
+          },
+          {
+            "g#",
+            [[g#<Cmd>lua require('hlslens').start()<CR>]],
+          },
+        },
+      },
     },
-    config = function()
-      require("config.plugins.scrollbar").setup()
+    opts = {
+      handle = {
+        highlight = "ColorColumn",
+      },
+      handlers = {
+        cursor = true,
+        diagnostic = true,
+        gitsigns = true,
+        search = true,
+      },
+    },
+    config = function(_, opts)
+      require("scrollbar").setup(opts)
     end,
     event = { "BufReadPost", "BufNewFile" },
   },
