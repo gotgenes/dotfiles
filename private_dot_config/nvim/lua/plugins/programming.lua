@@ -148,7 +148,7 @@ return {
       {
         "rcarriga/nvim-dap-ui",
         keys = {
-          { "<leader>du", nil },
+          { "<leader>du", false },
           {
             "<leader>dT",
             function()
@@ -160,7 +160,7 @@ return {
       },
     },
     keys = {
-      { "<leader>dO", nil },
+      { "<leader>dO", false },
       {
         "<leader>dn",
         function()
