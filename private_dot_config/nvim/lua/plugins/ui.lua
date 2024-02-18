@@ -150,9 +150,9 @@ return {
             "n",
             function()
               if vim.v.searchforward == 1 then
-                vim.cmd("normal! ngv")
+                vim.cmd.normal({ "ngv", bang = true })
               else
-                vim.cmd("normal! Ngv")
+                vim.cmd.normal({ "Ngv", bang = true })
               end
               require("hlslens").start()
             end,
@@ -162,9 +162,9 @@ return {
             "N",
             function()
               if vim.v.searchforward == 1 then
-                vim.cmd("normal! Ngv")
+                vim.cmd.normal({ "Ngv", bang = true })
               else
-                vim.cmd("normal! ngv")
+                vim.cmd.normal({ "ngv", bang = true })
               end
               require("hlslens").start()
             end,
@@ -204,6 +204,18 @@ return {
       require("scrollbar").setup(opts)
     end,
     event = { "BufReadPost", "BufNewFile" },
+    keys = {
+      {
+        "<Esc>",
+        function()
+          vim.cmd("noh")
+          require("scrollbar.handlers.search").nohlsearch()
+          local key = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+          vim.cmd.normal({ key, bang = true })
+        end,
+        desc = "Escape and clear hlsearch",
+      },
+    },
   },
   {
     "edluffy/specs.nvim",
