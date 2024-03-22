@@ -3,7 +3,7 @@ local act = wezterm.action
 local mux = wezterm.mux
 
 -- from https://stackoverflow.com/a/1283608/38140
-function table_merge(t1, t2)
+local function table_merge(t1, t2)
   for k, v in pairs(t2) do
     if type(v) == 'table' then
       if type(t1[k] or false) == 'table' then
@@ -16,6 +16,15 @@ function table_merge(t1, t2)
     end
   end
   return t1
+end
+
+local function get_active_tab_idx(mux_win)
+  for _, tab in ipairs(mux_win:tabs_with_info()) do
+    if tab.is_active then
+      wezterm.log_info('activetab: ', tab)
+      return tab.index
+    end
+  end
 end
 
 wezterm.on('gui-attached', function(domain)
@@ -64,6 +73,26 @@ local my_config = {
       key = 'u',
       mods = 'CTRL|SHIFT',
       action = copy_url_action,
+    },
+    {
+      key = 't',
+      mods = 'CTRL|SHIFT',
+      -- https://github.com/wez/wezterm/issues/909
+      action = wezterm.action_callback(function(win, pane)
+        local mux_win = win:mux_window()
+        local idx = get_active_tab_idx(mux_win)
+        mux_win:spawn_tab({})
+        wezterm.log_info('movetab: ', idx)
+        win:perform_action(wezterm.action.MoveTab(idx + 1), pane)
+      end),
+    },
+    {
+      key = 't',
+      mods = 'SUPER',
+      action = act.SpawnCommandInNewTab({
+        cwd = wezterm.home_dir,
+        domain = 'DefaultDomain',
+      }),
     },
   },
 }
