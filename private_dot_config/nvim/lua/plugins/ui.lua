@@ -162,9 +162,9 @@ return {
             "N",
             function()
               if vim.v.searchforward == 1 then
-                vim.cmd.normal({ "Ngv", bang = true })
+                vim.cmd.normal({ "Nzv", bang = true })
               else
-                vim.cmd.normal({ "ngv", bang = true })
+                vim.cmd.normal({ "nzv", bang = true })
               end
               require("hlslens").start()
             end,
