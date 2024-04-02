@@ -68,6 +68,10 @@ return {
     },
   },
   {
+    "nvim-lualine/lualine.nvim",
+    opts = require("config.plugins.lualine").opts,
+  },
+  {
     "nvimdev/dashboard-nvim",
     opts = function(_, opts)
       opts.config.center = {
