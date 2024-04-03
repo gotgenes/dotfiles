@@ -1,2 +1,5 @@
 README.md
 *.spl
+{{- if ne .chezmoi.os "darwin" }}
+./dot_local/bin/executable_brew.tmpl
+{{- end }}
