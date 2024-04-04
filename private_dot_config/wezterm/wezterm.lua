@@ -40,7 +40,7 @@ end)
 local url_pattern = 'https?://\\S+'
 
 local copy_url_action = act.QuickSelectArgs({
-  label = 'open url',
+  label = 'copy url',
   patterns = { url_pattern },
   action = wezterm.action_callback(function(window, pane)
     local url = window:get_selection_text_for_pane(pane)
@@ -70,7 +70,7 @@ local my_config = {
       action = open_url_action,
     },
     {
-      key = 'u',
+      key = 'a',
       mods = 'CTRL|SHIFT',
       action = copy_url_action,
     },
