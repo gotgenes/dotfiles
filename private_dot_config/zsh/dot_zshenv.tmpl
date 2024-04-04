@@ -13,7 +13,7 @@ export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 export ZSHZ_DATA="$XDG_DATA_HOME/z"
 export ZSHZ_CASE="smart"
 
-{{ if eq .chezmoi.os "darwin" -}}
+{{- if eq .chezmoi.os "darwin" }}
 if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
 fi
@@ -22,6 +22,8 @@ eval $(/opt/homebrew/bin/brew shellenv)
 {{- else }}
 eval $(/usr/local/bin/brew shellenv)
 {{- end }}
+{{- else }}
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 {{- end }}
 
 export GOPATH="$HOME/development/go"

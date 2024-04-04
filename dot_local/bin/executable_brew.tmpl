@@ -1,9 +1,13 @@
 #!/usr/bin/env zsh
 
-{{ if eq .chezmoi.arch "arm64" -}}
+{{- if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.arch "arm64" }}
 BREW="/opt/homebrew/bin/brew"
 {{- else }}
 BREW="/usr/local/bin/brew"
+{{- end }}
+{{- else }}
+BREW="/home/linuxbrew/.linuxbrew/bin/brew"
 {{- end }}
 
 # check if asdf is available
