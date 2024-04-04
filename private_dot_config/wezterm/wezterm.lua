@@ -37,7 +37,7 @@ wezterm.on('gui-attached', function(domain)
   end
 end)
 
-local url_pattern = 'https?://\\S+'
+local url_pattern = 'https?://[-[:alpha:]0-9@:%._+~#=]{2,256}.[[:alpha:]]{2,30}[-[:alpha:]0-9@:%_+.~#?&/=]*'
 
 local copy_url_action = act.QuickSelectArgs({
   label = 'copy url',
