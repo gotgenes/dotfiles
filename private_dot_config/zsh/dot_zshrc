@@ -29,14 +29,6 @@ fi
 [[ ! -f "$XDG_CONFIG_HOME/zsh/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/zsh/p10k.zsh"
 
 
-setopt APPEND_HISTORY
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_NO_STORE
-
-
 # plugins
 zinit light NICHOLAS85/z-a-eval
 
@@ -173,5 +165,18 @@ typeset -aU path
 
 # Load autocompletions
 source "$XDG_CONFIG_HOME/zsh/completion.zsh"
+
+export HISTFILE="$XDG_DATA_HOME/zsh/history"
+export SAVEHIST=100000
+export HISTSIZE=200000
+
+# The meaning of these options can be found in man page of `zshoptions`.
+setopt EXTENDED_HISTORY  # record command start time
+setopt HIST_EXPIRE_DUPS_FIRST  # expire duplicate entries first when trimming history
+setopt HIST_FIND_NO_DUPS  # do not display duplicates of a previously found line when searching history
+setopt HIST_IGNORE_SPACE  # ignore commands that start with space
+setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
+setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
+setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 
 # vi: filetype=zsh
