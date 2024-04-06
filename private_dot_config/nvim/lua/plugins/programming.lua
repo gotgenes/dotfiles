@@ -94,9 +94,33 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
-      require("config.plugins.syntax-tree-surfer").setup()
-    end,
+    opts = {},
+    keys = {
+      {
+        "J",
+        "<cmd>STSSelectNextSiblingNode<CR>",
+        desc = "select next sibling",
+        mode = { "x" },
+      },
+      {
+        "K",
+        "<cmd>STSSelectPrevSiblingNode<CR>",
+        desc = "select previous sibling",
+        mode = { "x" },
+      },
+      {
+        "H",
+        "<cmd>STSSelectParentNode<CR>",
+        desc = "select parent node",
+        mode = { "x" },
+      },
+      {
+        "L",
+        "<cmd>STSSelectChildNode<CR>",
+        desc = "select child node",
+        mode = { "x" },
+      },
+    },
   },
   {
     "Wansmer/treesj",
