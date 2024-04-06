@@ -99,6 +99,46 @@ return {
     end,
   },
   {
+    "Wansmer/treesj",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      use_default_keymaps = false,
+    },
+    keys = {
+      {
+        "<leader>jj",
+        function()
+          require("treesj").join()
+        end,
+      },
+      {
+        "<leader>js",
+        function()
+          require("treesj").split()
+        end,
+      },
+      {
+        "<leader>jt",
+        function()
+          require("treesj").toggle()
+        end,
+      },
+      {
+        "<leader>jT",
+        function()
+          require("treesj").toggle({ split = { recursive = true } })
+        end,
+      },
+    },
+    command = {
+      "TSJJoin",
+      "TSJSplit",
+      "TSJToggle",
+    },
+  },
+  {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
