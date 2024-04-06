@@ -243,6 +243,17 @@ return {
   },
   {
     "echasnovski/mini.surround",
+    dependencies = {
+      {
+        "folke/which-key.nvim",
+        optional = true,
+        opts = {
+          defaults = {
+            ["<leader>a"] = { name = "+surround" },
+          },
+        },
+      },
+    },
     opts = {
       mappings = {
         add = "<leader>aa",
@@ -257,6 +268,17 @@ return {
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      {
+        "folke/which-key.nvim",
+        optional = true,
+        opts = {
+          defaults = {
+            ["<leader>e"] = { name = "+explorer" },
+          },
+        },
+      },
+    },
     keys = function()
       return {
         {

@@ -102,6 +102,15 @@ return {
     "Wansmer/treesj",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
+      {
+        "folke/which-key.nvim",
+        optional = true,
+        opts = {
+          defaults = {
+            ["<leader>j"] = { name = "+split/join" },
+          },
+        },
+      },
     },
     opts = {
       use_default_keymaps = false,
@@ -112,24 +121,28 @@ return {
         function()
           require("treesj").join()
         end,
+        desc = "join",
       },
       {
         "<leader>js",
         function()
           require("treesj").split()
         end,
+        desc = "split",
       },
       {
         "<leader>jt",
         function()
           require("treesj").toggle()
         end,
+        desc = "toggle join",
       },
       {
         "<leader>jT",
         function()
           require("treesj").toggle({ split = { recursive = true } })
         end,
+        desc = "toggle join recursive",
       },
     },
     command = {
