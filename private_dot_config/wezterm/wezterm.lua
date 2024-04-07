@@ -37,11 +37,18 @@ wezterm.on('gui-attached', function(domain)
   end
 end)
 
-local url_pattern = 'https?://[-[:alpha:]0-9@:%._+~#=]{2,256}.[[:alpha:]]{2,30}[-[:alpha:]0-9@:%_+.~#?&/=]*'
+-- use the URL patterns from the default configuration
+-- https://github.com/wez/wezterm/blob/main/wezterm-gui/src/overlay/quickselect.rs
+local url_patterns = {
+  -- markdown_url
+  '\\[[^]]*\\]\\(([^)]+)\\)',
+  -- url
+  '(?:https?://|git@|git://|ssh://|ftp://|file:///)\\S+',
+}
 
 local copy_url_action = act.QuickSelectArgs({
   label = 'copy url',
-  patterns = { url_pattern },
+  patterns = url_patterns,
   action = wezterm.action_callback(function(window, pane)
     local url = window:get_selection_text_for_pane(pane)
     window:copy_to_clipboard(url, 'ClipboardAndPrimarySelection')
