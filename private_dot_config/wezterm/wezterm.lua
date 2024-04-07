@@ -37,18 +37,22 @@ wezterm.on('gui-attached', function(domain)
   end
 end)
 
--- use the URL patterns from the default configuration
--- https://github.com/wez/wezterm/blob/main/wezterm-gui/src/overlay/quickselect.rs
 local url_patterns = {
-  -- markdown_url
-  '\\[[^]]*\\]\\(([^)]+)\\)',
-  -- url
-  '(?:https?://|git@|git://|ssh://|ftp://|file:///)\\S+',
+  -- URL before a closing parenthesis
+  [=[([[:alpha:]]+://\S+)\)]=],
+  -- URL before a closing bracket
+  [=[([[:alpha:]]+://\S+)\]]=],
+  -- URL alone
+  [=[([[:alpha:]]+://\S+)]=],
 }
+
+-- Alphabet for Dvorak keyboard layout
+local quick_select_alphabet = 'htnsgcrlmwvzueoapkjqdfbiyx'
 
 local copy_url_action = act.QuickSelectArgs({
   label = 'copy url',
   patterns = url_patterns,
+  alphabet = quick_select_alphabet,
   action = wezterm.action_callback(function(window, pane)
     local url = window:get_selection_text_for_pane(pane)
     window:copy_to_clipboard(url, 'ClipboardAndPrimarySelection')
@@ -57,7 +61,8 @@ local copy_url_action = act.QuickSelectArgs({
 
 local open_url_action = act.QuickSelectArgs({
   label = 'open url',
-  patterns = { url_pattern },
+  patterns = url_patterns,
+  alphabet = quick_select_alphabet,
   action = wezterm.action_callback(function(window, pane)
     local url = window:get_selection_text_for_pane(pane)
     wezterm.open_with(url)
