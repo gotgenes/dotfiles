@@ -174,6 +174,11 @@ return {
           theme = "dropdown",
           previewer = false,
           initial_mode = "normal",
+          mappings = {
+            n = {
+              dd = "delete_buffer",
+            },
+          },
         },
       },
     },
