@@ -146,6 +146,15 @@ zinit ice \
     nocompile
 zinit light zdharma-continuum/null
 
+zinit ice \
+    id-as"copilot-aliases" \
+    has"gh" \
+    atclone"gh copilot alias -- zsh > copilot_aliases.zsh" \
+    atpull"%atclone" \
+    run-atpull \
+    nocompile
+zinit light zdharma-continuum/null
+
 
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 
