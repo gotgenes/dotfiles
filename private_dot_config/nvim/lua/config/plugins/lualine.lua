@@ -25,12 +25,6 @@ local disabled_filetypes = {
 
 function M.opts()
   local icons = require("lazyvim.config").icons
-  local colors = {
-    [""] = LazyVim.ui.fg("Special"),
-    ["Normal"] = LazyVim.ui.fg("Special"),
-    ["Warning"] = LazyVim.ui.fg("DiagnosticError"),
-    ["InProgress"] = LazyVim.ui.fg("DiagnosticWarn"),
-  }
   vim.o.laststatus = vim.g.lualine_laststatus
 
   return {
@@ -64,13 +58,13 @@ function M.opts()
         {
           function() return require("noice").api.status.command.get() end,
           cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-          color = LazyVim.ui.fg("Statement"),
+          color = function() return LazyVim.ui.fg("Statement") end,
         },
         -- stylua: ignore
         {
           function() return require("noice").api.status.mode.get() end,
           cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-          color = LazyVim.ui.fg("Constant"),
+          color = function() LazyVim.ui.fg("Constant") end,
         },
         {
           function()
@@ -93,19 +87,27 @@ function M.opts()
               return
             end
             local status = require("copilot.api").status.data
+            local colors = {
+              [""] = LazyVim.ui.fg("Special"),
+              ["Normal"] = LazyVim.ui.fg("Special"),
+              ["Warning"] = LazyVim.ui.fg("DiagnosticError"),
+              ["InProgress"] = LazyVim.ui.fg("DiagnosticWarn"),
+            }
             return colors[status.status] or colors[""]
           end,
         },
         -- stylua: ignore
         {
           function() return "  " .. require("dap").status() end,
-          cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-          color = LazyVim.ui.fg("Debug"),
+          cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+          color = function() LazyVim.ui.fg("Debug") end,
         },
         {
           require("lazy.status").updates,
           cond = require("lazy.status").has_updates,
-          color = LazyVim.ui.fg("Special"),
+          color = function()
+            return LazyVim.ui.fg("Special")
+          end,
         },
         {
           "diff",
