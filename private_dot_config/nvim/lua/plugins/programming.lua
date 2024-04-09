@@ -83,6 +83,32 @@ return {
     end,
   },
   {
+    "echasnovski/mini.comment",
+    enabled = false,
+  },
+  {
+    "numToStr/Comment.nvim",
+    dependencies = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
+    opts = {
+      pre_hook = function()
+        require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
+      end,
+    },
+    keys = {
+      { "gc", desc = "+comment (linewise)", mode = { "n" } },
+      { "gcc", desc = "toggle comment", mode = { "n" } },
+      { "gcA", desc = "insert comment at end of current line", mode = { "n" } },
+      { "gco", desc = "insert comment to the next line", mode = { "n" } },
+      { "gcO", desc = "insert comment to the previous line", mode = { "n" } },
+      { "gb", desc = "+comment (blockwise)", mode = { "n" } },
+      { "gbc", desc = "toggle comment", mode = { "n" } },
+      { "gc", desc = "toggle comment (linewise)", mode = { "x" } },
+      { "gb", desc = "toggle comment (blockwise)", mode = { "x" } },
+    },
+  },
+  {
     "nvim-treesitter/playground",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
