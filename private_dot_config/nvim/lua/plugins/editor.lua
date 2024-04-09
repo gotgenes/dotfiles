@@ -222,9 +222,13 @@ return {
   { "AndrewRadev/inline_edit.vim" },
   {
     "max397574/better-escape.nvim",
-    config = function()
-      require("config.plugins.better-escape").setup()
-    end,
+    event = "InsertEnter",
+    opts = {
+      mapping = { "jk", "jj", "kj" },
+      keys = function()
+        return vim.api.nvim_win_get_cursor(0)[2] > 1 and "<Esc>l" or "<Esc>"
+      end,
+    },
   },
   { "wsdjeg/vim-fetch" },
   {
