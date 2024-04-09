@@ -293,9 +293,15 @@ return {
   },
   {
     "edluffy/specs.nvim",
-    config = function()
-      require("config.plugins.specs").setup()
-    end,
+    opts = {
+      min_jump = 10,
+      popup = {
+        delay_ms = 5,
+        inc_ms = 10,
+        winhl = "IncSearch",
+      },
+      ignore_filetypes = { "help" },
+    },
   },
   {
     "s1n7ax/nvim-window-picker",
