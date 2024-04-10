@@ -207,9 +207,73 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
-      require("config.plugins.refactoring").setup()
-    end,
+    command = { "Refactor" },
+    keys = {
+      {
+        "<leader>rb",
+        function()
+          require("refactoring").refactor("Extract Block")
+        end,
+        desc = "extract block",
+        mode = { "n" },
+      },
+      {
+        "<leader>rB",
+        function()
+          require("refactoring").refactor("Extract Block To File")
+        end,
+        desc = "extract block to file",
+        mode = { "n" },
+      },
+      {
+        "<leader>rf",
+        function()
+          require("refactoring").refactor("Extract Function")
+        end,
+        desc = "extract function",
+        mode = { "x" },
+      },
+      {
+        "<leader>rF",
+        function()
+          require("refactoring").refactor("Extract Function To File")
+        end,
+        desc = "extract function to file",
+        mode = { "x" },
+      },
+      {
+        "<leader>ri",
+        function()
+          require("refactoring").refactor("Inline Variable")
+        end,
+        desc = "inline variable",
+        mode = { "n", "x" },
+      },
+      {
+        "<leader>rI",
+        function()
+          require("refactoring").refactor("Inline Function")
+        end,
+        desc = "inline function",
+        mode = { "n" },
+      },
+      {
+        "<leader>rv",
+        function()
+          require("refactoring").refactor("Extract Variable")
+        end,
+        desc = "extract variable",
+        mode = { "x" },
+      },
+      {
+        "<leader>rr",
+        function()
+          require("refactoring").select_refactor({ show_success_message = true })
+        end,
+        desc = "select refactoring",
+        mode = { "x" },
+      },
+    },
   },
   {
     "AndrewRadev/linediff.vim",
