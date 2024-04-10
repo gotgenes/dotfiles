@@ -195,7 +195,7 @@ return {
         desc = "toggle join recursive",
       },
     },
-    command = {
+    cmd = {
       "TSJJoin",
       "TSJSplit",
       "TSJToggle",
@@ -207,7 +207,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    command = { "Refactor" },
+    cmd = { "Refactor" },
     keys = {
       {
         "<leader>rb",
@@ -282,7 +282,7 @@ return {
   {
     "sindrets/diffview.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    command = {
+    cmd = {
       "DiffviewClose",
       "DiffviewFileHistory",
       "DiffviewFocusFiles",

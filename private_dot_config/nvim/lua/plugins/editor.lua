@@ -219,7 +219,10 @@ return {
       },
     },
   },
-  { "AndrewRadev/inline_edit.vim" },
+  {
+    "AndrewRadev/inline_edit.vim",
+    cmd = { "InlineEdit" },
+  },
   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
