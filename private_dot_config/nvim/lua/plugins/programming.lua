@@ -109,13 +109,6 @@ return {
     },
   },
   {
-    "nvim-treesitter/playground",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    build = ":TSInstall query",
-  },
-  {
     "ziontee113/syntax-tree-surfer",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
