@@ -58,6 +58,7 @@ return {
     dependencies = {
       "rktjmp/lush.nvim",
     },
+    lazy = true,
   },
   {
     "folke/noice.nvim",
@@ -293,6 +294,7 @@ return {
   },
   {
     "edluffy/specs.nvim",
+    event = "BufReadPost",
     opts = {
       min_jump = 10,
       popup = {
