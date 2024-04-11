@@ -73,56 +73,60 @@ return {
     enabled = false,
   },
   {
+    "SmiteshP/nvim-navic",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+    },
+    lazy = true,
+    init = function()
+      vim.g.navic_silence = true
+      LazyVim.lsp.on_attach(function(client, buffer)
+        if client.supports_method("textDocument/documentSymbol") then
+          require("nvim-navic").attach(client, buffer)
+          vim.api.nvim_exec_autocmds("User", {
+            pattern = "NavicInit",
+          })
+        end
+      end)
+    end,
+    opts = function()
+      return {
+        separator = " ",
+        highlight = true,
+        depth_limit = 5,
+        icons = require("lazyvim.config").icons.kinds,
+        lazy_update_context = true,
+      }
+    end,
+  },
+  {
     "utilyre/barbecue.nvim",
     name = "barbecue",
     dependencies = {
-      {
-        "SmiteshP/nvim-navic",
-        dependencies = {
-          "neovim/nvim-lspconfig",
-        },
-        lazy = true,
-        init = function()
-          vim.g.navic_silence = true
-          LazyVim.lsp.on_attach(function(client, buffer)
-            if client.supports_method("textDocument/documentSymbol") then
-              require("nvim-navic").attach(client, buffer)
-              vim.api.nvim_exec_autocmds("User", {
-                pattern = "NavicInit",
-              })
-            end
-          end)
-        end,
-        opts = function()
-          return {
-            separator = " ",
-            highlight = true,
-            depth_limit = 5,
-            icons = require("lazyvim.config").icons.kinds,
-            lazy_update_context = true,
-          }
-        end,
-      },
+      "SmiteshP/nvim-navic",
       "nvim-tree/nvim-web-devicons",
     },
     event = "User NavicInit",
-    opts = {
-      attach_navic = false,
-      exclude_filetypes = {
-        "NeoTree",
-        "Trouble",
-        "dashboard",
-        "dap-repl",
-        "dapui_breakpoints",
-        "dapui_console",
-        "dapui_scopes",
-        "dapui_stacks",
-        "dapui_watches",
-        "lazy",
-        "mason",
-        "notify",
-      },
-    },
+    opts = function()
+      return {
+        attach_navic = false,
+        exclude_filetypes = {
+          "NeoTree",
+          "Trouble",
+          "dashboard",
+          "dap-repl",
+          "dapui_breakpoints",
+          "dapui_console",
+          "dapui_scopes",
+          "dapui_stacks",
+          "dapui_watches",
+          "lazy",
+          "mason",
+          "notify",
+        },
+        kinds = require("lazyvim.config").icons.kinds,
+      }
+    end,
     config = function(_, opts)
       require("barbecue").setup(opts)
       vim.api.nvim_create_autocmd({
@@ -137,6 +141,33 @@ return {
         end,
       })
     end,
+  },
+  {
+    "SmiteshP/nvim-navbuddy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "SmiteshP/nvim-navic",
+    },
+    init = function()
+      LazyVim.lsp.on_attach(function(client, buffer)
+        require("nvim-navbuddy").attach(client, buffer)
+      end)
+    end,
+    opts = function()
+      return {
+        icons = require("lazyvim.config").icons.kinds,
+      }
+    end,
+    cmd = "Navbuddy",
+    keys = {
+      {
+        "<CR>",
+        function()
+          require("nvim-navbuddy").open()
+        end,
+        desc = "open navbuddy",
+      },
+    },
   },
   {
     "nvim-lualine/lualine.nvim",
