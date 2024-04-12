@@ -150,7 +150,9 @@ return {
     },
     init = function()
       LazyVim.lsp.on_attach(function(client, buffer)
-        require("nvim-navbuddy").attach(client, buffer)
+        if client.supports_method("textDocument/documentSymbol") then
+          require("nvim-navbuddy").attach(client, buffer)
+        end
       end)
     end,
     opts = function()
