@@ -42,6 +42,12 @@ local url_patterns = {
   [=[([[:alpha:]]+://\S+)\)]=],
   -- URL before a closing bracket
   [=[([[:alpha:]]+://\S+)\]]=],
+  -- URL before a closing angle bracket
+  [=[([[:alpha:]]+://\S+)>]=],
+  -- URL before a closing double-quote
+  [=[([[:alpha:]]+://\S+)"]=],
+  -- URL before a closing single-quote
+  [=[([[:alpha:]]+://\S+)']=],
   -- URL alone
   [=[([[:alpha:]]+://\S+)]=],
 }
