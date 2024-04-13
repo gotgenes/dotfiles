@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -130,11 +128,18 @@ return {
         },
         keys = {
           {
-            "<leader>sf",
+            "<leader><space>",
             function()
               require("telescope").extensions.smart_open.smart_open({ cwd_only = true })
             end,
-            desc = "search files by frecency",
+            desc = "find files by frecency (Root Dir)",
+          },
+          {
+            "<leader>ff",
+            function()
+              require("telescope").extensions.smart_open.smart_open({ cwd_only = true })
+            end,
+            desc = "find files by frecency (Root Dir)",
           },
         },
       },
@@ -183,8 +188,8 @@ return {
       },
     },
     keys = {
-      { "<leader>fr", Util.telescope("oldfiles", { only_cwd = true }), desc = "Recent (cwd)" },
-      { "<leader>fR", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+      { "<leader>fr", LazyVim.telescope("oldfiles", { cwd = LazyVim.root() }), desc = "recent" },
+      { "<leader>fR", "<cmd>Telescope resume<cr>", desc = "resume" },
       {
         "<leader>sG",
         function()
@@ -296,7 +301,7 @@ return {
         {
           "<leader>ef",
           function()
-            require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
+            require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
           end,
           desc = "Explorer NeoTree (root dir)",
         },
