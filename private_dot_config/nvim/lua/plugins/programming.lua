@@ -367,4 +367,18 @@ return {
       },
     },
   },
+  {
+    "stevearc/conform.nvim",
+    opts = function(_, opts)
+      local js_formatters = { { "biome", "prettierd", "prettier" } }
+      local formatters_by_ft = {
+        javascript = js_formatters,
+        javascriptreact = js_formatters,
+        typescript = js_formatters,
+        typescriptreact = js_formatters,
+      }
+      local merged_formatters = vim.tbl_extend("force", opts.formatters_by_ft or {}, formatters_by_ft)
+      opts.formatters_by_ft = merged_formatters
+    end,
+  },
 }
