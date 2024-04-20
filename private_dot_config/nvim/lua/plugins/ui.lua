@@ -264,6 +264,7 @@ return {
               end
               require("hlslens").start()
             end,
+            remap = false,
             desc = "Next search result",
           },
           {
@@ -276,6 +277,7 @@ return {
               end
               require("hlslens").start()
             end,
+            remap = false,
             desc = "Next search result",
           },
           {
