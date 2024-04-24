@@ -401,4 +401,15 @@ return {
       opts.formatters_by_ft = merged_formatters
     end,
   },
+  {
+    "ruifm/gitlinker.nvim",
+    opts = {},
+    keys = {
+      {
+        "<leader>gy",
+        desc = "copy remote URL",
+        mode = { "n", "v" },
+      },
+    },
+  },
 }
