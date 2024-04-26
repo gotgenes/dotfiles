@@ -98,6 +98,16 @@ zinit light zdharma-continuum/null
 
 zinit ice \
     as"completion" \
+    id-as"wezterm-completion" \
+    has"bw" \
+    atclone"wezterm shell-completion --shell zsh > _wezterm" \
+    atpull"%atclone" \
+    run-atpull \
+    nocompile
+zinit light zdharma-continuum/null
+
+zinit ice \
+    as"completion" \
     id-as"poetry-completion" \
     has"poetry" \
     atclone"poetry completions zsh > _poetry" \
