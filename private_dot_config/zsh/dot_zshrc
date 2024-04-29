@@ -99,7 +99,7 @@ zinit light zdharma-continuum/null
 zinit ice \
     as"completion" \
     id-as"wezterm-completion" \
-    has"bw" \
+    has"wezterm" \
     atclone"wezterm shell-completion --shell zsh > _wezterm" \
     atpull"%atclone" \
     run-atpull \
