@@ -352,14 +352,14 @@ return {
     "s1n7ax/nvim-window-picker",
     keys = {
       {
-        "<leader>w",
+        "<leader>wp",
         function()
           local selected_window = require("window-picker").pick_window()
           if selected_window ~= nil then
             vim.api.nvim_set_current_win(selected_window)
           end
         end,
-        desc = "pick window",
+        desc = "pick",
       },
     },
     opts = function()
