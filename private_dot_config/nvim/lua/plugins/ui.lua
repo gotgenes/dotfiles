@@ -26,14 +26,12 @@ return {
           enable_ui = true,
         },
         diffview = true,
-        fidget = true,
         gitsigns = true,
         illuminate = true,
         indent_blankline = {
           enabled = true,
           colored_indent_levels = false,
         },
-        leap = true,
         lsp_trouble = true,
         markdown = true,
         navic = {
@@ -44,7 +42,6 @@ return {
           enabled = true,
         },
         notify = true,
-        nvimtree = true,
         telescope = true,
         treesitter = true,
         which_key = true,
