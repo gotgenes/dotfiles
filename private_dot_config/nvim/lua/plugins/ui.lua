@@ -25,6 +25,7 @@ return {
           enabled = true,
           enable_ui = true,
         },
+        diffview = true,
         fidget = true,
         gitsigns = true,
         illuminate = true,
