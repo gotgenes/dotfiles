@@ -25,15 +25,22 @@ return {
           enabled = true,
           enable_ui = true,
         },
+        dap_ui = true,
+        dashboard = true,
         diffview = true,
+        flash = true,
         gitsigns = true,
-        illuminate = true,
+        illuminate = {
+          enabled = true,
+          lsp = false,
+        },
         indent_blankline = {
           enabled = true,
           colored_indent_levels = false,
         },
         lsp_trouble = true,
         markdown = true,
+        mason = true,
         navic = {
           enabled = true,
           custom_bg = "NONE",
@@ -41,6 +48,9 @@ return {
         native_lsp = {
           enabled = true,
         },
+        neotree = true,
+        neotest = true,
+        noice = true,
         notify = true,
         telescope = true,
         treesitter = true,
