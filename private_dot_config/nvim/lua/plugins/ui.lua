@@ -30,10 +30,6 @@ return {
         diffview = true,
         flash = true,
         gitsigns = true,
-        illuminate = {
-          enabled = true,
-          lsp = false,
-        },
         indent_blankline = {
           enabled = true,
           colored_indent_levels = false,
