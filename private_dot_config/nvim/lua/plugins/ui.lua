@@ -336,7 +336,7 @@ return {
     },
   },
   {
-    "edluffy/specs.nvim",
+    "JarKz/specs.nvim",
     event = "BufReadPost",
     opts = {
       min_jump = 10,
