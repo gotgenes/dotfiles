@@ -233,7 +233,9 @@ return {
           key = "l",
         },
         {
-          action = "qa",
+          action = function()
+            vim.api.nvim_input("<cmd>qa<cr>")
+          end,
           desc = " Quit",
           icon = " ",
           key = "q",
