@@ -269,26 +269,6 @@ return {
     },
   },
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        "folke/neodev.nvim",
-        opts = {
-          override = function(_, opts)
-            local path = vim.api.nvim_buf_get_name(0)
-            if path then
-              local name = vim.fs.basename(path)
-              if name == ".nvim.lua" then
-                opts.enabled = true
-                opts.plugins = true
-              end
-            end
-          end,
-        },
-      },
-    },
-  },
-  {
     "AndrewRadev/linediff.vim",
     cmd = { "Linediff", "LinediffReset" },
   },
