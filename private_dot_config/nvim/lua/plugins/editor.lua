@@ -188,7 +188,13 @@ return {
       },
     },
     keys = {
-      { "<leader>fr", LazyVim.telescope("oldfiles", { cwd = LazyVim.root() }), desc = "recent" },
+      {
+        "<leader>fr",
+        function()
+          LazyVim.pick.open("oldfiles", { cwd = LazyVim.root() })
+        end,
+        desc = "recent",
+      },
       { "<leader>fR", "<cmd>Telescope resume<cr>", desc = "resume" },
       {
         "<leader>sG",
