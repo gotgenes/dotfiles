@@ -185,6 +185,9 @@ typeset -aU path
 
 
 # Load autocompletions
+if [[ -v HOMEBREW_PREFIX ]]; then
+    zinit fpath "$HOMEBREW_PREFIX/share/zsh/site-functions"
+fi
 source "$XDG_CONFIG_HOME/zsh/completion.zsh"
 
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
