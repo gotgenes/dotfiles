@@ -73,6 +73,8 @@ zinit light jeffreytse/zsh-vi-mode
 
 zinit ice as"completion"
 zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
+
+zinit ice as"completion"
 zinit snippet OMZP::kubectl
 
 zinit ice lucid wait
