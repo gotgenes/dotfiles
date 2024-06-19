@@ -13,6 +13,7 @@ bindkey -M menuselect '^xh' accept-and-hold                # Hold
 bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
 bindkey -M menuselect '^xu' undo                           # Undo
 
+typeset -aU fpath
 autoload -Uz compinit; compinit
 zinit cdreplay -q
 
