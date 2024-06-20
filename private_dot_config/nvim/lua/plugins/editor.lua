@@ -143,6 +143,35 @@ return {
           },
         },
       },
+      {
+        "debugloop/telescope-undo.nvim",
+        opts = {
+          extensions = {
+            undo = {
+              side_by_side = true,
+              diff_context_lines = 4,
+              initial_mode = "normal",
+              layout_strategy = "vertical",
+              layout_config = {
+                preview_height = 0.7,
+              },
+            },
+          },
+        },
+        config = function(_, opts)
+          require("telescope").setup(opts)
+          require("telescope").load_extension("undo")
+        end,
+        keys = {
+          {
+            "<leader>su",
+            function()
+              require("telescope").extensions.undo.undo()
+            end,
+            desc = "Undo history",
+          },
+        },
+      },
     },
     opts = {
       defaults = {
