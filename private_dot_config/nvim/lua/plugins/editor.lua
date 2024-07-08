@@ -277,10 +277,51 @@ return {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
     opts = {
-      mapping = { "jk", "jj", "kj" },
-      keys = function()
-        return vim.api.nvim_win_get_cursor(0)[2] > 1 and "<Esc>l" or "<Esc>"
-      end,
+      mappings = {
+        i = {
+          j = {
+            k = "<Esc>",
+            j = "<Esc>",
+          },
+          k = {
+            j = "<Esc>",
+          },
+        },
+        c = {
+          j = {
+            k = "<Esc>",
+            j = "<Esc>",
+          },
+          k = {
+            j = "<Esc>",
+          },
+        },
+        t = {
+          j = {
+            k = "<Esc>",
+            j = "<Esc>",
+          },
+          k = {
+            j = "<Esc>",
+          },
+        },
+        v = {
+          j = {
+            k = "<Esc>",
+          },
+          k = {
+            j = "<Esc>",
+          },
+        },
+        s = {
+          j = {
+            k = "<Esc>",
+          },
+          k = {
+            j = "<Esc>",
+          },
+        },
+      },
     },
   },
   { "wsdjeg/vim-fetch" },
