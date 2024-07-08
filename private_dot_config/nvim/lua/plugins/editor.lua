@@ -402,16 +402,16 @@ return {
         {
           "<leader>ef",
           function()
-            require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
+            require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
           end,
-          desc = "Explorer NeoTree (root dir)",
+          desc = "Explorer NeoTree (cwd)",
         },
         {
           "<leader>eF",
           function()
-            require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+            require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
           end,
-          desc = "Explorer NeoTree (cwd)",
+          desc = "Explorer NeoTree (root dir)",
         },
         {
           "<leader>eg",
