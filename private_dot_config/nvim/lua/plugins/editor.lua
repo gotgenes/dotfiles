@@ -113,6 +113,21 @@ return {
     enabled = false,
   },
   {
+    "andymass/vim-matchup",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+      require("nvim-treesitter.configs").setup({
+        matchup = {
+          enable = true,
+          disable = {},
+        },
+      })
+    end,
+  },
+  {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       {
