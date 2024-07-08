@@ -233,6 +233,12 @@ return {
           key = "l",
         },
         {
+          action = "Mason",
+          desc = " Mason",
+          icon = "󱌢 ",
+          key = "m",
+        },
+        {
           action = function()
             vim.api.nvim_input("<cmd>qa<cr>")
           end,
