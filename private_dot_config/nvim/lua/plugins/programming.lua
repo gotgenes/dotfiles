@@ -99,8 +99,8 @@ return {
         "folke/which-key.nvim",
         optional = true,
         opts = {
-          defaults = {
-            ["<leader>j"] = { name = "+split/join" },
+          spec = {
+            { "<leader>j", group = "+split/join" },
           },
         },
       },
