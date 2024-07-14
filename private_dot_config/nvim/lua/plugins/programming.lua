@@ -40,6 +40,16 @@ return {
     "numToStr/Comment.nvim",
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",
+      {
+        "folke/which-key.nvim",
+        optional = true,
+        opts = {
+          spec = {
+            { "gc", group = "comment (linewise)", icon = { icon = " ", color = "cyan" }, mode = { "n" } },
+            { "gb", group = "comment (blockwise)", icon = { icon = " ", color = "cyan" }, mode = { "n" } },
+          },
+        },
+      },
     },
     opts = {
       pre_hook = function()
@@ -47,12 +57,10 @@ return {
       end,
     },
     keys = {
-      { "gc", group = "comment (linewise)", mode = { "n" } },
       { "gcc", desc = "toggle comment", mode = { "n" } },
       { "gcA", desc = "insert comment at end of current line", mode = { "n" } },
       { "gco", desc = "insert comment to the next line", mode = { "n" } },
       { "gcO", desc = "insert comment to the previous line", mode = { "n" } },
-      { "gb", group = "comment (blockwise)", mode = { "n" } },
       { "gbc", desc = "toggle comment", mode = { "n" } },
       { "gc", desc = "toggle comment (linewise)", mode = { "x" } },
       { "gb", desc = "toggle comment (blockwise)", mode = { "x" } },
@@ -100,7 +108,7 @@ return {
         optional = true,
         opts = {
           spec = {
-            { "<leader>j", group = "+split/join" },
+            { "<leader>j", group = "split/join", icon = { icon = "󰩫 ", color = "blue" } },
           },
         },
       },
