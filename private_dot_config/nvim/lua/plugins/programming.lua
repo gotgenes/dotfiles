@@ -153,7 +153,11 @@ return {
     cmd = { "Refactor" },
     keys = {
       {
-        "<leader>rb",
+        "<leader>ct",
+        group = "refactor",
+      },
+      {
+        "<leader>ctb",
         function()
           require("refactoring").refactor("Extract Block")
         end,
@@ -161,7 +165,7 @@ return {
         mode = { "n" },
       },
       {
-        "<leader>rB",
+        "<leader>ctB",
         function()
           require("refactoring").refactor("Extract Block To File")
         end,
@@ -169,7 +173,7 @@ return {
         mode = { "n" },
       },
       {
-        "<leader>rf",
+        "<leader>ctf",
         function()
           require("refactoring").refactor("Extract Function")
         end,
@@ -177,7 +181,7 @@ return {
         mode = { "x" },
       },
       {
-        "<leader>rF",
+        "<leader>ctF",
         function()
           require("refactoring").refactor("Extract Function To File")
         end,
@@ -185,7 +189,7 @@ return {
         mode = { "x" },
       },
       {
-        "<leader>ri",
+        "<leader>cti",
         function()
           require("refactoring").refactor("Inline Variable")
         end,
@@ -193,7 +197,7 @@ return {
         mode = { "n", "x" },
       },
       {
-        "<leader>rI",
+        "<leader>ctI",
         function()
           require("refactoring").refactor("Inline Function")
         end,
@@ -201,7 +205,7 @@ return {
         mode = { "n" },
       },
       {
-        "<leader>rv",
+        "<leader>ctv",
         function()
           require("refactoring").refactor("Extract Variable")
         end,
@@ -209,7 +213,7 @@ return {
         mode = { "x" },
       },
       {
-        "<leader>rr",
+        "<leader>ctr",
         function()
           require("refactoring").select_refactor({ show_success_message = true })
         end,
