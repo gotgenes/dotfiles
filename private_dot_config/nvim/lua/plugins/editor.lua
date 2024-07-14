@@ -366,8 +366,8 @@ return {
         "folke/which-key.nvim",
         optional = true,
         opts = {
-          defaults = {
-            ["<leader>a"] = { name = "+surround" },
+          spec = {
+            { "<leader>a", group = "+surround" },
           },
         },
       },
@@ -391,8 +391,8 @@ return {
         "folke/which-key.nvim",
         optional = true,
         opts = {
-          defaults = {
-            ["<leader>e"] = { name = "+explorer" },
+          spec = {
+            { "<leader>e", group = "+explorer" },
           },
         },
       },
