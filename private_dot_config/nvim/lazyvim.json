@@ -6,6 +6,7 @@
     "lazyvim.plugins.extras.coding.mini-surround",
     "lazyvim.plugins.extras.coding.yanky",
     "lazyvim.plugins.extras.dap.core",
+    "lazyvim.plugins.extras.editor.refactoring",
     "lazyvim.plugins.extras.lang.clangd",
     "lazyvim.plugins.extras.lang.clojure",
     "lazyvim.plugins.extras.lang.docker",
