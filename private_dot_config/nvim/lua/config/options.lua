@@ -12,3 +12,6 @@ opt.foldlevelstart = 99
 
 -- Set the spelling language to US English.
 opt.spelllang = "en_us"
+
+-- Use absolute line numbers by default.
+opt.relativenumber = false
