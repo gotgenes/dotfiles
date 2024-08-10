@@ -76,6 +76,8 @@ zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/
 
 zinit snippet OMZP::kubectl
 
+zinit snippet OMZP::dotnet
+
 zinit ice lucid wait
 zinit load agkozak/zsh-z
 
