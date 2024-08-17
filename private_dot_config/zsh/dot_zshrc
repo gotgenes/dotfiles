@@ -79,9 +79,6 @@ zinit snippet OMZP::kubectl
 zinit snippet OMZP::dotnet
 
 zinit ice lucid wait
-zinit load agkozak/zsh-z
-
-zinit ice lucid wait
 zinit snippet OMZP::fzf
 
 zinit snippet "https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh"
@@ -165,6 +162,16 @@ zinit ice \
     atclone"gh copilot alias -- zsh > copilot_aliases.zsh" \
     atpull"%atclone" \
     run-atpull \
+    nocompile
+zinit light zdharma-continuum/null
+
+zinit ice \
+    id-as"zoxide-integration" \
+    has"zoxide" \
+    run-atpull \
+    atpull \
+    eval"zoxide init zsh" \
+    atload"unalias zi" \
     nocompile
 zinit light zdharma-continuum/null
 
