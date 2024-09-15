@@ -13,7 +13,15 @@ end
 
 -- Color conversions functions originally found in:
 -- https://github.com/farias-hecdin/CSSVarHighlight/blob/main/lua/CSSVarHighlight/convert_color.lua
---
+
+--- Rgb to Hex color ----------------------------------------------------------
+M.rgbToHex = function(r, g, b)
+  local function toHex(num)
+    return string.format("%02x", num)
+  end
+  return "#" .. toHex(r) .. toHex(g) .. toHex(b)
+end
+
 --- Hsl to Hex color ----------------------------------------------------------
 -- thanks to: https://github.com/EmmanuelOga/columns/blob/master/utils/color.lua
 local function hue2rgb(p, q, t)
