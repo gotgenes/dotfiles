@@ -418,4 +418,8 @@ return {
       },
     },
   },
+  {
+    "echasnovski/mini.hipatterns",
+    opts = require("config.plugins.mini-hipatterns").opts,
+  },
 }
