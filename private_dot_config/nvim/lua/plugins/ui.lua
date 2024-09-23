@@ -47,7 +47,6 @@ return {
   },
   {
     "folke/noice.nvim",
-    tag = "v4.4.7",
     opts = {
       presets = {
         command_palette = false,
