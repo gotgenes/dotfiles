@@ -30,6 +30,10 @@ export path=("$GOPATH/bin" $path)
 
 export path=("$HOME/.local/bin" $path)
 
+if (( $+commands[dotnet]  )); then
+    export DOTNET_ROOT="$HOMEBREW_PREFIX/opt/dotnet/libexec"
+fi
+
 if (( $+commands[repassh] )); then
     export GIT_SSH="repassh"
 fi
