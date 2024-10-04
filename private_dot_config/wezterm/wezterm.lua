@@ -53,7 +53,7 @@ local url_patterns = {
 }
 
 -- Alphabet for Dvorak keyboard layout
-local quick_select_alphabet = 'htnsgcrlmwvzueoapkjqdfbiyx'
+local quick_select_alphabet = 'tnsgcrlmwvzueoapkjqdfbiyx'
 
 local copy_url_action = act.QuickSelectArgs({
   label = 'copy url',
