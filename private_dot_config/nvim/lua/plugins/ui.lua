@@ -164,7 +164,6 @@ return {
     "nvimdev/dashboard-nvim",
     opts = function(_, opts)
       opts.config.center = {
-
         {
           action = "Telescope smart_open cwd_only=true",
           desc = " Find file",
@@ -178,19 +177,19 @@ return {
           key = "n",
         },
         {
-          action = [[lua require("telescope.builtin").oldfiles({ only_cwd = true })]],
+          action = [[lua LazyVim.pick("oldfiles")({ only_cwd = true })]],
           desc = " Recent files",
           icon = " ",
           key = "r",
         },
         {
-          action = "Telescope live_grep",
+          action = [[lua LazyVim.pick("live_grep")()]],
           desc = " Find text",
           icon = " ",
           key = "g",
         },
         {
-          action = [[lua require("lazyvim.util").telescope.config_files()()]],
+          action = [[lua LazyVim.pick.config_files()()]],
           desc = " Config",
           icon = " ",
           key = "c",
