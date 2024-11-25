@@ -20,6 +20,7 @@ return {
       },
       integrations = {
         diffview = true,
+        grug_far = true,
         lsp_trouble = true,
         markdown = true,
         mason = true,
@@ -31,6 +32,7 @@ return {
         neotest = true,
         noice = true,
         notify = true,
+        snacks = true,
         which_key = true,
         window_picker = true,
       },
