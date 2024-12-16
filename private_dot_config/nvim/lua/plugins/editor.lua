@@ -1,6 +1,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    enable = false,
     opts = function(_, opts)
       local cmp = require("cmp")
       opts.mapping = {
