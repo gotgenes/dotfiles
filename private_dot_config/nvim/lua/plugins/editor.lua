@@ -1,34 +1,22 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
-    enable = false,
-    opts = function(_, opts)
-      local cmp = require("cmp")
-      opts.mapping = {
-        ["<Down>"] = {
-          i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+    "saghen/blink.cmp",
+    opts = {
+      completion = {
+        list = {
+          selection = {
+            preselect = true,
+            auto_insert = false,
+          },
         },
-        ["<Up>"] = {
-          i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-        },
-        ["<Tab>"] = cmp.mapping.select_next_item(),
-        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ["<C-y>"] = cmp.mapping.confirm({ select = false }),
-        ["<S-CR>"] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ["<C-e>"] = cmp.mapping.abort(),
-        ["<C-CR>"] = function(fallback)
-          cmp.abort()
-          fallback()
-        end,
-      }
-    end,
+      },
+      keymap = {
+        preset = "enter",
+        ["<C-y>"] = { "select_and_accept" },
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+      },
+    },
   },
   {
     "L3MON4D3/LuaSnip",
@@ -63,19 +51,13 @@ return {
   },
   {
     "windwp/nvim-autopairs",
-    dependencies = {
-      "hrsh7th/nvim-cmp",
-    },
     event = "InsertEnter",
     config = function()
       local npairs = require("nvim-autopairs")
-      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-      local cmp = require("cmp")
       local Rule = require("nvim-autopairs.rule")
       npairs.setup({
         check_ts = true,
       })
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
       npairs.add_rules({
         Rule(" ", " "):with_pair(function(opts)

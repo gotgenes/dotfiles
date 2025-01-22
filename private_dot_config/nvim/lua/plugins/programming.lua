@@ -200,29 +200,6 @@ return {
     },
   },
   {
-    "zbirenbaum/copilot.lua",
-    opts = {
-      panel = {
-        enabled = true,
-      },
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        keymap = {
-          accept = "<C-.>",
-        },
-      },
-    },
-    event = "InsertEnter",
-    keys = {
-      { "<C-.>", desc = "Accept Copilot suggestion", mode = "i" },
-    },
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    enabled = false,
-  },
-  {
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
       {
