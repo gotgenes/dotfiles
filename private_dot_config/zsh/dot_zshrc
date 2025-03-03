@@ -83,6 +83,8 @@ zinit snippet OMZP::fzf
 
 zinit snippet "https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh"
 
+zinit light lukechilds/zsh-better-npm-completion
+
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
 
 zinit ice \
