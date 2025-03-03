@@ -201,17 +201,6 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      {
-        "folke/which-key.nvim",
-        optional = true,
-        opts = {
-          spec = {
-            { "<leader>i", group = "ai", icon = { icon = " ", color = "orange" }, mode = { "n", "v" } },
-          },
-        },
-      },
-    },
     keys = {
       { "<leader>a", false, mode = { "n", "v" } },
       { "<leader>aa", nil, mode = { "n", "v" } },
@@ -219,6 +208,7 @@ return {
       { "<leader>aq", nil, mode = { "n", "v" } },
       { "<leader>ad", nil, mode = { "n", "v" } },
       { "<leader>ap", nil, mode = { "n", "v" } },
+      { "<leader>i", "", desc = "+ai", mode = { "n", "v" } },
       {
         "<leader>ia",
         function()
@@ -238,18 +228,25 @@ return {
       {
         "<leader>iq",
         function()
-          local input = vim.fn.input("Quick Chat: ")
-          if input ~= "" then
-            require("CopilotChat").ask(input)
-          end
+          vim.ui.input({
+            prompt = "Quick Chat: ",
+          }, function(input)
+            if input ~= "" then
+              require("CopilotChat").ask(input)
+            end
+          end)
         end,
         desc = "Quick Chat (CopilotChat)",
         mode = { "n", "v" },
       },
-      -- Show help actions with telescope
-      { "<leader>id", LazyVim.pick("help"), desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
-      -- Show prompts actions with telescope
-      { "<leader>ip", LazyVim.pick("prompt"), desc = "Prompt Actions (CopilotChat)", mode = { "n", "v" } },
+      {
+        "<leader>ip",
+        function()
+          require("CopilotChat").select_prompt()
+        end,
+        desc = "Prompt Actions (CopilotChat)",
+        mode = { "n", "v" },
+      },
     },
   },
   {
