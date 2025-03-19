@@ -29,10 +29,6 @@ if (( $+commands[dotnet]  )); then
     export DOTNET_ROOT="$HOMEBREW_PREFIX/opt/dotnet/libexec"
 fi
 
-if (( $+commands[repassh] )); then
-    export GIT_SSH="repassh"
-fi
-
 export PTPYTHON_CONFIG_HOME="$XDG_CONFIG_HOME/ptpython"
 
 # vi: filetype=zsh
