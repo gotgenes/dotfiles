@@ -10,9 +10,9 @@ BREW="/usr/local/bin/brew"
 BREW="/home/linuxbrew/.linuxbrew/bin/brew"
 {{- end }}
 
-# check if asdf is available
-if command -v asdf 1>/dev/null 2>&1; then
-  /usr/bin/env PATH="$(echo "${PATH}" | awk -v RS=: -v ORS=: '/asdf/ {next} {print}' | sed 's/:*$//')" $BREW "$@"
+# check if mise is available
+if command -v mise 1>/dev/null 2>&1; then
+  /usr/bin/env PATH="$(echo "${PATH}" | awk -v RS=: -v ORS=: '/mise/ {next} {print}' | sed 's/:*$//')" $BREW "$@"
 else
   $BREW "$@"
 fi
