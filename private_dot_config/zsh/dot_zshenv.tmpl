@@ -7,9 +7,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 export EDITOR="nvim"
 
-export ZSHZ_DATA="$XDG_DATA_HOME/z"
-export ZSHZ_CASE="smart"
-
 {{- if eq .chezmoi.os "darwin" }}
 if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
