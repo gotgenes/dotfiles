@@ -1,8 +1,17 @@
 ########
 # asdf #
 ########
-.envrc
 .tool-versions
+
+##########
+# direnv #
+##########
+.envrc
+
+########
+# mise #
+########
+mise.toml
 
 ############
 # Archives #

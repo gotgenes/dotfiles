@@ -96,7 +96,24 @@ zinit ice \
     nocompile
 zinit light zdharma-continuum/null
 
-[[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+zinit ice \
+    id-as"mise" \
+    has"mise" \
+    run-atpull \
+    atpull \
+    eval"mise activate" \
+    nocompile
+zinit light zdharma-continuum/null
+#
+zinit ice \
+    as"completion" \
+    id-as"mise-completion" \
+    has"mise" \
+    atclone"mise completion zsh > _mise" \
+    atpull"%atclone" \
+    run-atpull \
+    nocompile
+zinit light zdharma-continuum/null
 
 zinit ice \
     as"completion" \
