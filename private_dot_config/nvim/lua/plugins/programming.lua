@@ -306,4 +306,10 @@ return {
       },
     },
   },
+  {
+    "jannis-baum/vivify.vim",
+    filetype = {
+      "markdown",
+    },
+  },
 }
