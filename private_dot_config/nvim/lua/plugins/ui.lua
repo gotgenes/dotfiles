@@ -233,7 +233,7 @@ return {
       },
       scroll = {
         animate = {
-          duration = { step = 100, total = 150 },
+          duration = { step = 120, total = 150 },
           easing = "linear",
         },
       },
