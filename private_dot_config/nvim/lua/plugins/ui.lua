@@ -330,6 +330,14 @@ return {
     },
   },
   {
+    "sphamba/smear-cursor.nvim",
+    opts = {
+      min_horizontal_distance_smear = 20,
+      min_vertical_distance_smear = 10,
+      smear_to_cmd = false,
+    },
+  },
+  {
     "s1n7ax/nvim-window-picker",
     keys = {
       {
