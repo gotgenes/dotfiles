@@ -21,14 +21,13 @@ eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 {{- end }}
 
 export GOPATH="$HOME/development/go"
-export path=("$GOPATH/bin" $path)
-
-export path=("$HOME/.local/bin" $path)
 
 if (( $+commands[dotnet]  )); then
     export DOTNET_ROOT="$HOMEBREW_PREFIX/opt/dotnet/libexec"
 fi
 
 export PTPYTHON_CONFIG_HOME="$XDG_CONFIG_HOME/ptpython"
+
+source "$ZDOTDIR/paths.zsh"
 
 # vi: filetype=zsh
