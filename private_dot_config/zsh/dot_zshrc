@@ -26,7 +26,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f "$XDG_CONFIG_HOME/zsh/p10k.zsh" ]] || source "$XDG_CONFIG_HOME/zsh/p10k.zsh"
+[[ ! -f "$ZDOTDIR/p10k.zsh" ]] || source "$ZDOTDIR/p10k.zsh"
 
 
 # plugins
@@ -86,15 +86,6 @@ zinit snippet "https://github.com/wez/wezterm/blob/main/assets/shell-integration
 zinit light lukechilds/zsh-better-npm-completion
 
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
-
-zinit ice \
-    id-as"brew-shellenv" \
-    if"[[ -v HOMEBREW_PREFIX ]]" \
-    run-atpull \
-    atpull \
-    eval"$HOMEBREW_PREFIX/bin/brew shellenv" \
-    nocompile
-zinit light zdharma-continuum/null
 
 zinit ice \
     id-as"mise" \
@@ -195,27 +186,23 @@ zinit ice \
 zinit light zdharma-continuum/null
 
 
-source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
+source "$ZDOTDIR/aliases.zsh"
 
-# Files in $XDG_CONFIG_HOME/zsh/include allows host-specific configurations.
+# Files in $ZDOTDIR/include allows host-specific configurations.
 # For example, these may be files not suitable to be tracked by version control.
-if [[ -d "$XDG_CONFIG_HOME/zsh/include/" ]]; then
-    for file in $XDG_CONFIG_HOME/zsh/include/*.zsh; do
+if [[ -d "$ZDOTDIR/include/" ]]; then
+    for file in $ZDOTDIR/include/*.zsh; do
         source "$file"
     done
 fi
 
-# ensure ~/.local/bin is earliest in PATH
-export path=("$HOME/.local/bin" $path)
-
-typeset -aU path
-
+source "$ZDOTDIR/paths.zsh"
 
 # Load autocompletions
 if [[ -v HOMEBREW_PREFIX ]]; then
     zinit fpath "$HOMEBREW_PREFIX/share/zsh/site-functions"
 fi
-source "$XDG_CONFIG_HOME/zsh/completion.zsh"
+source "$ZDOTDIR/completion.zsh"
 
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
 export SAVEHIST=100000
