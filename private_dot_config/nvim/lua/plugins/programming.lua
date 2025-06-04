@@ -204,11 +204,11 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     keys = {
       { "<leader>a", false, mode = { "n", "v" } },
-      { "<leader>aa", nil, mode = { "n", "v" } },
-      { "<leader>ax", nil, mode = { "n", "v" } },
-      { "<leader>aq", nil, mode = { "n", "v" } },
-      { "<leader>ad", nil, mode = { "n", "v" } },
-      { "<leader>ap", nil, mode = { "n", "v" } },
+      { "<leader>aa", false, mode = { "n", "v" } },
+      { "<leader>ax", false, mode = { "n", "v" } },
+      { "<leader>aq", false, mode = { "n", "v" } },
+      { "<leader>ad", false, mode = { "n", "v" } },
+      { "<leader>ap", false, mode = { "n", "v" } },
       { "<leader>i", "", desc = "+ai", mode = { "n", "v" } },
       {
         "<leader>ia",
