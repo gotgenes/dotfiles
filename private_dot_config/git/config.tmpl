@@ -47,8 +47,16 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 [credential "https://github.com"]
-  {{- if eq .chezmoi.os "darwin" }}
+	helper = 
+	{{ if eq .chezmoi.os "darwin" -}}
 	helper = !/opt/homebrew/bin/gh auth git-credential
-  {{- else }}
+	{{- else }}
 	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
-  {{- end }}
+	{{- end }}
+[credential "https://gist.github.com"]
+	helper = 
+	{{ if eq .chezmoi.os "darwin" -}}
+	helper = !/opt/homebrew/bin/gh auth git-credential
+	{{- else }}
+	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
+	{{- end }}
