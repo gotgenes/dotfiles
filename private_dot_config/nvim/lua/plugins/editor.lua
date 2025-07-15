@@ -324,17 +324,6 @@ return {
   },
   { "wsdjeg/vim-fetch" },
   {
-    "axkirillov/hbac.nvim",
-    dependencies = {
-      -- these are optional, add them, if you want the telescope module
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {},
-    event = { "BufRead", "BufNewFile" },
-  },
-  {
     "klen/nvim-config-local",
     opts = {},
     main = "config-local",
