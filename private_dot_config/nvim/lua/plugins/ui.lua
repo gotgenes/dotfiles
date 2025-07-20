@@ -169,7 +169,7 @@ return {
         preset = {
           keys = {
             {
-              action = ":Telescope smart_open cwd_only=true",
+              action = ":lua Snacks.dashboard.pick('smart')",
               desc = " Find file",
               icon = " ",
               key = "f",
@@ -181,7 +181,7 @@ return {
               key = "n",
             },
             {
-              action = ":lua Snacks.dashboard.pick('oldfiles', { only_cwd = true })",
+              action = ":lua Snacks.dashboard.pick('oldfiles')",
               desc = " Recent files",
               icon = " ",
               key = "r",
@@ -231,11 +231,23 @@ return {
           },
         },
       },
+      picker = {
+        sources = { buffers = { layout = "select" } },
+      },
       scroll = {
         animate = {
           duration = { total = 80 },
           easing = "linear",
         },
+      },
+    },
+    keys = {
+      {
+        "<leader><space>",
+        function()
+          Snacks.picker.smart()
+        end,
+        desc = "Smart Find Files",
       },
     },
   },
@@ -352,7 +364,7 @@ return {
         "mason",
         "noice",
         "notify",
-        "telescope",
+        "snacks",
       },
     },
   },
