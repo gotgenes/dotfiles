@@ -201,6 +201,50 @@ return {
     },
   },
   {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      {
+        "ravitemer/mcphub.nvim",
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+        },
+        build = "npm install -g mcp-hub@latest",
+        opts = {},
+      },
+    },
+    opts = {
+      strategies = {
+        chat = { adapter = "copilot" },
+        inline = { adapter = "copilot" },
+        cmd = { adapter = "copilot" },
+      },
+      extensions = {
+        mcphub = {
+          callback = "mcphub.extensions.codecompanion",
+          opts = {},
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>ic",
+        function()
+          return require("codecompanion").toggle()
+        end,
+        desc = "Toggle (CodeCompanion)",
+        mode = { "n", "v" },
+      },
+    },
+    cmd = {
+      "CodeCompanion",
+      "CodeCompanionActions",
+      "CodeCompanionChat",
+      "CodeCompanionCmd",
+    },
+  },
+  {
     "CopilotC-Nvim/CopilotChat.nvim",
     keys = {
       { "<leader>a", false, mode = { "n", "v" } },
