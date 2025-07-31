@@ -113,7 +113,16 @@ M.opts = {
     actions = { copy_selector = copy_selector },
     sources = {
       buffers = { layout = "select" },
-      explorer = { win = { list = { keys = { Y = "copy_selector" } } } },
+      explorer = {
+        win = {
+          list = {
+            keys = {
+              Y = "copy_selector",
+              ["."] = "cd",
+            },
+          },
+        },
+      },
     },
   },
   scroll = {
