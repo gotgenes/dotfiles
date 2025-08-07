@@ -112,7 +112,13 @@ M.opts = {
   picker = {
     actions = { copy_selector = copy_selector },
     sources = {
-      buffers = { layout = "select" },
+      buffers = {
+        focus = "list",
+        layout = "select",
+        on_show = function(picker)
+          picker:action("list_down")
+        end,
+      },
       explorer = {
         win = {
           list = {
