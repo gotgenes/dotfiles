@@ -36,11 +36,11 @@ return {
           return true
         end, opts.ensure_installed)
       end
-      require("nvim-treesitter.configs").setup(opts)
+      require("nvim-treesitter").setup(opts)
     end,
   },
   {
-    "echasnovski/mini.comment",
+    "nvim-mini/mini.comment",
     enabled = false,
   },
   {
