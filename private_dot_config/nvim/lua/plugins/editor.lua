@@ -97,7 +97,7 @@ return {
     end,
   },
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     enabled = false,
   },
   {
@@ -107,7 +107,7 @@ return {
     },
     config = function()
       vim.g.matchup_matchparen_offscreen = {}
-      require("nvim-treesitter.configs").setup({
+      require("nvim-treesitter").setup({
         matchup = {
           enable = true,
           disable = {},
@@ -190,7 +190,7 @@ return {
     "gpanders/editorconfig.nvim",
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     dependencies = {
       {
         "folke/which-key.nvim",

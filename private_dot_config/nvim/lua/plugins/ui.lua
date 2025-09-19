@@ -359,7 +359,7 @@ return {
     end,
   },
   {
-    "echasnovski/mini.hipatterns",
+    "nvim-mini/mini.hipatterns",
     opts = require("config.plugins.mini-hipatterns").opts,
   },
 }
