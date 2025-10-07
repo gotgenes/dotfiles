@@ -201,96 +201,61 @@ return {
     },
   },
   {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      {
-        "ravitemer/mcphub.nvim",
-        dependencies = {
-          "nvim-lua/plenary.nvim",
-        },
-        build = "npm install -g mcp-hub@latest",
-        opts = {},
-      },
-    },
-    opts = {
-      strategies = {
-        chat = { adapter = "copilot" },
-        inline = { adapter = "copilot" },
-        cmd = { adapter = "copilot" },
-      },
-      extensions = {
-        mcphub = {
-          callback = "mcphub.extensions.codecompanion",
-          opts = {},
-        },
-      },
-    },
-    keys = {
-      {
-        "<leader>ic",
-        function()
-          return require("codecompanion").toggle()
-        end,
-        desc = "Toggle (CodeCompanion)",
-        mode = { "n", "v" },
-      },
-    },
-    cmd = {
-      "CodeCompanion",
-      "CodeCompanionActions",
-      "CodeCompanionChat",
-      "CodeCompanionCmd",
-    },
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
+    "folke/sidekick.nvim",
     keys = {
       { "<leader>a", false, mode = { "n", "v" } },
       { "<leader>aa", false, mode = { "n", "v" } },
-      { "<leader>ax", false, mode = { "n", "v" } },
-      { "<leader>aq", false, mode = { "n", "v" } },
-      { "<leader>ad", false, mode = { "n", "v" } },
-      { "<leader>ap", false, mode = { "n", "v" } },
+      { "<leader>ap", false, mode = { "n", "x" } },
+      { "<leader>as", false, mode = { "n", "v" } },
+      { "<leader>at", false, mode = { "n", "x" } },
       { "<leader>i", "", desc = "+ai", mode = { "n", "v" } },
       {
         "<leader>ia",
         function()
-          return require("CopilotChat").toggle()
+          require("sidekick.cli").toggle()
         end,
-        desc = "Toggle (CopilotChat)",
-        mode = { "n", "v" },
+        desc = "Sidekick Toggle CLI",
       },
       {
-        "<leader>ix",
+        "<leader>is",
         function()
-          return require("CopilotChat").reset()
+          require("sidekick.cli").select()
         end,
-        desc = "Clear (CopilotChat)",
-        mode = { "n", "v" },
+        -- Or to select only installed tools:
+        -- require("sidekick.cli").select({ filter = { installed = true } })
+        desc = "Select CLI",
       },
       {
-        "<leader>iq",
+        "<leader>it",
         function()
-          vim.ui.input({
-            prompt = "Quick Chat: ",
-          }, function(input)
-            if input ~= "" then
-              require("CopilotChat").ask(input)
-            end
-          end)
+          require("sidekick.cli").send({ msg = "{this}" })
         end,
-        desc = "Quick Chat (CopilotChat)",
-        mode = { "n", "v" },
+        mode = { "x", "n" },
+        desc = "Send This",
+      },
+      {
+        "<leader>iv",
+        function()
+          require("sidekick.cli").send({ msg = "{selection}" })
+        end,
+        mode = { "x" },
+        desc = "Send Visual Selection",
       },
       {
         "<leader>ip",
         function()
-          require("CopilotChat").select_prompt()
+          require("sidekick.cli").prompt()
         end,
-        desc = "Prompt Actions (CopilotChat)",
-        mode = { "n", "v" },
+        mode = { "n", "x" },
+        desc = "Sidekick Select Prompt",
+      },
+      {
+        "<c-.>",
+        function()
+          require("sidekick.cli").focus()
+        end,
+        mode = { "n", "x", "i", "t" },
+        desc = "Sidekick Switch Focus",
       },
     },
   },
