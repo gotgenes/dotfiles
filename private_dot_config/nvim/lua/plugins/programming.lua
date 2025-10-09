@@ -205,9 +205,11 @@ return {
     keys = {
       { "<leader>a", false, mode = { "n", "v" } },
       { "<leader>aa", false, mode = { "n", "v" } },
+      { "<leader>af", false, mode = { "n", "v" } },
       { "<leader>ap", false, mode = { "n", "x" } },
       { "<leader>as", false, mode = { "n", "v" } },
       { "<leader>at", false, mode = { "n", "x" } },
+      { "<leader>av", false, mode = { "n", "x" } },
       { "<leader>i", "", desc = "+ai", mode = { "n", "v" } },
       {
         "<leader>ia",
@@ -234,6 +236,13 @@ return {
         desc = "Send This",
       },
       {
+        "<leader>if",
+        function()
+          require("sidekick.cli").send({ msg = "{file}" })
+        end,
+        desc = "Send File",
+      },
+      {
         "<leader>iv",
         function()
           require("sidekick.cli").send({ msg = "{selection}" })
@@ -248,14 +257,6 @@ return {
         end,
         mode = { "n", "x" },
         desc = "Sidekick Select Prompt",
-      },
-      {
-        "<c-.>",
-        function()
-          require("sidekick.cli").focus()
-        end,
-        mode = { "n", "x", "i", "t" },
-        desc = "Sidekick Switch Focus",
       },
     },
   },
