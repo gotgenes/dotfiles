@@ -118,16 +118,6 @@ zinit light zdharma-continuum/null
 
 zinit ice \
     as"completion" \
-    id-as"poetry-completion" \
-    has"poetry" \
-    atclone"poetry completions zsh > _poetry" \
-    atpull"%atclone" \
-    run-atpull \
-    nocompile
-zinit light zdharma-continuum/null
-
-zinit ice \
-    as"completion" \
     id-as"gh-completion" \
     has"gh" \
     atclone"gh -s zsh completion > _gh" \
@@ -151,16 +141,6 @@ zinit ice \
     id-as"bw-completion" \
     has"bw" \
     atclone"bw completion --shell zsh > _bw" \
-    atpull"%atclone" \
-    run-atpull \
-    nocompile
-zinit light zdharma-continuum/null
-
-zinit ice \
-    as"completion" \
-    id-as"pipx-completion" \
-    has"pipx" \
-    atclone"register-python-argcomplete pipx > _pipx" \
     atpull"%atclone" \
     run-atpull \
     nocompile
