@@ -167,15 +167,6 @@ zinit ice \
 zinit light zdharma-continuum/null
 
 zinit ice \
-    id-as"copilot-aliases" \
-    has"gh" \
-    atclone"gh copilot alias -- zsh > copilot_aliases.zsh" \
-    atpull"%atclone" \
-    run-atpull \
-    nocompile
-zinit light zdharma-continuum/null
-
-zinit ice \
     id-as"zoxide-integration" \
     has"zoxide" \
     run-atpull \
