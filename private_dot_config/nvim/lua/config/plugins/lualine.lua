@@ -12,15 +12,13 @@ local function diff_source()
 end
 
 local disabled_filetypes = {
-  "alpha",
-  "dashboard",
   "dap-repl",
   "dapui_breakpoints",
   "dapui_console",
   "dapui_scopes",
   "dapui_stacks",
   "dapui_watches",
-  "starter",
+  "snacks_dashboard",
 }
 
 function M.opts()
@@ -32,6 +30,7 @@ function M.opts()
       theme = "auto",
       disabled_filetypes = {
         statusline = disabled_filetypes,
+        winbar = disabled_filetypes,
       },
       globalstatus = true,
     },
