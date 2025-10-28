@@ -114,6 +114,15 @@ function M.opts()
       lualine_z = {},
     },
     tabline = {},
+    winbar = {
+      lualine_b = {
+        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+        { "filename", path = 0 },
+      },
+      lualine_c = {
+        { "navic", color_correction = "dynamic" },
+      },
+    },
     extensions = {
       "fugitive",
       "lazy",

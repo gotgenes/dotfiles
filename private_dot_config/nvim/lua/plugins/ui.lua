@@ -73,55 +73,11 @@ return {
         require("nvim-navic").attach(client, buffer)
       end)
       return {
-        separator = " ",
         highlight = true,
         depth_limit = 5,
         icons = LazyVim.config.icons.kinds,
         lazy_update_context = true,
       }
-    end,
-  },
-  {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",
-    },
-    event = "User NavicInit",
-    opts = function()
-      return {
-        attach_navic = false,
-        exclude_filetypes = {
-          "NeoTree",
-          "Trouble",
-          "dashboard",
-          "dap-repl",
-          "dapui_breakpoints",
-          "dapui_console",
-          "dapui_scopes",
-          "dapui_stacks",
-          "dapui_watches",
-          "lazy",
-          "mason",
-          "notify",
-        },
-        kinds = require("lazyvim.config").icons.kinds,
-      }
-    end,
-    config = function(_, opts)
-      require("barbecue").setup(opts)
-      vim.api.nvim_create_autocmd({
-        "WinResized",
-        "BufWinEnter",
-        "CursorHold",
-        "InsertLeave",
-      }, {
-        group = vim.api.nvim_create_augroup("barbecue.updater", {}),
-        callback = function()
-          require("barbecue.ui").update()
-        end,
-      })
     end,
   },
   {
