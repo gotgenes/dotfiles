@@ -67,21 +67,16 @@ return {
     lazy = true,
     init = function()
       vim.g.navic_silence = true
-      LazyVim.lsp.on_attach(function(client, buffer)
-        if client:supports_method("textDocument/documentSymbol") then
-          require("nvim-navic").attach(client, buffer)
-          vim.api.nvim_exec_autocmds("User", {
-            pattern = "NavicInit",
-          })
-        end
-      end)
     end,
     opts = function()
+      Snacks.util.lsp.on({ method = "textDocument/documentSymbol" }, function(buffer, client)
+        require("nvim-navic").attach(client, buffer)
+      end)
       return {
         separator = " ",
         highlight = true,
         depth_limit = 5,
-        icons = require("lazyvim.config").icons.kinds,
+        icons = LazyVim.config.icons.kinds,
         lazy_update_context = true,
       }
     end,
@@ -135,16 +130,12 @@ return {
       "MunifTanjim/nui.nvim",
       "SmiteshP/nvim-navic",
     },
-    init = function()
-      LazyVim.lsp.on_attach(function(client, buffer)
-        if client:supports_method("textDocument/documentSymbol") then
-          require("nvim-navbuddy").attach(client, buffer)
-        end
-      end)
-    end,
     opts = function()
+      Snacks.util.lsp.on({ method = "textDocument/documentSymbol" }, function(buffer, client)
+        require("nvim-navbuddy").attach(client, buffer)
+      end)
       return {
-        icons = require("lazyvim.config").icons.kinds,
+        icons = LazyVim.config.icons.kinds,
       }
     end,
     cmd = "Navbuddy",
