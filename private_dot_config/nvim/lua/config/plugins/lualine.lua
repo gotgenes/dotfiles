@@ -66,36 +66,13 @@ function M.opts()
           cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
           color = function() return { fg = Snacks.util.color("Constant") } end,
         },
-        {
-          function()
-            local icon = require("lazyvim.config").icons.kinds.Copilot
-            local status = require("copilot.api").status.data
-            return icon .. (status.message or "")
-          end,
-          cond = function()
-            if not package.loaded["copilot"] then
-              return
-            end
-            local ok, clients = pcall(LazyVim.lsp.get_clients, { name = "copilot", bufnr = 0 })
-            if not ok then
-              return false
-            end
-            return ok and #clients > 0
-          end,
-          color = function()
-            if not package.loaded["copilot"] then
-              return
-            end
-            local status = require("copilot.api").status.data
-            local colors = {
-              [""] = { fg = Snacks.util.color("Special") },
-              ["Normal"] = { fg = Snacks.util.color("Special") },
-              ["Warning"] = { fg = Snacks.util.color("DiagnosticError") },
-              ["InProgress"] = { fg = Snacks.util.color("DiagnosticWarn") },
-            }
-            return colors[status.status] or colors[""]
-          end,
-        },
+        LazyVim.lualine.status(LazyVim.config.icons.kinds.Copilot, function()
+          local clients = package.loaded["copilot"] and vim.lsp.get_clients({ name = "copilot", bufnr = 0 }) or {}
+          if #clients > 0 then
+            local status = require("copilot.status").data.status
+            return (status == "InProgress" and "pending") or (status == "Warning" and "error") or "ok"
+          end
+        end),
         -- stylua: ignore
         {
           function() return "  " .. require("dap").status() end,
