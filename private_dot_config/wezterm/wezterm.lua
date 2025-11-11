@@ -76,7 +76,7 @@ local open_url_action = act.QuickSelectArgs({
 })
 
 local my_config = {
-  font = wezterm.font('JetBrainsMono Nerd Font', { weight = 'Regular' }),
+  font = wezterm.font('JetBrains Mono', { weight = 'Regular' }),
   font_size = 14.0,
   line_height = 1.15,
   color_scheme = 'Catppuccin Macchiato',
