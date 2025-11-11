@@ -78,7 +78,7 @@ local open_url_action = act.QuickSelectArgs({
 local my_config = {
   font = wezterm.font('JetBrains Mono', { weight = 'Regular' }),
   font_size = 14.0,
-  line_height = 1.15,
+  line_height = 1.2,
   color_scheme = 'Catppuccin Macchiato',
   hide_tab_bar_if_only_one_tab = true,
   keys = {
