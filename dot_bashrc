@@ -41,14 +41,10 @@ xterm*|rxvt*|gnome*|screen-256color)
     ;;
 esac
 
-# Set up ALL THE ENVs
-envs=("goenv" "jenv" "nodenv" "pyenv" "rbenv")
-
-for env in "${envs[@]}"; do
-    if command -v $env &> /dev/null; then
-        eval "$($env init -)"
-    fi
-done
+# Activate mise if installed
+if command -v mise &> /dev/null; then
+  eval "$(mise activate bash)"
+fi
 
 bash_completion_script="$(brew --prefix)/etc/profile.d/bash_completion.sh"
 if [[ -r "$bash_completion_script" ]]; then
