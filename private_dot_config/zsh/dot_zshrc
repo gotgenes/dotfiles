@@ -187,5 +187,3 @@ setopt HIST_IGNORE_SPACE  # ignore commands that start with space
 setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
-
-# vi: filetype=zsh
