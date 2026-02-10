@@ -15,3 +15,6 @@ opt.spelllang = "en_us"
 
 -- Use absolute line numbers by default.
 opt.relativenumber = false
+
+-- LSP Server to use for Python
+vim.g.lazyvim_python_lsp = "ty"
