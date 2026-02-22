@@ -58,6 +58,9 @@ chezmoi managed
 chezmoi init
 ```
 
+**Note:** chezmoi does not remove files from the target when they are deleted from the source directory.
+If you delete or rename a file in the chezmoi source, you must manually remove the stale file from the target (e.g., `~/.config/`), or use `chezmoi forget` and then delete the target file.
+
 ## Code Style: Lua (Neovim Configuration)
 
 ### Formatting

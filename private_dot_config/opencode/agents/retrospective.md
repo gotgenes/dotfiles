@@ -10,8 +10,12 @@ permission:
     "git log*": allow
     "git diff*": allow
     "git status*": allow
+    "git add*": allow
+    "git commit*": allow
     "ls .opencode/agents/": allow
     "ls -la .opencode/agents/": allow
+    "ls ~/.config/opencode/agents/": allow
+    "ls -la ~/.config/opencode/agents/": allow
 tools:
   write: true
   edit: true
