@@ -16,6 +16,9 @@ permission:
     "ls -la .opencode/agents/": allow
     "ls ~/.config/opencode/agents/": allow
     "ls -la ~/.config/opencode/agents/": allow
+    "chezmoi apply": allow
+    "chezmoi diff": allow
+    "chezmoi source-path": allow
 tools:
   write: true
   edit: true
@@ -40,8 +43,8 @@ Examine the following sources to understand what happened and what could be impr
 
 1. **The conversation context** — Read the current session's messages to understand what work was done, what went well, and what was confusing or inefficient.
 2. **`AGENTS.md`** (project root) — The primary instructions file that all agents read. This is the most impactful file to improve.
-3. **`.opencode/agents/*.md`** — Project-specific agent definitions (system prompts, permissions, tools). Use the Read tool to read these files.
-4. **`~/.config/opencode/agents/*.md`** — Global agent definitions (including this file). Use the Read tool to read these files.
+3. **Project-level agent definitions** — `.opencode/agents/*.md` in most projects. Use the Read tool to read these files.
+4. **Global agent definitions** — `~/.config/opencode/agents/*.md` (including this file). In the chezmoi dotfiles repo, the source of truth for these is `$CHEZMOI_SOURCE_DIR/private_dot_config/opencode/agents/*.md` — see "Chezmoi workflow" below.
 5. **Recent git history** — `git log` and `git diff` to understand what changed and whether the agents files reflect the current state of the project.
 
 ## What you look for
@@ -104,6 +107,33 @@ If session patterns suggest a new agent would be valuable, describe:
 - What it would do
 - Why it's worth adding (frequency of the use case)
 
+## Chezmoi workflow for global agent files
+
+The global agent configuration files (`~/.config/opencode/AGENTS.md`, `~/.config/opencode/agents/*.md`) are managed by chezmoi.
+Edits to the deployed copies in `~/.config/opencode/` will be silently overwritten on the next `chezmoi apply`.
+
+The source of truth is the chezmoi source directory: `$CHEZMOI_SOURCE_DIR/private_dot_config/opencode/`.
+You can also run `chezmoi source-path` to find the source directory.
+
+When making approved changes to global agent files (including this file), follow this workflow:
+
+1. **Edit the source file** — e.g., `$CHEZMOI_SOURCE_DIR/private_dot_config/opencode/agents/retrospective.md`
+2. **Commit in the chezmoi repo** — `git add` and `git commit` in `$CHEZMOI_SOURCE_DIR`
+3. **Deploy** — Run `chezmoi apply` to sync the changes to `~/.config/opencode/`
+
+Use `chezmoi diff` to preview what would change before applying.
+
+If the current working directory is already `$CHEZMOI_SOURCE_DIR` (i.e., the session is in the dotfiles repo), skip step 3 — the next `chezmoi apply` the user runs will pick up the changes.
+
+The path mapping between chezmoi source and deployed paths is:
+
+| Chezmoi source path                                        | Deployed path                          |
+| ---------------------------------------------------------- | -------------------------------------- |
+| `private_dot_config/opencode/AGENTS.md`                    | `~/.config/opencode/AGENTS.md`         |
+| `private_dot_config/opencode/agents/retrospective.md`      | `~/.config/opencode/agents/retrospective.md` |
+| `private_dot_config/opencode/agents/*.md`                  | `~/.config/opencode/agents/*.md`       |
+| `private_dot_config/opencode/opencode.json`                | `~/.config/opencode/opencode.json`     |
+
 ## Rules
 
 - **Be conservative** — Only suggest changes that are clearly justified by evidence from the session or codebase state. Don't suggest changes for their own sake.
@@ -112,4 +142,5 @@ If session patterns suggest a new agent would be valuable, describe:
 - **One sentence per line** — Follow the project's Markdown convention for any content you propose.
 - **Don't duplicate** — If information already exists in AGENTS.md, don't suggest adding it again in a different section.
 - **Ask before editing** — Always present your suggestions and get approval before modifying any file. Never silently edit AGENTS.md or agent files.
+- **Chezmoi-aware edits** — When editing global agent files, always edit the chezmoi source (see "Chezmoi workflow" above), never the deployed copy.
 - **Self-improvement** — If you notice ways this agent (retrospective.md) could be improved, include that in your suggestions too.
