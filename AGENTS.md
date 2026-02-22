@@ -165,6 +165,21 @@ Use LuaLS `---@type` annotations where they aid clarity:
 - **mise** is the runtime version manager (replacing asdf/pyenv)
 - **LazyVim** is the Neovim distribution base, with extensive customization
 
+## OpenCode / Claude Path Compatibility
+
+OpenCode's Claude compatibility layer rewrites `.opencode/` paths to `.claude/` (or `.Claude/`) in the system prompt sent to Claude models.
+This means the model sees paths like `~/.config/Claude/AGENTS.md` and `.Claude/agents/`, but the actual files live under `opencode/` directories.
+
+In this chezmoi repo, the mapping is:
+
+| System prompt path                  | Actual file in this repo                          |
+| ----------------------------------- | ------------------------------------------------- |
+| `~/.config/Claude/AGENTS.md`       | `private_dot_config/opencode/AGENTS.md`           |
+| `~/.config/Claude/agents/*.md`     | `private_dot_config/opencode/agents/*.md`         |
+| `.Claude/` (project-level)          | Does not exist; this repo has no project-level config |
+
+When reading or modifying agent configuration files, always use the `private_dot_config/opencode/` paths.
+
 ## Important Notes
 
 - There are no tests or CI in this repository.
