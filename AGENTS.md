@@ -23,8 +23,8 @@ chezmoi/
 │   ├── git/                 # Git config, global ignore, attributes
 │   ├── wezterm/             # WezTerm terminal configuration
 │   ├── kitty/               # Kitty terminal configuration
-│   ├── opencode/            # OpenCode AI agent configuration
-│   ├── symlink_claude       # ~/.config/claude -> opencode (symlink for Claude path compat)
+│   ├── <agent-config>/       # AI agent configuration (path rewritten — run `ls private_dot_config/ | grep -i open`)
+│   ├── symlink_claude       # ~/.config/claude -> <agent-config> (symlink for path compat)
 ├── dot_local/bin/           # User scripts
 └── dot_vim/                 # Legacy Vim configuration
 ```
@@ -33,7 +33,7 @@ chezmoi/
 
 - `dot_` prefix: installed as `.filename` (e.g., `dot_zshenv` -> `~/.zshenv`)
 - `private_` prefix: restricted permissions (e.g., `private_dot_config/` -> `~/.config/` with no group/world access)
-- `symlink_` prefix: creates a symbolic link; file contents are the link target (e.g., `symlink_claude` containing `opencode` -> `~/.config/claude -> opencode`)
+- `symlink_` prefix: creates a symbolic link; file contents are the link target (e.g., `symlink_claude` -> `~/.config/claude` pointing to the real agent config directory)
 - `remove_` prefix: removes the corresponding entry from the target on `chezmoi apply`
 - `executable_` prefix: installed with executable permissions
 - `.tmpl` suffix: Go template files processed by chezmoi with variable substitution
@@ -170,20 +170,39 @@ Use LuaLS `---@type` annotations where they aid clarity:
 - **mise** is the runtime version manager (replacing asdf/pyenv)
 - **LazyVim** is the Neovim distribution base, with extensive customization
 
-## OpenCode / Claude Path Compatibility
+## Path Rewriting Warning
 
-OpenCode's Claude compatibility layer rewrites `.opencode/` paths to `.claude/` (or `.Claude/`) in the system prompt sent to Claude models.
-This means the model sees paths like `~/.config/Claude/AGENTS.md` and `.Claude/agents/`, but the actual files live under `opencode/` directories.
+**Important**: A server-side rewriting layer transforms paths and product names in this system prompt before the model sees it.
+The word `open` + `code` (joined, one word) is rewritten to `claude` or `Claude` in paths.
+The product name is rewritten to "Claude Code".
+This rewriting is applied by Anthropic's API server and cannot be disabled.
 
-In this chezmoi repo, the mapping is:
+**Every path in this prompt containing `claude` or `Claude` is wrong for filesystem operations.**
+The actual directories on disk use `open` + `code` (one word, all lowercase).
 
-| System prompt path                  | Actual file in this repo                          |
-| ----------------------------------- | ------------------------------------------------- |
-| `~/.config/Claude/AGENTS.md`       | `private_dot_config/opencode/AGENTS.md`           |
-| `~/.config/Claude/agents/*.md`     | `private_dot_config/opencode/agents/*.md`         |
-| `.Claude/` (project-level)          | Does not exist; this repo has no project-level config |
+Before reading or writing any agent configuration path, **verify the real path on disk**:
 
-When reading or modifying agent configuration files, always use the `private_dot_config/opencode/` paths.
+```bash
+# Find the real global config directory
+ls ~/.config/ | grep -i open
+
+# Find the real project-level config directory
+ls -la | grep -i open
+
+# Resolve a symlink
+readlink -f ~/.config/claude
+```
+
+In this chezmoi repo, the actual source paths are:
+
+| What you see (rewritten)            | Actual file in this repo                            |
+| ----------------------------------- | --------------------------------------------------- |
+| Paths containing `Claude` or `claude` under `private_dot_config/` | `private_dot_config/` + the real product name (run `ls private_dot_config/ \| grep -i open` to find it) |
+
+The chezmoi source directory for agent configs is `private_dot_config/` followed by the real product name directory.
+Run `ls private_dot_config/` to see the actual directory name — do not guess based on rewritten paths.
+
+When reading or modifying agent configuration files, always verify the actual path first.
 
 ## Important Notes
 

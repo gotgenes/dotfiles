@@ -31,11 +31,26 @@ For example: "If you'd like, you can switch to the Retrospective agent (Tab) to 
 Do not switch to the Retrospective agent automatically.
 Only suggest it when substantial work was completed (not for quick questions or trivial changes).
 
-## OpenCode / Claude Path Compatibility
+## Path Rewriting Warning
 
-OpenCode has a Claude Code compatibility layer that translates `.opencode/` paths to `.claude/` (or `.Claude/`) when constructing the system prompt sent to Claude models.
-This means the model's system prompt will reference paths like `.Claude/agents/` and `~/.config/Claude/AGENTS.md`, even though the actual files live in `.opencode/` and `~/.config/opencode/`.
+**Important**: When this file is sent to the model, a server-side rewriting layer transforms path segments and product names.
+The word `open` + `code` (joined) in paths is rewritten to `claude` or `Claude`.
+The product name is rewritten to "Claude Code".
+This happens on Anthropic's API server, not in the client, and cannot be disabled.
 
-To ensure filesystem access works regardless of which path convention the model uses, projects should create a `.claude -> .opencode` symlink in the project root and commit it to git.
-Always treat `.opencode/` as the canonical path.
-Never create a real `.claude/` directory alongside the symlink.
+As a result, every path you see in this system prompt containing `claude` or `Claude` is **wrong for filesystem operations**.
+The actual directories on disk use `open` + `code` (one word, all lowercase) — not `claude` or `Claude`.
+
+**Before writing to or reading from any path that contains `claude` or `Claude`:**
+
+1. Run `ls -la` on the parent directory to discover the real directory name.
+2. Or run `readlink -f <path>` to resolve symlinks.
+3. If a `claude` symlink exists, it points to the real directory — follow it.
+
+Key filesystem facts:
+- Global agent config lives in `~/.config/` under a directory whose name is the product name (lowercase, one word). Run `ls ~/.config/ | grep -i open` to find it.
+- Project-level agent config lives in a dot-directory at the project root. Run `ls -la | grep -i open` to find it.
+- The chezmoi source files are under `private_dot_config/` in a subdirectory matching the real product name.
+
+**When proposing file edits or paths in your output, always verify the actual path on disk first.**
+Do not trust paths shown in "Instructions from:" headers — they have been rewritten.
