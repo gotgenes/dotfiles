@@ -23,7 +23,8 @@ chezmoi/
 │   ├── git/                 # Git config, global ignore, attributes
 │   ├── wezterm/             # WezTerm terminal configuration
 │   ├── kitty/               # Kitty terminal configuration
-│   └── opencode/            # OpenCode AI agent configuration
+│   ├── opencode/            # OpenCode AI agent configuration
+│   ├── symlink_claude       # ~/.config/claude -> opencode (symlink for Claude path compat)
 ├── dot_local/bin/           # User scripts
 └── dot_vim/                 # Legacy Vim configuration
 ```
@@ -31,10 +32,14 @@ chezmoi/
 ### Chezmoi Naming Conventions
 
 - `dot_` prefix: installed as `.filename` (e.g., `dot_zshenv` -> `~/.zshenv`)
-- `private_dot_config/`: installed as `~/.config/` with restricted permissions
-- `.tmpl` suffix: Go template files processed by chezmoi with variable substitution
+- `private_` prefix: restricted permissions (e.g., `private_dot_config/` -> `~/.config/` with no group/world access)
+- `symlink_` prefix: creates a symbolic link; file contents are the link target (e.g., `symlink_claude` containing `opencode` -> `~/.config/claude -> opencode`)
+- `remove_` prefix: removes the corresponding entry from the target on `chezmoi apply`
 - `executable_` prefix: installed with executable permissions
+- `.tmpl` suffix: Go template files processed by chezmoi with variable substitution
 - Files without special prefixes are installed as-is
+
+For the full list of source state attributes, see the [chezmoi reference](https://www.chezmoi.io/reference/target-types/).
 
 ## Chezmoi Commands
 
