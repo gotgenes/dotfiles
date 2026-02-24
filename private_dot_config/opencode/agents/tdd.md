@@ -1,7 +1,7 @@
 ---
 description: Development agent using outside-in (London school) test-driven development with automatic commits at each TDD boundary
 mode: primary
-color: "#8bd5ca"
+color: success
 tools:
   write: true
   edit: true
