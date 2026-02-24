@@ -68,7 +68,7 @@ Examine the following sources to understand what happened and what could be impr
 1. **The conversation context** — Read the current session's messages to understand what work was done, what went well, and what was confusing or inefficient.
 2. **`AGENTS.md`** (project root) — The primary instructions file that all agents read. This is the most impactful file to improve.
 3. **Project-level agent definitions** — Look for a dot-directory at the project root containing `agents/*.md`. Run `ls -la | grep -i open` to find it. Use the Read tool to read these files.
-4. **Global agent definitions** — The global agents directory is under `~/.config/`. Run `ls ~/.config/ | grep -i open` to find the real directory name, then read `agents/*.md` within it. In the chezmoi dotfiles repo, the source of truth is under `$CHEZMOI_SOURCE_DIR/private_dot_config/` — run `ls $CHEZMOI_SOURCE_DIR/private_dot_config/ | grep -i open` to find the real subdirectory name. See "Chezmoi workflow" below.
+4. **Global agent definitions** — The global agents directory is under `~/.config/`. Run `ls ~/.config/ | grep -i open` to find the real directory name, then read `agents/*.md` within it. In the chezmoi dotfiles repo, the source of truth is under `$(chezmoi source-path)/private_dot_config/` — run `ls "$(chezmoi source-path)/private_dot_config/" | grep -i open` to find the real subdirectory name. See "Chezmoi workflow" below.
 5. **Recent git history** — `git log` and `git diff` to understand what changed and whether the agents files reflect the current state of the project.
 
 ## What you look for
@@ -155,13 +155,13 @@ Run `chezmoi source-path` to find it, then `ls` the `private_dot_config/` subdir
 When making approved changes to global agent files (including this file), follow this workflow:
 
 1. **Discover paths** — Run the path discovery commands above to find the real directory names.
-2. **Edit the source file** — Edit inside `$CHEZMOI_SOURCE_DIR/private_dot_config/<real-name>/` (where `<real-name>` is what you found via `ls`).
-3. **Commit in the chezmoi repo** — `git add` and `git commit` in `$CHEZMOI_SOURCE_DIR`.
+2. **Edit the source file** — Edit inside `$(chezmoi source-path)/private_dot_config/<real-name>/` (where `<real-name>` is what you found via `ls`).
+3. **Commit in the chezmoi repo** — `git add` and `git commit` in the chezmoi source directory (`chezmoi source-path`).
 4. **Deploy** — Run `chezmoi apply` to sync the changes to `~/.config/<real-name>/`.
 
 Use `chezmoi diff` to preview what would change before applying.
 
-If the current working directory is already `$CHEZMOI_SOURCE_DIR` (i.e., the session is in the dotfiles repo), skip step 4 — the next `chezmoi apply` the user runs will pick up the changes.
+If the current working directory is already the chezmoi source directory (i.e., the session is in the dotfiles repo), skip step 4 — the next `chezmoi apply` the user runs will pick up the changes.
 
 To find the chezmoi source path for a specific deployed file:
 
