@@ -54,6 +54,36 @@ When implementing a new feature or behavior, follow this procedure exactly:
 - Run it. It should pass.
 - **Commit**.
 
+## Implementation Cycle (Red-Green-Refactor)
+
+Within each implementation step (Steps 2–4), follow strict red-green-refactor discipline.
+
+### Red
+
+- Write exactly **one** failing test. Do not write the next test until the current one passes.
+- Order tests from most degenerate to most complex: **zero → one → many → boundary cases → error cases**.
+- The first test for any unit should exercise the simplest possible input (nil, empty, zero, identity).
+
+### Green
+
+- Write the **minimum code** to make the failing test pass.
+- Prefer the simplest transformation that satisfies the test. Follow the Transformation Priority Premise: prefer (nil → constant → variable → scalar → collection → conditional → iteration → recursion) in that order.
+- If a constant or hardcoded value satisfies the current test, use it. Let the next test drive generalization.
+- You may anticipate the final design — use that foresight to **choose the next test**, not to implement beyond what the current test requires.
+
+### Refactor
+
+- Refactor **only when all tests are green**. Never refactor while a test is red.
+- Refactoring must not change observable behavior or introduce new functionality.
+- Remove duplication, improve naming, simplify structure.
+- Extracting private functions or methods is encouraged — do it freely to improve clarity.
+- If refactoring reveals a responsibility that deserves its own public interface or class, **do not extract it inline**. Instead, flag it to the user as a candidate for a new TDD cycle (return to Step 2 for the new unit).
+
+### Between cycles
+
+- Run the **full test suite** (not just the current test) after each green and each refactor step.
+- Only proceed to write the next test after the suite is green and refactoring is complete.
+
 ## Commit Discipline
 
 - Commit automatically at each TDD boundary described above. Do not ask for permission.
