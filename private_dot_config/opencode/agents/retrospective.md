@@ -7,6 +7,7 @@ permission:
   edit: ask
   external_directory:
     "~/.config/*": allow
+    "~/.local/share/chezmoi/*": allow
   bash:
     "*": deny
     "git log*": allow
