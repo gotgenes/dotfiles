@@ -186,6 +186,11 @@ Run `prek run --all-files` to check all files before committing.
   - If `GH_USER` is not set, the wrapper passes through to the real `gh` binary with default authentication.
   - Per-directory `mise.toml` files (untracked) set `GH_USER` to the appropriate GitHub account name.
   - The wrapper script contains no account names; identity mappings live in untracked mise config files.
+  - The git credential helper in `private_dot_config/git/config.tmpl` must invoke the wrapper (`$HOME/.local/bin/gh auth git-credential`), not the real `gh` binary directly.
+    If it bypasses the wrapper, git operations (push, fetch) will authenticate with the default active account instead of the per-directory account.
+- **Wrapper scripts in `dot_local/bin/`** shadow Homebrew binaries via PATH priority (`~/.local/bin` appears before `/opt/homebrew/bin`).
+  These wrappers add per-directory behavior (e.g., account selection) before delegating to the real binary.
+  Other configuration that invokes these tools (e.g., git credential helpers, editor integrations) should reference the wrapper path, not the real binary, to preserve the per-directory behavior.
 
 ## Path Rewriting Warning
 
