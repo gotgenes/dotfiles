@@ -5,6 +5,8 @@ temperature: 0.3
 color: "#a78bfa"
 permission:
   edit: ask
+  external_directory:
+    "~/.config/*": allow
   bash:
     "*": deny
     "git log*": allow
