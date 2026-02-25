@@ -10,7 +10,7 @@ Supporting formats: TOML, YAML, HJSON, JSON.
 
 ## Repository Structure
 
-```
+```text
 chezmoi/
 ├── dot_*                    # Home directory dotfiles (e.g., dot_zshenv -> ~/.zshenv)
 ├── private_dot_config/      # ~/.config/ (restricted permissions)
@@ -139,21 +139,21 @@ Use LuaLS `---@type` annotations where they aid clarity:
 - Reference variables from `.chezmoi.toml.tmpl` via `{{ .email }}`, etc.
 - Keep template logic minimal; prefer separate files over complex branching
 
-## Formatting
+## Formatting and Linting
 
 - **Lua**: StyLua (see configs above)
-- **Markdown**: One sentence per line (unbroken) for better diffs
+- **Markdown**: Prettier (formatting) and markdownlint-cli2 (linting); one sentence per line (unbroken) for better diffs
 - **Shell**: No automated formatter; follow existing style
 
 ## Naming Conventions
 
-| Context              | Convention                              | Example                          |
-| -------------------- | --------------------------------------- | -------------------------------- |
-| Lua locals/functions | `snake_case`                            | `diff_source`, `copy_selector`   |
-| Lua exported helpers | `camelCase` (LazyVim convention)        | `M.rgbToHex`, `M.hslToHex`      |
-| Shell variables      | `UPPER_SNAKE_CASE` for env vars         | `$EDITOR`, `$XDG_CONFIG_HOME`   |
-| Shell functions      | `snake_case`                            | `source_if_exists`               |
-| chezmoi files        | Follow chezmoi prefix conventions       | `dot_zshenv`, `private_dot_config` |
+| Context              | Convention                        | Example                            |
+| -------------------- | --------------------------------- | ---------------------------------- |
+| Lua locals/functions | `snake_case`                      | `diff_source`, `copy_selector`     |
+| Lua exported helpers | `camelCase` (LazyVim convention)  | `M.rgbToHex`, `M.hslToHex`         |
+| Shell variables      | `UPPER_SNAKE_CASE` for env vars   | `$EDITOR`, `$XDG_CONFIG_HOME`      |
+| Shell functions      | `snake_case`                      | `source_if_exists`                 |
+| chezmoi files        | Follow chezmoi prefix conventions | `dot_zshenv`, `private_dot_config` |
 
 ## Git Commit Messages
 
@@ -205,8 +205,8 @@ readlink -f ~/.config/claude
 
 In this chezmoi repo, the actual source paths are:
 
-| What you see (rewritten)            | Actual file in this repo                            |
-| ----------------------------------- | --------------------------------------------------- |
+| What you see (rewritten)                                          | Actual file in this repo                                                                                |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | Paths containing `Claude` or `claude` under `private_dot_config/` | `private_dot_config/` + the real product name (run `ls private_dot_config/ \| grep -i open` to find it) |
 
 The chezmoi source directory for agent configs is `private_dot_config/` followed by the real product name directory.

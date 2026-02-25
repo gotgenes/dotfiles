@@ -1,3 +1,6 @@
 AGENTS.md
 README.md
 *.spl
+.markdownlint-cli2.yaml
+.prettierrc.yaml
+.prettierignore

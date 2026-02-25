@@ -1,0 +1,5 @@
+# Prettier configuration
+# Used by Neovim (conform.nvim) and agents
+
+# Don't reflow prose — one sentence per line convention
+proseWrap: preserve

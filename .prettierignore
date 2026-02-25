@@ -1,0 +1,11 @@
+# Go template files (chezmoi) — prettier would mangle template syntax
+*.tmpl
+
+# Legacy Vim configuration
+dot_vim/
+
+# HJSON files — not supported by prettier
+*.hjson
+
+# Spell files
+*.spl
