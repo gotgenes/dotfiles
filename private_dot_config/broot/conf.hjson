@@ -108,7 +108,7 @@
   # If you want the escape key to quit broot when there's nothing
   # to cancel (for example when you just opened broot), uncomment
   # this parameter
-  # 
+  #
   # quit_on_last_cancel: true
 
   ###############################################################
