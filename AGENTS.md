@@ -169,6 +169,11 @@ Use LuaLS `---@type` annotations where they aid clarity:
 - **JetBrains Mono** is the preferred font
 - **mise** is the runtime version manager (replacing asdf/pyenv)
 - **LazyVim** is the Neovim distribution base, with extensive customization
+- **Per-directory git identity** uses git's native `includeIf` mechanism via a local include chain:
+  - The tracked git config includes `~/.config/git/config.local` (silently ignored if absent).
+  - `config.local` is untracked and contains `includeIf "gitdir:..."` directives pointing to per-org config files.
+  - Per-org config files (also untracked) override `user.email` and other settings.
+  - This keeps organization names out of the public repository.
 
 ## Path Rewriting Warning
 
