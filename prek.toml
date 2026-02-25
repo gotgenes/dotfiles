@@ -1,0 +1,29 @@
+# Configuration file for `prek`, a git hook framework written in Rust.
+# See https://prek.j178.dev for more information.
+#:schema https://www.schemastore.org/prek.json
+
+[[repos]]
+repo = "builtin"
+hooks = [
+    { id = "trailing-whitespace" },
+    { id = "end-of-file-fixer" },
+    { id = "check-added-large-files" },
+    { id = "check-merge-conflict" },
+    { id = "check-yaml" },
+    { id = "check-toml" },
+    { id = "check-json" },
+]
+
+[[repos]]
+repo = "https://github.com/DavidAnson/markdownlint-cli2"
+rev = "v0.21.0"
+hooks = [
+    { id = "markdownlint-cli2" },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+    { id = "prettier", name = "prettier", entry = "prettier --write --ignore-unknown", language = "system", types = ["markdown"] },
+    { id = "stylua", name = "stylua", entry = "stylua", language = "system", types = ["lua"] },
+]

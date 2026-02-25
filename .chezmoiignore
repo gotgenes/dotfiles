@@ -4,3 +4,4 @@ README.md
 .markdownlint-cli2.yaml
 .prettierrc.yaml
 .prettierignore
+prek.toml

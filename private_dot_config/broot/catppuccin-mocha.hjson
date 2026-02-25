@@ -12,7 +12,7 @@
 skin: {
     input: rgb(205, 214, 244) none
     # fg:none bg:$surface2
-    selected_line: none rgb(88, 91, 112) 
+    selected_line: none rgb(88, 91, 112)
     # fg:$text bg:none
     default: rgb(205, 214, 244) none
     # fg:$overlay0 bg:none
