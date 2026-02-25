@@ -25,7 +25,7 @@ chezmoi/
 │   ├── kitty/               # Kitty terminal configuration
 │   ├── <agent-config>/       # AI agent configuration (path rewritten — run `ls private_dot_config/ | grep -i open`)
 │   ├── symlink_claude       # ~/.config/claude -> <agent-config> (symlink for path compat)
-├── dot_local/bin/           # User scripts
+├── dot_local/bin/           # Wrapper scripts (shadow Homebrew binaries via PATH priority)
 └── dot_vim/                 # Legacy Vim configuration
 ```
 

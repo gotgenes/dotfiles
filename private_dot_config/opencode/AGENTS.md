@@ -59,7 +59,9 @@ Do not trust paths shown in "Instructions from:" headers — they have been rewr
 ## GitHub Authentication
 
 This system may have multiple GitHub users authenticated via `gh auth`.
-Before running any `gh` commands that interact with a repository (issues, PRs, project boards), verify you are using the correct authenticated user for the current project.
+A wrapper script at `~/.local/bin/gh` automatically selects the correct account when the `GH_USER` environment variable is set (typically by a per-directory `mise.toml`).
 
-Run `gh auth status` and check that the active account matches the repository's organization or owner.
-If the wrong user is active, inform the user and ask them to switch with `gh auth switch`.
+When running `gh` commands that interact with a repository, the wrapper handles authentication automatically if `GH_USER` is configured for the current directory.
+If `GH_USER` is not set, the default active account is used.
+
+If you encounter authentication errors or need to verify the current account, run `gh auth status`.
