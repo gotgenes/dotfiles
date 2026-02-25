@@ -174,6 +174,11 @@ Use LuaLS `---@type` annotations where they aid clarity:
   - `config.local` is untracked and contains `includeIf "gitdir:..."` directives pointing to per-org config files.
   - Per-org config files (also untracked) override `user.email` and other settings.
   - This keeps organization names out of the public repository.
+- **Per-directory GitHub CLI account** uses a `gh` wrapper script (`dot_local/bin/executable_gh.tmpl`) combined with [mise](https://mise.jdx.dev/) environment variables:
+  - The wrapper checks for a `GH_USER` environment variable. If set, it fetches the token for that user from the keyring via `gh auth token -u "$GH_USER"` and passes it as `GH_TOKEN` for that invocation.
+  - If `GH_USER` is not set, the wrapper passes through to the real `gh` binary with default authentication.
+  - Per-directory `mise.toml` files (untracked) set `GH_USER` to the appropriate GitHub account name.
+  - The wrapper script contains no account names; identity mappings live in untracked mise config files.
 
 ## Path Rewriting Warning
 

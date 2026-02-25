@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+{{- if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.arch "arm64" }}
+GH="/opt/homebrew/bin/gh"
+{{- else }}
+GH="/usr/local/bin/gh"
+{{- end }}
+{{- else }}
+GH="/home/linuxbrew/.linuxbrew/bin/gh"
+{{- end }}
+
+# If GH_USER is set (e.g., by mise for a per-directory override),
+# fetch the token for that user from the keyring and pass it to gh
+# via GH_TOKEN. This avoids mutating the global active account.
+if [[ -n "$GH_USER" ]]; then
+    token=$("$GH" auth token -u "$GH_USER" 2>/dev/null)
+    if [[ -n "$token" ]]; then
+        GH_TOKEN="$token" exec "$GH" "$@"
+    fi
+fi
+
+exec "$GH" "$@"
