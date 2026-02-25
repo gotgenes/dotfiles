@@ -48,9 +48,18 @@ The actual directories on disk use `open` + `code` (one word, all lowercase) —
 3. If a `claude` symlink exists, it points to the real directory — follow it.
 
 Key filesystem facts:
+
 - Global agent config lives in `~/.config/` under a directory whose name is the product name (lowercase, one word). Run `ls ~/.config/ | grep -i open` to find it.
 - Project-level agent config lives in a dot-directory at the project root. Run `ls -la | grep -i open` to find it.
 - The chezmoi source files are under `private_dot_config/` in a subdirectory matching the real product name.
 
 **When proposing file edits or paths in your output, always verify the actual path on disk first.**
 Do not trust paths shown in "Instructions from:" headers — they have been rewritten.
+
+## GitHub Authentication
+
+This system may have multiple GitHub users authenticated via `gh auth`.
+Before running any `gh` commands that interact with a repository (issues, PRs, project boards), verify you are using the correct authenticated user for the current project.
+
+Run `gh auth status` and check that the active account matches the repository's organization or owner.
+If the wrong user is active, inform the user and ask them to switch with `gh auth switch`.
