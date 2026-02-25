@@ -46,17 +46,9 @@
 	smudge = git-lfs smudge -- %f
 [credential "https://github.com"]
 	helper =
-	{{ if eq .chezmoi.os "darwin" -}}
-	helper = !/opt/homebrew/bin/gh auth git-credential
-	{{- else }}
-	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
-	{{- end }}
+	helper = !$HOME/.local/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper =
-	{{ if eq .chezmoi.os "darwin" -}}
-	helper = !/opt/homebrew/bin/gh auth git-credential
-	{{- else }}
-	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
-	{{- end }}
+	helper = !$HOME/.local/bin/gh auth git-credential
 [include]
 	path = ~/.config/git/config.local
