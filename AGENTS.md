@@ -66,6 +66,9 @@ chezmoi init
 **Note:** chezmoi does not remove files from the target when they are deleted from the source directory.
 If you delete or rename a file in the chezmoi source, you must manually remove the stale file from the target (e.g., `~/.config/`), or use `chezmoi forget` and then delete the target file.
 
+**Important:** After committing changes to chezmoi-tracked files (anything under `dot_*`, `private_dot_config/`, `dot_local/`, etc.), run `chezmoi apply` to deploy the changes to the home directory.
+Use `chezmoi diff` to preview what would change before applying.
+
 ## Code Style: Lua (Neovim Configuration)
 
 ### Formatting
@@ -145,6 +148,10 @@ Use LuaLS `---@type` annotations where they aid clarity:
 - **Markdown**: Prettier (formatting) and markdownlint-cli2 (linting); one sentence per line (unbroken) for better diffs
 - **Shell**: No automated formatter; follow existing style
 
+Pre-commit hooks are managed by [prek](https://prek.j178.dev/) (see `prek.toml`).
+Hooks run automatically on `git commit` and enforce trailing whitespace, final newlines, file format validation (YAML, TOML, JSON), markdownlint, prettier, and StyLua.
+Run `prek run --all-files` to check all files before committing.
+
 ## Naming Conventions
 
 | Context              | Convention                        | Example                            |
@@ -218,6 +225,6 @@ When reading or modifying agent configuration files, always verify the actual pa
 
 - There are no tests or CI in this repository.
 - The `dot_vimrc` is a legacy config superseded by the Neovim/LazyVim setup in `private_dot_config/nvim/`.
-- The `.chezmoiignore` file prevents `README.md` and `.spl` spell files from being deployed.
+- The `.chezmoiignore` file prevents repo-level files (`AGENTS.md`, `README.md`, `prek.toml`, linter/formatter configs, `.spl` spell files) from being deployed. When adding new repo-level config files, add them to `.chezmoiignore`.
 - The primary target is macOS arm64; Linux support is handled via `{{ if eq .chezmoi.os "linux" }}` template conditionals.
 - The user works with: Python, Go, TypeScript/JavaScript, Lua, C/C++, C#/.NET, Docker, SQL, LaTeX, Markdown, Terraform, Ruby, and more — filetype configs exist for all of these.
