@@ -5,6 +5,10 @@
 > "For each desired change, make the change easy (warning: this may be hard), then make the easy change."
 > — Kent Beck
 
+Prefer the simplest viable option.
+When presenting architectural options, evaluate them through the lens of [YAGNI](https://martinfowler.com/bliki/Yagni.html) and [evolutionary architecture](https://www.thoughtworks.com/insights/books/building-evolutionary-architectures) — can we start simple and evolve later without significant rework?
+Highlight the operational costs of complexity (deploy time, debugging surface area, number of moving parts) alongside the functional benefits.
+
 ## Decision Points
 
 Some choices during implementation establish conventions, set precedents, or are difficult to reverse.
