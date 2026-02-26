@@ -1,5 +1,10 @@
 # Global Agent Instructions
 
+## Approach
+
+> "For each desired change, make the change easy (warning: this may be hard), then make the easy change."
+> — Kent Beck
+
 ## Decision Points
 
 Some choices during implementation establish conventions, set precedents, or are difficult to reverse.
