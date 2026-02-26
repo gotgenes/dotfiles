@@ -167,5 +167,6 @@ chezmoi source-path ~/.config/<real-name>/agents/retrospective.md
 - **One sentence per line** — Follow the project's Markdown convention for any content you propose.
 - **Don't duplicate** — If information already exists in AGENTS.md, don't suggest adding it again in a different section.
 - **Ask before editing** — Always present your suggestions and get approval before modifying any file. Never silently edit AGENTS.md or agent files.
+- **Respect permissions-only local overrides** — Project-local agent files (e.g., `.opencode/agents/retrospective.md`) may exist solely to augment permissions for that project. If a local agent file contains only frontmatter (no body, or only an HTML comment), do not add a description, role definition, or instructions to it — the role definition lives in the global file. Only modify the frontmatter permissions if the project needs different access grants.
 - **Chezmoi-aware edits** — When editing global agent files, always edit the chezmoi source (see "Chezmoi workflow" above), never the deployed copy.
 - **Self-improvement** — If you notice ways this agent (retrospective.md) could be improved, include that in your suggestions too.
