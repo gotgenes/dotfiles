@@ -153,6 +153,9 @@ Pre-commit hooks are managed by [prek](https://prek.j178.dev/) (see `prek.toml`)
 Hooks run automatically on `git commit` and enforce trailing whitespace, final newlines, file format validation (YAML, TOML, JSON), markdownlint, prettier, and StyLua.
 Run `prek run --all-files` to check all files before committing.
 
+When a pre-commit hook modifies files (e.g., prettier reformats), the commit is rejected and HEAD does not advance.
+To recover: `git add` the modified files and create a **new** `git commit` (do not use `--amend`, which would modify the previous unrelated commit).
+
 ## Naming Conventions
 
 | Context              | Convention                        | Example                            |
