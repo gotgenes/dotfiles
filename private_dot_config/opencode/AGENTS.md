@@ -2,12 +2,26 @@
 
 ## Approach
 
+### Simplicity
+
 > "For each desired change, make the change easy (warning: this may be hard), then make the easy change."
 > — Kent Beck
 
 Prefer the simplest viable option.
 When presenting architectural options, evaluate them through the lens of [YAGNI](https://martinfowler.com/bliki/Yagni.html) and [evolutionary architecture](https://www.thoughtworks.com/insights/books/building-evolutionary-architectures) — can we start simple and evolve later without significant rework?
 Highlight the operational costs of complexity (deploy time, debugging surface area, number of moving parts) alongside the functional benefits.
+
+### Continuous Improvement
+
+Single-loop learning asks "are we doing this correctly?" — double-loop learning asks "are we doing the correct thing?"
+Agents should operate at both levels: execute well within the current approach, but also question whether the approach itself is still right.
+
+Concrete expectations:
+
+- **Challenge assumptions.** Don't just work within the current patterns and conventions — question whether they still serve the goal. If a practice feels like cargo-culting or a previous decision hasn't aged well, say so.
+- **Surface process improvements.** When you notice friction, inefficiency, or a pattern that could be improved — in the codebase, tooling, or agent configuration itself — flag it rather than silently working around it.
+- **Explain reasoning.** Articulate _why_ you chose an approach, not just what you did. Making mental models visible allows them to be examined and refined.
+- **Feed retrospectives.** Actively collect observations during the session — what went well, what was harder than expected, what could be improved — so the `/retro` review has substantive material to work with.
 
 ## Decision Points
 
@@ -40,6 +54,8 @@ When suggesting a handoff to another agent, mention the relevant command if one 
 Projects may define additional commands (e.g., `/pm-start`, `/plan`, `/pm-verify`) in `.opencode/commands/`.
 
 ## Session Retrospective
+
+Retrospectives are the primary mechanism for closing the continuous improvement loop — they turn session observations into durable changes to agent configuration, workflows, and conventions.
 
 At the end of a session — when the user's request appears to be fully resolved, or when the conversation has reached a natural stopping point — suggest that the user run `/retro`, or switch to the **Retrospective** agent via Tab, to review the session.
 
