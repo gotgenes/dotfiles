@@ -64,6 +64,10 @@ chezmoi managed
 chezmoi init
 ```
 
+**Critical:** Always edit files in the chezmoi source directory (this repository), never the deployed targets (e.g., `~/.config/`, `~/.*`).
+The source is the single source of truth; deployed files are overwritten by `chezmoi apply`.
+If you need to modify a deployed file like `~/.config/opencode/AGENTS.md`, edit its source at `private_dot_config/opencode/AGENTS.md` in this repo, then run `chezmoi apply` to deploy.
+
 **Note:** chezmoi does not remove files from the target when they are deleted from the source directory.
 If you delete or rename a file in the chezmoi source, you must manually remove the stale file from the target (e.g., `~/.config/`), or use `chezmoi forget` and then delete the target file.
 
