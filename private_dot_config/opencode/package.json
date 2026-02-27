@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@ex-machina/opencode-anthropic-auth": "latest",
+    "@opencode-ai/plugin": "1.2.15"
+  }
+}

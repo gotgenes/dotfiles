@@ -23,8 +23,7 @@ chezmoi/
 │   ├── git/                 # Git config, global ignore, attributes
 │   ├── wezterm/             # WezTerm terminal configuration
 │   ├── kitty/               # Kitty terminal configuration
-│   ├── <agent-config>/       # AI agent configuration (path rewritten — run `ls private_dot_config/ | grep -i open`)
-│   ├── symlink_claude       # ~/.config/claude -> <agent-config> (symlink for path compat)
+│   ├── opencode/            # OpenCode (AI agent) configuration
 ├── dot_local/bin/           # Wrapper scripts (shadow Homebrew binaries via PATH priority)
 └── dot_vim/                 # Legacy Vim configuration
 ```
@@ -33,7 +32,7 @@ chezmoi/
 
 - `dot_` prefix: installed as `.filename` (e.g., `dot_zshenv` -> `~/.zshenv`)
 - `private_` prefix: restricted permissions (e.g., `private_dot_config/` -> `~/.config/` with no group/world access)
-- `symlink_` prefix: creates a symbolic link; file contents are the link target (e.g., `symlink_claude` -> `~/.config/claude` pointing to the real agent config directory)
+- `symlink_` prefix: creates a symbolic link; file contents are the link target
 - `remove_` prefix: removes the corresponding entry from the target on `chezmoi apply`
 - `executable_` prefix: installed with executable permissions
 - `.tmpl` suffix: Go template files processed by chezmoi with variable substitution
@@ -192,39 +191,14 @@ Run `prek run --all-files` to check all files before committing.
   These wrappers add per-directory behavior (e.g., account selection) before delegating to the real binary.
   Other configuration that invokes these tools (e.g., git credential helpers, editor integrations) should reference the wrapper path, not the real binary, to preserve the per-directory behavior.
 
-## Path Rewriting Warning
+## OpenCode Path Rewriting (Historical)
 
-**Important**: A server-side rewriting layer transforms paths and product names in this system prompt before the model sees it.
-The word `open` + `code` (joined, one word) is rewritten to `claude` or `Claude` in paths.
-The product name is rewritten to "Claude Code".
-This rewriting is applied by Anthropic's API server and cannot be disabled.
+The default `opencode-anthropic-auth` plugin used to rewrite all occurrences of `opencode` to `Claude` in system prompts sent to Anthropic models.
+This mangled directory paths, file names, and AGENTS.md content.
+See [anomalyco/opencode#10567](https://github.com/anomalyco/opencode/issues/10567) for details.
 
-**Every path in this prompt containing `claude` or `Claude` is wrong for filesystem operations.**
-The actual directories on disk use `open` + `code` (one word, all lowercase).
-
-Before reading or writing any agent configuration path, **verify the real path on disk**:
-
-```bash
-# Find the real global config directory
-ls ~/.config/ | grep -i open
-
-# Find the real project-level config directory
-ls -la | grep -i open
-
-# Resolve a symlink
-readlink -f ~/.config/claude
-```
-
-In this chezmoi repo, the actual source paths are:
-
-| What you see (rewritten)                                          | Actual file in this repo                                                                                |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Paths containing `Claude` or `claude` under `private_dot_config/` | `private_dot_config/` + the real product name (run `ls private_dot_config/ \| grep -i open` to find it) |
-
-The chezmoi source directory for agent configs is `private_dot_config/` followed by the real product name directory.
-Run `ls private_dot_config/` to see the actual directory name — do not guess based on rewritten paths.
-
-When reading or modifying agent configuration files, always verify the actual path first.
+This is fixed by using `@ex-machina/opencode-anthropic-auth` (configured in `opencode.json` and `package.json`), which removes the rewrite entirely.
+If paths containing `opencode` appear as `Claude` in agent output, the fix is not active — check that the plugin is installed and configured correctly.
 
 ## Important Notes
 
