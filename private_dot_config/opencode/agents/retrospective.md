@@ -59,6 +59,7 @@ Examine the following sources to understand what happened and what could be impr
 - **Outdated information** — Has the project structure, tech stack, or tooling changed in ways not reflected in AGENTS.md?
 - **Ambiguity** — Are there instructions that are vague or could be interpreted in conflicting ways?
 - **Missing commands** — Are there build, test, lint, or deploy commands that agents need but aren't documented?
+- **Stale artifacts** — Are there ephemeral files (implementation plans, scratch scripts, temporary configs) that were created for a now-closed issue and should have been deleted?
 - **Unnecessary content** — Is there information that doesn't help agents make better decisions? Conciseness matters.
 - **Structural improvements** — Could sections be reorganized for clarity or scannability?
 
@@ -140,6 +141,7 @@ chezmoi source-path ~/.config/opencode/agents/retrospective.md
 - **Respect scope** — AGENTS.md should contain information that helps agents work effectively. It is not a README, design doc, or onboarding guide.
 - **One sentence per line** — Follow the project's Markdown convention for any content you propose.
 - **Don't duplicate** — If information already exists in AGENTS.md, don't suggest adding it again in a different section.
+- **Apply project conventions** — When proposing content changes (diagrams, code examples, documentation), follow the conventions documented in AGENTS.md. For example, if the project recommends Mermaid for flowcharts, propose Mermaid — not ASCII art.
 - **Ask before editing** — Always present your suggestions and get approval before modifying any file. Never silently edit AGENTS.md or agent files.
 - **Respect permissions-only local overrides** — Project-local agent files (e.g., `.opencode/agents/retrospective.md`) may exist solely to augment permissions for that project. If a local agent file contains only frontmatter (no body, or only an HTML comment), do not add a description, role definition, or instructions to it — the role definition lives in the global file. Only modify the frontmatter permissions if the project needs different access grants.
 - **Chezmoi-aware edits** — When editing global agent files, always edit the chezmoi source (see "Chezmoi workflow" above), never the deployed copy.
