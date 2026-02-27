@@ -29,13 +29,23 @@ When presenting a decision point:
 - State which option you'd recommend and why, but do not apply it without confirmation.
 - If you're unsure whether something is a decision point, err on the side of asking.
 
+## Workflow Commands
+
+Global custom commands are available to streamline agent transitions.
+When suggesting a handoff to another agent, mention the relevant command if one exists.
+
+- `/tdd <context>` — Switch to the TDD agent and begin outside-in implementation. Pass the plan, issue, or task description as arguments.
+- `/retro` — Switch to the Retrospective agent for end-of-session review.
+
+Projects may define additional commands (e.g., `/pm-start`, `/plan`, `/pm-verify`) in `.opencode/commands/`.
+
 ## Session Retrospective
 
-At the end of a session — when the user's request appears to be fully resolved, or when the conversation has reached a natural stopping point — suggest that the user switch to the **Retrospective** agent (via Tab) to review the session.
+At the end of a session — when the user's request appears to be fully resolved, or when the conversation has reached a natural stopping point — suggest that the user run `/retro`, or switch to the **Retrospective** agent via Tab, to review the session.
 
 A natural stopping point includes: a task or issue being closed, a commit being made, a planning document being written, or the user saying something like "thanks" or "that's all."
 Frame it as a brief, optional recommendation, not a demand.
-For example: "If you'd like, you can switch to the Retrospective agent (Tab) to review this session for any improvements to the agent configuration."
+For example: "If you'd like, you can run `/retro` to review this session for improvements to the agent configuration."
 
 Do not switch to the Retrospective agent automatically.
 Only suggest it when substantial work was completed (not for quick questions or trivial changes).
