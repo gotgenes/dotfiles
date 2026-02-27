@@ -66,15 +66,6 @@ For example: "If you'd like, you can run `/retro` to review this session for imp
 Do not switch to the Retrospective agent automatically.
 Only suggest it when substantial work was completed (not for quick questions or trivial changes).
 
-## OpenCode Path Rewriting (Historical)
-
-The default `opencode-anthropic-auth` plugin used to rewrite all occurrences of `opencode` to `Claude` in system prompts sent to Anthropic models.
-This mangled directory paths, file names, and AGENTS.md content.
-See [anomalyco/opencode#10567](https://github.com/anomalyco/opencode/issues/10567) for details.
-
-This is fixed by using `@ex-machina/opencode-anthropic-auth` (configured in `opencode.json` and `package.json`), which removes the rewrite entirely.
-If paths containing `opencode` appear as `Claude` in agent output, the fix is not active — check that the plugin is installed and configured correctly.
-
 ## GitHub Authentication
 
 This system may have multiple GitHub users authenticated via `gh auth`.
