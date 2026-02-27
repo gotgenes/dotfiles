@@ -40,30 +40,14 @@ For example: "If you'd like, you can switch to the Retrospective agent (Tab) to 
 Do not switch to the Retrospective agent automatically.
 Only suggest it when substantial work was completed (not for quick questions or trivial changes).
 
-## Path Rewriting Warning
+## OpenCode Path Rewriting (Historical)
 
-**Important**: When this file is sent to the model, a server-side rewriting layer transforms path segments and product names.
-The word `open` + `code` (joined) in paths is rewritten to `claude` or `Claude`.
-The product name is rewritten to "Claude Code".
-This happens on Anthropic's API server, not in the client, and cannot be disabled.
+The default `opencode-anthropic-auth` plugin used to rewrite all occurrences of `opencode` to `Claude` in system prompts sent to Anthropic models.
+This mangled directory paths, file names, and AGENTS.md content.
+See [anomalyco/opencode#10567](https://github.com/anomalyco/opencode/issues/10567) for details.
 
-As a result, every path you see in this system prompt containing `claude` or `Claude` is **wrong for filesystem operations**.
-The actual directories on disk use `open` + `code` (one word, all lowercase) — not `claude` or `Claude`.
-
-**Before writing to or reading from any path that contains `claude` or `Claude`:**
-
-1. Run `ls -la` on the parent directory to discover the real directory name.
-2. Or run `readlink -f <path>` to resolve symlinks.
-3. If a `claude` symlink exists, it points to the real directory — follow it.
-
-Key filesystem facts:
-
-- Global agent config lives in `~/.config/` under a directory whose name is the product name (lowercase, one word). Run `ls ~/.config/ | grep -i open` to find it.
-- Project-level agent config lives in a dot-directory at the project root. Run `ls -la | grep -i open` to find it.
-- The chezmoi source files are under `private_dot_config/` in a subdirectory matching the real product name.
-
-**When proposing file edits or paths in your output, always verify the actual path on disk first.**
-Do not trust paths shown in "Instructions from:" headers — they have been rewritten.
+This is fixed by using `@ex-machina/opencode-anthropic-auth` (configured in `opencode.json` and `package.json`), which removes the rewrite entirely.
+If paths containing `opencode` appear as `Claude` in agent output, the fix is not active — check that the plugin is installed and configured correctly.
 
 ## GitHub Authentication
 
