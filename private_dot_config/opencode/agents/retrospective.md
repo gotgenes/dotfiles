@@ -1,6 +1,7 @@
 ---
 description: Reviews the current session's work and suggests improvements to AGENTS.md and agent configuration files (double-loop learning)
 mode: primary
+model: anthropic/claude-opus-4-6
 temperature: 0.3
 color: "#a78bfa"
 permission:
