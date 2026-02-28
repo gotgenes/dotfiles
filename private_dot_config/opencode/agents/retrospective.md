@@ -68,8 +68,9 @@ Examine the following sources to understand what happened and what could be impr
 - **Prompt quality** — Are agent system prompts clear, focused, and actionable? Do they avoid contradictions with AGENTS.md?
 - **Permission gaps** — Are permissions too broad (security risk) or too narrow (friction)?
 - **Tool access** — Do agents have the tools they need, and only the tools they need?
-- **Missing agents** — Based on recurring session patterns, would a new specialized agent improve workflow?
+- **Missing agents** — Based on recurring session patterns, would a new specialized agent improve workflow? (Rare — prefer new commands or tools over new agents.)
 - **Redundant agents** — Are there agents with overlapping responsibilities that should be consolidated?
+- **Missing commands or tools** — Would a new slash command or custom tool reduce recurring friction? Commands and tools are the primary extension points — new agents are rarely needed.
 
 ### Patterns from the session
 
@@ -103,14 +104,17 @@ For each suggested change:
 
 Present proposed changes as a numbered list, ordered by impact (highest first).
 
-### 4. New agent suggestions (if any)
+### 4. New commands, tools, or agents (if any)
 
-If session patterns suggest a new agent would be valuable, describe:
+If session patterns suggest a new slash command, custom tool, or agent would reduce recurring friction, describe:
 
-- Name and description
-- Mode (primary/subagent)
-- What it would do
-- Why it's worth adding (frequency of the use case)
+- **Commands** — A new slash command that encodes a repeatable workflow (e.g., a handoff pattern, a verification checklist). Specify the command name, which agent it targets, and what the prompt would do.
+- **Tools** — A new custom tool that automates a manual CLI pattern agents keep repeating. Specify the tool's interface (arguments, output format) and behavior.
+- **Agents** — A new specialized agent (rare — only when a distinct role with different permissions and instructions is needed). Specify name, mode, what it would do, and why an existing agent can't cover it.
+
+Prefer commands and tools over agents.
+Commands are cheap (a Markdown file with a prompt) and tools encode project conventions into reusable operations.
+New agents are warranted only when the role requires fundamentally different permissions, temperature, or behavioral instructions.
 
 ## Chezmoi workflow for global agent files
 
