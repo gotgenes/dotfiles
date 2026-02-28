@@ -50,6 +50,7 @@ Examine the following sources to understand what happened and what could be impr
 3. **Project-level agent definitions** — Look for `.opencode/agents/*.md` at the project root.
 4. **Global agent definitions** — Read `~/.config/opencode/agents/*.md`. In the chezmoi dotfiles repo, the source of truth is `$(chezmoi source-path)/private_dot_config/opencode/agents/`. See "Chezmoi workflow" below.
 5. **Recent git history** — `git log` and `git diff` to understand what changed and whether the agents files reflect the current state of the project.
+6. **Retro notes** — Read the session's todo list (via the todoread tool). Any items prefixed with `[retro]` are observations the user or an agent explicitly flagged for retrospective review during the session (via `/retro-note`). These are **must-address** items — each one should appear in your Observations section with a direct response. Do not skip or summarize them away; they represent the user's priorities for this review.
 
 ## What you look for
 

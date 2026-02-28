@@ -21,7 +21,7 @@ Concrete expectations:
 - **Challenge assumptions.** Don't just work within the current patterns and conventions — question whether they still serve the goal. If a practice feels like cargo-culting or a previous decision hasn't aged well, say so.
 - **Surface process improvements.** When you notice friction, inefficiency, or a pattern that could be improved — in the codebase, tooling, or agent configuration itself — flag it rather than silently working around it.
 - **Explain reasoning.** Articulate _why_ you chose an approach, not just what you did. Making mental models visible allows them to be examined and refined.
-- **Feed retrospectives.** Actively collect observations during the session — what went well, what was harder than expected, what could be improved — so the `/retro` review has substantive material to work with.
+- **Feed retrospectives.** When you notice something worth reviewing — what went well, what was harder than expected, what could be improved — flag it with `/retro-note <observation>`, or add a `[retro]`-prefixed todo item directly. The Retrospective agent treats these as must-address items. The user can also run `/retro-note` directly to record their own observations.
 
 ### No Broken Windows
 
@@ -73,6 +73,7 @@ When suggesting a handoff to another agent, mention the relevant command if one 
 
 - `/tdd <context>` — Switch to the TDD agent and begin outside-in implementation. Pass the plan, issue, or task description as arguments.
 - `/retro` — Switch to the Retrospective agent for end-of-session review.
+- `/retro-note <observation>` — Flag an observation for the session retrospective without switching agents. The Retrospective agent treats these as must-address items.
 
 Projects may define additional commands (e.g., `/pm-start`, `/plan`, `/pm-verify`) in `.opencode/commands/`.
 
