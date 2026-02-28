@@ -11,6 +11,25 @@ Prefer the simplest viable option.
 When presenting architectural options, evaluate them through the lens of [YAGNI](https://martinfowler.com/bliki/Yagni.html) and [evolutionary architecture](https://www.thoughtworks.com/insights/books/building-evolutionary-architectures) — can we start simple and evolve later without significant rework?
 Highlight the operational costs of complexity (deploy time, debugging surface area, number of moving parts) alongside the functional benefits.
 
+### Explicit Is Better Than Implicit
+
+Make interfaces reveal their intent.
+
+- **Return values over side effects.** Functions and methods should return a meaningful result whenever possible. An explicit return value makes the function's purpose visible to callers and enables composition, testing, and reasoning about data flow. If a function only performs side effects, consider whether it can also return a result that describes what it did.
+- **Decompose inputs at the interface boundary.** Accept meaningful components as distinct, named parameters rather than opaque compound values the function must parse internally. This makes the function's actual data requirements visible and pushes parsing to the caller, where context about the data's origin already exists.
+
+Counterexample — an opaque compound input the function must parse:
+
+```python
+get_repo("https://github.com/gotgenes/getignore")
+```
+
+Preferred — discrete, named parameters that make data requirements explicit:
+
+```python
+get_repo(user_name="gotgenes", repository="getignore")
+```
+
 ### Continuous Improvement
 
 Single-loop learning asks "are we doing this correctly?" — double-loop learning asks "are we doing the correct thing?"
