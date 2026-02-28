@@ -23,6 +23,16 @@ Concrete expectations:
 - **Explain reasoning.** Articulate _why_ you chose an approach, not just what you did. Making mental models visible allows them to be examined and refined.
 - **Feed retrospectives.** Actively collect observations during the session — what went well, what was harder than expected, what could be improved — so the `/retro` review has substantive material to work with.
 
+### No Broken Windows
+
+Bug fixes always take priority over new features and enhancements.
+Broken tooling, incorrect behavior, and regressions should be addressed before non-bug work.
+This applies the [Broken Windows theory](https://en.wikipedia.org/wiki/Broken_windows_theory) to the codebase: small defects left unaddressed erode quality norms and compound over time.
+
+When a project uses a prioritized backlog, rank bug fixes above all non-bug items.
+When multiple bugs exist, rank them by impact (how much friction they cause per occurrence).
+When there is no formal backlog, flag bugs immediately rather than working around them.
+
 ## Decision Points
 
 Some choices during implementation establish conventions, set precedents, or are difficult to reverse.
