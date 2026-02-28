@@ -110,6 +110,16 @@ When suggesting a handoff to another agent, mention the relevant command if one 
 
 Projects may define additional commands (e.g., `/pm-start`, `/plan`, `/pm-verify`) in `.opencode/commands/`.
 
+### Suggesting Commands
+
+When suggesting a slash command as a next step, agents should **both** mention the command in text output (as a fallback for logs and shared sessions) **and** call the `suggest_command` tool to pre-fill the user's input prompt.
+
+The `suggest_command` tool is provided by a global plugin.
+It clears the current prompt, appends the command text, and shows a toast notification.
+The user reviews the pre-filled command and presses Enter to execute.
+
+Example: when recommending a retrospective, mention `/retro` in text and call `suggest_command("/retro")`.
+
 ## Session Retrospective
 
 Retrospectives are the primary mechanism for closing the continuous improvement loop — they turn session observations into durable changes to agent configuration, workflows, and conventions.
@@ -119,6 +129,7 @@ At the end of a session — when the user's request appears to be fully resolved
 A natural stopping point includes: a task or issue being closed, a commit being made, a planning document being written, or the user saying something like "thanks" or "that's all."
 Frame it as a brief, optional recommendation, not a demand.
 For example: "If you'd like, you can run `/retro` to review this session for improvements to the agent configuration."
+When suggesting `/retro`, also call `suggest_command("/retro")` to pre-fill the user's prompt.
 
 Do not switch to the Retrospective agent automatically.
 Only suggest it when substantial work was completed (not for quick questions or trivial changes).
