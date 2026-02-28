@@ -46,6 +46,19 @@ Steps:
 
 Workarounds for already-fixed bugs add unnecessary complexity and miss the opportunity to pick up other improvements in the newer version.
 
+### Verify Before Documenting
+
+When troubleshooting, do not document a root cause until it has been verified.
+If you change multiple variables at once (e.g., switch APIs _and_ add a permission), go back and test each variable independently before attributing the fix.
+
+Specifically:
+
+- Do not write "X doesn't work" in documentation or commit messages unless you have confirmed it after all other changes are in place.
+- If a workaround was introduced before the real fix was found, remove the workaround and verify the simpler approach works.
+- Prefer testing hypotheses over presenting decision points. If a quick test can resolve uncertainty, run the test first.
+
+Incorrect root cause attribution creates misleading documentation that compounds over time.
+
 ## Decision Points
 
 Some choices during implementation establish conventions, set precedents, or are difficult to reverse.
@@ -66,12 +79,32 @@ When presenting a decision point:
 - State which option you'd recommend and why, but do not apply it without confirmation.
 - If you're unsure whether something is a decision point, err on the side of asking.
 
+## Manual Actions
+
+When a task requires the user to perform a manual action (e.g., change a setting in a UI, approve a permission, create a resource that can't be automated), use the `question` tool to **gate on completion** rather than printing instructions and continuing.
+
+This ensures the user sees the request (it blocks progress) and gives them structured options to respond.
+
+Use this format:
+
+- **Header**: `Manual action required` (distinguishes from decision-point questions)
+- **Question**: Numbered steps the user needs to perform
+- **Options** (always include all three):
+  1. `Done` — "I've completed the steps above"
+  2. `Need help` — "I'm stuck or something looks different than expected"
+  3. `Something went wrong` — "I completed the steps but got an error or unexpected result"
+
+If the user selects "Need help" or "Something went wrong", ask clarifying questions before retrying or adjusting the approach.
+
+For **non-blocking** manual notes (things the user should do later but that don't gate current progress), mention them in the conversation output without using the `question` tool.
+
 ## Workflow Commands
 
 Global custom commands are available to streamline agent transitions.
 When suggesting a handoff to another agent, mention the relevant command if one exists.
 
-- `/tdd <context>` — Switch to the TDD agent and begin outside-in implementation. Pass the plan, issue, or task description as arguments.
+- `/tdd <context>` — Switch to the TDD agent and begin outside-in implementation. Pass a plan file path, issue number, or task description as arguments.
+- `/build <context>` — Switch to the Build agent for non-TDD implementation (config, infrastructure, tooling). Pass a plan file path, issue number, or task description as arguments.
 - `/retro` — Switch to the Retrospective agent for end-of-session review.
 - `/retro-note <observation>` — Flag an observation for the session retrospective without switching agents. The Retrospective agent treats these as must-address items.
 
