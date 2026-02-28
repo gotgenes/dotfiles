@@ -33,6 +33,19 @@ When a project uses a prioritized backlog, rank bug fixes above all non-bug item
 When multiple bugs exist, rank them by impact (how much friction they cause per occurrence).
 When there is no formal backlog, flag bugs immediately rather than working around them.
 
+### Troubleshooting Third-Party Dependencies
+
+When a bug is traced to a third-party dependency (GitHub Action, npm package, framework, etc.), check whether a newer version has already fixed the issue **before** designing a workaround.
+
+Steps:
+
+1. Identify the upstream issue (search the dependency's issue tracker).
+2. Check recent releases and changelogs for a fix.
+3. If a fix exists in a newer version, upgrade rather than work around.
+4. If no fix exists, then design a workaround — and reference the upstream issue in a comment so the workaround can be removed when a fix ships.
+
+Workarounds for already-fixed bugs add unnecessary complexity and miss the opportunity to pick up other improvements in the newer version.
+
 ## Decision Points
 
 Some choices during implementation establish conventions, set precedents, or are difficult to reverse.
