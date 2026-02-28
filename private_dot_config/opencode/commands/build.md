@@ -16,3 +16,10 @@ Before starting:
 3. Create a Todo list from the plan's task list or acceptance criteria to track progress.
 
 Begin implementation.
+
+When complete:
+
+1. Push all commits to the remote repository.
+2. Recommend handoff to the appropriate verification step (e.g., `/pm-verify #N`).
+
+Do not leave unpushed commits — the verification and release workflow requires all changes to be on the remote.
