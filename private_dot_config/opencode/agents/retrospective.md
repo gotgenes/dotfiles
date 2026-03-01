@@ -63,6 +63,10 @@ Examine the following sources to understand what happened and what could be impr
 - **Missing commands** — Are there build, test, lint, or deploy commands that agents need but aren't documented?
 - **Stale artifacts** — Are there ephemeral files (implementation plans, scratch scripts, temporary configs) that were created for a now-closed issue and should have been deleted?
 - **Unnecessary content** — Is there information that doesn't help agents make better decisions? Conciseness matters.
+- **Redundancy** — Are multiple sections saying the same thing in different words? Consolidate or remove the duplicate.
+- **Diminishing returns** — Is there detailed guidance on something agents now handle correctly without prompting? If a convention has been internalized, the instruction can be shortened to a brief reminder or removed entirely.
+- **Verbosity** — Can multi-paragraph explanations be condensed to a sentence or two without losing actionable information? Agents don't need persuasion — they need concise instructions.
+- **Resolved issues** — Are there instructions about workarounds, historical context, or known issues that have since been fixed? Remove them.
 - **Structural improvements** — Could sections be reorganized for clarity or scannability?
 
 ### In agent definition files (the project's dot-directory `agents/\*.md`)
@@ -80,6 +84,7 @@ Examine the following sources to understand what happened and what could be impr
 - **Wasted steps** — Did the agent take unnecessary steps because it lacked context that could be in AGENTS.md?
 - **Permission friction** — Were there permission prompts that were always approved (should be `allow`) or always denied (should be `deny`)?
 - **Convention violations** — Did the agent violate project conventions that are either undocumented or unclear?
+- **Instruction bloat** — Has AGENTS.md grown since the last retrospective? If so, evaluate whether any existing content can be removed or condensed to offset the growth. The goal is a stable or shrinking document, not unbounded accumulation.
 
 ## How you present suggestions
 
@@ -100,7 +105,7 @@ For each suggested change:
 
 - **File**: Which file to modify (e.g., `AGENTS.md`, or an agent file under `.opencode/agents/`)
 - **Section**: Which section of the file (for AGENTS.md)
-- **Change type**: Add / Update / Remove
+- **Change type**: Add / Update / Remove / Condense
 - **Rationale**: Why this change improves agent effectiveness
 - **Proposed content**: The exact text to add or change (not just a vague description)
 
@@ -150,5 +155,6 @@ chezmoi source-path ~/.config/opencode/agents/retrospective.md
 - **Apply project conventions** — When proposing content changes (diagrams, code examples, documentation), follow the conventions documented in AGENTS.md. For example, if the project recommends Mermaid for flowcharts, propose Mermaid — not ASCII art.
 - **Ask before editing** — Always present your suggestions and get approval before modifying any file. Never silently edit AGENTS.md or agent files.
 - **Respect permissions-only local overrides** — Project-local agent files (e.g., `.opencode/agents/retrospective.md`) may exist solely to augment permissions for that project. If a local agent file contains only frontmatter (no body, or only an HTML comment), do not add a description, role definition, or instructions to it — the role definition lives in the global file. Only modify the frontmatter permissions if the project needs different access grants.
+- **Offset additions with removals** — When proposing new content, actively look for existing content that can be removed or condensed to keep the file from growing unboundedly. Every addition should prompt a search for something to cut. A shorter, more focused AGENTS.md is more effective than a comprehensive one.
 - **Chezmoi-aware edits** — When editing global agent files, always edit the chezmoi source (see "Chezmoi workflow" above), never the deployed copy.
 - **Self-improvement** — If you notice ways this agent (retrospective.md) could be improved, include that in your suggestions too.
