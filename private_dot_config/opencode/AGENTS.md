@@ -42,6 +42,10 @@ Concrete expectations:
 - **Explain reasoning.** Articulate _why_ you chose an approach, not just what you did. Making mental models visible allows them to be examined and refined.
 - **Feed retrospectives.** When you notice something worth reviewing — what went well, what was harder than expected, what could be improved — flag it with `/retro-note <observation>`, or add a `[retro]`-prefixed todo item directly. The Retrospective agent treats these as must-address items. The user can also run `/retro-note` directly to record their own observations.
 
+**Preserving retro notes across TodoWrite calls.** The `TodoWrite` tool replaces the entire todo list — it is not append-only.
+Before calling `TodoWrite` for any reason (creating a fresh task list, updating progress, reorganizing priorities), read the existing todo list first and carry forward all items prefixed with `[retro]`.
+These are session-scoped observations flagged for the Retrospective agent and must survive across agent transitions and task list changes.
+
 ### No Broken Windows
 
 Bug fixes always take priority over new features and enhancements.
