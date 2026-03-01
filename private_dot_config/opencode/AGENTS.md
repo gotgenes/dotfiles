@@ -108,6 +108,7 @@ Examples of decision points:
 - A file structure, naming pattern, or architectural boundary is being established for the first time
 - A workaround is needed for a tooling limitation, and there are multiple approaches
 - A testing strategy decision (what to test, at what level, with what tools)
+- An acceptance criterion prescribes a specific mechanism (e.g., "console traces") rather than a desired outcome (e.g., "traces are viewable locally") — the mechanism may have been chosen as the path of least resistance in a prior issue, not as a deliberate architectural choice
 
 When presenting a decision point:
 
