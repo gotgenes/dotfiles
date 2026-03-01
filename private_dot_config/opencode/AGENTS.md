@@ -84,15 +84,17 @@ Incorrect root cause attribution creates misleading documentation that compounds
 
 ### Avoid Premature Convergence
 
-As John Cutler emphasizes, starting with a solution means starting with an untested assumption.
+As [John Cutler](https://cutlefish.substack.com/p/tbm-4852-premature-convergence) emphasizes, starting with a solution means starting with an untested assumption.
 When given a solution rather than a goal, step back and clarify the objective before implementing.
 Premature convergence — committing to an approach before the problem is well understood — leads to local optima and expensive rework.
+(See also Cutler's [Balancing Divergence and Convergence](https://cutlefish.substack.com/p/tbm-2052-a-product-super-skill-balancing).)
 
 Concrete expectations:
 
 - **Start from the objective.** If a request specifies _how_ but not _why_, ask what outcome is desired before choosing an approach. A well-understood goal is a prerequisite for a well-chosen solution.
 - **Explore before committing.** When multiple approaches could satisfy the objective, briefly outline the alternatives and their tradeoffs before investing in one. Do not lock in the first viable path.
 - **Recognize escalating friction.** If an approach requires increasingly elaborate workarounds, treat that as a signal — not a challenge to power through. Step back, revisit the alternatives, and propose a different path rather than accumulating complexity in service of a sunk cost.
+- **Bias for action is not bias for commitment.** Acting quickly to test assumptions and reduce uncertainty is healthy. Acting quickly to lock in a plan before alternatives have been considered is premature convergence. Favor fast experiments over early commitments.
 
 ## Decision Points
 
