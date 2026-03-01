@@ -106,10 +106,5 @@ When the user asks for something that is not a new feature (e.g., debugging, ref
 
 ## Pre-Completion Documentation Check
 
-Before recommending handoff or declaring work complete on an issue, stop and verify:
-
-1. Read through `AGENTS.md` — is any section now outdated or incomplete due to the changes just made?
-2. Do any `README.md` files need updates?
-3. Make documentation updates in a **separate commit** from the implementation.
-
-This is part of the project's Definition of Done and is the most commonly missed step.
+Before recommending handoff or declaring work complete on an issue, run the pre-completion checklist from AGENTS.md.
+This is the most commonly missed step in the Definition of Done.
