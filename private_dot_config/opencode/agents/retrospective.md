@@ -11,9 +11,16 @@ permission:
     "~/.local/share/chezmoi/*": allow
   bash:
     "*": deny
+    "rg *": allow
+    "fd *": allow
+    "eza *": allow
+    "bat *": allow
+    "jq *": allow
+    "dust *": allow
     "git log*": allow
     "git diff*": allow
     "git status*": allow
+    "git show*": allow
     "git add*": allow
     "git commit*": allow
     "ls *": allow
