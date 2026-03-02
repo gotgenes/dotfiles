@@ -42,6 +42,25 @@ chezmoi/
 
 For the full list of source state attributes, see the [chezmoi reference](https://www.chezmoi.io/reference/target-types/).
 
+## OpenCode Permission Model
+
+OpenCode's permission system uses a last-wins rule evaluation.
+Rules from multiple sources are flattened into a single list in this order:
+
+1. **System defaults** — built into OpenCode (`"*": "allow"` for most permissions)
+2. **Agent-specific overrides** — built-in per-agent rules (e.g., Plan denies edit)
+3. **User global config** — `opencode.json` `permission` block
+4. **User agent config** — agent `.md` frontmatter `permission` block
+
+`evaluate` uses `findLast` on the flattened list, so later rules override earlier ones.
+A `"*": "ask"` in `opencode.json` overrides the system default `"*": "allow"` for **all** agents.
+
+Implications:
+
+- **Write agents** (Build, TDD) should not need bash permission blocks — the system default `"*": "allow"` is correct for them.
+- **Read-only agents** (Plan, Retro) need their own `bash` blocks with `"*": "ask"` or `"*": "deny"` to restrict bash, plus explicit allows for read-only tools.
+- **Global `opencode.json`** should only contain `read` restrictions (e.g., denying `.env` files). Do not add a global `bash` block — it will restrict write agents.
+
 ## Chezmoi Commands
 
 ```bash
@@ -211,7 +230,6 @@ If paths containing `opencode` appear as `Claude` in agent output, the fix is no
 
 ## Important Notes
 
-- There are no tests or CI in this repository.
 - The `dot_vimrc` is a legacy config superseded by the Neovim/LazyVim setup in `private_dot_config/nvim/`.
 - The `.chezmoiignore` file prevents repo-level files (`AGENTS.md`, `README.md`, `prek.toml`, linter/formatter configs, `.spl` spell files) from being deployed. When adding new repo-level config files, add them to `.chezmoiignore`.
 - The primary target is macOS arm64; Linux support is handled via `{{ if eq .chezmoi.os "linux" }}` template conditionals.
