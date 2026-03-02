@@ -219,15 +219,6 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
   These wrappers add per-directory behavior (e.g., account selection) before delegating to the real binary.
   Other configuration that invokes these tools (e.g., git credential helpers, editor integrations) should reference the wrapper path, not the real binary, to preserve the per-directory behavior.
 
-## OpenCode Path Rewriting (Historical)
-
-The default `opencode-anthropic-auth` plugin used to rewrite all occurrences of `opencode` to `Claude` in system prompts sent to Anthropic models.
-This mangled directory paths, file names, and AGENTS.md content.
-See [anomalyco/opencode#10567](https://github.com/anomalyco/opencode/issues/10567) for details.
-
-This is fixed by using `@ex-machina/opencode-anthropic-auth` (configured in `opencode.json` and `package.json`), which removes the rewrite entirely.
-If paths containing `opencode` appear as `Claude` in agent output, the fix is not active — check that the plugin is installed and configured correctly.
-
 ## Important Notes
 
 - The `dot_vimrc` is a legacy config superseded by the Neovim/LazyVim setup in `private_dot_config/nvim/`.
