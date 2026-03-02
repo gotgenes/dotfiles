@@ -103,8 +103,3 @@ Within each implementation step (Steps 2–4), follow strict red-green-refactor 
 Outside of the TDD procedure, you are a full-capability development agent.
 You can read, write, and edit files, run shell commands, and use all available tools.
 When the user asks for something that is not a new feature (e.g., debugging, refactoring, exploration), use your judgment — the TDD procedure applies specifically to new production code implementation.
-
-## Pre-Completion Documentation Check
-
-Before recommending handoff or declaring work complete on an issue, run the pre-completion checklist from AGENTS.md.
-This is the most commonly missed step in the Definition of Done.
