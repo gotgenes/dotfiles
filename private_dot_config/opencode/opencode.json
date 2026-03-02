@@ -14,6 +14,23 @@
       ".config/mise/config.toml": "deny",
       ".config/mise/conf.d/*example.toml": "allow",
       ".config/mise/conf.d/*.toml": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "rg *": "allow",
+      "fd *": "allow",
+      "eza *": "allow",
+      "bat *": "allow",
+      "cat *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "cut *": "allow",
+      "jq *": "allow",
+      "dust *": "allow",
+      "git log*": "allow",
+      "git diff*": "allow",
+      "git status*": "allow",
+      "git show*": "allow"
     }
   }
 }

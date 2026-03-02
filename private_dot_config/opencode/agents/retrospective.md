@@ -15,6 +15,10 @@ permission:
     "fd *": allow
     "eza *": allow
     "bat *": allow
+    "cat *": allow
+    "head *": allow
+    "tail *": allow
+    "cut *": allow
     "jq *": allow
     "dust *": allow
     "git log*": allow
