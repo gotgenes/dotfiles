@@ -222,6 +222,6 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
 ## Important Notes
 
 - The `dot_vimrc` is a legacy config superseded by the Neovim/LazyVim setup in `private_dot_config/nvim/`.
-- The `.chezmoiignore` file prevents repo-level files (`AGENTS.md`, `README.md`, `prek.toml`, linter/formatter configs, `.spl` spell files) from being deployed. When adding new repo-level config files, add them to `.chezmoiignore`.
+- The `.chezmoiignore` file prevents repo-level and development-only files from being deployed to the home directory. When adding files that should exist only in the source repo (e.g., documentation, linter configs, plan documents), add them to `.chezmoiignore`.
 - The primary target is macOS arm64; Linux support is handled via `{{ if eq .chezmoi.os "linux" }}` template conditionals.
 - The user works with: Python, Go, TypeScript/JavaScript, Lua, C/C++, C#/.NET, Docker, SQL, LaTeX, Markdown, Terraform, Ruby, and more — filetype configs exist for all of these.
