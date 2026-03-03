@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@ex-machina/opencode-anthropic-auth": "latest",
+    "@gotgenes/opencode-agent-identity": "latest",
     "@opencode-ai/plugin": "1.2.15"
   }
 }
