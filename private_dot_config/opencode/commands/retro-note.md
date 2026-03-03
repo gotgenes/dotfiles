@@ -10,4 +10,4 @@ The user wants to record a retrospective note. Add a todo item using the TodoWri
 
 CRITICAL: First read the existing todo list, then write back ALL existing items plus the new `[retro]` item. The TodoWrite tool replaces the entire list — do not drop existing items.
 
-Do not discuss or elaborate. Just add the todo item and briefly confirm what was recorded.
+Do not discuss or elaborate. Briefly confirm what was recorded, then suggest the next step to resume the prior workflow. Look at the conversation history to determine what the user was doing before this interruption and recommend the appropriate command or action to continue (e.g., "Run `/build docs/plans/foo.md` to continue implementation").
