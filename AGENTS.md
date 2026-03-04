@@ -220,10 +220,10 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
   These wrappers add per-directory behavior (e.g., account selection) before delegating to the real binary.
   Other configuration that invokes these tools (e.g., git credential helpers, editor integrations) should reference the wrapper path, not the real binary, to preserve the per-directory behavior.
 - **Shell PATH ordering** relies on a deliberate sequence across multiple files:
-  - `.zshenv`: `brew shellenv` sets `HOMEBREW_PREFIX` and adds homebrew to PATH; `paths.zsh` prepends `~/.local/bin`, `GOPATH/bin`, and `~/.docker/bin`; `mise activate zsh` runs so mise-managed tools are available in all shell contexts (including non-interactive `zsh -c` invocations like OpenCode's bash tool).
+  - `.zshenv`: `brew shellenv` sets `HOMEBREW_PREFIX` and adds homebrew to PATH; `paths.zsh` prepends `~/.local/bin`, `GOPATH/bin`, and `~/.docker/bin`; `mise activate zsh --shims` adds the shims directory to PATH; `mise hook-env` exports per-directory env vars and direct tool paths. This ensures mise tools and env vars are available in non-interactive shells (`zsh -c` from OpenCode's bash tool).
   - `/etc/zprofile` (macOS system file, login shells only): `path_helper` reorders PATH, demoting user-added entries behind system paths.
-  - `.zshrc`: `paths.zsh` is sourced again to re-prepend user paths after `path_helper`'s reordering; `mise activate zsh` re-runs to restore mise tool precedence after `path_helper`'s clobbering.
-  - Both `.zshenv` and `.zshrc` `unset` stale mise state variables (`__MISE_ORIG_PATH`, etc.) before activation — these leak from parent shells and cause mise to skip recalculating PATH for the current directory.
+  - `.zshrc`: `paths.zsh` is sourced again to re-prepend user paths after `path_helper`'s reordering; stale mise PATH entries (demoted by `path_helper`) are stripped; `mise activate zsh` installs interactive `precmd`/`chpwd` hooks; explicit `mise hook-env` prepends fresh tool paths at the front.
+  - `paths.zsh` uses `typeset -aU path` for deduplication then `typeset +U path` to remove the permanent unique constraint — without this, zsh silently blocks re-prepending entries that already exist elsewhere in PATH, which prevented mise tools from being moved back to the front after `path_helper` demoted them.
   - The homebrew lines in `paths.zsh` look redundant with `brew shellenv` but are required: `path_helper` demotes them for login shells, and the `.zshrc` re-source restores the correct order.
 
 ## Important Notes
