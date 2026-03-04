@@ -88,15 +88,6 @@ zinit light lukechilds/zsh-better-npm-completion
 [[ -f "$XDG_CONFIG_HOME/broot/launcher/bash/br" ]] && source "$XDG_CONFIG_HOME/broot/launcher/bash/br"
 
 zinit ice \
-    id-as"mise" \
-    has"mise" \
-    run-atpull \
-    atpull \
-    eval"mise activate" \
-    nocompile
-zinit light zdharma-continuum/null
-#
-zinit ice \
     as"completion" \
     id-as"mise-completion" \
     has"mise" \
@@ -197,3 +188,10 @@ setopt HIST_IGNORE_SPACE  # ignore commands that start with space
 setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
+
+# Activate mise AFTER paths.zsh so mise tools take precedence over everything.
+# Direct activation (not cached via zinit eval) ensures __MISE_ORIG_PATH and
+# __MISE_SESSION reflect the current shell, not a stale snapshot.
+if (( $+commands[mise] )); then
+    eval "$(mise activate zsh)"
+fi
