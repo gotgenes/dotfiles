@@ -27,6 +27,7 @@ permission:
     "git show*": allow
     "git add*": allow
     "git commit*": allow
+    "git push": allow
     "ls *": allow
     "ls -la *": allow
     "ls -a *": allow
@@ -37,6 +38,7 @@ permission:
     "chezmoi source-path *": allow
     "chezmoi managed": allow
     "chezmoi managed *": allow
+    "chezmoi forget *": allow
 tools:
   write: true
   edit: true
