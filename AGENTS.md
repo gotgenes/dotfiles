@@ -219,6 +219,11 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
 - **Wrapper scripts in `dot_local/bin/`** shadow Homebrew binaries via PATH priority (`~/.local/bin` appears before `/opt/homebrew/bin`).
   These wrappers add per-directory behavior (e.g., account selection) before delegating to the real binary.
   Other configuration that invokes these tools (e.g., git credential helpers, editor integrations) should reference the wrapper path, not the real binary, to preserve the per-directory behavior.
+- **Shell PATH ordering** relies on a deliberate sequence across multiple files:
+  - `.zshenv`: `brew shellenv` sets `HOMEBREW_PREFIX` and adds homebrew to PATH; `paths.zsh` prepends `~/.local/bin`, `GOPATH/bin`, and `~/.docker/bin`.
+  - `/etc/zprofile` (macOS system file, login shells only): `path_helper` reorders PATH, demoting user-added entries behind system paths.
+  - `.zshrc`: `paths.zsh` is sourced again to re-prepend user paths after `path_helper`'s reordering; `eval "$(mise activate zsh)"` runs last so mise tools take highest precedence.
+  - The homebrew lines in `paths.zsh` look redundant with `brew shellenv` but are required: `path_helper` demotes them for login shells, and the `.zshrc` re-source restores the correct order.
 
 ## Important Notes
 
