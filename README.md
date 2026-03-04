@@ -81,3 +81,77 @@ To configure per-directory account switching using [mise](https://mise.jdx.dev/)
 
 Any `gh` command run from `~/acmecorp/` or its subdirectories will now use the work account.
 The `mise.toml` files are not tracked by this repository, keeping account names private.
+
+## Zsh and mise shell integration
+
+[mise](https://mise.jdx.dev/) manages per-directory tool versions (node, python, go, etc.) and environment variables.
+Integrating it with zsh on macOS requires careful coordination because of how zsh sources startup files and how macOS's `path_helper` reorders PATH.
+
+### The problem
+
+Zsh sources different files depending on the shell type:
+
+```mermaid
+graph TD
+    A["zsh starts"] --> B["~/.zshenv<br/>(always)"]
+    B --> C{interactive?}
+    C -- yes --> D{login?}
+    C -- no --> Z["run command<br/>(e.g., zsh -c '...')"]
+    D -- yes --> E["/etc/zprofile<br/>(macOS path_helper)"]
+    E --> F["~/.zshrc"]
+    D -- no --> F
+    F --> G["interactive session"]
+```
+
+The challenge: **`/etc/zprofile`** runs macOS's `path_helper`, which reorders PATH by demoting user-added entries behind system paths.
+Any mise tool paths added in `.zshenv` get pushed to the end of PATH by the time `.zshrc` runs, so homebrew's versions of tools (e.g., node) take precedence.
+
+Meanwhile, tools like [OpenCode](https://opencode.ai/) invoke `zsh -c 'command'` for shell commands, which only sources `.zshenv` — never `.zshrc`.
+These non-interactive shells need mise tools and environment variables too.
+
+### The solution
+
+The configuration uses **two different mise activation strategies**, gated by shell type:
+
+```mermaid
+graph TD
+    subgraph zshenv [".zshenv (all shells)"]
+        E1["brew shellenv"] --> E2["paths.zsh<br/>(~/.local/bin, homebrew, etc.)"]
+        E2 --> E3{"[[ ! -o interactive ]]?"}
+        E3 -- "non-interactive" --> E4["mise activate --shims<br/>(adds shims dir to PATH)"]
+        E4 --> E5["mise hook-env<br/>(exports env vars + tool paths)"]
+        E3 -- "interactive" --> E6["skip mise<br/>(handled in .zshrc)"]
+    end
+
+    subgraph zprofile ["/etc/zprofile (login shells only)"]
+        P1["path_helper reorders PATH"]
+    end
+
+    subgraph zshrc [".zshrc (interactive shells)"]
+        R1["paths.zsh re-sourced<br/>(re-prepends user paths)"]
+        R1 --> R2["mise activate<br/>(installs precmd/chpwd hooks,<br/>prepends direct tool paths)"]
+    end
+
+    E6 --> P1
+    P1 --> R1
+    E6 -.->|"non-login"| R1
+```
+
+#### Non-interactive shells (`zsh -c`)
+
+`.zshenv` activates mise with `--shims` (a lightweight PATH prepend) plus `hook-env` (which exports per-directory env vars and direct tool paths).
+This gives the shell everything it needs in a single file, with no interactive hooks.
+
+#### Interactive shells (terminal sessions)
+
+`.zshenv` **skips** mise entirely for interactive shells.
+This is deliberate: any mise PATH entries added here would be demoted by `path_helper` in login shells, causing homebrew's tool versions to take precedence.
+
+Instead, `.zshrc` runs full `mise activate`, which installs `precmd` and `chpwd` hooks.
+These hooks automatically update PATH and environment variables whenever you change directories, giving you per-project tool versions and env vars.
+
+### Key detail: `paths.zsh` deduplication
+
+`paths.zsh` is sourced in both `.zshenv` and `.zshrc` (the second time to undo `path_helper`'s reordering).
+It uses `typeset -aU path` to deduplicate PATH entries, then immediately `typeset +U path` to remove the permanent unique constraint.
+Without the `+U`, zsh would silently block any later attempt to re-prepend an entry that already exists elsewhere in PATH — which would prevent mise from moving its tool paths back to the front.
