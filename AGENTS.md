@@ -25,7 +25,8 @@ chezmoi/
 │   ├── kitty/               # Kitty terminal configuration
 │   ├── opencode/            # OpenCode (AI agent) configuration
 │   │   ├── agents/          # Global agent definitions (tdd, retrospective)
-│   │   └── commands/        # Global workflow commands (/tdd, /retro)
+│   │   ├── commands/        # Global workflow commands (/tdd, /retro)
+│   │   └── plugins/         # Local plugins (loaded directly at startup)
 ├── dot_local/bin/           # Wrapper scripts (shadow Homebrew binaries via PATH priority)
 └── dot_vim/                 # Legacy Vim configuration
 ```

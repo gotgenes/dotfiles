@@ -35,6 +35,8 @@ permission:
     "chezmoi diff": allow
     "chezmoi source-path": allow
     "chezmoi source-path *": allow
+    "chezmoi managed": allow
+    "chezmoi managed *": allow
 tools:
   write: true
   edit: true

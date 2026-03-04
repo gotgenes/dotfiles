@@ -5,4 +5,3 @@ README.md
 .prettierrc.yaml
 .prettierignore
 prek.toml
-.config/opencode/plugins/agent-identity-prompt.md
