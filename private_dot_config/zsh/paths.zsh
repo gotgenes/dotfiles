@@ -14,4 +14,8 @@ fi
 
 export path=("$HOME/.local/bin" $path)
 
+# Deduplicate, then remove the permanent unique constraint so later
+# re-prepends (e.g., mise shims after path_helper reorders) can move
+# entries back to the front of PATH.
 typeset -aU path
+typeset +U path
