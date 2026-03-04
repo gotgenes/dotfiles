@@ -189,11 +189,18 @@ setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 
-# Re-activate mise after paths.zsh. This is needed for interactive login shells
-# where /etc/zprofile's path_helper runs between .zshenv and .zshrc, demoting
-# the entries paths.zsh prepended (including mise tool paths). Re-running here
-# restores the correct order: mise tools > ~/.local/bin > homebrew > system.
+# Full mise activation for interactive shells. This installs precmd/chpwd hooks
+# that auto-switch tool versions and env vars when changing directories.
+# Clean up state from .zshenv's activation: unset mise vars, and strip mise
+# entries from PATH that path_helper demoted to the end. mise activate captures
+# __MISE_ORIG_PATH from the current PATH, so stale entries would prevent
+# hook-env from prepending tools at the front.
+# The explicit hook-env call is needed because activate's built-in _mise_hook
+# only fires on the next prompt (see mise docs "Using mise in rc files").
 unset __MISE_ORIG_PATH __MISE_DIFF __MISE_SESSION __MISE_ZSH_PRECMD_RUN MISE_SHELL
+path=("${path[@]:#*mise/shims}")
+path=("${path[@]:#*mise/installs/*}")
 if (( $+commands[mise] )); then
     eval "$(mise activate zsh)"
+    eval "$(mise hook-env -s zsh)"
 fi

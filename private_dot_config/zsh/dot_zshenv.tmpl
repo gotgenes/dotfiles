@@ -23,11 +23,10 @@ export PTPYTHON_CONFIG_HOME="$XDG_CONFIG_HOME/ptpython"
 
 source "$ZDOTDIR/paths.zsh"
 
-# Activate mise so tools are available in non-interactive shells (e.g., OpenCode's
-# bash tool uses `zsh -c` via Node.js spawn({shell}), which only sources .zshenv).
-# Unset stale vars first — they leak from parent shells and cause mise to skip
-# recalculating PATH for the current directory.
-unset __MISE_ORIG_PATH __MISE_DIFF __MISE_SESSION __MISE_ZSH_PRECMD_RUN MISE_SHELL
+# Mise: shims for tool resolution in all shell contexts (including non-interactive
+# `zsh -c` from OpenCode's bash tool), hook-env for per-directory env vars.
+# Full `mise activate zsh` (with prompt hooks) is deferred to .zshrc.
 if (( $+commands[mise] )); then
-    eval "$(mise activate zsh)"
+    eval "$(mise activate zsh --shims)"
+    eval "$(mise hook-env -s zsh)"
 fi
