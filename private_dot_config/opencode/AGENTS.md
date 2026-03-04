@@ -71,16 +71,9 @@ Workarounds for already-fixed bugs add unnecessary complexity and miss the oppor
 
 ### Verify Before Documenting
 
-When troubleshooting, do not document a root cause until it has been verified.
-If you change multiple variables at once (e.g., switch APIs _and_ add a permission), go back and test each variable independently before attributing the fix.
-
-Specifically:
-
-- Do not write "X doesn't work" in documentation or commit messages unless you have confirmed it after all other changes are in place.
-- If a workaround was introduced before the real fix was found, remove the workaround and verify the simpler approach works.
-- Prefer testing hypotheses over presenting decision points. If a quick test can resolve uncertainty, run the test first.
-
-Incorrect root cause attribution creates misleading documentation that compounds over time.
+Do not document a root cause, recommend a removal, or present a "simplification" until it has been tested.
+If you change multiple variables at once, test each independently before attributing the fix.
+If a quick test can resolve uncertainty, run the test before presenting a decision point.
 
 ### Avoid Premature Convergence
 
