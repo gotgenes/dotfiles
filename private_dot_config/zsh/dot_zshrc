@@ -189,10 +189,10 @@ setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 
-# Activate mise AFTER paths.zsh so mise tools take precedence over everything.
-# Unset stale mise state first — these env vars leak from parent shells (e.g.,
-# interactive terminal → OpenCode → zsh -l -c) and prevent mise from
-# recalculating PATH for the current directory.
+# Re-activate mise after paths.zsh. This is needed for interactive login shells
+# where /etc/zprofile's path_helper runs between .zshenv and .zshrc, demoting
+# the entries paths.zsh prepended (including mise tool paths). Re-running here
+# restores the correct order: mise tools > ~/.local/bin > homebrew > system.
 unset __MISE_ORIG_PATH __MISE_DIFF __MISE_SESSION __MISE_ZSH_PRECMD_RUN MISE_SHELL
 if (( $+commands[mise] )); then
     eval "$(mise activate zsh)"
