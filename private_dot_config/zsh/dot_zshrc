@@ -190,10 +190,7 @@ setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 
 # Full mise activation for interactive shells. Installs precmd/chpwd hooks that
-# auto-switch tool versions and env vars when changing directories. The explicit
-# hook-env call is needed because activate's built-in _mise_hook only fires on
-# the next prompt (see mise docs "Using mise in rc files").
+# auto-switch tool versions and env vars when changing directories.
 if (( $+commands[mise] )); then
     eval "$(mise activate zsh)"
-    eval "$(mise hook-env -s zsh)"
 fi
