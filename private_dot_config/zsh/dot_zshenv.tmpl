@@ -8,9 +8,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export EDITOR="nvim"
 
 {{- if eq .chezmoi.os "darwin" }}
-if [ -x /usr/libexec/path_helper ]; then
-    eval `/usr/libexec/path_helper -s`
-fi
 eval $(/opt/homebrew/bin/brew shellenv)
 {{- else }}
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
