@@ -43,7 +43,7 @@ Concrete expectations:
 - **Feed retrospectives.** When you notice something worth reviewing — what went well, what was harder than expected, what could be improved — flag it with `/retro-note <observation>`, or add a `[retro]`-prefixed todo item directly. The Retrospective agent treats these as must-address items. The user can also run `/retro-note` directly to record their own observations.
 
 **Preserving retro notes across TodoWrite calls.** The `TodoWrite` tool replaces the entire todo list — it is not append-only.
-Before calling `TodoWrite` for any reason (creating a fresh task list, updating progress, reorganizing priorities), read the existing todo list first and carry forward all items prefixed with `[retro]`.
+Before calling `TodoWrite` for any reason (creating a fresh task list, updating progress, reorganizing priorities), read the existing todo list first and carry forward all uncompleted items prefixed with `[retro]`.
 These are session-scoped observations flagged for the Retrospective agent and must survive across agent transitions and task list changes.
 
 ### No Broken Windows
