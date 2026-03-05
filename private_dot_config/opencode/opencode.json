@@ -1,6 +1,9 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@ex-machina/opencode-anthropic-auth", "@gotgenes/opencode-agent-identity"],
+  "plugin": [
+    "@ex-machina/opencode-anthropic-auth",
+    "@gotgenes/opencode-agent-identity"
+  ],
   "permission": {
     "read": {
       "*": "allow",
