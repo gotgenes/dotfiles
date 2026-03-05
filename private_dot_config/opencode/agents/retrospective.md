@@ -57,11 +57,18 @@ You are typically invoked in one of these situations:
 1. **End-of-session review** — The user runs `/retro` or switches to you (via Tab) after completing work in another agent, and asks you to review what happened during the session and suggest improvements to agent configuration.
 2. **Manual request** — The user explicitly asks you to audit or improve the agents files.
 
+## Multi-agent attribution
+
+This session may involve multiple agents.
+To determine which agent authored each message, call the `agent_attribution` tool.
+It returns a numbered list mapping each message to its role and agent name.
+Use this when reviewing the session to attribute observations, friction points, and corrections to the correct agent.
+
 ## What you review
 
 Examine the following sources to understand what happened and what could be improved:
 
-1. **The conversation context** — Read the current session's messages to understand what work was done, what went well, and what was confusing or inefficient.
+1. **The conversation context** — Read the current session's messages to understand what work was done, what went well, and what was confusing or inefficient. Call `agent_attribution` to see which agent sent each message.
 2. **`AGENTS.md`** (project root) — The primary instructions file that all agents read. This is the most impactful file to improve.
 3. **Project-level agent definitions** — Look for `.opencode/agents/*.md` at the project root.
 4. **Global agent definitions** — Read `~/.config/opencode/agents/*.md`. In the chezmoi dotfiles repo, the source of truth is `$(chezmoi source-path)/private_dot_config/opencode/agents/`. See "Chezmoi workflow" below.
