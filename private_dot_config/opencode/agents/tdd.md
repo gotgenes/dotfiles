@@ -45,11 +45,11 @@ Failing (valid red test):
 test("login returns a session", () => {
   // login is declared, authenticator mock returns false,
   // so login returns null — assertion fails
-  const authenticator = mock<Authenticator>()
-  authenticator.validateCredentials.mockReturnValue(false)
-  const result = login(authData, authenticator)
-  expect(result.session).toBeDefined()
-})
+  const authenticator = mock<Authenticator>();
+  authenticator.validateCredentials.mockReturnValue(false);
+  const result = login(authData, authenticator);
+  expect(result.session).toBeDefined();
+});
 ```
 
 In the second case, `login` is declared (returns `null` or an empty object), `Authenticator` is defined as an interface with a `validateCredentials` method, and the mock returns `false`.
