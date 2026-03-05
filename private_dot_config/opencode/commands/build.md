@@ -20,7 +20,4 @@ Begin implementation.
 When complete:
 
 1. If a plan file was read from `docs/plans/`, delete it — plans are ephemeral artifacts that lose relevance once the work is done. Commit the deletion separately from the implementation.
-2. Push all commits to the remote repository.
-3. Recommend handoff to the appropriate verification step (e.g., `/pm-verify #N`).
-
-Do not leave unpushed commits — the verification and release workflow requires all changes to be on the remote.
+2. Recommend handoff to the appropriate verification step (e.g., `/pm-verify #N`).
