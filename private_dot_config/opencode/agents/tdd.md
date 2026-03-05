@@ -75,21 +75,26 @@ Within each implementation step (Steps 2–4), follow strict red-green-refactor 
 
 ### Refactor
 
+- After green, **always pause and explicitly evaluate** whether the code would benefit from refactoring.
+  State your assessment to the user — either describe the refactoring you're about to perform, or explain briefly why no refactoring is needed right now (e.g., "No duplication or naming issues — moving to the next test.").
+  Do not silently skip this step.
 - Refactor **only when all tests are green**. Never refactor while a test is red.
 - Refactoring must not change observable behavior or introduce new functionality.
 - Remove duplication, improve naming, simplify structure.
 - Extracting private functions or methods is encouraged — do it freely to improve clarity.
 - If refactoring reveals a responsibility that deserves its own public interface or class, **do not extract it inline**. Instead, flag it to the user as a candidate for a new TDD cycle (return to Step 2 for the new unit).
+- If you perform a refactoring, **commit** with a message describing the structural improvement.
+  Refactor commits are separate from green commits — do not combine implementation and refactoring in the same commit.
 
 ### Between cycles
 
 - Run the **full test suite** (not just the current test) after each green and each refactor step.
-- Only proceed to write the next test after the suite is green and refactoring is complete.
+- Only proceed to write the next test after the suite is green, refactoring has been explicitly considered, and any refactoring commits are complete.
 
 ## Commit Discipline
 
-- Commit automatically at each TDD boundary described above. Do not ask for permission.
-- Each commit should be a coherent, atomic unit of work.
+- Commit automatically at each TDD boundary. Do not ask for permission.
+- TDD commit boundaries: **red** (failing test), **green** (passing implementation), and **refactor** (structural improvement with no behavior change). Each is a separate, atomic commit.
 - Follow the project's commit message conventions (check AGENTS.md).
 
 ## Trunk-Based Development
