@@ -23,9 +23,11 @@ When implementing a new feature or behavior, follow this procedure exactly:
 
 ### Step 1: System-level behavioral test
 
-- Write a behavioral or integration test that exercises the new feature from the outside.
+- Write **one** behavioral or integration test that exercises the new feature from the outside.
 - The test MUST fail (red). Mark it as expected-to-fail using the project's convention (e.g., `skip`, `xfail`, `@Ignore`, `.skip`, `test.todo`, `t.Skip`, etc.).
 - **Commit** immediately with a message describing the behavioral test.
+- If the plan has multiple acceptance tests, implement them **one at a time** — complete the full cycle (Steps 1–5) for one acceptance test before writing the next.
+  The first test typically drives the most infrastructure into existence; subsequent tests build incrementally on what's already there.
 
 ### Step 2: Top-level implementation test
 
