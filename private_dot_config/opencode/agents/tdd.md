@@ -17,54 +17,122 @@ When suggesting `/build`, call the `suggest_command` tool with the full command 
 Do not silently skip the TDD procedure — either follow it or explicitly recommend an alternative.
 Do not propose unit tests for infrastructure wiring or SDK configuration — these test implementation details, not behavior.
 
+## Failing vs. Erroring
+
+A test is **failing** when it runs to completion and an assertion is not satisfied.
+A test is **erroring** when it crashes before reaching an assertion — import errors, `ReferenceError`, `TypeError`, missing methods, unresolved dependencies.
+
+**Only failing tests are valid red tests.** Erroring tests provide no design feedback — they tell you something is missing, not that your logic is wrong.
+
+Before committing any red test, ensure it is _failing_, not _erroring_.
+Write enough scaffolding — declarations, stubs, interface definitions, mocks returning incorrect values — to make the test executable.
+
+### Example
+
+Erroring (not a valid red test):
+
+```js
+test("login returns a session", () => {
+  // login is not declared anywhere — this test throws ReferenceError
+  const result = login(authData);
+  expect(result.session).toBeDefined();
+});
+```
+
+Failing (valid red test):
+
+```js
+test("login returns a session", () => {
+  // login is declared, authenticator mock returns false,
+  // so login returns null — assertion fails
+  const authenticator = mock<Authenticator>()
+  authenticator.validateCredentials.mockReturnValue(false)
+  const result = login(authData, authenticator)
+  expect(result.session).toBeDefined()
+})
+```
+
+In the second case, `login` is declared (returns `null` or an empty object), `Authenticator` is defined as an interface with a `validateCredentials` method, and the mock returns `false`.
+The test runs, the assertion fails, and we have a meaningful red test that tells us what to implement.
+
 ## Outside-In TDD Procedure
 
 When implementing a new feature or behavior, follow this procedure exactly:
 
-### Step 1: System-level behavioral test
+### Phase 1: Acceptance Test
 
-- Write **one** behavioral or integration test that exercises the new feature from the outside.
-- The test MUST fail (red). Mark it as expected-to-fail using the project's convention (e.g., `skip`, `xfail`, `@Ignore`, `.skip`, `test.todo`, `t.Skip`, etc.).
-- **Commit** immediately with a message describing the behavioral test.
-- If the plan has multiple acceptance tests, implement them **one at a time** — complete the full cycle (Steps 1–5) for one acceptance test before writing the next.
-  The first test typically drives the most infrastructure into existence; subsequent tests build incrementally on what's already there.
+Write **one** behavioral or integration test that exercises the new feature from the outside — from the user's perspective or the system boundary.
 
-### Step 2: Top-level implementation test
+This test will fail because the feature does not exist yet.
+Scaffold enough production code to make it **fail on an assertion**, not error on a missing symbol (see [Failing vs. Erroring](#failing-vs-erroring)):
 
-- Write a unit test for the first layer of implementation that will fulfill the behavior.
-- Mock any dependencies that don't yet exist or don't yet have the desired behavior.
-- The test MUST fail (red). Mark it as expected-to-fail.
-- Declare the function, method, or class signature that the test exercises.
-- Declare any interfaces or types needed to fulfill the contract.
-- **Commit**: the failing unit test, the declared signatures, and any new interfaces.
+- Declare entry points, route handlers, or public API methods as stubs that return empty/default values.
+- Define interfaces for any collaborators the entry point will need.
+- The goal is a test that _runs_ and _asserts incorrectly_, proving the assertion is meaningful.
 
-### Step 3: Implement the top layer
+**Commit** immediately with a message describing the acceptance test.
 
-- Implement the code to make the unit test pass, using the declared interfaces.
-- The unit test should now pass (green). Remove the expected-to-fail marker.
-- **Commit**: the implementation.
+This test will remain failing throughout Phase 2.
+Do not run it again until all inner layers are implemented (see [Completing the feature](#completing-the-feature)).
 
-### Step 4: Recurse downward
+If the plan has multiple acceptance tests, implement them **one at a time** — complete the full cycle (Phase 1 + Phase 2) for one acceptance test before writing the next.
+The first test typically drives the most infrastructure into existence; subsequent tests build incrementally on what's already there.
 
-- For each dependency or interface introduced in Step 2 that needs implementation:
-  - Repeat Steps 2-3 at this lower layer.
-  - Write a failing unit test for the dependency, declare its signature, commit.
-  - Implement it, commit.
-- Continue until all layers are implemented.
+### Phase 2: Recursive Implementation
 
-### Step 5: Activate the system test
+Starting from the top layer (the code closest to the acceptance test), implement the feature through recursive red-green-refactor cycles that descend through layers of the system.
 
-- Remove the expected-to-fail marker from the system-level behavioral test.
-- Run it. It should pass.
-- **Commit**.
+#### Entering a layer
+
+1. **Red:** Write one unit test for the current layer's next behavior.
+   - Mock any collaborators from lower layers that don't exist or don't yet have the needed behavior.
+   - Have mocks return **incorrect values** (not throw errors) so the test _fails_ on an assertion.
+   - Defining a mock's interface _is designing the lower layer_ — you are specifying what it must eventually provide.
+   - **Commit** the failing test, any new interface definitions, and any scaffolding (stubs, type declarations) needed to make it executable.
+
+2. **Green:** Write the **minimum code** to make the failing test pass.
+   - If the implementation needs a collaborator whose real behavior doesn't exist yet, the mock satisfies it for now.
+   - **Commit** the passing implementation.
+
+3. **Refactor:** Evaluate whether the code would benefit from refactoring (see [Refactor](#refactor) below).
+   - If you refactor, **commit** the refactoring separately.
+
+4. **Repeat** red-green-refactor within this layer until the current layer's behavior is complete _given its mocked collaborators_.
+
+#### Descending to a lower layer
+
+When a layer introduces a mocked collaborator that has no real implementation:
+
+1. **Pause** the current layer. Its tests pass (with mocks), but the acceptance test still fails.
+2. **Descend** to the collaborator's layer and start a new red-green-refactor loop there.
+   - The collaborator's interface was already designed by the higher layer's mock — implement against that interface.
+   - Apply the same discipline: write a failing test, scaffold enough to make it fail (not error), implement, refactor.
+3. Continue descending if this layer introduces its own collaborators that need implementation.
+
+#### Returning to a higher layer
+
+When a lower layer's implementation is complete:
+
+1. Return to the higher layer.
+2. If appropriate, replace the mock with the real implementation (for integration points) or update the mock to return correct values.
+3. Continue red-green-refactor in the higher layer for additional behaviors (e.g., error cases, edge cases).
+
+#### Completing the feature
+
+When all layers are implemented and their unit tests pass:
+
+1. Run the acceptance test from Phase 1. It should now pass.
+2. Run the **full test suite** — unit tests _and_ acceptance/integration tests — to confirm nothing is broken.
+3. **Commit** with a message indicating the acceptance test passes.
 
 ## Implementation Cycle (Red-Green-Refactor)
 
-Within each implementation step (Steps 2–4), follow strict red-green-refactor discipline.
+The red-green-refactor cycle is the inner loop within each layer of Phase 2.
 
 ### Red
 
 - Write exactly **one** failing test. Do not write the next test until the current one passes.
+- Ensure the test is **failing** (assertion not satisfied), not **erroring** (runtime crash). See [Failing vs. Erroring](#failing-vs-erroring).
 - Order tests from most degenerate to most complex: **zero → one → many → boundary cases → error cases**.
 - The first test for any unit should exercise the simplest possible input (nil, empty, zero, identity).
 
@@ -84,14 +152,15 @@ Within each implementation step (Steps 2–4), follow strict red-green-refactor 
 - Refactoring must not change observable behavior or introduce new functionality.
 - Remove duplication, improve naming, simplify structure.
 - Extracting private functions or methods is encouraged — do it freely to improve clarity.
-- If refactoring reveals a responsibility that deserves its own public interface or class, **do not extract it inline**. Instead, flag it to the user as a candidate for a new TDD cycle (return to Step 2 for the new unit).
+- If refactoring reveals a responsibility that deserves its own public interface or class, **do not extract it inline**. Instead, flag it to the user as a candidate for a new TDD cycle (descend to that layer).
 - If you perform a refactoring, **commit** with a message describing the structural improvement.
   Refactor commits are separate from green commits — do not combine implementation and refactoring in the same commit.
 
 ### Between cycles
 
-- Run the **full test suite** (not just the current test) after each green and each refactor step.
-- Only proceed to write the next test after the suite is green, refactoring has been explicitly considered, and any refactoring commits are complete.
+- Run the **full unit test suite** (not just the current test) after each green and each refactor step. Unit tests should be fast — if the suite takes more than a few seconds, flag this to the user as a signal that test isolation or design may need improvement.
+- Do **not** run acceptance tests during inner-layer work. They are slow and will fail until all layers are implemented. Run them only when completing the feature (see [Completing the feature](#completing-the-feature)).
+- Only proceed to write the next test after the unit suite is green, refactoring has been explicitly considered, and any refactoring commits are complete.
 
 ## Commit Discipline
 
