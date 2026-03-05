@@ -129,6 +129,61 @@ If the user selects "Need help" or "Something went wrong", ask clarifying questi
 
 For **non-blocking** manual notes (things the user should do later but that don't gate current progress), mention them in the conversation output without using the `question` tool.
 
+## Question Tool Usage
+
+The `question` tool renders as a compact dialog widget — not a document viewer.
+Keep question invocations lean and put supporting context in regular message output.
+
+### Context before, not inside
+
+Output all explanatory context (plan summaries, analysis results, step lists, follow-up notes) as regular message text **before** invoking the `question` tool.
+The question text should be a concise prompt, and options should be short actionable choices.
+
+**Bad** — context stuffed into the question widget:
+
+```text
+question(
+  header: "Plan review",
+  question: "The plan covers 12 implementation steps (outside-in TDD order):
+    1. Install npm dependencies
+    2. Install shadcn/ui components
+    ... (10 more steps) ...
+    All 8 ACs are covered.
+    Follow-ups: Auto-sign-in after verify (new issue after #68).
+    Ready to proceed?",
+  options: [...]
+)
+```
+
+**Good** — context in message output, question tool is concise:
+
+```text
+[message]
+The plan covers 12 implementation steps. All 8 ACs are covered.
+Follow-up: Auto-sign-in after verify (new issue after #68).
+
+[question tool call]
+question(
+  header: "Plan review",
+  question: "Ready to proceed?",
+  options: [
+    { label: "Looks good, proceed", description: "Approve and move to implementation" },
+    { label: "I have changes", description: "I want to adjust something first" }
+  ]
+)
+```
+
+### One decision per question
+
+Each question (or each question-option group within a multi-question invocation) should address **a single independent decision**.
+Do not combine unrelated decisions into one question with combinatorial options like "I agree with all / I only want X / I want X and Y but not Z."
+
+When multiple decisions are needed:
+
+- **Preferred:** pass multiple question-option groups in a single `question` invocation (one group per decision).
+- **Also acceptable:** invoke `question` multiple times sequentially, one decision per call.
+- **Not acceptable:** one question with options that encode combinations of independent choices.
+
 ## Workflow Commands
 
 Global custom commands are available to streamline agent transitions.
