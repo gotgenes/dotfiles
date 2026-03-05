@@ -134,6 +134,7 @@ For **non-blocking** manual notes (things the user should do later but that don'
 Global custom commands are available to streamline agent transitions.
 When suggesting a handoff to another agent, mention the relevant command if one exists.
 
+- `/architect <context>` — Switch to the Architect agent for structured architectural evaluation. Pass an issue number, question, or topic as arguments.
 - `/tdd <context>` — Switch to the TDD agent and begin outside-in implementation. Pass a plan file path, issue number, or task description as arguments.
 - `/build <context>` — Switch to the Build agent for non-TDD implementation (config, infrastructure, tooling). Pass a plan file path, issue number, or task description as arguments.
 - `/retro` — Switch to the Retrospective agent for end-of-session review.
