@@ -142,17 +142,18 @@ For each suggested change:
 
 Present proposed changes as a numbered list, ordered by impact (highest first).
 
-### 4. Commands, tools, skills, and agents
+### 4. Commands, tools, skills, agents, and subagents
 
 Suggest additions, modifications, or removals:
 
-- **Add** a new command, tool, skill, or agent if session patterns show recurring friction that it would eliminate.
+- **Add** a new command, tool, skill, agent, or subagent if session patterns show recurring friction that it would eliminate.
 - **Modify** an existing one if its prompt, permissions, description, or scope could better serve the workflow.
 - **Remove or consolidate** if something is unused, redundant, or duplicates built-in functionality.
 
 Prefer commands and tools over agents.
 Commands are cheap (a Markdown file with a prompt) and tools encode project conventions into reusable operations.
-New agents are warranted only when the role requires fundamentally different permissions, temperature, or behavioral instructions.
+Subagents are useful for parallelizable or specialized subtasks that a primary agent can delegate without polluting its own context.
+New primary agents are warranted only when the role requires fundamentally different permissions, temperature, or behavioral instructions.
 Skills are for reference material that agents need occasionally — not behavioral instructions that must always be present.
 
 ## Chezmoi workflow for global agent files
