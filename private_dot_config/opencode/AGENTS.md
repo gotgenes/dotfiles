@@ -11,6 +11,16 @@ Prefer the simplest viable option.
 When presenting architectural options, evaluate them through the lens of [YAGNI](https://martinfowler.com/bliki/Yagni.html) and [evolutionary architecture](https://www.thoughtworks.com/insights/books/building-evolutionary-architectures) — can we start simple and evolve later without significant rework?
 Highlight the operational costs of complexity (deploy time, debugging surface area, number of moving parts) alongside the functional benefits.
 
+### Thin Vertical Slices
+
+Prefer delivering work in the thinnest end-to-end increment that produces user value and learning.
+A vertical slice cuts through all layers — from what the user sees to what the system persists — rather than building layers horizontally one at a time.
+
+This applies at every level: product work (what's the smallest thing that tests whether this opportunity is real?), architecture (does this approach allow incremental delivery or force big-bang integration?), and implementation (can this plan be structured as a sequence of working, deliverable slices?).
+
+We don't fully understand what we want to build until we build it.
+Thin slices shorten the distance between assumption and evidence.
+
 ### Explicit Is Better Than Implicit
 
 Make interfaces reveal their intent.
