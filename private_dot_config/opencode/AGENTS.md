@@ -89,6 +89,51 @@ Concrete expectations:
 - **Recognize escalating friction.** If an approach requires increasingly elaborate workarounds, treat that as a signal — not a challenge to power through. Step back, revisit the alternatives, and propose a different path rather than accumulating complexity in service of a sunk cost.
 - **Bias for action is not bias for commitment.** Acting quickly to test assumptions and reduce uncertainty is healthy. Acting quickly to lock in a plan before alternatives have been considered is premature convergence. Favor fast experiments over early commitments.
 
+## Code Design
+
+### Self-Documenting Code
+
+Code should be its own primary documentation.
+Prefer names that reveal intent — for functions, methods, classes, variables, and modules — so the code reads clearly without supplementary explanation.
+
+- **Names over comments.** If a comment is needed to explain _what_ code does, treat that as a signal to extract a well-named function or rename the existing symbol.
+  Comments should explain _why_ — the reasoning, constraints, or non-obvious context behind a decision — not narrate the mechanics.
+- **Scope-appropriate naming.** Name length should correspond to scope.
+  Short names (`i`, `x`, `fn`) are fine for small scopes (loop counters, short lambdas, single-expression closures).
+  Wider scopes — exported functions, module-level variables, class names — warrant longer, descriptive names that reveal purpose.
+- **Doc comments follow ecosystem conventions.** Add documentation comments (JSDoc, GoDoc, Python docstrings, LuaLS annotations, etc.) where the language's tooling ecosystem expects them — typically on public/exported APIs.
+  Do not add doc comments purely for narration when the name and signature already convey usage, parameters, and return values.
+
+### Code Organization and Proximity
+
+Source files should read like a newspaper article: high-level intent at the top, progressively deeper detail as you read down.
+
+- **Public API first.** Exported functions, classes, and interfaces appear near the top of a file so readers can scan the module's surface without wading through implementation details.
+- **Stepdown Rule.** Each function should be followed by the helpers it calls, at the next level of abstraction — caller first, then the helpers it depends on.
+  Related functions that collaborate or operate on the same data should also be grouped together rather than scattered through the file.
+- **Helpers stay in the file.** Private helper functions should remain in the same file as the code that uses them, when the language allows it.
+  This keeps related code together and reduces navigation burden.
+- **Growing helpers signal a new layer.** When private helpers accumulate to the point where they warrant their own tests, that is a design signal: extract them into a new module with its own public API.
+  Test only public interfaces — if something needs to be tested, it should _be_ a public interface, possibly of a lower-level module.
+- **Defer to language conventions.** When a language has idiomatic file layout conventions (e.g., Go's package structure, Python's module conventions), follow them.
+  The newspaper ordering is the default when no stronger convention applies.
+
+### SOLID Principles
+
+Follow the SOLID principles, with particular emphasis on Single Responsibility, Interface Segregation, and Dependency Inversion.
+
+- **Single Responsibility (SRP).** Each function, class, and module should do one thing well.
+  When a unit of code has multiple reasons to change, split it.
+  This applies at every scale — a function that parses input _and_ processes it should be two functions; a module that handles both HTTP routing and business logic should be two modules.
+- **Interface Segregation (ISP).** Prefer small, focused interfaces over large ones.
+  Clients should not be forced to depend on methods or properties they don't use.
+  When an interface grows, look for natural seams to split it into smaller, cohesive contracts.
+- **Dependency Inversion (DIP).** This is critical and non-negotiable for testable design.
+  High-level modules should not depend on low-level modules; both should depend on abstractions.
+  Default to dependency injection for non-trivial dependencies — accept collaborators as parameters rather than constructing them internally.
+  DI is the mechanical foundation of test-driven development: without it, you cannot substitute test doubles, and without test doubles, you cannot test units in isolation.
+  When writing new code, design for injection from the start rather than retrofitting it later.
+
 ## Decision Points
 
 Some choices during implementation establish conventions, set precedents, or are difficult to reverse.
