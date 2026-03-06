@@ -73,8 +73,9 @@ Examine the following sources to understand what happened and what could be impr
 2. **`AGENTS.md`** (project root) — The primary instructions file that all agents read. This is the most impactful file to improve.
 3. **Project-level agent definitions** — Look for `.opencode/agents/*.md` at the project root.
 4. **Global agent definitions** — Read `~/.config/opencode/agents/*.md`. In the chezmoi dotfiles repo, the source of truth is `$(chezmoi source-path)/private_dot_config/opencode/agents/`. See "Chezmoi workflow" below.
-5. **Recent git history** — `git log` and `git diff` to understand what changed and whether the agents files reflect the current state of the project.
-6. **Retro notes** — Read the session's todo list (via the todoread tool). Any items prefixed with `[retro]` are observations the user or an agent explicitly flagged for retrospective review during the session (via `/retro-note`). These are **must-address** items — each one should appear in your Observations section with a direct response. Do not skip or summarize them away; they represent the user's priorities for this review.
+5. **Global skills** — Read `~/.config/opencode/skills/*/SKILL.md`. In the chezmoi dotfiles repo, the source of truth is `$(chezmoi source-path)/private_dot_config/opencode/skills/`. Skills are demand-loaded reference material — review whether content should move between AGENTS.md (always-loaded) and skills (on-demand) based on how frequently agents need it.
+6. **Recent git history** — `git log` and `git diff` to understand what changed and whether the agents files reflect the current state of the project.
+7. **Retro notes** — Read the session's todo list (via the todoread tool). Any items prefixed with `[retro]` are observations the user or an agent explicitly flagged for retrospective review during the session (via `/retro-note`). These are **must-address** items — each one should appear in your Observations section with a direct response. Do not skip or summarize them away; they represent the user's priorities for this review.
 
 ## What you look for
 
@@ -100,6 +101,13 @@ Examine the following sources to understand what happened and what could be impr
 - **Missing agents** — Based on recurring session patterns, would a new specialized agent improve workflow? (Rare — prefer new commands or tools over new agents.)
 - **Redundant agents** — Are there agents with overlapping responsibilities that should be consolidated?
 - **Missing commands or tools** — Would a new slash command or custom tool reduce recurring friction? Commands and tools are the primary extension points — new agents are rarely needed.
+- **Redundant commands, tools, or skills** — Are there commands that are never used, tools that duplicate built-in functionality, or skills that agents never load? Remove or consolidate them.
+
+### In skills
+
+- **AGENTS.md content that should be a skill** — Is there reference material in AGENTS.md (global or project) that is only needed for specific tasks? Extracting it into a skill reduces always-on context cost. Good candidates: tool reference tables, language-specific conventions, workflow procedures that cross agent boundaries.
+- **Skills that should be in AGENTS.md** — Is there a skill that agents consistently load on every task? If so, the demand-loading overhead isn't justified — move it back to AGENTS.md.
+- **Skill description quality** — Are skill descriptions specific enough for agents to know when to load them? Vague descriptions lead to skills being ignored.
 
 ### Patterns from the session
 
@@ -134,17 +142,18 @@ For each suggested change:
 
 Present proposed changes as a numbered list, ordered by impact (highest first).
 
-### 4. New commands, tools, or agents (if any)
+### 4. Commands, tools, skills, and agents
 
-If session patterns suggest a new slash command, custom tool, or agent would reduce recurring friction, describe:
+Suggest additions, modifications, or removals:
 
-- **Commands** — A new slash command that encodes a repeatable workflow (e.g., a handoff pattern, a verification checklist). Specify the command name, which agent it targets, and what the prompt would do.
-- **Tools** — A new custom tool that automates a manual CLI pattern agents keep repeating. Specify the tool's interface (arguments, output format) and behavior.
-- **Agents** — A new specialized agent (rare — only when a distinct role with different permissions and instructions is needed). Specify name, mode, what it would do, and why an existing agent can't cover it.
+- **Add** a new command, tool, skill, or agent if session patterns show recurring friction that it would eliminate.
+- **Modify** an existing one if its prompt, permissions, description, or scope could better serve the workflow.
+- **Remove or consolidate** if something is unused, redundant, or duplicates built-in functionality.
 
 Prefer commands and tools over agents.
 Commands are cheap (a Markdown file with a prompt) and tools encode project conventions into reusable operations.
 New agents are warranted only when the role requires fundamentally different permissions, temperature, or behavioral instructions.
+Skills are for reference material that agents need occasionally — not behavioral instructions that must always be present.
 
 ## Chezmoi workflow for global agent files
 
