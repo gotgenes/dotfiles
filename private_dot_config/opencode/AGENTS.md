@@ -1,5 +1,9 @@
 # Global Agent Instructions
 
+This file contains **shared context that all agents need** across every project: approach, code design principles, decision protocols, and workflow conventions.
+Operational guidance for a single agent belongs in that agent's definition file, not here.
+When adding content, ask: "Do all agents across all projects need this?" If not, it belongs in a project-level `AGENTS.md` or a specific agent's definition file.
+
 ## Approach
 
 ### Simplicity
