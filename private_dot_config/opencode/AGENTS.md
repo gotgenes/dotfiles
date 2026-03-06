@@ -258,13 +258,7 @@ Projects may define additional commands (e.g., `/pm-start`, `/plan`, `/pm-verify
 
 ### Suggesting Commands
 
-When suggesting a slash command as a next step, agents should **both** mention the command in text output (as a fallback for logs and shared sessions) **and** call the `suggest_command` tool to pre-fill the user's input prompt.
-
-The `suggest_command` tool is provided by a global plugin.
-It clears the current prompt, appends the command text, and shows a toast notification.
-The user reviews the pre-filled command and presses Enter to execute.
-
-Example: when recommending a retrospective, mention `/retro` in text and call `suggest_command("/retro")`.
+When suggesting a slash command as a next step, mention the command in text output **and** call the `suggest_command` tool to pre-fill the user's input prompt.
 
 ## Session Retrospective
 
