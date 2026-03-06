@@ -95,6 +95,7 @@ Different decisions will weight dimensions differently — this is a starting po
 3. **Control spectrum** — first-party vs. third-party, data residency, vendor lock-in, reversibility of the choice if it proves wrong.
 4. **Capability fit** — does it actually solve the problem at hand, not just the most common version of the problem?
 5. **Evolutionary fitness** — can we start simple and grow into complexity, or does this force upfront commitment to capabilities we may never need?
+6. **Incremental deliverability** — does this architecture allow the team to deliver value in thin end-to-end slices (UI to persistence), or does it force big-bang integration? Can the first useful slice ship before the full capability is built? Architectures that require completing an entire layer before any slice can work are a red flag.
 
 ## Evaluation protocol
 
@@ -120,6 +121,7 @@ Evaluate each candidate against each dimension with specific evidence:
 - What does the SDK actually look like? (Read the docs, not the marketing copy.)
 - What lock-in does this create? (What would it cost to switch in 18 months?)
 - Does it fit the existing stack, or does it introduce new complexity?
+- Can the first useful vertical slice ship before the full capability is built, or does this architecture force big-bang integration?
 
 Present comparisons as a table or structured list — make it easy to see the options side by side.
 
