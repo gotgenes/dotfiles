@@ -68,6 +68,9 @@ Implications:
 # Apply all configurations to home directory
 chezmoi apply
 
+# Apply a single file (use the TARGET path, not the source path)
+chezmoi apply ~/.config/opencode/AGENTS.md
+
 # Preview changes before applying
 chezmoi diff
 
