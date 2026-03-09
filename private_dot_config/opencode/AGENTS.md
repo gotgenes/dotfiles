@@ -89,6 +89,13 @@ Do not document a root cause, recommend a removal, or present a "simplification"
 If you change multiple variables at once, test each independently before attributing the fix.
 If a quick test can resolve uncertainty, run the test before presenting a decision point.
 
+### Question the Test Environment
+
+When debugging a test failure — especially a flaky one — ask early: "Does this test environment resemble production?"
+If the test runs against a dev server, mock, or emulator that behaves differently from the production runtime, the failure may be an artifact of the test environment, not a bug in the application.
+Identify the differences between the test environment and production before investing in a fix.
+A fix for a dev-server-only problem is a workaround, not a solution.
+
 ### Avoid Premature Convergence
 
 As [John Cutler](https://cutlefish.substack.com/p/tbm-4852-premature-convergence) emphasizes, starting with a solution means starting with an untested assumption.
