@@ -78,6 +78,9 @@ Do not run it again until all inner layers are implemented (see [Completing the 
 If the plan has multiple acceptance tests, implement them **one at a time** — complete the full cycle (Phase 1 + Phase 2) for one acceptance test before writing the next.
 The first test typically drives the most infrastructure into existence; subsequent tests build incrementally on what's already there.
 
+If the plan includes error or edge case scenarios (validation failures, conflict states, service unavailability), these should appear as **separate acceptance tests** — not as unit-level details buried inside the happy-path implementation.
+An error-path acceptance test exercises the system from the outside, just like a happy-path one, but asserts on the error experience (error message displayed, form state preserved, etc.).
+
 ### Phase 2: Recursive Implementation
 
 Starting from the top layer (the code closest to the acceptance test), implement the feature through recursive red-green-refactor cycles that descend through layers of the system.
