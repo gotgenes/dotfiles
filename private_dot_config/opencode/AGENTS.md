@@ -155,6 +155,12 @@ Follow the SOLID principles, with particular emphasis on Single Responsibility, 
   DI is the mechanical foundation of test-driven development: without it, you cannot substitute test doubles, and without test doubles, you cannot test units in isolation.
   When writing new code, design for injection from the start rather than retrofitting it later.
 
+### Markdown
+
+Always specify a language on fenced code blocks (e.g., ` ```typescript `, ` ```text `, ` ```bash `).
+Use `text` for plain-text output that has no specific syntax.
+Most projects enforce this via markdownlint's MD040 rule.
+
 ## Decision Points
 
 Some choices during implementation establish conventions, set precedents, or are difficult to reverse.
