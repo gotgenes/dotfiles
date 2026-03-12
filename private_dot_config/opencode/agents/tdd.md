@@ -1,6 +1,7 @@
 ---
 description: Development agent using outside-in (London school) test-driven design with automatic commits at each TDD boundary
 mode: primary
+model: anthropic/claude-opus-4-6
 color: success
 tools:
   write: true
@@ -135,6 +136,8 @@ The red-green-refactor cycle is the inner loop within each layer of Phase 2.
 ### Red
 
 - Write exactly **one** failing test. Do not write the next test until the current one passes.
+- **Never batch multiple tests in a single red step.** Writing several tests at once and then making them all green defeats the purpose of TDD — each test should drive exactly one incremental design decision. If you catch yourself writing more than one `it()` block before running tests, stop and commit the first one only.
+- **Plan checklists may group behaviors** — if a plan step says "Write tests for X, Y, and Z," treat each as a separate red-green-refactor cycle. The plan describes _what_ to build; the TDD procedure governs _how_.
 - Ensure the test is **failing** (assertion not satisfied), not **erroring** (runtime crash). See [Failing vs. Erroring](#failing-vs-erroring).
 - Order tests from most degenerate to most complex: **zero → one → many → boundary cases → error cases**.
 - The first test for any unit should exercise the simplest possible input (nil, empty, zero, identity).
