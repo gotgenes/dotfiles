@@ -13,13 +13,17 @@ permission:
     "git show*": allow
     "git add *": allow
     "git commit *": allow
+    "git fetch --ff-only": allow
     "git push*": allow
     "ls": allow
     "ls *": allow
+    "eza": allow
+    "eza *": allow
     "rg *": allow
     "fd *": allow
     "bat *": allow
     "cat *": allow
+    "echo *": allow
     "jq *": allow
     "gh issue *": allow
     "gh pr *": allow

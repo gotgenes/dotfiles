@@ -8,9 +8,11 @@ permission:
     "*": ask
     "rg *": allow
     "fd *": allow
+    "eza": allow
     "eza *": allow
     "bat *": allow
     "cat *": allow
+    "echo *": allow
     "head *": allow
     "tail *": allow
     "cut *": allow
