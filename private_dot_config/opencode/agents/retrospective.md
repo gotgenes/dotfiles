@@ -13,6 +13,7 @@ permission:
     "*": deny
     "rg *": allow
     "fd *": allow
+    "eza": allow
     "eza *": allow
     "bat *": allow
     "cat *": allow
@@ -29,8 +30,6 @@ permission:
     "git commit*": allow
     "git push": allow
     "ls *": allow
-    "ls -la *": allow
-    "ls -a *": allow
     "readlink *": allow
     "chezmoi apply": allow
     "chezmoi diff": allow
