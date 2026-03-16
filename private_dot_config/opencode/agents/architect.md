@@ -10,6 +10,7 @@ permission:
     "git log*": allow
     "git status*": allow
     "git diff*": allow
+    "git describe*": allow
     "git show*": allow
     "git add *": allow
     "git commit *": allow
