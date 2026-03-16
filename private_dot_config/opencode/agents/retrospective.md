@@ -24,6 +24,7 @@ permission:
     "dust *": allow
     "git log*": allow
     "git diff*": allow
+    "git describe*": allow
     "git status*": allow
     "git show*": allow
     "git add*": allow
