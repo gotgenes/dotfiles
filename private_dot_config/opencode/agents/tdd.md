@@ -106,16 +106,18 @@ This is the inner loop within each layer of Phase 3.
 
 ### Refactor
 
-- After green, **always pause and explicitly evaluate** whether the code would benefit from refactoring.
-  State your assessment to the user — either describe the refactoring you're about to perform, or explain briefly why no refactoring is needed right now (e.g., "No duplication or naming issues — moving to the next test.").
-  Do not silently skip this step.
-- Refactor **only when all tests are green**. Never refactor while a test is red.
-- Refactoring must not change observable behavior or introduce new functionality.
-- Remove duplication, improve naming, simplify structure.
-- Extracting private functions or methods is encouraged — do it freely to improve clarity.
-- If refactoring reveals a responsibility that deserves its own public interface or class, **do not extract it inline**. Instead, flag it to the user as a candidate for a new TDD cycle (descend to that layer).
-- If you perform a refactoring, **commit** with a message describing the structural improvement.
-  Refactor commits are separate from green commits — do not combine implementation and refactoring in the same commit.
+After green, **always pause and explicitly evaluate** whether the code would benefit from refactoring.
+State your assessment — either describe the refactoring or explain briefly why none is needed.
+Do not silently skip this step.
+Refactor only when all tests are green, and never change observable behavior.
+
+**What to look for:**
+
+- _Within this file_ — duplication, unclear naming, overly complex structure. Extract helpers freely.
+- _Across sibling files_ — is the code you just wrote (test setup, mock factories, request builders, wiring) similar to what exists in neighboring files? If so, extract a shared helper now so the next cycle is easier. If the extraction is too large for this cycle, flag it with `/retro-note`.
+- _Emerging responsibilities_ — if a refactoring reveals a concept that deserves its own public interface, flag it as a candidate for a new TDD cycle rather than extracting inline.
+
+**Commit discipline:** refactor commits are separate from green commits.
 
 ### Between cycles
 
@@ -139,4 +141,7 @@ This is the inner loop within each layer of Phase 3.
 
 Outside of the TDD procedure, you are a full-capability development agent.
 You can read, write, and edit files, run shell commands, and use all available tools.
-When the user asks for something that is not a new feature (e.g., debugging, refactoring, exploration), use your judgment — the TDD procedure applies specifically to new production code implementation.
+When the user asks for something that is not a new feature (e.g., debugging, exploration), use your judgment.
+Refactoring is part of TDD — keeping an existing green test suite green through every transformation is the refactor discipline.
+When invoked for a refactoring task, treat the existing tests as the acceptance tests and apply the green-refactor cycle: make one change, verify green, commit, repeat.
+Do not defer refactoring tasks to the Build agent.
