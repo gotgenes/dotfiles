@@ -11,34 +11,38 @@ permission:
     "~/.local/share/chezmoi/*": allow
   bash:
     "*": deny
-    "rg *": allow
-    "fd *": allow
-    "eza": allow
-    "eza *": allow
     "bat *": allow
     "cat *": allow
-    "head *": allow
-    "tail *": allow
     "cut *": allow
-    "jq *": allow
     "dust *": allow
-    "git log*": allow
-    "git diff*": allow
-    "git describe*": allow
-    "git status*": allow
-    "git show*": allow
+    "echo *": allow
+    "eza *": allow
+    "eza": allow
+    "fd *": allow
+    "grep *": allow
+    "head *": allow
+    "jq *": allow
+    "ls *": allow
+    "ls": allow
+    "readlink *": allow
+    "rg *": allow
+    "sort *": allow
+    "tail *": allow
     "git add*": allow
     "git commit*": allow
+    "git describe*": allow
+    "git diff*": allow
+    "git log*": allow
     "git push": allow
-    "ls *": allow
-    "readlink *": allow
+    "git show*": allow
+    "git status*": allow
     "chezmoi apply": allow
     "chezmoi diff": allow
-    "chezmoi source-path": allow
-    "chezmoi source-path *": allow
-    "chezmoi managed": allow
-    "chezmoi managed *": allow
     "chezmoi forget *": allow
+    "chezmoi managed *": allow
+    "chezmoi managed": allow
+    "chezmoi source-path *": allow
+    "chezmoi source-path": allow
 tools:
   write: true
   edit: true

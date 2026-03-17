@@ -7,30 +7,28 @@ color: "#0ea5e9"
 permission:
   bash:
     "*": deny
-    "git log*": allow
-    "git status*": allow
-    "git diff*": allow
-    "git describe*": allow
-    "git show*": allow
-    "git add *": allow
-    "git commit *": allow
-    "git fetch --ff-only": allow
-    "git push*": allow
-    "ls": allow
-    "ls *": allow
-    "eza": allow
-    "eza *": allow
-    "rg *": allow
-    "fd *": allow
     "bat *": allow
     "cat *": allow
+    "cut *": allow
+    "dust *": allow
     "echo *": allow
+    "eza *": allow
+    "eza": allow
+    "fd *": allow
+    "grep *": allow
+    "head *": allow
     "jq *": allow
-    "gh issue *": allow
-    "gh pr *": allow
-    "gh project *": allow
-    "gh api *": allow
-    "gh auth status*": allow
+    "ls *": allow
+    "ls": allow
+    "readlink *": allow
+    "rg *": allow
+    "sort *": allow
+    "tail *": allow
+    "git describe*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git show*": allow
+    "git status*": allow
 tools:
   write: true
   edit: true

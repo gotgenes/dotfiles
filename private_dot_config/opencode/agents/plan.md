@@ -6,21 +6,26 @@ permission:
   edit: deny
   bash:
     "*": ask
-    "rg *": allow
-    "fd *": allow
-    "eza": allow
-    "eza *": allow
     "bat *": allow
     "cat *": allow
-    "echo *": allow
-    "head *": allow
-    "tail *": allow
     "cut *": allow
-    "jq *": allow
     "dust *": allow
-    "git log*": allow
-    "git diff*": allow
+    "echo *": allow
+    "eza *": allow
+    "eza": allow
+    "fd *": allow
+    "grep *": allow
+    "head *": allow
+    "jq *": allow
+    "ls": allow
+    "ls *": allow
+    "readlink *": allow
+    "rg *": allow
+    "sort *": allow
+    "tail *": allow
     "git describe*": allow
-    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
     "git show*": allow
+    "git status*": allow
 ---
