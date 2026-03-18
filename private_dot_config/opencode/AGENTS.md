@@ -139,6 +139,19 @@ Source files should read like a newspaper article: high-level intent at the top,
 - **Defer to language conventions.** When a language has idiomatic file layout conventions (e.g., Go's package structure, Python's module conventions), follow them.
   The newspaper ordering is the default when no stronger convention applies.
 
+### Directory Structure
+
+Organize project directories by feature (domain concept), not by technical type.
+
+- **Group by feature.** A feature directory (e.g., `auth/`, `appointments/`, `checkout/`) contains everything that feature needs: schemas, UI components, data access, helpers, and tests.
+  This keeps related code close together, makes feature boundaries visible in the file tree, and allows a feature to be understood, modified, or removed without navigating across the entire project.
+- **Avoid group by type.** Directories like `schemas/`, `components/`, `repositories/`, `helpers/` scatter a single feature's code across the tree.
+  This makes it hard to see what a feature touches, encourages implicit coupling between unrelated features that share a directory, and forces every change to span multiple distant locations.
+- **Shared code lives in explicit shared modules.** When code is genuinely used across multiple features, extract it into a clearly named shared module (e.g., `shared/`, `lib/`, `common/`) rather than leaving it in one feature's directory.
+  The threshold for extraction is actual reuse, not speculative reuse.
+- **Defer to framework conventions.** Some frameworks prescribe a directory structure (e.g., Next.js `app/` routing, Rails `app/models/`).
+  When a framework convention conflicts with group-by-feature, follow the framework — but organize within those constraints by feature where possible (e.g., Next.js route groups, Rails namespaced modules).
+
 ### SOLID Principles
 
 Follow the SOLID principles, with particular emphasis on Single Responsibility, Interface Segregation, and Dependency Inversion.
