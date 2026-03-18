@@ -100,9 +100,26 @@ Examine the following sources to understand what happened and what could be impr
 
 ### In agent definition files (the project's dot-directory `agents/\*.md`)
 
-- **Prompt quality** — Are agent system prompts clear, focused, and actionable? Do they avoid contradictions with AGENTS.md?
+#### Prompt structure
+
+Agent prompts, commands, and skills should be structurally scannable.
+Use Markdown headers to delineate distinct sections (background, instructions, tool guidance, output format) rather than relying on one long flow of text.
+Break long enumerated lists (more than ~5 items) into subsections with descriptive headers so each concern is independently scannable.
+Prefer headers over nested bullet lists — nesting blurs the boundary between a parent concept and its children, and doesn't scale when a section grows.
+Keep each section focused on one concern — if a section covers multiple unrelated topics, split it.
+
+#### Prompt content
+
+Are instructions clear, focused, and actionable?
+Do they avoid contradictions with AGENTS.md?
+
+#### Permissions and tools
+
 - **Permission gaps** — Are permissions too broad (security risk) or too narrow (friction)?
 - **Tool access** — Do agents have the tools they need, and only the tools they need?
+
+#### Agent and extension point coverage
+
 - **Missing agents** — Based on recurring session patterns, would a new specialized agent improve workflow? (Rare — prefer new commands or tools over new agents.)
 - **Redundant agents** — Are there agents with overlapping responsibilities that should be consolidated?
 - **Missing commands or tools** — Would a new slash command or custom tool reduce recurring friction? Commands and tools are the primary extension points — new agents are rarely needed.
