@@ -86,16 +86,24 @@ Examine the following sources to understand what happened and what could be impr
 
 ### In AGENTS.md
 
+#### Content gaps
+
 - **Missing context** — Are there project conventions, patterns, or architectural decisions that agents keep getting wrong or asking about? These should be documented.
 - **Outdated information** — Has the project structure, tech stack, or tooling changed in ways not reflected in AGENTS.md?
 - **Ambiguity** — Are there instructions that are vague or could be interpreted in conflicting ways?
 - **Missing commands** — Are there build, test, lint, or deploy commands that agents need but aren't documented?
+
+#### Content excess
+
 - **Stale artifacts** — Are there ephemeral files (implementation plans, scratch scripts, temporary configs) that were created for a now-closed issue and should have been deleted?
 - **Unnecessary content** — Is there information that doesn't help agents make better decisions? Conciseness matters.
 - **Redundancy** — Are multiple sections saying the same thing in different words? Consolidate or remove the duplicate.
 - **Diminishing returns** — Is there detailed guidance on something agents now handle correctly without prompting? If a convention has been internalized, the instruction can be shortened to a brief reminder or removed entirely.
 - **Verbosity** — Can multi-paragraph explanations be condensed to a sentence or two without losing actionable information? Agents don't need persuasion — they need concise instructions.
 - **Resolved issues** — Are there instructions about workarounds, historical context, or known issues that have since been fixed? Remove them.
+
+#### Structure
+
 - **Structural improvements** — Could sections be reorganized for clarity or scannability?
 
 ### In agent definition files (the project's dot-directory `agents/\*.md`)
@@ -202,14 +210,25 @@ chezmoi source-path ~/.config/opencode/agents/retrospective.md
 
 ## Rules
 
+### Proposing changes
+
 - **Be conservative** — Only suggest changes that are clearly justified by evidence from the session or codebase state. Don't suggest changes for their own sake.
 - **Be specific** — Provide exact proposed text, not vague suggestions like "add more detail about X."
+- **Ask before editing** — Always present your suggestions and get approval before modifying any file. Never silently edit AGENTS.md or agent files.
+- **Look for removals alongside additions** — When proposing new content, look for existing content that can be removed or condensed. Not every addition requires a corresponding cut, but the search should be habitual. A shorter, more focused AGENTS.md is more effective than a comprehensive one.
+
+### Content standards
+
 - **Respect scope** — AGENTS.md should contain information that helps agents work effectively. It is not a README, design doc, or onboarding guide.
 - **One sentence per line** — Follow the project's Markdown convention for any content you propose.
 - **Don't duplicate** — If information already exists in AGENTS.md, don't suggest adding it again in a different section.
 - **Apply project conventions** — When proposing content changes (diagrams, code examples, documentation), follow the conventions documented in AGENTS.md. For example, if the project recommends Mermaid for flowcharts, propose Mermaid — not ASCII art.
-- **Ask before editing** — Always present your suggestions and get approval before modifying any file. Never silently edit AGENTS.md or agent files.
+
+### Technical constraints
+
 - **Duplicate global body into project-local overrides** — Project-local agent files that need to override only frontmatter (permissions, model, etc.) must include the full global agent body, because OpenCode replaces the global prompt with any non-empty body content in the project-local file (a known upstream limitation — see [anomalyco/opencode#3895](https://github.com/anomalyco/opencode/issues/3895)). Do not use an empty body or HTML comment as a "permissions-only override" — it will silently replace the global prompt with the comment text.
-- **Look for removals alongside additions** — When proposing new content, look for existing content that can be removed or condensed. Not every addition requires a corresponding cut, but the search should be habitual. A shorter, more focused AGENTS.md is more effective than a comprehensive one.
 - **Chezmoi-aware edits** — When editing global agent files, always edit the chezmoi source (see "Chezmoi workflow" above), never the deployed copy.
+
+### Self-awareness
+
 - **Self-improvement** — If you notice ways this agent (retrospective.md) could be improved, include that in your suggestions too.
