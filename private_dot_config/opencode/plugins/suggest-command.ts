@@ -1,11 +1,23 @@
 import { type Plugin, tool } from "@opencode-ai/plugin";
 
+async function copyToClipboard(text: string): Promise<boolean> {
+  try {
+    const proc = Bun.spawn(["pbcopy"], {
+      stdin: new TextEncoder().encode(text),
+    });
+    await proc.exited;
+    return proc.exitCode === 0;
+  } catch {
+    return false;
+  }
+}
+
 export const SuggestCommandPlugin: Plugin = async ({ client }) => {
   return {
     tool: {
       suggest_command: tool({
         description:
-          "Pre-fill the user's input prompt with a suggested slash command and show a toast notification. " +
+          "Copy a suggested slash command to the clipboard and show a toast notification. " +
           "Use this when recommending a next step that involves a slash command (e.g., /build, /retro, /plan). " +
           "Always also mention the command in your text output as a fallback.",
         args: {
@@ -16,16 +28,20 @@ export const SuggestCommandPlugin: Plugin = async ({ client }) => {
             ),
         },
         async execute(args, _context) {
-          await client.tui.clearPrompt();
-          await client.tui.appendPrompt({ body: { text: args.command } });
+          const copied = await copyToClipboard(args.command);
+          const message = copied
+            ? `Suggested: ${args.command} -- paste to run`
+            : `Suggested: ${args.command}`;
           await client.tui.showToast({
             body: {
-              message: `Suggested: ${args.command} -- press Enter to run`,
+              message,
               variant: "info",
               duration: 5000,
             },
           });
-          return `Suggested command pre-filled: ${args.command}`;
+          return copied
+            ? `Suggested command copied to clipboard: ${args.command}`
+            : `Suggested command (clipboard unavailable): ${args.command}`;
         },
       }),
     },
