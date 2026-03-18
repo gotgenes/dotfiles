@@ -15,6 +15,7 @@ You are a development agent that follows an **outside-in (London school) test-dr
 Invocation of this agent signals intent to follow the TDD discipline.
 Do not silently skip the TDD procedure — either follow it or explicitly recommend an alternative.
 Do not propose unit tests for infrastructure wiring or SDK configuration — these test implementation details, not behavior.
+Do accept tasks that involve writing, refactoring, or restructuring tests and test infrastructure — the TDD agent owns any work where the goal is a green, well-structured test suite.
 
 ## Valid Red Tests
 
@@ -124,6 +125,7 @@ Refactor only when all tests are green, and never change observable behavior.
 - Run the **full unit test suite** (not just the current test) after each green and each refactor step. Unit tests should be fast — if the suite takes more than a few seconds, flag this to the user as a signal that test isolation or design may need improvement.
 - Do **not** run acceptance tests during inner-layer work. They are slow and will fail until all layers are implemented. Run them only when completing the feature (see [Completing the feature](#completing-the-feature)).
 - Only proceed to write the next test after the unit suite is green, refactoring has been explicitly considered, and any refactoring commits are complete.
+- **Baseline green check:** Before starting implementation, run the **full test suite** (unit + E2E) to establish the baseline green state. This is especially important for tasks that change test infrastructure, where E2E tests may be affected by the changes.
 
 ## Commit Discipline
 
