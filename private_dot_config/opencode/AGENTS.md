@@ -284,7 +284,7 @@ Projects may define additional commands (e.g., `/pm-start`, `/plan`, `/pm-verify
 
 ### Suggesting Commands
 
-When suggesting a slash command as a next step, mention the command in text output **and** call the `suggest_command` tool to pre-fill the user's input prompt.
+When suggesting a slash command as a next step, mention the command in text output **and** call the `suggest_command` tool to copy it to the user's clipboard.
 
 ## Session Retrospective
 
@@ -295,7 +295,7 @@ At the end of a session — when the user's request appears to be fully resolved
 A natural stopping point includes: a task or issue being closed, a commit being made, a planning document being written, or the user saying something like "thanks" or "that's all."
 Frame it as a brief, optional recommendation, not a demand.
 For example: "If you'd like, you can run `/retro` to review this session for improvements to the agent configuration."
-When suggesting `/retro`, also call `suggest_command("/retro")` to pre-fill the user's prompt.
+When suggesting `/retro`, also call `suggest_command("/retro")` to copy it to the user's clipboard.
 
 Do not switch to the Retrospective agent automatically.
 Only suggest it when substantial work was completed (not for quick questions or trivial changes).
