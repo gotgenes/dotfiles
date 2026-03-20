@@ -49,14 +49,29 @@ get_repo(user_name="gotgenes", repository="getignore")
 Single-loop learning asks "are we doing this correctly?" — double-loop learning asks "are we doing the correct thing?"
 Agents should operate at both levels: execute well within the current approach, but also question whether the approach itself is still right.
 
-Concrete expectations:
+#### Challenge assumptions
 
-- **Challenge assumptions.** Don't just work within the current patterns and conventions — question whether they still serve the goal. If a practice feels like cargo-culting or a previous decision hasn't aged well, say so.
-- **Surface process improvements.** When you notice friction, inefficiency, or a pattern that could be improved — in the codebase, tooling, or agent configuration itself — flag it rather than silently working around it.
-- **Explain reasoning.** Articulate _why_ you chose an approach, not just what you did. Making mental models visible allows them to be examined and refined.
-- **Feed retrospectives.** When you notice something worth reviewing — what went well, what was harder than expected, what could be improved — flag it with `/retro-note <observation>`, or add a `[retro]`-prefixed todo item directly. The Retrospective agent treats these as must-address items. The user can also run `/retro-note` directly to record their own observations.
+Don't just work within the current patterns and conventions — question whether they still serve the goal.
+If a practice feels like cargo-culting or a previous decision hasn't aged well, say so.
 
-**Preserving retro notes across TodoWrite calls.** The `TodoWrite` tool replaces the entire todo list — it is not append-only.
+#### Surface process improvements
+
+When you notice friction, inefficiency, or a pattern that could be improved — in the codebase, tooling, or agent configuration itself — flag it rather than silently working around it.
+
+#### Explain reasoning
+
+Articulate _why_ you chose an approach, not just what you did.
+Making mental models visible allows them to be examined and refined.
+
+#### Feed retrospectives
+
+When you notice something worth reviewing — what went well, what was harder than expected, what could be improved — flag it with `/retro-note <observation>`, or add a `[retro]`-prefixed todo item directly.
+The Retrospective agent treats these as must-address items.
+The user can also run `/retro-note` directly to record their own observations.
+
+#### Preserving retro notes across TodoWrite calls
+
+The `TodoWrite` tool replaces the entire todo list — it is not append-only.
 Before calling `TodoWrite` for any reason (creating a fresh task list, updating progress, reorganizing priorities), read the existing todo list first and carry forward all uncompleted items prefixed with `[retro]`.
 These are session-scoped observations flagged for the Retrospective agent and must survive across agent transitions and task list changes.
 
@@ -66,22 +81,17 @@ Bug fixes always take priority over new features and enhancements.
 Broken tooling, incorrect behavior, and regressions should be addressed before non-bug work.
 This applies the [Broken Windows theory](https://en.wikipedia.org/wiki/Broken_windows_theory) to the codebase: small defects left unaddressed erode quality norms and compound over time.
 
-When a project uses a prioritized backlog, rank bug fixes above all non-bug items.
-When multiple bugs exist, rank them by impact (how much friction they cause per occurrence).
+In prioritized backlogs, rank bug fixes above all non-bug items, ordered by impact (friction per occurrence).
 When there is no formal backlog, flag bugs immediately rather than working around them.
 
 ### Troubleshooting Third-Party Dependencies
 
 When a bug is traced to a third-party dependency (GitHub Action, npm package, framework, etc.), check whether a newer version has already fixed the issue **before** designing a workaround.
 
-Steps:
-
 1. Identify the upstream issue (search the dependency's issue tracker).
 2. Check recent releases and changelogs for a fix.
 3. If a fix exists in a newer version, upgrade rather than work around.
 4. If no fix exists, then design a workaround — and reference the upstream issue in a comment so the workaround can be removed when a fix ships.
-
-Workarounds for already-fixed bugs add unnecessary complexity and miss the opportunity to pick up other improvements in the newer version.
 
 ### Verify Before Documenting
 
@@ -103,12 +113,26 @@ When given a solution rather than a goal, step back and clarify the objective be
 Premature convergence — committing to an approach before the problem is well understood — leads to local optima and expensive rework.
 (See also Cutler's [Balancing Divergence and Convergence](https://cutlefish.substack.com/p/tbm-2052-a-product-super-skill-balancing).)
 
-Concrete expectations:
+#### Start from the objective
 
-- **Start from the objective.** If a request specifies _how_ but not _why_, ask what outcome is desired before choosing an approach. A well-understood goal is a prerequisite for a well-chosen solution.
-- **Explore before committing.** When multiple approaches could satisfy the objective, briefly outline the alternatives and their tradeoffs before investing in one. Do not lock in the first viable path.
-- **Recognize escalating friction.** If an approach requires increasingly elaborate workarounds, treat that as a signal — not a challenge to power through. Step back, revisit the alternatives, and propose a different path rather than accumulating complexity in service of a sunk cost.
-- **Bias for action is not bias for commitment.** Acting quickly to test assumptions and reduce uncertainty is healthy. Acting quickly to lock in a plan before alternatives have been considered is premature convergence. Favor fast experiments over early commitments.
+If a request specifies _how_ but not _why_, ask what outcome is desired before choosing an approach.
+A well-understood goal is a prerequisite for a well-chosen solution.
+
+#### Explore before committing
+
+When multiple approaches could satisfy the objective, briefly outline the alternatives and their tradeoffs before investing in one.
+Do not lock in the first viable path.
+
+#### Recognize escalating friction
+
+If an approach requires increasingly elaborate workarounds, treat that as a signal — not a challenge to power through.
+Step back, revisit the alternatives, and propose a different path rather than accumulating complexity in service of a sunk cost.
+
+#### Bias for action is not bias for commitment
+
+Acting quickly to test assumptions and reduce uncertainty is healthy.
+Acting quickly to lock in a plan before alternatives have been considered is premature convergence.
+Favor fast experiments over early commitments.
 
 ## Code Design
 
@@ -117,56 +141,97 @@ Concrete expectations:
 Code should be its own primary documentation.
 Prefer names that reveal intent — for functions, methods, classes, variables, and modules — so the code reads clearly without supplementary explanation.
 
-- **Names over comments.** If a comment is needed to explain _what_ code does, treat that as a signal to extract a well-named function or rename the existing symbol.
-  Comments should explain _why_ — the reasoning, constraints, or non-obvious context behind a decision — not narrate the mechanics.
-- **Scope-appropriate naming.** Name length should correspond to scope.
-  Short names (`i`, `x`, `fn`) are fine for small scopes (loop counters, short lambdas, single-expression closures).
-  Wider scopes — exported functions, module-level variables, class names — warrant longer, descriptive names that reveal purpose.
-- **Doc comments follow ecosystem conventions.** Add documentation comments (JSDoc, GoDoc, Python docstrings, LuaLS annotations, etc.) where the language's tooling ecosystem expects them — typically on public/exported APIs.
-  Do not add doc comments purely for narration when the name and signature already convey usage, parameters, and return values.
+#### Names over comments
+
+If a comment is needed to explain _what_ code does, treat that as a signal to extract a well-named function or rename the existing symbol.
+Comments should explain _why_ — the reasoning, constraints, or non-obvious context behind a decision — not narrate the mechanics.
+
+#### Scope-appropriate naming
+
+Name length should correspond to scope.
+Short names (`i`, `x`, `fn`) are fine for small scopes (loop counters, short lambdas, single-expression closures).
+Wider scopes — exported functions, module-level variables, class names — warrant longer, descriptive names that reveal purpose.
+
+#### Doc comments follow ecosystem conventions
+
+Add documentation comments (JSDoc, GoDoc, Python docstrings, LuaLS annotations, etc.) where the language's tooling ecosystem expects them — typically on public/exported APIs.
+Do not add doc comments purely for narration when the name and signature already convey usage, parameters, and return values.
 
 ### Code Organization and Proximity
 
 Source files should read like a newspaper article: high-level intent at the top, progressively deeper detail as you read down.
 
-- **Public API first.** Exported functions, classes, and interfaces appear near the top of a file so readers can scan the module's surface without wading through implementation details.
-- **Stepdown Rule.** Each function should be followed by the helpers it calls, at the next level of abstraction — caller first, then the helpers it depends on.
-  Related functions that collaborate or operate on the same data should also be grouped together rather than scattered through the file.
-- **Helpers stay in the file.** Private helper functions should remain in the same file as the code that uses them, when the language allows it.
-  This keeps related code together and reduces navigation burden.
-- **Growing helpers signal a new layer.** When private helpers accumulate to the point where they warrant their own tests, that is a design signal: extract them into a new module with its own public API.
-  Test only public interfaces — if something needs to be tested, it should _be_ a public interface, possibly of a lower-level module.
-- **Defer to language conventions.** When a language has idiomatic file layout conventions (e.g., Go's package structure, Python's module conventions), follow them.
-  The newspaper ordering is the default when no stronger convention applies.
+#### Public API first
+
+Exported functions, classes, and interfaces appear near the top of a file so readers can scan the module's surface without wading through implementation details.
+
+#### Stepdown rule
+
+Each function should be followed by the helpers it calls, at the next level of abstraction — caller first, then the helpers it depends on.
+Related functions that collaborate or operate on the same data should also be grouped together rather than scattered through the file.
+
+#### Helpers stay in the file
+
+Private helper functions should remain in the same file as the code that uses them, when the language allows it.
+This keeps related code together and reduces navigation burden.
+
+#### Growing helpers signal a new layer
+
+When private helpers accumulate to the point where they warrant their own tests, that is a design signal: extract them into a new module with its own public API.
+Test only public interfaces — if something needs to be tested, it should _be_ a public interface, possibly of a lower-level module.
+
+#### Defer to language conventions
+
+When a language has idiomatic file layout conventions (e.g., Go's package structure, Python's module conventions), follow them.
+The newspaper ordering is the default when no stronger convention applies.
 
 ### Directory Structure
 
 Organize project directories by feature (domain concept), not by technical type.
 
-- **Group by feature.** A feature directory (e.g., `auth/`, `appointments/`, `checkout/`) contains everything that feature needs: schemas, UI components, data access, helpers, and tests.
-  This keeps related code close together, makes feature boundaries visible in the file tree, and allows a feature to be understood, modified, or removed without navigating across the entire project.
-- **Avoid group by type.** Directories like `schemas/`, `components/`, `repositories/`, `helpers/` scatter a single feature's code across the tree.
-  This makes it hard to see what a feature touches, encourages implicit coupling between unrelated features that share a directory, and forces every change to span multiple distant locations.
-- **Shared code lives in explicit shared modules.** When code is genuinely used across multiple features, extract it into a clearly named shared module (e.g., `shared/`, `lib/`, `common/`) rather than leaving it in one feature's directory.
-  The threshold for extraction is actual reuse, not speculative reuse.
-- **Defer to framework conventions.** Some frameworks prescribe a directory structure (e.g., Next.js `app/` routing, Rails `app/models/`).
-  When a framework convention conflicts with group-by-feature, follow the framework — but organize within those constraints by feature where possible (e.g., Next.js route groups, Rails namespaced modules).
+#### Group by feature
+
+A feature directory (e.g., `auth/`, `appointments/`, `checkout/`) contains everything that feature needs: schemas, UI components, data access, helpers, and tests.
+This keeps related code close together, makes feature boundaries visible in the file tree, and allows a feature to be understood, modified, or removed without navigating across the entire project.
+
+#### Avoid group by type
+
+Directories like `schemas/`, `components/`, `repositories/`, `helpers/` scatter a single feature's code across the tree.
+This makes it hard to see what a feature touches, encourages implicit coupling between unrelated features that share a directory, and forces every change to span multiple distant locations.
+
+#### Shared code lives in explicit shared modules
+
+When code is genuinely used across multiple features, extract it into a clearly named shared module (e.g., `shared/`, `lib/`, `common/`) rather than leaving it in one feature's directory.
+The threshold for extraction is actual reuse, not speculative reuse.
+
+#### Defer to framework conventions
+
+Some frameworks prescribe a directory structure (e.g., Next.js `app/` routing, Rails `app/models/`).
+When a framework convention conflicts with group-by-feature, follow the framework — but organize within those constraints by feature where possible (e.g., Next.js route groups, Rails namespaced modules).
 
 ### SOLID Principles
 
 Follow the SOLID principles, with particular emphasis on Single Responsibility, Interface Segregation, and Dependency Inversion.
 
-- **Single Responsibility (SRP).** Each function, class, and module should do one thing well.
-  When a unit of code has multiple reasons to change, split it.
-  This applies at every scale — a function that parses input _and_ processes it should be two functions; a module that handles both HTTP routing and business logic should be two modules.
-- **Interface Segregation (ISP).** Prefer small, focused interfaces over large ones.
-  Clients should not be forced to depend on methods or properties they don't use.
-  When an interface grows, look for natural seams to split it into smaller, cohesive contracts.
-- **Dependency Inversion (DIP).** This is critical and non-negotiable for testable design.
-  High-level modules should not depend on low-level modules; both should depend on abstractions.
-  Default to dependency injection for non-trivial dependencies — accept collaborators as parameters rather than constructing them internally.
-  DI is the mechanical foundation of test-driven development: without it, you cannot substitute test doubles, and without test doubles, you cannot test units in isolation.
-  When writing new code, design for injection from the start rather than retrofitting it later.
+#### Single Responsibility (SRP)
+
+Each function, class, and module should do one thing well.
+When a unit of code has multiple reasons to change, split it.
+This applies at every scale — a function that parses input _and_ processes it should be two functions; a module that handles both HTTP routing and business logic should be two modules.
+
+#### Interface Segregation (ISP)
+
+Prefer small, focused interfaces over large ones.
+Clients should not be forced to depend on methods or properties they don't use.
+When an interface grows, look for natural seams to split it into smaller, cohesive contracts.
+
+#### Dependency Inversion (DIP)
+
+This is critical and non-negotiable for testable design.
+High-level modules should not depend on low-level modules; both should depend on abstractions.
+Default to dependency injection for non-trivial dependencies — accept collaborators as parameters rather than constructing them internally.
+DI is the mechanical foundation of test-driven development: without it, you cannot substitute test doubles, and without test doubles, you cannot test units in isolation.
+When writing new code, design for injection from the start rather than retrofitting it later.
 
 ### Markdown
 
@@ -198,21 +263,21 @@ When presenting a decision point:
 ## Manual Actions
 
 When a task requires the user to perform a manual action (e.g., change a setting in a UI, approve a permission, create a resource that can't be automated), use the `question` tool to **gate on completion** rather than printing instructions and continuing.
-
 This ensures the user sees the request (it blocks progress) and gives them structured options to respond.
 
-Use this format:
+### Blocking actions
 
-- **Header**: `Manual action required` (distinguishes from decision-point questions)
+Use the `question` tool with this format:
+
+- **Header**: `Manual action required`
 - **Question**: Numbered steps the user needs to perform
-- **Options** (always include all three):
-  1. `Done` — "I've completed the steps above"
-  2. `Need help` — "I'm stuck or something looks different than expected"
-  3. `Something went wrong` — "I completed the steps but got an error or unexpected result"
+- **Options**: `Done` ("I've completed the steps above"), `Need help` ("I'm stuck or something looks different than expected"), `Something went wrong` ("I completed the steps but got an error or unexpected result")
 
 If the user selects "Need help" or "Something went wrong", ask clarifying questions before retrying or adjusting the approach.
 
-For **non-blocking** manual notes (things the user should do later but that don't gate current progress), mention them in the conversation output without using the `question` tool.
+### Non-blocking notes
+
+For things the user should do later but that don't gate current progress, mention them in the conversation output without using the `question` tool.
 
 ## Question Tool Usage
 
@@ -300,13 +365,15 @@ When suggesting `/retro`, also call `suggest_command("/retro")` to copy it to th
 Do not switch to the Retrospective agent automatically.
 Only suggest it when substantial work was completed (not for quick questions or trivial changes).
 
-## CLI Tools
+## Environment
+
+### CLI Tools
 
 This system has modern CLI tools installed via Homebrew.
 Prefer these over their traditional counterparts: `fd` over `find`, `rg` over `grep`, `eza` over `ls`, `bat` over `cat`, `sd` over `sed`, `dust` over `du`, `jq` for JSON processing.
 Load the `cli-tools` skill for the full tool mapping and usage examples.
 
-## GitHub Authentication
+### GitHub Authentication
 
 This system may have multiple GitHub users authenticated via `gh auth`.
 A wrapper script at `~/.local/bin/gh` automatically selects the correct account when the `GH_USER` environment variable is set (typically by a per-directory `mise.toml`).
