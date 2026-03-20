@@ -221,19 +221,23 @@
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.
+  # ANSI 4 = Catppuccin Macchiato Blue (#8aadf4)
   typeset -g POWERLEVEL9K_DIR_BACKGROUND=4
   # Default current directory foreground color.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=240
+  # ANSI 0 = Catppuccin Macchiato Surface1 (#494d64) — dark text on blue background
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=0
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
-  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=236
+  # ANSI 8 = Catppuccin Macchiato Surface2 (#5b6078) — muted, fades abbreviated segments
+  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=8
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=241
+  # ANSI 0 = Catppuccin Macchiato Surface1 (#494d64) — same as DIR_FOREGROUND, distinguished by bold
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=0
   # Display anchor directory segments in bold.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
   # Don't shorten directories that contain any of these files. They are anchors.
