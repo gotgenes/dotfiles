@@ -43,6 +43,7 @@ permission:
     "chezmoi managed": allow
     "chezmoi source-path *": allow
     "chezmoi source-path": allow
+    "prek run*": allow
 tools:
   write: true
   edit: true
