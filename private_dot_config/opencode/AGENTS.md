@@ -170,7 +170,7 @@ Follow the SOLID principles, with particular emphasis on Single Responsibility, 
 
 ### Markdown
 
-Always specify a language on fenced code blocks (e.g., ` ```typescript `, ` ```text `, ` ```bash `).
+Always specify a language identifier immediately after the opening fence of a code block (e.g., `typescript`, `text`, `bash`).
 Use `text` for plain-text output that has no specific syntax.
 Most projects enforce this via markdownlint's MD040 rule.
 
