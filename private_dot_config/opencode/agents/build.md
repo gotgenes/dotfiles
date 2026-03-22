@@ -1,7 +1,7 @@
 ---
 description: Development agent for implementation tasks
 mode: primary
-model: anthropic/claude-sonnet-4-6
+model: anthropic/claude-opus-4-6
 ---
 
 # Build Agent
