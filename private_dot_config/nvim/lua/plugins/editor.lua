@@ -190,31 +190,6 @@ return {
     "gpanders/editorconfig.nvim",
   },
   {
-    "nvim-mini/mini.surround",
-    dependencies = {
-      {
-        "folke/which-key.nvim",
-        optional = true,
-        opts = {
-          spec = {
-            { "<leader>a", group = "+surround" },
-          },
-        },
-      },
-    },
-    opts = {
-      mappings = {
-        add = "<leader>aa",
-        delete = "<leader>ad",
-        find = "<leader>af",
-        find_left = "<leader>aF",
-        highlight = "<leader>ah",
-        replace = "<leader>ar",
-        update_n_lines = "<leader>an",
-      },
-    },
-  },
-  {
     "folke/flash.nvim",
     opts = {
       modes = {
