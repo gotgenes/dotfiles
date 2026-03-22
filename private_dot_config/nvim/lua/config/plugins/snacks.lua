@@ -110,7 +110,22 @@ M.opts = {
     },
   },
   picker = {
-    actions = { copy_selector = copy_selector },
+    actions = {
+      copy_selector = copy_selector,
+      sidekick_send = function(...)
+        return require("sidekick.cli.picker.snacks").send(...)
+      end,
+    },
+    win = {
+      input = {
+        keys = {
+          ["<a-i>"] = {
+            "sidekick_send",
+            mode = { "n", "i" },
+          },
+        },
+      },
+    },
     sources = {
       buffers = {
         focus = "list",
