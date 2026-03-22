@@ -219,27 +219,8 @@ return {
     end,
     -- stylua: ignore
     keys = {
-      -- Disable upstream <leader>a* keys (we use <leader>a for surround)
-      { "<leader>a", false, mode = { "n", "v" } },
-      { "<leader>aa", false, mode = { "n", "v" } },
-      { "<leader>ad", false },
-      { "<leader>af", false, mode = { "n", "v" } },
-      { "<leader>ap", false, mode = { "n", "x" } },
-      { "<leader>as", false, mode = { "n", "v" } },
-      { "<leader>at", false, mode = { "n", "x" } },
-      { "<leader>av", false, mode = { "n", "x" } },
-      -- NES: accept/jump in normal mode
       { "<tab>", LazyVim.cmp.map({ "ai_nes" }, "<tab>"), mode = { "n" }, expr = true },
-      -- AI prefix
-      { "<leader>i", "", desc = "+ai", mode = { "n", "v" } },
       { "<c-.>", function() require("sidekick.cli").focus() end, desc = "Sidekick Focus", mode = { "n", "t", "i", "x" } },
-      { "<leader>ia", function() require("sidekick.cli").toggle() end, desc = "Sidekick Toggle CLI" },
-      { "<leader>is", function() require("sidekick.cli").select() end, desc = "Select CLI" },
-      { "<leader>id", function() require("sidekick.cli").close() end, desc = "Detach a CLI Session" },
-      { "<leader>it", function() require("sidekick.cli").send({ msg = "{this}" }) end, mode = { "x", "n" }, desc = "Send This" },
-      { "<leader>if", function() require("sidekick.cli").send({ msg = "{file}" }) end, desc = "Send File" },
-      { "<leader>iv", function() require("sidekick.cli").send({ msg = "{selection}" }) end, mode = { "x" }, desc = "Send Visual Selection" },
-      { "<leader>ip", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Sidekick Select Prompt" },
     },
   },
   {

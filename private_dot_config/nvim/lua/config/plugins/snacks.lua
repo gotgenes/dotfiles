@@ -119,7 +119,7 @@ M.opts = {
     win = {
       input = {
         keys = {
-          ["<a-i>"] = {
+          ["<a-a>"] = {
             "sidekick_send",
             mode = { "n", "i" },
           },
