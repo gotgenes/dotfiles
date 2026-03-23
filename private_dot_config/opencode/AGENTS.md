@@ -347,6 +347,8 @@ When suggesting a handoff to another agent, mention the relevant command if one 
 
 Projects may define additional commands (e.g., `/pm-start`, `/plan`, `/pm-verify`) in `.opencode/commands/`.
 
+Before creating or modifying agent definitions, commands, tools, skills, plugins, or `opencode.json`, load the `opencode-authoring` skill.
+
 ### Suggesting Commands
 
 When suggesting a slash command as a next step, mention the command in text output **and** call the `suggest_command` tool to copy it to the user's clipboard.
