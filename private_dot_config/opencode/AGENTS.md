@@ -84,14 +84,21 @@ This applies the [Broken Windows theory](https://en.wikipedia.org/wiki/Broken_wi
 In prioritized backlogs, rank bug fixes above all non-bug items, ordered by impact (friction per occurrence).
 When there is no formal backlog, flag bugs immediately rather than working around them.
 
-### Troubleshooting Third-Party Dependencies
+### Prefer Upstream Solutions Over Custom Ones
 
-When a bug is traced to a third-party dependency (GitHub Action, npm package, framework, etc.), check whether a newer version has already fixed the issue **before** designing a workaround.
+When working with third-party dependencies, check for existing upstream mechanisms before designing custom solutions.
+This applies to both bugs and configuration:
+
+**Bugs:** Check whether a newer version has already fixed the issue before designing a workaround.
 
 1. Identify the upstream issue (search the dependency's issue tracker).
 2. Check recent releases and changelogs for a fix.
 3. If a fix exists in a newer version, upgrade rather than work around.
 4. If no fix exists, then design a workaround — and reference the upstream issue in a comment so the workaround can be removed when a fix ships.
+
+**Configuration:** Check whether the library provides a standard configuration mechanism (environment variables, config file options, API parameters) before proposing a custom one.
+Read the library's configuration documentation before designing env vars, wrapper scripts, or conditional logic.
+A standard mechanism is more discoverable, better documented, and maintained by the upstream project.
 
 ### Verify Before Documenting
 
