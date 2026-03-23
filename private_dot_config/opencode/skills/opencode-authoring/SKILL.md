@@ -1,3 +1,8 @@
+---
+name: opencode-authoring
+description: Conventions for creating and maintaining OpenCode extension points — AGENTS.md content quality, agent definition structure, extension point selection, skill design, and subagent patterns
+---
+
 # OpenCode Authoring
 
 Conventions and design principles for creating and maintaining OpenCode extension points: `AGENTS.md`, agent definitions, subagents, commands, tools, skills, plugins, and `opencode.json`.
