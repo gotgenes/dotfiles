@@ -63,6 +63,8 @@ Implications:
 - **Read-only agents** (Plan, Retro) need their own `bash` blocks with `"*": "ask"` or `"*": "deny"` to restrict bash, plus explicit allows for read-only tools.
 - **Global `opencode.json`** should only contain `read` restrictions (e.g., denying `.env` files). Do not add a global `bash` block — it will restrict write agents.
 
+Before creating or modifying agent definitions, commands, tools, skills, or plugins under `private_dot_config/opencode/`, load the `opencode-authoring` skill.
+
 ## Chezmoi Commands
 
 ```bash
