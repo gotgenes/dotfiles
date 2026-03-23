@@ -85,60 +85,29 @@ Examine the following sources to understand what happened and what could be impr
 
 ## What you look for
 
-### In AGENTS.md
+Before reviewing, load the `opencode-authoring` skill for the full conventions on AGENTS.md content quality, agent definition structure, extension point selection, skill design, and subagent patterns.
 
-#### Content gaps
+### AGENTS.md content
 
-- **Missing context** — Are there project conventions, patterns, or architectural decisions that agents keep getting wrong or asking about? These should be documented.
-- **Outdated information** — Has the project structure, tech stack, or tooling changed in ways not reflected in AGENTS.md?
-- **Ambiguity** — Are there instructions that are vague or could be interpreted in conflicting ways?
-- **Missing commands** — Are there build, test, lint, or deploy commands that agents need but aren't documented?
+Check for content gaps (missing conventions, outdated info, ambiguity) and content excess (stale artifacts, redundancy, verbosity, resolved issues).
+See the skill's "AGENTS.md" section for the full checklist.
 
-#### Content excess
+### Agent definitions
 
-- **Stale artifacts** — Are there ephemeral files (implementation plans, scratch scripts, temporary configs) that were created for a now-closed issue and should have been deleted?
-- **Unnecessary content** — Is there information that doesn't help agents make better decisions? Conciseness matters.
-- **Redundancy** — Are multiple sections saying the same thing in different words? Consolidate or remove the duplicate.
-- **Diminishing returns** — Is there detailed guidance on something agents now handle correctly without prompting? If a convention has been internalized, the instruction can be shortened to a brief reminder or removed entirely.
-- **Verbosity** — Can multi-paragraph explanations be condensed to a sentence or two without losing actionable information? Agents don't need persuasion — they need concise instructions.
-- **Resolved issues** — Are there instructions about workarounds, historical context, or known issues that have since been fixed? Remove them.
+Check prompt structure (scannable headers, focused sections), prompt content (clear, actionable, no contradictions with AGENTS.md), and permission/tool design (least privilege, friction signals).
+See the skill's "Agent Definitions" section.
 
-#### Structure
+### Extension points
 
-- **Structural improvements** — Could sections be reorganized for clarity or scannability?
+Are there missing or redundant agents, commands, tools, skills, or subagents?
+Do subagent definitions still reflect the conventions they encode (subagent drift)?
+See the skill's "Extension Point Model" section for the selection hierarchy.
 
-### In agent definition files (the project's dot-directory `agents/\*.md`)
+### Skills
 
-#### Prompt structure
-
-Agent prompts, commands, and skills should be structurally scannable.
-Use Markdown headers to delineate distinct sections (background, instructions, tool guidance, output format) rather than relying on one long flow of text.
-Break long enumerated lists (more than ~5 items) into subsections with descriptive headers so each concern is independently scannable.
-Prefer headers over nested bullet lists — nesting blurs the boundary between a parent concept and its children, and doesn't scale when a section grows.
-Keep each section focused on one concern — if a section covers multiple unrelated topics, split it.
-
-#### Prompt content
-
-Are instructions clear, focused, and actionable?
-Do they avoid contradictions with AGENTS.md?
-
-#### Permissions and tools
-
-- **Permission gaps** — Are permissions too broad (security risk) or too narrow (friction)?
-- **Tool access** — Do agents have the tools they need, and only the tools they need?
-
-#### Agent and extension point coverage
-
-- **Missing agents** — Based on recurring session patterns, would a new specialized agent improve workflow? (Rare — prefer new commands or tools over new agents.)
-- **Redundant agents** — Are there agents with overlapping responsibilities that should be consolidated?
-- **Missing commands or tools** — Would a new slash command or custom tool reduce recurring friction? Commands and tools are the primary extension points — new agents are rarely needed.
-- **Redundant commands, tools, or skills** — Are there commands that are never used, tools that duplicate built-in functionality, or skills that agents never load? Remove or consolidate them.
-
-### In skills
-
-- **AGENTS.md content that should be a skill** — Is there reference material in AGENTS.md (global or project) that is only needed for specific tasks? Extracting it into a skill reduces always-on context cost. Good candidates: tool reference tables, language-specific conventions, workflow procedures that cross agent boundaries.
-- **Skills that should be in AGENTS.md** — Is there a skill that agents consistently load on every task? If so, the demand-loading overhead isn't justified — move it back to AGENTS.md.
-- **Skill description quality** — Are skill descriptions specific enough for agents to know when to load them? Vague descriptions lead to skills being ignored.
+Is there AGENTS.md content that should be a skill (reference material only needed occasionally)?
+Is there a skill that agents always load (should be inlined back)?
+Are skill descriptions specific enough for agents to know when to load them?
 
 ### Patterns from the session
 
@@ -146,7 +115,7 @@ Do they avoid contradictions with AGENTS.md?
 - **Wasted steps** — Did the agent take unnecessary steps because it lacked context that could be in AGENTS.md?
 - **Permission friction** — Were there permission prompts that were always approved (should be `allow`) or always denied (should be `deny`)?
 - **Convention violations** — Did the agent violate project conventions that are either undocumented or unclear?
-- **Instruction bloat** — Has AGENTS.md grown since the last retrospective? If so, evaluate whether any existing content can be removed or condensed to offset the growth. The goal is a stable or shrinking document, not unbounded accumulation.
+- **Instruction bloat** — Has AGENTS.md grown since the last retrospective? If so, evaluate whether any existing content can be removed or condensed to offset the growth.
 
 ## How you present suggestions
 
@@ -173,19 +142,10 @@ For each suggested change:
 
 Present proposed changes as a numbered list, ordered by impact (highest first).
 
-### 4. Commands, tools, skills, agents, and subagents
+### 4. Extension points
 
-Suggest additions, modifications, or removals:
-
-- **Add** a new command, tool, skill, agent, or subagent if session patterns show recurring friction that it would eliminate.
-- **Modify** an existing one if its prompt, permissions, description, or scope could better serve the workflow.
-- **Remove or consolidate** if something is unused, redundant, or duplicates built-in functionality.
-
-Prefer commands and tools over agents.
-Commands are cheap (a Markdown file with a prompt) and tools encode project conventions into reusable operations.
-Subagents are useful for parallelizable or specialized subtasks that a primary agent can delegate without polluting its own context.
-New primary agents are warranted only when the role requires fundamentally different permissions, temperature, or behavioral instructions.
-Skills are for reference material that agents need occasionally — not behavioral instructions that must always be present.
+Suggest additions, modifications, or removals to commands, tools, skills, agents, or subagents.
+The `opencode-authoring` skill documents the selection hierarchy and design conventions for each extension point.
 
 ## Chezmoi workflow for global agent files
 
