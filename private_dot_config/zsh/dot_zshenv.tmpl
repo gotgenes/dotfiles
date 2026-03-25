@@ -23,12 +23,31 @@ export PTPYTHON_CONFIG_HOME="$XDG_CONFIG_HOME/ptpython"
 
 source "$ZDOTDIR/paths.zsh"
 
-# Activate mise for non-interactive shells only (e.g., OpenCode's bash tool uses
-# `zsh -c` which only sources .zshenv). Shims provide tool resolution; hook-env
-# exports per-directory env vars and prepends direct tool paths.
-# Interactive shells skip this — they get full activation in .zshrc instead,
-# which avoids path_helper (.zprofile) demoting mise entries between the two files.
+# Activate mise for non-interactive shells only (e.g., OpenCode spawns `zsh -c`
+# for each command, sourcing only .zshenv). Interactive shells get full
+# activation in .zshrc instead, which avoids path_helper (.zprofile) demoting
+# mise entries between the two files.
+#
+# Use `mise env` instead of `mise hook-env` so that env vars from mise.toml
+# (e.g., AWS_PROFILE) are applied as defaults — inherited values from inline
+# overrides like `AWS_PROFILE=repone-admin <cmd>` take precedence.
+# hook-env's extra state vars (__MISE_DIFF, __MISE_SESSION) are unnecessary
+# for one-shot non-interactive shells.
 if [[ ! -o interactive ]] && (( $+commands[mise] )); then
     eval "$(mise activate zsh --shims)"
-    eval "$(mise hook-env -s zsh)"
+
+    local _line _rest _var _val
+    while IFS= read -r _line; do
+        if [[ "$_line" == "export PATH="* ]]; then
+            eval "$_line"
+        elif [[ "$_line" == "export "* ]]; then
+            _rest="${_line#export }"
+            _var="${_rest%%=*}"
+            _val="${_rest#*=}"
+            if [[ -z "${(P)_var+x}" ]]; then
+                eval "export ${_var}=${_val}"
+            fi
+        fi
+    done < <(mise env -s zsh 2>/dev/null)
+    unset _line _rest _var _val
 fi

@@ -226,11 +226,22 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
   These wrappers add per-directory behavior (e.g., account selection) before delegating to the real binary.
   Other configuration that invokes these tools (e.g., git credential helpers, editor integrations) should reference the wrapper path, not the real binary, to preserve the per-directory behavior.
 - **Shell PATH ordering** relies on a deliberate sequence across multiple files:
-  - `.zshenv`: `brew shellenv` sets `HOMEBREW_PREFIX` and adds homebrew to PATH; `paths.zsh` prepends `~/.local/bin`, `GOPATH/bin`, and `~/.docker/bin`. For non-interactive shells only (`[[ ! -o interactive ]]`): `mise activate zsh --shims` adds the shims directory to PATH; `mise hook-env` exports per-directory env vars and direct tool paths. This ensures mise tools and env vars are available in `zsh -c` invocations (OpenCode's bash tool). Interactive shells skip mise here entirely — they get full activation in `.zshrc`.
+  - `.zshenv`: `brew shellenv` sets `HOMEBREW_PREFIX` and adds homebrew to PATH; `paths.zsh` prepends `~/.local/bin`, `GOPATH/bin`, and `~/.docker/bin`. For non-interactive shells only (`[[ ! -o interactive ]]`): `mise activate zsh --shims` adds the shims directory to PATH; `mise env` exports per-directory env vars and direct tool paths (env vars are applied as defaults only — see "mise env vars in non-interactive shells" below). Interactive shells skip mise here entirely — they get full activation in `.zshrc`.
   - `/etc/zprofile` (macOS system file, login shells only): `path_helper` reorders PATH, demoting user-added entries behind system paths. Because `.zshenv` skips mise for interactive shells, there are no mise entries for `path_helper` to demote.
   - `.zshrc`: `paths.zsh` is sourced again to re-prepend user paths after `path_helper`'s reordering; `mise activate zsh` installs interactive `precmd`/`chpwd` hooks and prepends tool paths via its built-in `_mise_hook`.
   - `paths.zsh` uses `typeset -aU path` for deduplication then `typeset +U path` to remove the permanent unique constraint — without this, zsh silently blocks re-prepending entries that already exist elsewhere in PATH, which prevented mise tools from being moved back to the front after `path_helper` demoted them.
   - The homebrew lines in `paths.zsh` look redundant with `brew shellenv` but are required: `path_helper` demotes them for login shells, and the `.zshrc` re-source restores the correct order.
+- **mise env vars in non-interactive shells:** `.zshenv` uses `mise env` (not `mise hook-env`) for non-interactive shells, applying env vars from `mise.toml` as defaults only — if a var is already set in the inherited environment, the inherited value is preserved.
+  This matters for OpenCode and other tools that spawn `zsh -c` subprocesses: inline overrides like `AWS_PROFILE=repone-admin <cmd>` work correctly because the inherited value takes precedence over the `mise.toml` default.
+  `mise hook-env` cannot be used here because it unconditionally exports env vars (it does `unset VAR` then `export VAR=value`), which clobbers any inherited value.
+  Interactive shells are unaffected — `mise activate zsh` in `.zshrc` uses `precmd` hooks that run after each command, so inline overrides naturally work.
+- **OpenCode shell invocation model:** OpenCode spawns each bash tool command as a new `zsh -c <command>` process (inheriting the user's login shell, not bash).
+  Each invocation sources `.zshenv` (the only file zsh sources for non-interactive, non-login shells) and then runs the command.
+  This means:
+  - **No persistent state between commands.** `export VAR=value` in one command does not carry over to the next — each starts fresh from `.zshenv`.
+  - **Inline env var overrides work** (after the `.zshenv` fix above) because the inherited value takes precedence over mise defaults.
+  - **To override an env var for a single command,** use the inline prefix: `AWS_PROFILE=repone-admin aws sts get-caller-identity`.
+  - **To override for a chain of commands in one invocation,** use `export` at the start: `export AWS_PROFILE=repone-admin && aws sts get-caller-identity && cdk diff`.
 
 ## Important Notes
 
