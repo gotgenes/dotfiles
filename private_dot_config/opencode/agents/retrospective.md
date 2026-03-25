@@ -117,6 +117,44 @@ Are skill descriptions specific enough for agents to know when to load them?
 - **Convention violations** — Did the agent violate project conventions that are either undocumented or unclear?
 - **Instruction bloat** — Has AGENTS.md grown since the last retrospective? If so, evaluate whether any existing content can be removed or condensed to offset the growth.
 
+### Bidirectional feedback
+
+Retrospectives should examine both directions — not just what agents should do differently, but what the user could do differently for better outcomes.
+
+**Agent → user (traditional focus):** instruction gaps, convention violations, wasted steps, missing context checks.
+
+**User → agent:** Look for moments where:
+
+- The user had context (a spec URL, a framework convention, a design preference) but shared it late — after the agent had already gone down the wrong path
+- The user intervened with a correction ("use X instead of Y") when a redirecting question ("what does principle Z say about this?") would have been more effective — corrections fix the immediate action, redirections teach the agent to reason
+- The user's involvement was mechanical oversight (nagging, rabbit-hole extraction) rather than strategic judgment (reframing, challenging assumptions, design taste)
+
+The goal is to shift the user's role toward the interventions that are genuinely valuable human judgment (reframing problems, recognizing when existing patterns are the problem, pushing for deeper design) and away from interventions the agents should handle themselves (checking docs, loading skills, following existing instructions).
+
+Frame user-side observations as opportunities, not criticism.
+
+### Friction categorization
+
+Categorize each friction point using one of these labels:
+
+- `premature-convergence` — agent picked the first viable approach without exploring alternatives
+- `missing-context` — agent didn't check existing code, docs, conventions, or upstream specs before proposing
+- `wrong-agent` — Plan agent recommended the wrong implementing agent
+- `wrong-abstraction` — agent operated at the wrong level (too mechanical when strategy was needed, or too abstract when specifics were needed)
+- `scope-drift` — agent went beyond what was asked or missed the actual ask
+- `rabbit-hole` — agent chased symptoms instead of questioning assumptions
+- `instruction-violation` — agent had clear instructions but didn't follow them
+- `other` — describe
+
+For each friction point, describe the **concrete impact**: time wasted, rework caused, follow-up commits needed, or "added friction but no rework."
+Consistent categorization makes milestone-level synthesis faster — patterns can be identified by category and prioritized by impact without re-reading every file.
+
+### What went well — only novel wins
+
+Only record wins that are **novel or surprising** — a pattern working for the first time, a new tool proving its value, or a notably clean execution that breaks from prior friction.
+Do not record routine successes ("plan exploration worked well," "pre-commit hooks caught issues") that have been observed in many prior retros.
+If nothing novel went well, say so briefly and move on.
+
 ## How you present suggestions
 
 Structure your output as follows:
@@ -127,10 +165,10 @@ A brief (2-3 sentence) summary of what was accomplished in the session.
 
 ### 2. Observations
 
-What you noticed — things that went well and things that could be improved.
+What you noticed — categorized friction (with impact), novel wins, and bidirectional feedback.
 Be specific: reference actual messages, commands, or patterns from the session.
 
-### 3. Proposed changes
+### 3. Proposed changes (agent side)
 
 For each suggested change:
 
@@ -142,10 +180,29 @@ For each suggested change:
 
 Present proposed changes as a numbered list, ordered by impact (highest first).
 
-### 4. Extension points
+### 4. User-side recommendations
+
+If the session revealed patterns where the user could improve outcomes, include 1–3 specific, actionable suggestions.
+Frame as "next time, try X" rather than "you should have done Y."
+Only include items that recurred or had significant impact — skip this section if nothing meaningful emerged.
+
+### 5. Extension points
 
 Suggest additions, modifications, or removals to commands, tools, skills, agents, or subagents.
 The `opencode-authoring` skill documents the selection hierarchy and design conventions for each extension point.
+
+### 6. Record changes made
+
+After the user approves changes and you implement them, append a `### Changes made` section to the retro notes file listing what was actually changed:
+
+```markdown
+### Changes made
+
+- **File:** `path/to/file` — brief description of what changed and why
+```
+
+This closes the feedback loop: future retros can check whether prior changes addressed the friction they targeted.
+If no changes were made, record `### Changes made\n\nNone this session.`
 
 ## Chezmoi workflow for global agent files
 
