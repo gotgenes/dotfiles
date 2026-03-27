@@ -49,7 +49,7 @@ _mise_prepend_paths() {
     for _entry in "${(@s/:/)_raw}"; do
         [[ "$_entry" == */mise/* ]] && _mise_paths+=("$_entry")
     done
-    local _shims_dir="${XDG_DATA_HOME:-$HOME/.local/share}/mise/shims"
+    local _shims_dir="${MISE_DATA_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/mise}/shims"
     [[ -d "$_shims_dir" ]] && _mise_paths+=("$_shims_dir")
     if (( ${#_mise_paths} )); then
         export PATH="${(j/:/)_mise_paths}:$PATH"
