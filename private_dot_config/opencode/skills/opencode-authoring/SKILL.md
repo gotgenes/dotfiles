@@ -186,6 +186,26 @@ Grant limited bash access only when the subagent needs to run targeted tests or 
 
 Primary agents need `permission.task: true` (or `"allow"`) in `opencode.json` to dispatch subagents.
 
+### MCP tool access
+
+Subagents can use MCP tools (Playwright, Honeycomb, etc.) — they require only a per-agent entry in `opencode.json`.
+MCP tools are loaded once for the entire OpenCode instance; the only gate is the permission system (`findLast()` matching).
+Disable tools globally under the top-level `tools` key, then re-enable per-subagent under `agent.<name>.tools`, just like primary agents.
+
+### Question tool support
+
+Subagents can use the `question` tool — the parent session's UI aggregates question prompts from child sessions.
+The Task tool does not disable the `question` tool in subagent sessions.
+This enables subagents to gate on human confirmation (e.g., for manual-required AC verification).
+Include `question: true` in the subagent's `tools` frontmatter.
+
+### Long-running operations
+
+Subagents can perform long-running operations (CI workflow monitoring, multi-step Playwright verification) without timeout issues.
+The Task tool maintains the subagent session until it completes.
+Use the `ci_find` and `ci_watch` custom tools for CI workflow monitoring — they handle polling with proper backoff.
+Load the `ci-cd` skill in the subagent definition or instruct the subagent to load it before triggering workflows.
+
 ### Subagent drift
 
 Subagent definitions that reference project conventions (ADRs, skills, codebase patterns) can drift as those conventions evolve.
@@ -296,3 +316,16 @@ This keeps tools out of agents that don't need them.
 ### Permission overrides
 
 Agent-level permission overrides (e.g., `permission.task` for subagent dispatch) are configured under `agent.<name>.permission`.
+
+## Global file management (chezmoi)
+
+Global OpenCode configuration files (`~/.config/opencode/`) are managed by chezmoi.
+Edits to the deployed copies will be silently overwritten on the next `chezmoi apply`.
+
+When modifying global files (agents, skills, commands, plugins, `opencode.json`):
+
+1. **Edit the chezmoi source** — files live in `$(chezmoi source-path)/private_dot_config/opencode/`.
+   Use `chezmoi source-path ~/.config/opencode/<path>` to find the exact source file.
+1. **Deploy** — run `chezmoi apply` to sync changes to `~/.config/opencode/`.
+
+Do not edit the deployed copies directly — they are not the source of truth.
