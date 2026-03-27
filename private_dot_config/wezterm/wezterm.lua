@@ -48,10 +48,8 @@ local url_patterns = {
   [=[([[:alpha:]]+://\S+)"]=],
   -- URL before a closing single-quote
   [=[([[:alpha:]]+://\S+)']=],
-  -- URL before a trailing period (end of sentence)
-  [=[([[:alpha:]]+://\S+)\.]=],
-  -- URL alone
-  [=[([[:alpha:]]+://\S+)]=],
+  -- URL alone (strip trailing sentence punctuation)
+  [=[([[:alpha:]]+://\S+(?<![.,:;!?]))]=],
 }
 
 -- Alphabet for Dvorak keyboard layout
