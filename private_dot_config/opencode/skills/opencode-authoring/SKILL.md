@@ -196,7 +196,7 @@ Disable tools globally under the top-level `tools` key, then re-enable per-subag
 
 Subagents can use the `question` tool — the parent session's UI aggregates question prompts from child sessions.
 The Task tool does not disable the `question` tool in subagent sessions.
-This enables subagents to gate on human confirmation (e.g., for manual-required AC verification).
+This enables subagents to gate on human confirmation when needed (e.g., blocking on a manual action the user must perform).
 Include `question: true` in the subagent's `tools` frontmatter.
 
 ### Long-running operations
