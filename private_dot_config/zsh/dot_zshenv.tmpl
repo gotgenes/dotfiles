@@ -28,42 +28,55 @@ source "$ZDOTDIR/paths.zsh"
 # activation in .zshrc instead, which avoids path_helper (.zprofile) demoting
 # mise entries between the two files.
 #
-# Use `mise env` instead of `mise hook-env` so that env vars from mise.toml
-# (e.g., AWS_PROFILE) are applied as defaults — inherited values from inline
-# overrides like `AWS_PROFILE=repone-admin <cmd>` take precedence.
-# hook-env's extra state vars (__MISE_DIFF, __MISE_SESSION) are unnecessary
+# We parse `mise env` output instead of eval'ing it directly for two reasons:
+#   1. Env vars (e.g., AWS_PROFILE) are applied as defaults — inherited values
+#      from inline overrides like `AWS_PROFILE=repone-admin <cmd>` take
+#      precedence. `mise hook-env` can't do this; it unconditionally overwrites.
+#   2. Only mise-specific PATH entries are prepended, preserving paths.zsh
+#      ordering (e.g., ~/.local/bin before /opt/homebrew/bin). Both
+#      `mise hook-env` and `mise activate --shims` prepend /opt/homebrew/bin,
+#      which demotes ~/.local/bin wrapper scripts.
+#
+# hook-env's internal state vars (__MISE_DIFF, __MISE_SESSION) are unnecessary
 # for one-shot non-interactive shells.
-if [[ ! -o interactive ]] && (( $+commands[mise] )); then
-    # Extract mise tool install paths, shims, and env vars from `mise env`.
-    # PATH: only prepend mise-specific entries (installs/ and shims/) to the
-    # existing PATH so that paths.zsh ordering (e.g., ~/.local/bin before
-    # homebrew) is preserved. We avoid `mise activate --shims` because it also
-    # prepends /opt/homebrew/bin, which demotes ~/.local/bin wrapper scripts.
-    # Env vars: apply as defaults only — inherited values take precedence.
-    local _line _rest _var _val _mise_paths=()
-    while IFS= read -r _line; do
-        if [[ "$_line" == "export PATH="* ]]; then
-            _rest="${_line#export PATH=}"
-            _rest="${_rest//\'/}"
-            for _val in "${(@s/:/)_rest}"; do
-                [[ "$_val" == */mise/* ]] && _mise_paths+=("$_val")
-            done
-        elif [[ "$_line" == "export "* ]]; then
-            _rest="${_line#export }"
-            _var="${_rest%%=*}"
-            _val="${_rest#*=}"
-            if [[ -z "${(P)_var+x}" ]]; then
-                eval "export ${_var}=${_val}"
-            fi
-        fi
-    done < <(mise env -s zsh 2>/dev/null)
-    # Always include the shims directory as a catch-all for tools not in the
-    # current directory's mise.toml. mise env only outputs direct install paths.
+
+# Prepend only mise-managed PATH entries (installs/ dirs) to the existing PATH,
+# plus the shims directory as a catch-all for tools not in the current
+# directory's mise.toml.
+_mise_prepend_paths() {
+    local _mise_paths=() _raw _entry
+    _raw="${1//\'/}"
+    for _entry in "${(@s/:/)_raw}"; do
+        [[ "$_entry" == */mise/* ]] && _mise_paths+=("$_entry")
+    done
     local _shims_dir="${XDG_DATA_HOME:-$HOME/.local/share}/mise/shims"
     [[ -d "$_shims_dir" ]] && _mise_paths+=("$_shims_dir")
     if (( ${#_mise_paths} )); then
         export PATH="${(j/:/)_mise_paths}:$PATH"
     fi
-    unset _shims_dir
-    unset _line _rest _var _val _mise_paths
+}
+
+# Export a var only if it is not already set in the environment (i.e., not
+# inherited from the parent process). This makes mise.toml values act as
+# defaults that inline overrides can supersede.
+_mise_export_default() {
+    local _var="$1" _val="$2"
+    if [[ -z "${(P)_var+x}" ]]; then
+        eval "export ${_var}=${_val}"
+    fi
+}
+
+if [[ ! -o interactive ]] && (( $+commands[mise] )); then
+    local _line
+    while IFS= read -r _line; do
+        if [[ "$_line" == "export PATH="* ]]; then
+            _mise_prepend_paths "${_line#export PATH=}"
+        elif [[ "$_line" == "export "* ]]; then
+            local _rest="${_line#export }"
+            _mise_export_default "${_rest%%=*}" "${_rest#*=}"
+        fi
+    done < <(mise env -s zsh 2>/dev/null)
+    unset _line
 fi
+
+unfunction _mise_prepend_paths _mise_export_default 2>/dev/null
