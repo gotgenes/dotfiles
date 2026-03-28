@@ -139,6 +139,16 @@ zinit light zdharma-continuum/null
 
 zinit ice \
     as"completion" \
+    id-as"pnpm-completion" \
+    has"pnpm" \
+    atclone"pnpm completion zsh > _pnpm" \
+    atpull"%atclone" \
+    run-atpull \
+    nocompile
+zinit light zdharma-continuum/null
+
+zinit ice \
+    as"completion" \
     id-as"bw-completion" \
     has"bw" \
     atclone"bw completion --shell zsh > _bw" \
