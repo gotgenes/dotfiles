@@ -74,6 +74,12 @@ zinit light jeffreytse/zsh-vi-mode
 zinit ice as"completion"
 zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
 
+zinit ice \
+    atload"zpcdreplay" \
+    atclone"./zplug.zsh" \
+    atpull"%atclone"
+zinit light g-plane/pnpm-shell-completion
+
 zinit snippet OMZP::kubectl
 
 zinit snippet OMZP::dotnet
@@ -132,16 +138,6 @@ zinit ice \
     id-as"aws-vault-completion" \
     has"aws-vault" \
     atclone"aws-vault --completion-script-zsh > _aws-vault" \
-    atpull"%atclone" \
-    run-atpull \
-    nocompile
-zinit light zdharma-continuum/null
-
-zinit ice \
-    as"completion" \
-    id-as"pnpm-completion" \
-    has"pnpm" \
-    atclone"pnpm completion zsh > _pnpm" \
     atpull"%atclone" \
     run-atpull \
     nocompile
