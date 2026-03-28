@@ -12,9 +12,10 @@ $ARGUMENTS
 Before starting:
 
 1. Read the project's AGENTS.md for product context, UI conventions, and any Designer-specific instructions.
-2. If the arguments reference a GitHub issue number, read the issue for full context.
-3. If the arguments include a URL or page reference, use Playwright to view the current state.
-4. Load the `mobile-ux` skill for mobile interaction patterns.
-5. Load the `shadcn` skill if the evaluation involves component selection.
+1. If the arguments reference a GitHub issue number, read the issue for full context.
+1. Start the dev server to view the running application. Use `dev:preview` mode when evaluating flows that involve persistent data (athlete lists, user profiles, session bookings). Use `dev:msw` only for offline/mock scenarios.
+1. If the arguments include a URL or page reference, use Playwright to view the current state.
+1. Load the `mobile-ux` skill for mobile interaction patterns.
+1. Load the `shadcn` skill if the evaluation involves component selection.
 
-Begin by understanding the user's task and context before evaluating.
+Begin by viewing the product as a user would — form impressions before reading code.
