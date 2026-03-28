@@ -75,7 +75,6 @@ zinit ice as"completion"
 zinit snippet "https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker"
 
 zinit ice \
-    atload"zpcdreplay" \
     atclone"./zplug.zsh" \
     atpull"%atclone"
 zinit light g-plane/pnpm-shell-completion
