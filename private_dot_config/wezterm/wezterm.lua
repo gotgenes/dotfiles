@@ -120,4 +120,9 @@ local my_config = {
 
 local config = table_merge(wezterm.config_builder(), my_config)
 
+local ok, local_config = pcall(require, 'local')
+if ok and type(local_config) == 'table' then
+  table_merge(config, local_config)
+end
+
 return config
