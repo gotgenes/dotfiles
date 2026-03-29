@@ -1,0 +1,5 @@
+{
+  "workspace": {
+    "library": ["~/.local/share/nvim/lazy/wezterm-types"]
+  }
+}
