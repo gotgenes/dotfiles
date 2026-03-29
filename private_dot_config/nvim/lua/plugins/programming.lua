@@ -286,4 +286,16 @@ return {
       "markdown",
     },
   },
+  {
+    "DrKJeff16/wezterm-types",
+    lazy = true,
+  },
+  {
+    "folke/lazydev.nvim",
+    opts = {
+      library = {
+        { path = "wezterm-types", mods = { "wezterm" } },
+      },
+    },
+  },
 }
