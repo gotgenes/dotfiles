@@ -1,4 +1,4 @@
-local wezterm = require('wezterm')
+local wezterm = require('wezterm') ---@type Wezterm
 local act = wezterm.action
 local mux = wezterm.mux
 
@@ -75,6 +75,7 @@ local open_url_action = act.QuickSelectArgs({
   end),
 })
 
+---@type Config
 local my_config = {
   font = wezterm.font('JetBrains Mono', { weight = 'Regular' }),
   font_size = 14.0,
