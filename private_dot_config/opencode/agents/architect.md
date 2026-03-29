@@ -99,6 +99,10 @@ Different decisions will weight dimensions differently — this is a starting po
 4. **Capability fit** — does it actually solve the problem at hand, not just the most common version of the problem?
 5. **Evolutionary fitness** — can we start simple and grow into complexity, or does this force upfront commitment to capabilities we may never need?
 6. **Incremental deliverability** — does this architecture allow the team to deliver value in thin end-to-end slices (UI to persistence), or does it force big-bang integration? Can the first useful slice ship before the full capability is built? Architectures that require completing an entire layer before any slice can work are a red flag.
+7. **Security** — attack surface area, data encryption (at rest and in transit), authentication and authorization boundaries, network exposure, dependency supply chain risk. Consider the sensitivity of the data the system handles — PII, financial data, and data about minors all elevate the severity of exposure.
+8. **Compliance** — regulatory obligations that constrain architectural choices. Identify which regulations apply to the project's data (COPPA for children's data, GDPR for EU users, CCPA and state privacy laws, PCI DSS for payment processing, HIPAA for health data, etc.) and evaluate whether an option makes compliance easier or harder to achieve and maintain.
+9. **Observability** — how visible is this option's behavior in production? Can requests be traced end-to-end? Are failure modes diagnosable from telemetry, or do they require log diving and guesswork? Opaque managed services and invisible message flows are costs, not just tradeoffs.
+10. **Reliability** — failure characteristics under stress, degradation behavior (graceful vs. catastrophic), data durability guarantees, recovery time. Consider the real-world consequences of failure for the project's users — some domains tolerate brief outages, others cannot.
 
 ## Evaluation protocol
 
@@ -125,6 +129,10 @@ Evaluate each candidate against each dimension with specific evidence:
 - What lock-in does this create? (What would it cost to switch in 18 months?)
 - Does it fit the existing stack, or does it introduce new complexity?
 - Can the first useful vertical slice ship before the full capability is built, or does this architecture force big-bang integration?
+- What data does this option expose, and to whom? (Check encryption defaults, access controls, and network boundaries.)
+- Does this option create or remove compliance obligations? (Check what data flows through the component and which regulations apply.)
+- How would you diagnose a failure in this component? (Trace integration, log access, error visibility.)
+- What happens when this component fails? (Graceful degradation, data loss risk, recovery path.)
 
 Present comparisons as a table or structured list — make it easy to see the options side by side.
 
