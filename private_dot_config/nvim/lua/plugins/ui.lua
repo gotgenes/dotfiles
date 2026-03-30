@@ -3,7 +3,7 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     opts = {
-      flavour = "macchiato",
+      flavour = "auto",
       styles = {
         comments = { "italic" },
         conditionals = { "italic" },
