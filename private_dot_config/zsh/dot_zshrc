@@ -105,8 +105,8 @@ zinit light zdharma-continuum/null
 zinit ice \
     as"completion" \
     id-as"wezterm-completion" \
-    has"wezterm" \
-    atclone"wezterm shell-completion --shell zsh > _wezterm" \
+    if'(( $+commands[wezterm] || $+commands[wezterm.exe] ))' \
+    atclone'$(( $+commands[wezterm] )) && wezterm shell-completion --shell zsh > _wezterm || wezterm.exe shell-completion --shell zsh > _wezterm' \
     atpull"%atclone" \
     run-atpull \
     nocompile
