@@ -19,6 +19,7 @@ return {
         operators = {},
       },
       integrations = {
+        blink_pairs = true,
         diffview = true,
         grug_far = true,
         lsp_trouble = true,
