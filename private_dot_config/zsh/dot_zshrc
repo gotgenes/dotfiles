@@ -106,7 +106,7 @@ zinit ice \
     as"completion" \
     id-as"wezterm-completion" \
     if'(( $+commands[wezterm] || $+commands[wezterm.exe] ))' \
-    atclone'$(( $+commands[wezterm] )) && wezterm shell-completion --shell zsh > _wezterm || wezterm.exe shell-completion --shell zsh > _wezterm' \
+    atclone'if (( $+commands[wezterm] )); then wezterm shell-completion --shell zsh > _wezterm; else wezterm.exe shell-completion --shell zsh > _wezterm; fi' \
     atpull"%atclone" \
     run-atpull \
     nocompile
