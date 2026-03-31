@@ -153,9 +153,6 @@ return {
     main = "config-local",
   },
   {
-    "gpanders/editorconfig.nvim",
-  },
-  {
     "folke/flash.nvim",
     opts = {
       modes = {
