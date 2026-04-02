@@ -248,6 +248,9 @@ Most projects enforce this via markdownlint's MD040 rule.
 
 Use sequential numbering (`1.` `2.` `3.`) in ordered lists, restarting at `1.` under each new heading.
 
+Do not use bold text (`**...**`) as a substitute for headings — use proper Markdown heading syntax (`##`, `###`, `####`).
+markdownlint's MD036 rule rejects emphasis used as headings.
+
 ## Decision Points
 
 Some choices during implementation establish conventions, set precedents, or are difficult to reverse.
