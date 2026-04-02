@@ -73,6 +73,9 @@ Sections should be scannable.
 Use headers to delineate concerns.
 Keep each section focused on one topic.
 
+When adding skill-loading instructions, use the established pattern: "Before [doing X], load the `skill-name` skill."
+This keeps skill references consistent and scannable (e.g., "Before writing or debugging tests, load the `testing` skill.").
+
 ### Balancing growth
 
 When adding content, look for existing content that can be removed or condensed.
