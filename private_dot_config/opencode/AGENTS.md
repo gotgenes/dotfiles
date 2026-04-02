@@ -385,6 +385,12 @@ This system has modern CLI tools installed via Homebrew.
 Prefer these over their traditional counterparts: `fd` over `find`, `rg` over `grep`, `eza` over `ls`, `bat` over `cat`, `sd` over `sed`, `dust` over `du`, `jq` for JSON processing.
 Load the `cli-tools` skill for the full tool mapping and usage examples.
 
+### Web Fetching
+
+When the built-in WebFetch tool returns 403 or 404, fall back to `playwright-cli` which uses a real browser.
+Use `--headed` when the site has Cloudflare protection — headed mode auto-passes challenges that block headless browsers.
+Load the `playwright-cli` skill for the full command reference.
+
 ### GitHub Authentication
 
 This system may have multiple GitHub users authenticated via `gh auth`.
