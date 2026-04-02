@@ -33,7 +33,9 @@ permission:
     "git describe*": allow
     "git diff*": allow
     "git log*": allow
+    "git pull --ff-only": allow
     "git push": allow
+    "git rev-parse *": allow
     "git show*": allow
     "git status*": allow
     "chezmoi apply": allow

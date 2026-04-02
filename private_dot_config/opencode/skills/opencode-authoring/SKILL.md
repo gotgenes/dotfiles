@@ -113,6 +113,157 @@ Apply least privilege: agents should have the permissions they need and no more.
 - Agents with `"*": allow` on bash when they only need specific commands.
 - Write access to directories the agent never modifies.
 
+### Permission patterns
+
+This section documents canonical permission patterns as composable building blocks.
+Each agent definition selects which pattern applies and which bash command groups it needs.
+
+#### Bash command groups (tool-agnostic)
+
+These groups contain only tool-agnostic commands suitable for global agent definitions.
+Project-specific commands (package managers, platform-specific tools, doc directory paths) belong in project-local definitions or a project-local skill.
+
+| Group              | Commands                                                                                                                                                  | Purpose                          |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **Read utilities** | `rg *`, `fd *`, `bat *`, `cat *`, `eza *`, `eza`, `ls *`, `ls`, `head *`, `tail *`, `jq *`, `cut *`, `sort *`, `grep *`, `echo *`, `readlink *`, `dust *` | Codebase exploration, inspection |
+| **Git read**       | `git status*`, `git log*`, `git diff*`, `git show*`, `git describe*`, `git rev-parse *`                                                                   | Repository state inspection      |
+| **Git write**      | `git add *`, `git commit *`, `git push`, `git pull *`                                                                                                     | Committing and pushing changes   |
+| **chezmoi**        | `chezmoi apply`, `chezmoi diff`, `chezmoi source-path`, `chezmoi source-path *`, `chezmoi managed`, `chezmoi managed *`, `chezmoi forget *`               | Global file management           |
+
+#### Named patterns
+
+| Pattern                             | Bash default | Bash groups                                       | Write/edit scope                                                     | Tools                                    |
+| ----------------------------------- | ------------ | ------------------------------------------------- | -------------------------------------------------------------------- | ---------------------------------------- |
+| **1. Full-permission coding agent** | _(default)_  | No `permission:` block — unrestricted             | No restrictions                                                      | write, edit, bash, todo                  |
+| **2. Doc-writing primary agent**    | `"*": deny`  | Read utilities, Git read, Git write               | `"*": deny` + specific `docs/<subdirectory>/*` paths                 | write, edit, bash, todo, question        |
+| **3. Board-management primary**     | `"*": ask`   | Read utilities, Git read, Git write (`push: ask`) | edit only: `"*": deny` + agent self-modification path                | write, edit, bash, todo, question        |
+| **4. Locked-down primary**          | `"*": deny`  | _(none)_                                          | `"*": deny` on bash, write, edit                                     | _(defaults only)_                        |
+| **5. Read-only subagent**           | _(N/A)_      | _(none)_                                          | _(N/A)_                                                              | write: false, edit: false, bash: false   |
+| **6. Verification subagent + bash** | `"*": deny`  | Read utilities, Git read, targeted tool runs      | `"*": deny` on write and edit                                        | write: false, edit: false, bash: true    |
+| **7. Commit-capable subagent**      | `"*": deny`  | Git read, Git write                               | _(N/A — files created by custom tools that bypass permission layer)_ | bash: true (write/edit false by default) |
+
+#### Decision table
+
+| Agent role                                                  | Start from pattern |
+| ----------------------------------------------------------- | ------------------ |
+| Unrestricted coding agent (implements features, fixes bugs) | 1                  |
+| Writes docs, plans, ADRs, design evaluations                | 2                  |
+| Manages board, creates/closes issues, no file writes        | 3                  |
+| Pure conversation (brainstorming, ideation)                 | 4                  |
+| Verification-only subagent (reviews, inspects)              | 5                  |
+| Subagent that runs tests or checks (needs bash)             | 6                  |
+| Subagent that commits artifacts (retro notes, changelogs)   | 7                  |
+
+#### Concrete frontmatter examples
+
+**Pattern 2 — doc-writing primary agent (global baseline):**
+
+```yaml
+permission:
+  write:
+    "*": deny
+    "docs/decisions/*": allow
+    "docs/plans/*": allow
+  edit:
+    "*": deny
+    "docs/decisions/*": allow
+    "docs/plans/*": allow
+  bash:
+    "*": deny
+    # Read utilities
+    "rg *": allow
+    "fd *": allow
+    "bat *": allow
+    "cat *": allow
+    "eza *": allow
+    "eza": allow
+    "ls *": allow
+    "ls": allow
+    "head *": allow
+    "tail *": allow
+    "jq *": allow
+    "cut *": allow
+    "sort *": allow
+    "grep *": allow
+    "echo *": allow
+    "readlink *": allow
+    "dust *": allow
+    # Git read
+    "git status*": allow
+    "git log*": allow
+    "git diff*": allow
+    "git show*": allow
+    "git describe*": allow
+    "git rev-parse *": allow
+    # Git write
+    "git add *": allow
+    "git commit *": allow
+    "git push": allow
+    "git pull *": allow
+tools:
+  write: true
+  edit: true
+  bash: true
+  todo: true
+  question: true
+```
+
+**Pattern 5 — read-only subagent:**
+
+```yaml
+tools:
+  write: false
+  edit: false
+  bash: false
+```
+
+Add `question: true` when the subagent needs to gate on human confirmation.
+
+**Pattern 6 — verification subagent with bash:**
+
+```yaml
+permission:
+  write:
+    "*": deny
+  edit:
+    "*": deny
+  bash:
+    "*": deny
+    # Read utilities (subset as needed)
+    "rg *": allow
+    "cat *": allow
+    # Git read
+    "git status*": allow
+    "git log*": allow
+    "git diff*": allow
+    # Targeted tool runs
+    "pnpm run typecheck*": allow
+    "pnpm run test*": allow
+tools:
+  write: false
+  edit: false
+  bash: true
+```
+
+#### Global vs. project-local layering
+
+Global definitions provide the **tool-agnostic baseline**: read utilities, git read, and optionally git write.
+Project-local definitions add **project-specific permissions**: doc directory paths for write/edit scoping, package manager commands, platform-specific tools (GitHub CLI, CI tools).
+
+Commands that belong **only** in project-local definitions:
+
+- Package manager commands (`pnpm *`, `npm *`, `yarn *`)
+- Platform-specific tools (`gh *`, `vercel *`, `fly *`)
+- Doc directory paths (`docs/decisions/*`, `docs/plans/*`, etc.)
+
+Commands appropriate for **global** definitions:
+
+- Read utilities (rg, fd, bat, cat, eza, ls, head, tail, jq, cut, sort, grep, echo, readlink, dust)
+- Git read and git write commands
+- chezmoi commands (for the retrospective agent)
+
+Projects with additional permission needs should document them in a project-local skill (e.g., `agent-permissions`) that is loaded alongside this skill when authoring or reviewing agent definitions.
+
 ### Tool access
 
 Agents should have the tools they need, and only the tools they need.
