@@ -29,6 +29,11 @@ permission:
     "git log*": allow
     "git show*": allow
     "git status*": allow
+    "git rev-parse *": allow
+    # Git write
+    "git add *": allow
+    "git commit *": allow
+    "git push": allow
 tools:
   write: true
   edit: true

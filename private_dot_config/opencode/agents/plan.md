@@ -3,29 +3,36 @@ description: Planning and analysis agent — reviews code and suggests changes w
 mode: primary
 model: anthropic/claude-opus-4-6
 permission:
-  edit: deny
   bash:
-    "*": ask
+    "*": deny
+    # Read utilities
+    "rg *": allow
+    "fd *": allow
     "bat *": allow
     "cat *": allow
-    "cut *": allow
-    "dust *": allow
-    "echo *": allow
     "eza *": allow
     "eza": allow
-    "fd *": allow
-    "grep *": allow
-    "head *": allow
-    "jq *": allow
-    "ls": allow
     "ls *": allow
-    "readlink *": allow
-    "rg *": allow
-    "sort *": allow
+    "ls": allow
+    "head *": allow
     "tail *": allow
-    "git describe*": allow
-    "git diff*": allow
-    "git log*": allow
-    "git show*": allow
+    "jq *": allow
+    "cut *": allow
+    "sort *": allow
+    "grep *": allow
+    "echo *": allow
+    "readlink *": allow
+    "dust *": allow
+    # Git read
     "git status*": allow
+    "git log*": allow
+    "git diff*": allow
+    "git show*": allow
+    "git describe*": allow
+    "git rev-parse *": allow
+    # Git write
+    "git add *": allow
+    "git commit *": allow
+    "git push": allow
+    "git pull *": allow
 ---
