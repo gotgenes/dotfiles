@@ -282,6 +282,44 @@ Do not use empty bodies or HTML comments as "permissions-only overrides."
 
 This is tracked at [opencode#3895](https://github.com/anomalyco/opencode/issues/3895).
 
+## Model Selection
+
+When creating or modifying an agent, select the model based on the agent's cognitive demand category.
+
+### Cognitive demand categories
+
+| Category                    | Description                                                                                              | Examples                                                                                         |
+| --------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Mechanical verification** | Pattern matching, string comparison, checklist evaluation, structured output following a template        | Plan-reviewer (file path existence checks), viewport-inspector (screenshot comparison)           |
+| **Judgment-based analysis** | Code quality evaluation, cross-file synthesis, design assessment, identifying what's missing             | Pre-completion-reviewer (quality checklist), refactoring-reviewer (extraction opportunities)     |
+| **Creative/strategic**      | Reframing problems, exploring design spaces, novel analysis, challenging assumptions, divergent thinking | Plan (design-space exploration), architect (multi-dimensional evaluation), brainstorm (ideation) |
+
+### Model assignment guidelines
+
+| Cognitive demand   | Recommended model | Rationale                                                                                                 |
+| ------------------ | ----------------- | --------------------------------------------------------------------------------------------------------- |
+| Creative/strategic | Opus              | Design-space exploration, premature convergence resistance, and long-horizon reasoning are Opus strengths |
+| Judgment-based     | Sonnet or Opus    | Default to Sonnet; use Opus when retro evidence shows quality regressions on Sonnet                       |
+| Mechanical         | Sonnet            | SWE-bench shows only ~3% gap between Opus and Sonnet on standardized tasks                                |
+
+Haiku is deferred for agent use until it supports adaptive thinking and has a context window comparable to Sonnet.
+
+### Explicit pinning convention
+
+All subagents should have an explicit `model:` field in frontmatter.
+Do not rely on model inheritance from the dispatcher — inheritance makes the subagent's behavior depend on whichever primary agent dispatches it, which is fragile and invisible.
+Explicit pinning makes model assignments visible, versionable, and independent of the dispatch chain.
+
+### High-frequency cost awareness
+
+Agents that run on every issue (pre-completion-reviewer, retro-stage, release-orchestrator) deserve more scrutiny on model choice than low-frequency agents (architect, brainstorm).
+A 1.67× cost multiplier on a low-frequency agent is negligible; the same multiplier on a per-issue agent compounds.
+
+### Regression monitoring
+
+When downgrading an agent's model, document the specific regression signal that would warrant reverting — either in the issue body or in a code comment in the agent's frontmatter.
+Examples: "If zero-correction sessions regress, revert to Opus" or "If the reviewer starts producing false-positive PASS results, revert to Opus."
+
 ## Subagents
 
 Subagents are fresh-context agents dispatched by primary agents via the Task tool.
