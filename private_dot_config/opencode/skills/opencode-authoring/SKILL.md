@@ -330,8 +330,9 @@ This gives the human explicit control over when reviews happen.
 
 #### Automatic hooks
 
-Dispatching on every step is noisy for trivial changes and hard to partially adopt.
-Prefer judgment-based or command-triggered dispatch.
+Use automatic dispatch when the subagent's value depends on running every time — skipping it would reintroduce the problem it solves (e.g., `plan-reviewer` verifying assumptions that the Plan agent cannot self-check due to shared context).
+For optional quality checks where the agent can judge whether the check is warranted, prefer judgment-based dispatch.
+For checks the user should control, prefer command-triggered dispatch.
 
 ### Permissions
 
