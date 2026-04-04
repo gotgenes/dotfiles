@@ -271,6 +271,8 @@ When presenting a decision point:
 - List the options with pros, cons, and consequences of each.
 - State which option you'd recommend and why, but do not apply it without confirmation.
 - If you're unsure whether something is a decision point, err on the side of asking.
+- If the user's request implies a feature or behavior that isn't in the plan or the current codebase, ask the user directly after 2–3 tool calls of investigation rather than exhaustively searching for evidence.
+  A quick clarifying question is cheaper than 10 tool calls of inconclusive investigation.
 
 ## Manual Actions
 
