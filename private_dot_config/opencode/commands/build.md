@@ -17,7 +17,8 @@ Before starting:
 
 Begin implementation.
 
-When complete:
+## Completion
 
-1. If a plan file was read from `docs/plans/`, delete it — plans are ephemeral artifacts that lose relevance once the work is done. Commit the deletion separately from the implementation.
-2. Recommend handoff to the appropriate verification step (e.g., `/pm-verify #N`).
+Do not delete the plan file — plan files are retained as historical reference.
+
+Follow the pre-completion protocol defined in your system prompt.

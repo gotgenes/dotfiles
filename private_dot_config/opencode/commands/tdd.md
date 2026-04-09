@@ -15,3 +15,7 @@ Before starting:
 4. Identify the acceptance test entry point and the first layer of implementation.
 
 Begin with Phase 1 (acceptance test).
+
+## Completion
+
+Do not delete the plan file — plan files are retained as historical reference.
