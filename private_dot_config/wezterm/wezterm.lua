@@ -40,7 +40,7 @@ end)
 local url_patterns = {
   -- Negative lookbehind strips trailing punctuation and delimiters that are
   -- almost always sentence-level syntax rather than part of the URL.
-  [=[([[:alpha:]]+://\S+(?<![.,:;!?)\]>"']))]=],
+  [=[([[:alpha:]]+://\S+(?<![.,:;!?()\[\]><"'`]))]=],
 }
 
 -- Alphabet for Dvorak keyboard layout
