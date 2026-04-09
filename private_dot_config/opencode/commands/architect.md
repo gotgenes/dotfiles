@@ -3,6 +3,8 @@ description: Start architectural evaluation for a decision or question
 agent: architect
 ---
 
+# Architectural Evaluation
+
 Evaluate the following architectural question or decision.
 
 $ARGUMENTS
