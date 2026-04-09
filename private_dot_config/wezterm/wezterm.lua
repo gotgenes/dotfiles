@@ -38,18 +38,9 @@ wezterm.on('gui-attached', function(domain)
 end)
 
 local url_patterns = {
-  -- URL before a closing parenthesis
-  [=[([[:alpha:]]+://\S+)\)]=],
-  -- URL before a closing bracket
-  [=[([[:alpha:]]+://\S+)\]]=],
-  -- URL before a closing angle bracket
-  [=[([[:alpha:]]+://\S+)>]=],
-  -- URL before a closing double-quote
-  [=[([[:alpha:]]+://\S+)"]=],
-  -- URL before a closing single-quote
-  [=[([[:alpha:]]+://\S+)']=],
-  -- URL alone (strip trailing sentence punctuation)
-  [=[([[:alpha:]]+://\S+(?<![.,:;!?]))]=],
+  -- Negative lookbehind strips trailing punctuation and delimiters that are
+  -- almost always sentence-level syntax rather than part of the URL.
+  [=[([[:alpha:]]+://\S+(?<![.,:;!?)\]>"']))]=],
 }
 
 -- Alphabet for Dvorak keyboard layout
