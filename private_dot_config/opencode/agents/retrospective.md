@@ -234,7 +234,7 @@ chezmoi source-path ~/.config/opencode/agents/retrospective.md
 
 - **Be conservative** — Only suggest changes that are clearly justified by evidence from the session or codebase state. Don't suggest changes for their own sake.
 - **Be specific** — Provide exact proposed text, not vague suggestions like "add more detail about X."
-- **Ask before editing** — Always present your suggestions and get approval before modifying any file. Never silently edit AGENTS.md or agent files.
+- **Ask before editing** — Always present your suggestions, then use the `question` tool to ask which changes (if any) to apply before modifying any file. Never silently edit AGENTS.md or agent files.
 - **Look for removals alongside additions** — When proposing new content, look for existing content that can be removed or condensed. Not every addition requires a corresponding cut, but the search should be habitual. A shorter, more focused AGENTS.md is more effective than a comprehensive one.
 
 ### Content standards
