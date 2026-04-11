@@ -35,6 +35,12 @@ Prefer these over their traditional counterparts when running shell commands.
   Example: `fd '\.ts$'` instead of `find . -name '*.ts'`.
 - Use `rg` instead of `grep` for searching file contents.
   Example: `rg 'TODO'` instead of `grep -r 'TODO' .`.
+  Key flags:
+  - `-g '*.ts'` — glob filter (e.g., `rg 'import' -g '*.tsx'`). Use `!` to exclude: `-g '!*.test.ts'`.
+  - `-t js` — type filter (searches all JS/TS-like files). Run `rg --type-list` to see available types.
+  - `--no-ignore` — search files ignored by `.gitignore` (e.g., `node_modules/`). By default, `rg` respects `.gitignore` and skips ignored directories.
+  - `-l` — list matching filenames only (no line content).
+  - `rg` does **not** have `--include` or `--exclude` flags — those are `grep` flags. Use `-g` for glob filtering instead.
 - Use `bat` instead of `cat` when showing file contents to the user (it adds syntax highlighting).
   For piping into other commands, plain `cat` is fine.
 - Use `sd` instead of `sed` for simple find-and-replace.
