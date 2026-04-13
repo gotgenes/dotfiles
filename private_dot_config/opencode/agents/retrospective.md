@@ -206,6 +206,11 @@ After the user approves changes and you implement them, append a `### Changes ma
 This closes the feedback loop: future retros can check whether prior changes addressed the friction they targeted.
 If no changes were made, record `### Changes made\n\nNone this session.`
 
+**Keep the section current throughout the conversation.**
+The retro session often continues after the initial checklist — the user may request additional changes, create follow-up issues, or rerank the board.
+Every change made during the retro session (file edits, issues created, board reranks) should be appended to the `### Changes made` section before the final commit.
+Do not treat the initial recording as final.
+
 ## Chezmoi workflow for global agent files
 
 The global agent configuration files are managed by chezmoi.
