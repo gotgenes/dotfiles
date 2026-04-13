@@ -129,7 +129,7 @@ Project-specific commands (package managers, platform-specific tools, doc direct
 | Group              | Commands                                                                                                                                                  | Purpose                          |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
 | **Read utilities** | `rg *`, `fd *`, `bat *`, `cat *`, `eza *`, `eza`, `ls *`, `ls`, `head *`, `tail *`, `jq *`, `cut *`, `sort *`, `grep *`, `echo *`, `readlink *`, `dust *` | Codebase exploration, inspection |
-| **Git read**       | `git status*`, `git log*`, `git diff*`, `git show*`, `git describe*`, `git rev-parse *`                                                                   | Repository state inspection      |
+| **Git read**       | `git status*`, `git log*`, `git diff*`, `git show*`, `git describe*`, `git rev-parse *`, `git blame *`                                                    | Repository state inspection      |
 | **Git write**      | `git add *`, `git commit *`, `git push`, `git pull *`                                                                                                     | Committing and pushing changes   |
 | **chezmoi**        | `chezmoi apply`, `chezmoi diff`, `chezmoi source-path`, `chezmoi source-path *`, `chezmoi managed`, `chezmoi managed *`, `chezmoi forget *`               | Global file management           |
 
@@ -198,6 +198,7 @@ permission:
     "git show*": allow
     "git describe*": allow
     "git rev-parse *": allow
+    "git blame *": allow
     # Git write
     "git add *": allow
     "git commit *": allow
