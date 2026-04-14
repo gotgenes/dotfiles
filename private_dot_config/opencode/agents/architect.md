@@ -24,6 +24,7 @@ permission:
     "rg *": allow
     "sort *": allow
     "tail *": allow
+    "wc *": allow
     "git describe*": allow
     "git diff*": allow
     "git log*": allow

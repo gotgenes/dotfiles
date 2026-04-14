@@ -126,12 +126,12 @@ Each agent definition selects which pattern applies and which bash command group
 These groups contain only tool-agnostic commands suitable for global agent definitions.
 Project-specific commands (package managers, platform-specific tools, doc directory paths) belong in project-local definitions or a project-local skill.
 
-| Group              | Commands                                                                                                                                                  | Purpose                          |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| **Read utilities** | `rg *`, `fd *`, `bat *`, `cat *`, `eza *`, `eza`, `ls *`, `ls`, `head *`, `tail *`, `jq *`, `cut *`, `sort *`, `grep *`, `echo *`, `readlink *`, `dust *` | Codebase exploration, inspection |
-| **Git read**       | `git status*`, `git log*`, `git diff*`, `git show*`, `git describe*`, `git rev-parse *`, `git blame *`                                                    | Repository state inspection      |
-| **Git write**      | `git add *`, `git commit *`, `git push`, `git pull *`                                                                                                     | Committing and pushing changes   |
-| **chezmoi**        | `chezmoi apply`, `chezmoi diff`, `chezmoi source-path`, `chezmoi source-path *`, `chezmoi managed`, `chezmoi managed *`, `chezmoi forget *`               | Global file management           |
+| Group              | Commands                                                                                                                                                          | Purpose                          |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **Read utilities** | `rg *`, `fd *`, `bat *`, `cat *`, `eza *`, `eza`, `ls *`, `ls`, `head *`, `tail *`, `wc *`, `jq *`, `cut *`, `sort *`, `grep *`, `echo *`, `readlink *`, `dust *` | Codebase exploration, inspection |
+| **Git read**       | `git status*`, `git log*`, `git diff*`, `git show*`, `git describe*`, `git rev-parse *`, `git blame *`                                                            | Repository state inspection      |
+| **Git write**      | `git add *`, `git commit *`, `git push`, `git pull *`                                                                                                             | Committing and pushing changes   |
+| **chezmoi**        | `chezmoi apply`, `chezmoi diff`, `chezmoi source-path`, `chezmoi source-path *`, `chezmoi managed`, `chezmoi managed *`, `chezmoi forget *`                       | Global file management           |
 
 #### Named patterns
 
@@ -184,6 +184,7 @@ permission:
     "ls": allow
     "head *": allow
     "tail *": allow
+    "wc *": allow
     "jq *": allow
     "cut *": allow
     "sort *": allow
@@ -262,7 +263,7 @@ Commands that belong **only** in project-local definitions:
 
 Commands appropriate for **global** definitions:
 
-- Read utilities (rg, fd, bat, cat, eza, ls, head, tail, jq, cut, sort, grep, echo, readlink, dust)
+- Read utilities (rg, fd, bat, cat, eza, ls, head, tail, wc, jq, cut, sort, grep, echo, readlink, dust)
 - Git read and git write commands
 - chezmoi commands (for the retrospective agent)
 
