@@ -23,6 +23,7 @@ permission:
     "echo *": allow
     "readlink *": allow
     "dust *": allow
+    "wc *": allow
     # Git read
     "git status*": allow
     "git log*": allow
