@@ -473,6 +473,21 @@ Changes to `opencode.json` also require a restart.
 Skills live in `.opencode/skills/<name>/SKILL.md` (project-level) or `~/.config/opencode/skills/<name>/SKILL.md` (global).
 They are demand-loaded reference material — agents load them via the `skill` tool when a task matches the skill's description.
 
+### Required frontmatter
+
+Every `SKILL.md` **must** start with YAML frontmatter containing `name` and `description`.
+Without both fields, OpenCode silently ignores the file — the skill tool will report it as "not found" even though the file exists on disk.
+
+```yaml
+---
+name: my-skill
+description: Specific description of what this skill covers
+---
+```
+
+The `name` must match the directory name, be lowercase alphanumeric with single-hyphen separators, and be 1–64 characters.
+The `description` must be 1–1024 characters.
+
 ### When to extract from AGENTS.md
 
 Extract content into a skill when:
