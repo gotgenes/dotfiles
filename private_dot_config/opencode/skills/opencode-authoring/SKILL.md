@@ -37,6 +37,26 @@ When addressing a recurring need, prefer the options higher in this list:
 New primary agents are rarely needed.
 Most needs are better served by commands, tools, or skills.
 
+### Content distribution (ADR-0038)
+
+Behavioral content is distributed by function — not by agent:
+
+| Container             | Function            | Example content                                                    |
+| --------------------- | ------------------- | ------------------------------------------------------------------ |
+| **Agent definitions** | Permission boundary | Bash allow/deny rules, write/edit scope, MCP tool access           |
+| **Command bodies**    | Orchestration       | Step sequence, handoff points, bootstrap procedure                 |
+| **Skills**            | Domain expertise    | Evaluation frameworks, heuristics, conventions, reference material |
+
+When deciding where new behavioral content belongs, apply this decision table:
+
+| Question                                                     | Answer           |
+| ------------------------------------------------------------ | ---------------- |
+| Is it a permission or tool-access rule?                      | Agent definition |
+| Is it a step sequence, workflow, or handoff?                 | Command body     |
+| Is it domain knowledge an agent loads on demand?             | Skill            |
+| Is it a convention every agent needs on every task?          | AGENTS.md        |
+| Is it a reusable operation that encodes project conventions? | Custom tool      |
+
 ## AGENTS.md
 
 ### Scope

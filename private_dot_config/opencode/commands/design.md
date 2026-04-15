@@ -1,9 +1,17 @@
 ---
 description: Start a design evaluation or interactive prototype for a feature, flow, or page
-agent: designer
+agent: code
 ---
 
 # Design Evaluation
+
+You **must** immediately load the following skills:
+
+1. `design-evaluation`
+2. `shadcn`
+3. `mobile-ux`
+
+Do not proceed until all skills are loaded.
 
 Evaluate the following design question, feature, or user flow.
 
@@ -11,13 +19,10 @@ $ARGUMENTS
 
 Before starting:
 
-1. Read the project's AGENTS.md for product context, UI conventions, and any Designer-specific instructions.
+1. Read the project's AGENTS.md for product context, UI conventions, and any project-specific instructions.
 2. If the arguments reference a GitHub issue number, read the issue for full context.
 3. Determine whether to **prototype** or **evaluate**: if the feature has not been implemented yet and involves UI work, offer to compose an interactive prototype first. If the feature is already built, proceed with visual evaluation.
-4. Start the dev server to view the running application. Use `dev:preview` mode when evaluating flows that involve persistent data (athlete lists, user profiles, session bookings). Use `dev:msw` for prototypes using hardcoded data or offline scenarios.
+4. Start the dev server to view the running application.
 5. If the arguments include a URL or page reference, use Playwright to view the current state.
-6. Load the `mobile-ux` skill for mobile interaction patterns.
-7. Load the `shadcn` skill if the evaluation involves component selection.
 
 Begin by viewing the product as a user would — form impressions before reading code.
-For prototyping, compose interactive prototypes in `web/app/routes/_preview/` and invite the user to click through at `localhost:5173/_preview/...`.

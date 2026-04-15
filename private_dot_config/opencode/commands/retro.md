@@ -1,11 +1,17 @@
 ---
 description: Review this session for workflow and agent improvements
-agent: retrospective
+agent: code
 ---
 
 # Review Session
 
-Review the current session and follow the procedure defined in your system prompt.
+You **must** immediately load the following skills:
+
+1. `retrospective-workflow`
+
+Do not proceed until all skills are loaded.
+
+Review the session and follow the full retrospective procedure from the `retrospective-workflow` skill.
 
 Arguments: `$ARGUMENTS`
 

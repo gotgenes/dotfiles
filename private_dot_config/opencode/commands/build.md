@@ -1,6 +1,6 @@
 ---
 description: Start implementation from a plan or issue (non-TDD)
-agent: build
+agent: code
 ---
 
 # Build

@@ -1,21 +1,22 @@
 ---
 description: Start TDD implementation from a plan or issue
-agent: tdd
+agent: code
 ---
 
-Implement the following using the outside-in TDD procedure defined in your system prompt.
+# TDD
+
+You **must** immediately load the following skills:
+
+1. `tdd-discipline`
+2. `testing`
+
+Do not proceed until all skills are loaded.
+
+Implement the following using the outside-in TDD procedure from the `tdd-discipline` skill.
 
 $ARGUMENTS
 
-Before starting:
+If the arguments contain a file path to a plan, read it first as the implementation plan.
+If the arguments reference an issue number, fetch the issue for context.
 
-1. If the arguments contain a file path (e.g., `docs/plans/foo.md`), read that file first — it is the implementation plan.
-2. Read the project's AGENTS.md for commit message conventions and any project-specific test commands.
-3. Confirm this task is appropriate for TDD. If it's configuration, documentation, or infrastructure wiring, flag that and suggest switching to the Build agent via `/build`. Call the `suggest_command` tool with the full `/build` command in addition to mentioning it in your text output.
-4. Identify the acceptance test entry point and the first layer of implementation.
-
-Begin with Phase 1 (acceptance test).
-
-## Completion
-
-Do not delete the plan file — plan files are retained as historical reference.
+Begin with Phase 1 (acceptance test) from the `tdd-discipline` skill.
