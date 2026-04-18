@@ -68,11 +68,6 @@ local open_url_action = act.QuickSelectArgs({
 
 ---@type Config
 local my_config = {
-  tls_servers = {
-    {
-      bind_address = 'crock.local:8089',
-    },
-  },
   font = wezterm.font('JetBrains Mono', { weight = 'Regular' }),
   font_size = 14.0,
   line_height = 1.2,
