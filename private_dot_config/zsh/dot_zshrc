@@ -38,6 +38,10 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 
+if command -v fast-theme &> /dev/null; then
+    fast-theme "XDG:catppuccin-macchiato"
+fi
+
 zinit light zsh-users/zsh-history-substring-search
 
 export ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true
