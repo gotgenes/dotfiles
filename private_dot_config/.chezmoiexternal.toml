@@ -6,3 +6,9 @@ exact = true
 stripComponents = 2
 include = ["*/themes/**"]
 refreshPeriod = "168h"
+
+["git/themes/catppuccin-delta.gitconfig"]
+type = "file"
+# Pin to a specific commit for reproducible updates.
+url = "https://raw.githubusercontent.com/catppuccin/delta/74b47a345638a2f19b3e5bdb9d7e4984066f9ac7/catppuccin.gitconfig"
+refreshPeriod = "168h"
