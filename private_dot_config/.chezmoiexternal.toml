@@ -18,3 +18,9 @@ type = "file"
 # Pin to a specific commit for reproducible updates.
 url = "https://raw.githubusercontent.com/catppuccin/fzf/7c2e05606f2e75840b1ba367b1f997cd919809b3/themes/catppuccin-fzf-macchiato.sh"
 refreshPeriod = "168h"
+
+["fsh/catppuccin-macchiato.ini"]
+type = "file"
+# Pin to a specific commit for reproducible updates.
+url = "https://raw.githubusercontent.com/catppuccin/zsh-fsh/a9bdf479f8982c4b83b5c5005c8231c6b3352e2a/themes/catppuccin-macchiato.ini"
+refreshPeriod = "168h"
