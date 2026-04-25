@@ -86,6 +86,10 @@ zinit snippet OMZP::dotnet
 zinit ice lucid wait
 zinit snippet OMZP::fzf
 
+if [[ -f "$XDG_CONFIG_HOME/zsh/themes/catppuccin-fzf-macchiato.sh" ]]; then
+    source "$XDG_CONFIG_HOME/zsh/themes/catppuccin-fzf-macchiato.sh"
+fi
+
 zinit snippet "https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh"
 
 zinit light lukechilds/zsh-better-npm-completion
