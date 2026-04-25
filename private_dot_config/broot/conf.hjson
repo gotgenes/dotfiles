@@ -21,7 +21,7 @@
             dark
             unknown
         ]
-        file: catppuccin-mocha.hjson
+        file: skins/catppuccin/macchiato/catppuccin-macchiato-mauve.hjson
     }
   ]
 

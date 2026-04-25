@@ -1,0 +1,8 @@
+["broot/skins/catppuccin"]
+type = "archive"
+# Pin to a specific commit for reproducible updates.
+url = "https://github.com/catppuccin/broot/archive/404357d2e5abbf8d28658796696995d4410e3390.tar.gz"
+exact = true
+stripComponents = 2
+include = ["*/themes/**"]
+refreshPeriod = "168h"
