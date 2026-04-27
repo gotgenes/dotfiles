@@ -36,10 +36,10 @@ zinit ice blockf
 zinit light zsh-users/zsh-completions
 
 zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma-continuum/fast-syntax-highlighting
 
+zinit light zdharma-continuum/fast-syntax-highlighting
 if command -v fast-theme &> /dev/null; then
-    fast-theme "XDG:catppuccin-macchiato"
+    fast-theme -q "XDG:catppuccin-macchiato"
 fi
 
 zinit light zsh-users/zsh-history-substring-search
