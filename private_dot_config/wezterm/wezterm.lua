@@ -106,6 +106,11 @@ local my_config = {
         domain = 'DefaultDomain',
       }),
     },
+    {
+      key = 'Enter',
+      mods = 'ALT',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
   },
 }
 
