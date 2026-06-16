@@ -231,13 +231,15 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
   - `.zshrc`: `paths.zsh` is sourced again to re-prepend user paths after `path_helper`'s reordering; `mise activate zsh` installs interactive `precmd`/`chpwd` hooks and prepends tool paths via its built-in `_mise_hook`.
   - `paths.zsh` uses `typeset -aU path` for deduplication then `typeset +U path` to remove the permanent unique constraint — without this, zsh silently blocks re-prepending entries that already exist elsewhere in PATH, which prevented mise tools from being moved back to the front after `path_helper` demoted them.
   - The homebrew lines in `paths.zsh` look redundant with `brew shellenv` but are required: `path_helper` demotes them for login shells, and the `.zshrc` re-source restores the correct order.
+  - **Non-login shells inherit PATH verbatim:** `.zshenv` captures `$PATH` at the very top (before `brew shellenv`, `paths.zsh`, and the mise block) and restores it at the end for non-login shells (`[[ ! -o login ]]`). The re-prepends only need to run for login shells, where `brew shellenv`'s `path_helper` (and `/etc/zprofile`'s) reorder PATH; a plain `zsh -c` (e.g. pi spawning a bash tool command) inherits an already-correct PATH from its parent and must keep it untouched, otherwise `~/.local/bin`/`scripts/bin` wrappers are demoted and the mise shims dir is injected ahead of them. Exported env vars (`HOMEBREW_PREFIX`, `FPATH`, `GOPATH`, mise defaults) are left intact.
 - **mise env vars in non-interactive shells:** `.zshenv` uses `mise env` (not `mise hook-env`) for non-interactive shells, applying env vars from `mise.toml` as defaults only — if a var is already set in the inherited environment, the inherited value is preserved.
   This matters for OpenCode and other tools that spawn `zsh -c` subprocesses: inline overrides like `AWS_PROFILE=repone-admin <cmd>` work correctly because the inherited value takes precedence over the `mise.toml` default.
   `mise hook-env` cannot be used here because it unconditionally exports env vars (it does `unset VAR` then `export VAR=value`), which clobbers any inherited value.
   Interactive shells are unaffected — `mise activate zsh` in `.zshrc` uses `precmd` hooks that run after each command, so inline overrides naturally work.
-- **OpenCode shell invocation model:** OpenCode spawns each bash tool command as a new `zsh -c <command>` process (inheriting the user's login shell, not bash).
-  Each invocation sources `.zshenv` (the only file zsh sources for non-interactive, non-login shells) and then runs the command.
-  This means:
+- **Agent shell invocation models:** AI coding agents spawn each bash tool command as a new zsh process (the user's shell, not bash), but invoke it differently.
+  OpenCode uses `zsh -l -c <script>` (login, non-interactive) and manually sources `~/.zshenv` and `$ZDOTDIR/.zshrc` inside the script; as a login shell it passes through `path_helper`, so the `paths.zsh` re-prepends apply and mise tools are set up.
+  pi uses a plain `zsh -c <command>` (non-login, non-interactive), sourcing only `.zshenv`, and relies on the non-login PATH restore (see "Shell PATH ordering") to keep its inherited PATH verbatim.
+  Each command runs in a fresh shell, which means:
   - **No persistent state between commands.** `export VAR=value` in one command does not carry over to the next — each starts fresh from `.zshenv`.
   - **Inline env var overrides work** (after the `.zshenv` fix above) because the inherited value takes precedence over mise defaults.
   - **To override an env var for a single command,** use the inline prefix: `AWS_PROFILE=repone-admin aws sts get-caller-identity`.

@@ -7,6 +7,14 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 export EDITOR="nvim"
 
+# Capture the PATH inherited from the parent process before any manipulation
+# below (brew shellenv's path_helper, paths.zsh re-prepends, the mise block).
+# Login shells (terminals, OpenCode's `zsh -l -c`) pass through path_helper,
+# which demotes brew/.local behind system paths; the re-prepends exist to undo
+# that. Non-login shells (e.g. pi's plain `zsh -c`) inherit an already-correct
+# PATH, so it is restored verbatim at the end of this file.
+__ZSHENV_INHERITED_PATH=$PATH
+
 {{- if eq .chezmoi.os "darwin" }}
 eval $(/opt/homebrew/bin/brew shellenv)
 {{- else }}
@@ -82,3 +90,14 @@ if [[ ! -o interactive ]] && (( $+commands[mise] )); then
 fi
 
 unfunction _mise_prepend_paths _mise_export_default 2>/dev/null
+
+# Restore the inherited PATH for non-login shells. The manipulation above only
+# needs to run for login shells (where path_helper reorders PATH); a plain
+# `zsh -c` (e.g. pi spawning a command) inherits an already-set-up PATH and
+# should keep it verbatim rather than have entries reshuffled or mise shims
+# injected. Env vars exported above (HOMEBREW_PREFIX, FPATH, GOPATH, ...) are
+# left intact.
+if [[ ! -o login ]]; then
+    export PATH=$__ZSHENV_INHERITED_PATH
+fi
+unset __ZSHENV_INHERITED_PATH
