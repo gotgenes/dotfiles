@@ -57,6 +57,9 @@ return {
   {
     "saghen/blink.pairs",
     version = "*",
+    build = function()
+      require("blink.pairs").build():pwait(60000)
+    end,
     dependencies = { "saghen/blink.download" },
     --- @module 'blink.pairs'
     --- @type blink.pairs.Config
