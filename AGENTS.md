@@ -207,7 +207,8 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
 
 - **Catppuccin Macchiato** is the color theme across all tools (Neovim, WezTerm, Kitty, bat, broot, lazygit)
 - **Vi/Vim keybindings** are preferred everywhere (bash, zsh, tmux, readline, broot)
-- **JetBrains Mono** is the preferred font
+- **JetBrains Mono** is the preferred font, with **Sarasa Term SC** as the CJK fallback in WezTerm.
+  JetBrains Mono has no Han coverage, and WezTerm cannot use macOS's CoreText fallback chain — see the comment in `private_dot_config/wezterm/wezterm.lua`.
 - **mise** is the runtime version manager (replacing asdf/pyenv)
 - **LazyVim** is the Neovim distribution base, with extensive customization
 - **Per-directory git identity** uses git's native `includeIf` mechanism via a local include chain:
@@ -249,5 +250,11 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
 
 - The `dot_vimrc` is a legacy config superseded by the Neovim/LazyVim setup in `private_dot_config/nvim/`.
 - The `.chezmoiignore` file prevents repo-level and development-only files from being deployed to the home directory. When adding files that should exist only in the source repo (e.g., documentation, linter configs, plan documents), add them to `.chezmoiignore`.
+- Homebrew packages (taps, formulae, casks) are declared in `private_dot_config/homebrew/Brewfile`, deployed to `~/.config/homebrew/Brewfile`.
+  This is the location `brew bundle --global` resolves to when `XDG_CONFIG_HOME` is set, so `brew bundle` commands work from any directory.
+  `brew bundle` is built into Homebrew core; no `homebrew/bundle` tap is required.
+  Prefer `brew bundle add --cask NAME` / `brew bundle remove NAME` over hand-editing, then run `chezmoi re-add ~/.config/homebrew/Brewfile` to pull the change back into the source.
+  Avoid `brew bundle dump --force`: it snapshots what is currently installed and will silently drop declared-but-uninstalled entries, since the Brewfile records intent rather than state.
+  Use `brew bundle install --global` to restore packages on a new machine.
 - The primary target is macOS arm64; Linux support is handled via `{{ if eq .chezmoi.os "linux" }}` template conditionals.
 - The user works with: Python, Go, TypeScript/JavaScript, Lua, C/C++, C#/.NET, Docker, SQL, LaTeX, Markdown, Terraform, Ruby, and more — filetype configs exist for all of these.
