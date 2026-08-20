@@ -68,7 +68,17 @@ local open_url_action = act.QuickSelectArgs({
 
 ---@type Config
 local my_config = {
-  font = wezterm.font('JetBrains Mono', { weight = 'Regular' }),
+  -- JetBrains Mono has no CJK coverage at all (Nerd Font patching only adds
+  -- icons, not Han). WezTerm uses freetype/harfbuzz rather than CoreText, so it
+  -- can't consult macOS's font fallback chain and instead lands on Apple SD
+  -- Gothic Neo -- a Korean font that covers Hanja but not Simplified-only forms.
+  -- That renders CJK text as a confusing mix of real glyphs and tofu.
+  -- Sarasa Term SC covers SC/TC/JP/KR uniformly.
+  -- Requires: brew install --cask font-sarasa-gothic
+  font = wezterm.font_with_fallback({
+    { family = 'JetBrains Mono', weight = 'Regular' },
+    'Sarasa Term SC',
+  }),
   font_size = 14.0,
   line_height = 1.2,
   color_scheme = 'Catppuccin Macchiato',
