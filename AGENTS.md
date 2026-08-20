@@ -253,7 +253,10 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
 - Homebrew packages (taps, formulae, casks) are declared in `private_dot_config/homebrew/Brewfile`, deployed to `~/.config/homebrew/Brewfile`.
   This is the location `brew bundle --global` resolves to when `XDG_CONFIG_HOME` is set, so `brew bundle` commands work from any directory.
   `brew bundle` is built into Homebrew core; no `homebrew/bundle` tap is required.
-  Prefer `brew bundle add --cask NAME` / `brew bundle remove NAME` over hand-editing, then run `chezmoi re-add ~/.config/homebrew/Brewfile` to pull the change back into the source.
+  Entries are grouped `tap` / plain `brew` / tap-qualified `brew` / `cask` / `go`, each alphabetized, with no description comments.
+  Edit the source file directly and preserve that layout: `brew bundle add` appends at end of file with description comments, and `brew bundle add --cask` is broken in Homebrew 6.0 (`uninitialized constant Cask::CaskLoader`).
+  `brew bundle remove NAME` is reliable; after any command that writes the target, run `chezmoi re-add ~/.config/homebrew/Brewfile`.
+  When comparing installed packages against the Brewfile, match on full tap-qualified names (`brew leaves -r` prints `oven-sh/bun/bun`, not `bun`) or the comparison will report declared packages as missing.
   Avoid `brew bundle dump --force`: it snapshots what is currently installed and will silently drop declared-but-uninstalled entries, since the Brewfile records intent rather than state.
   Use `brew bundle install --global` to restore packages on a new machine.
 - The primary target is macOS arm64; Linux support is handled via `{{ if eq .chezmoi.os "linux" }}` template conditionals.
