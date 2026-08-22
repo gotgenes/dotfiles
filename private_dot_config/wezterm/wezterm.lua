@@ -74,9 +74,13 @@ local my_config = {
   -- Gothic Neo -- a Korean font that covers Hanja but not Simplified-only forms.
   -- That renders CJK text as a confusing mix of real glyphs and tofu.
   -- Sarasa Term SC covers SC/TC/JP/KR uniformly.
-  -- Requires: brew install --cask font-sarasa-gothic
+  -- Both fonts are declared in private_dot_config/homebrew/Brewfile.
+  -- 'JetBrainsMono Nerd Font' is the Homebrew cask, not WezTerm's bundled
+  -- 'JetBrains Mono'. Metrics are identical (x_adv=8, cells=1 at font_size 14),
+  -- and it renders Nerd Font icons at exactly one cell where the bundled
+  -- Symbols Nerd Font Mono fallback overflows them slightly (x_adv=9.33).
   font = wezterm.font_with_fallback({
-    { family = 'JetBrains Mono', weight = 'Regular' },
+    { family = 'JetBrainsMono Nerd Font', weight = 'Regular' },
     'Sarasa Term SC',
   }),
   font_size = 14.0,
