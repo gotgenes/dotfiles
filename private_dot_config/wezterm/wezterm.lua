@@ -73,15 +73,17 @@ local my_config = {
   -- can't consult macOS's font fallback chain and instead lands on Apple SD
   -- Gothic Neo -- a Korean font that covers Hanja but not Simplified-only forms.
   -- That renders CJK text as a confusing mix of real glyphs and tofu.
-  -- Sarasa Term SC covers SC/TC/JP/KR uniformly.
-  -- Both fonts are declared in private_dot_config/homebrew/Brewfile.
+  -- Hiragino Sans GB is a macOS system font covering SC/TC/JP; Korean falls
+  -- through to Apple SD Gothic Neo. Do not use Sarasa Term SC here: Homebrew
+  -- ships it only as a 793 MB, 480-face SuperTTC, and resolving it costs ~1.5s
+  -- per tab/window versus ~0.09s for Hiragino (same as no fallback at all).
   -- 'JetBrainsMono Nerd Font' is the Homebrew cask, not WezTerm's bundled
   -- 'JetBrains Mono'. Metrics are identical (x_adv=8, cells=1 at font_size 14),
   -- and it renders Nerd Font icons at exactly one cell where the bundled
   -- Symbols Nerd Font Mono fallback overflows them slightly (x_adv=9.33).
   font = wezterm.font_with_fallback({
     { family = 'JetBrainsMono Nerd Font', weight = 'Regular' },
-    'Sarasa Term SC',
+    'Hiragino Sans GB',
   }),
   font_size = 14.0,
   line_height = 1.2,
