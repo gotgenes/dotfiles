@@ -226,6 +226,17 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
 - **Wrapper scripts in `dot_local/bin/`** shadow Homebrew binaries via PATH priority (`~/.local/bin` appears before `/opt/homebrew/bin`).
   These wrappers add per-directory behavior (e.g., account selection) before delegating to the real binary.
   Other configuration that invokes these tools (e.g., git credential helpers, editor integrations) should reference the wrapper path, not the real binary, to preserve the per-directory behavior.
+- **GNU coreutils are installed** (`coreutils` in the Brewfile) because AI agents habitually reach for GNU tools that macOS lacks or implements differently.
+  Homebrew links unprefixed only the commands macOS does not ship at all — `timeout`, `realpath`, `nproc`, `shuf`, `truncate`, `factor`, `md5sum`/`sha*sum`, `base32`, `basenc`, `b2sum` — so those work everywhere via `/opt/homebrew/bin` with no extra configuration.
+  Everything that collides with a macOS command gets a `g` prefix (`gdate`, `gsed`, `gstat`, `gls`, ...) and is left shadowed by the BSD version on purpose.
+  The one exception is `date`: `dot_local/bin/symlink_date.tmpl` links `~/.local/bin/date` to `gdate`, because agents routinely write `date -d '2 days ago'` and `--iso-8601`, which BSD `date` rejects.
+  It is guarded to macOS via `.chezmoiignore`, since Linux already has GNU `date`.
+  Do **not** add `coreutils`' `libexec/gnubin` to PATH — that shadows every BSD coreutil at once and breaks scripts written against macOS flags.
+  Add further per-tool symlinks only when a concrete need appears; `gsed` and `gstat` in particular are risky to shadow.
+  Note that the `date` shim does not apply in a bare login non-interactive shell (`zsh -l -c` without sourcing `.zshrc`), where `path_helper` demotes `~/.local/bin` behind `/bin`; pi and OpenCode are both unaffected (see "Agent shell invocation models").
+- **Aliases do not work for agent shells.** pi runs `zsh -c`, which sources only `.zshenv`, so anything defined in `.zshrc` — including every alias — is invisible.
+  Aliases also only expand in command position, so they never help when a tool is invoked via `xargs`, a `Makefile`, or a nested script.
+  To make a command available to agents, put an executable or symlink in `~/.local/bin` (i.e. `dot_local/bin/`) instead of aliasing it.
 - **Shell PATH ordering** relies on a deliberate sequence across multiple files:
   - `.zshenv`: `brew shellenv` sets `HOMEBREW_PREFIX` and adds homebrew to PATH; `paths.zsh` prepends `~/.local/bin`, `GOPATH/bin`, and `~/.docker/bin`. For non-interactive shells only (`[[ ! -o interactive ]]`): `mise env` output is parsed to prepend mise-specific paths (installs/ and shims/) to PATH and apply env vars as defaults (see "mise env vars in non-interactive shells" below). `mise activate --shims` is avoided because it also prepends `/opt/homebrew/bin`, which demotes `~/.local/bin` wrapper scripts. Interactive shells skip mise here entirely — they get full activation in `.zshrc`.
   - `/etc/zprofile` (macOS system file, login shells only): `path_helper` reorders PATH, demoting user-added entries behind system paths. Because `.zshenv` skips mise for interactive shells, there are no mise entries for `path_helper` to demote.

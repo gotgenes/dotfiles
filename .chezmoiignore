@@ -5,3 +5,8 @@ README.md
 .prettierrc.yaml
 .prettierignore
 prek.toml
+
+{{ if ne .chezmoi.os "darwin" -}}
+{{/* Linux ships GNU coreutils natively; the gdate shim is macOS-only. */}}
+.local/bin/date
+{{ end -}}
