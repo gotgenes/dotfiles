@@ -82,76 +82,92 @@ To configure per-directory account switching using [mise](https://mise.jdx.dev/)
 Any `gh` command run from `~/acmecorp/` or its subdirectories will now use the work account.
 The `mise.toml` files are not tracked by this repository, keeping account names private.
 
-## Zsh and mise shell integration
+## Shell startup and mise integration
 
-[mise](https://mise.jdx.dev/) manages per-directory tool versions (node, python, go, etc.) and environment variables.
-Integrating it with zsh on macOS requires careful coordination because of how zsh sources startup files and how macOS's `path_helper` reorders PATH.
+Both zsh (the interactive shell) and bash (Pi's command shell, and an occasional interactive shell) are configured to produce the same environment and PATH.
+[mise](https://mise.jdx.dev/) manages per-directory tool versions (node, python, go, etc.) and environment variables in both.
 
-### The problem
+Three rules drive the design:
 
-Zsh sources different files depending on the shell type:
+1. **Login shells build PATH; non-login shells inherit it verbatim.**
+   A terminal tab starts from the bare system PATH and must build it.
+   A `zsh -c` or `bash -c` spawned by an editor or agent inherits an already-correct PATH; re-prepending entries would demote `~/.local/bin` wrappers or project-local bin dirs the parent put first.
+2. **mise env vars in non-interactive shells are defaults.**
+   A value already in the environment (e.g., an inline override like `AWS_PROFILE=x cmd`) wins over the `mise.toml` value.
+3. **Env vars are defined once**, in `~/.config/shell/env.sh`, which both shells source.
+   It is restricted to syntax that zsh and bash treat identically (plain `export`, `case`, `[ ]`, `command -v`); PATH logic is per shell.
+   Aliases are likewise shared via `~/.config/shell/aliases.sh`.
 
-```mermaid
-graph TD
-    A["zsh starts"] --> B["~/.zshenv<br/>(always)"]
-    B --> C{interactive?}
-    C -- yes --> D{login?}
-    C -- no --> Z["run command<br/>(e.g., zsh -c '...')"]
-    D -- yes --> E["/etc/zprofile<br/>(macOS path_helper)"]
-    E --> F["~/.zshrc"]
-    D -- no --> F
-    F --> G["interactive session"]
-```
-
-The challenge: **`/etc/zprofile`** runs macOS's `path_helper`, which reorders PATH by demoting user-added entries behind system paths.
-Any mise tool paths added in `.zshenv` get pushed to the end of PATH by the time `.zshrc` runs, so homebrew's versions of tools (e.g., node) take precedence.
-
-Meanwhile, tools like [OpenCode](https://opencode.ai/) invoke `zsh -c 'command'` for shell commands, which only sources `.zshenv` — never `.zshrc`.
-These non-interactive shells need mise tools and environment variables too.
-
-### The solution
-
-The configuration uses **two different mise activation strategies**, gated by shell type:
+### Which files each shell reads
 
 ```mermaid
 graph TD
-    subgraph zshenv [".zshenv (all shells)"]
-        E1["brew shellenv"] --> E2["paths.zsh<br/>(~/.local/bin, homebrew, etc.)"]
-        E2 --> E3{"[[ ! -o interactive ]]?"}
-        E3 -- "non-interactive" --> E4["mise activate --shims<br/>(adds shims dir to PATH)"]
-        E4 --> E5["mise hook-env<br/>(exports env vars + tool paths)"]
-        E3 -- "interactive" --> E6["skip mise<br/>(handled in .zshrc)"]
+    subgraph zsh
+        Z0["zsh starts"] --> Z1["~/.zshenv (always)<br/>env.sh, fpath;<br/>paths.zsh if login;<br/>mise env defaults if non-interactive"]
+        Z1 --> Z2{login?}
+        Z2 -- yes --> Z3["/etc/zprofile<br/>path_helper demotes user paths"]
+        Z2 -- no --> Z4{interactive?}
+        Z3 --> Z4
+        Z4 -- yes --> Z5["~/.zshrc<br/>paths.zsh again, mise activate"]
+        Z4 -- no --> Z6["run command"]
     end
-
-    subgraph zprofile ["/etc/zprofile (login shells only)"]
-        P1["path_helper reorders PATH"]
+    subgraph bash
+        B0["bash starts"] --> B1{login?}
+        B1 -- yes --> B2["/etc/profile<br/>path_helper"]
+        B2 --> B3["~/.bash_profile<br/>env.sh, paths.bash"]
+        B3 --> B4{interactive?}
+        B4 -- yes --> B5["~/.bashrc<br/>mise activate, starship, ..."]
+        B4 -- no --> B6["mise shims +<br/>mise_env.bash"]
+        B1 -- no --> B7{interactive?}
+        B7 -- yes --> B5
+        B7 -- "no (bash -c)" --> B8["reads NO startup files"]
     end
-
-    subgraph zshrc [".zshrc (interactive shells)"]
-        R1["paths.zsh re-sourced<br/>(re-prepends user paths)"]
-        R1 --> R2["mise activate<br/>(installs precmd/chpwd hooks,<br/>prepends direct tool paths)"]
-    end
-
-    E6 --> P1
-    P1 --> R1
-    E6 -.->|"non-login"| R1
 ```
 
-#### Non-interactive shells (`zsh -c`)
+The key difference is where macOS's `path_helper` runs.
+In zsh it runs in `/etc/zprofile`, _between_ `.zshenv` and `.zshrc`, and demotes everything `.zshenv` prepended behind the system paths; so `paths.zsh` is sourced twice, once in each file.
+In bash it runs in `/etc/profile`, _before_ `~/.bash_profile`, so `paths.bash` runs once and nothing reorders PATH afterwards.
 
-`.zshenv` activates mise with `--shims` (a lightweight PATH prepend) plus `hook-env` (which exports per-directory env vars and direct tool paths).
-This gives the shell everything it needs in a single file, with no interactive hooks.
+### Pi (`bash -c`)
 
-#### Interactive shells (terminal sessions)
+Pi runs every command as `bash -c <command>`, inheriting Pi's own environment.
+`bash -c` reads no startup files, so the inherited PATH is kept verbatim for free, but nothing applies the `mise.toml` env vars of the directory the command runs in.
+Pi's `shellCommandPrefix` setting fills that gap: Pi pastes it above every command.
 
-`.zshenv` **skips** mise entirely for interactive shells.
-This is deliberate: any mise PATH entries added here would be demoted by `path_helper` in login shells, causing homebrew's tool versions to take precedence.
+```mermaid
+graph TD
+    A["WezTerm → zsh (login, interactive)<br/>mise activate exports GH_USER, AWS_PROFILE, ... for $PWD"] --> B["pi<br/>environment = snapshot of that shell"]
+    B --> C["spawn(shellPath, ['-c', prefix + '\n' + command])"]
+    C --> D["/opt/homebrew/bin/bash -c<br/>source ~/.config/bash/mise_env.bash<br/>&lt;command&gt;"]
+    D --> E["mise_env.bash: mise env for cwd;<br/>export only vars not already set;<br/>PATH untouched"]
+```
 
-Instead, `.zshrc` runs full `mise activate`, which installs `precmd` and `chpwd` hooks.
-These hooks automatically update PATH and environment variables whenever you change directories, giving you per-project tool versions and env vars.
+`~/.pi/agent/settings.json` (not managed by this repository):
 
-### Key detail: `paths.zsh` deduplication
+```json
+{
+  "shellPath": "/opt/homebrew/bin/bash",
+  "shellCommandPrefix": "source ~/.config/bash/mise_env.bash"
+}
+```
 
-`paths.zsh` is sourced in both `.zshenv` and `.zshrc` (the second time to undo `path_helper`'s reordering).
-It uses `typeset -aU path` to deduplicate PATH entries, then immediately `typeset +U path` to remove the permanent unique constraint.
-Without the `+U`, zsh would silently block any later attempt to re-prepend an entry that already exists elsewhere in PATH — which would prevent mise from moving its tool paths back to the front.
+mise-managed tools resolve correctly without any PATH changes, because the inherited PATH contains the mise shims directory and shims look up the tool version per directory at run time.
+
+### Non-interactive zsh (`zsh -c`, OpenCode's `zsh -l -c`)
+
+`.zshenv` parses `mise env` output instead of using `mise hook-env` or `mise activate --shims`.
+`hook-env` unconditionally overwrites env vars (breaking inline overrides), and both it and `--shims` prepend `/opt/homebrew/bin`, demoting `~/.local/bin` wrappers.
+Env vars are applied as defaults in every non-interactive zsh; mise PATH entries (install dirs and the shims dir) are prepended only in login shells, per rule 1.
+
+### Interactive shells
+
+`.zshrc` and `.bashrc` run full `mise activate`, which installs prompt hooks that update PATH and env vars whenever you change directories.
+`.zshenv` skips mise for interactive shells, because `path_helper` would demote anything it added.
+
+### Key details
+
+- `paths.zsh` uses `typeset -aU path` to deduplicate PATH, then immediately `typeset +U path` to remove the permanent unique constraint.
+  Without the `+U`, zsh would silently block any later attempt to re-prepend an entry that already exists elsewhere in PATH — which would prevent mise from moving its tool paths back to the front.
+- `brew shellenv` is not used: `env.sh` exports its `HOMEBREW_*` variables statically (templated per OS), and PATH/fpath are added by the per-shell files.
+  `brew shellenv` costs a subprocess in every shell and prepends to `INFOPATH`/`FPATH` unconditionally, so every nested shell added another copy.
+  `INFOPATH` and `fpath` are now added idempotently.
