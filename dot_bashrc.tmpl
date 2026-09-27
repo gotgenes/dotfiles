@@ -1,0 +1,100 @@
+# Interactive bash. Read directly by non-login interactive shells (e.g. typing
+# `bash` in zsh) and via ~/.bash_profile for login shells.
+#
+# Non-interactive shells (`bash -c`, scripts) never read this file; for Pi's
+# commands see ~/.config/bash/mise_env.bash.
+[[ $- == *i* ]] || return
+
+source "$HOME/.bash_common"
+
+# A non-login shell inherits env and PATH from its parent and keeps them
+# verbatim (same rule as zsh's .zshenv). Only set them up here when started
+# with a bare environment that never went through a login shell.
+if [[ -z "${HOMEBREW_PREFIX:-}" ]]; then
+    source "$HOME/.config/shell/env.sh"
+    source "$XDG_CONFIG_HOME/bash/paths.bash"
+fi
+
+# History, mirroring the zsh settings: large, timestamped, no duplicates, no
+# space-prefixed commands, appended after every command (see PROMPT_COMMAND
+# below) rather than when the shell exits.
+HISTSIZE=200000
+HISTFILESIZE=100000
+HISTCONTROL=ignoreboth:erasedups
+HISTTIMEFORMAT="%F %T "
+shopt -s histappend
+
+# Re-check the window size after each command and update LINES/COLUMNS.
+shopt -s checkwinsize
+
+# Vi editing mode (also set in ~/.inputrc for every readline program).
+set -o vi
+# ^p check for partial match in history
+bind -m vi-insert '"\C-p": dynamic-complete-history'
+# ^n cycle through the list of partial matches
+bind -m vi-insert '"\C-n": menu-complete'
+# ^l clear screen
+bind -m vi-insert '"\C-l": clear-screen'
+
+# Aliases shared with zsh.
+source_if_exists "$XDG_CONFIG_HOME/shell/aliases.sh"
+
+# Host-specific configuration not suitable for version control.
+if [[ -d "$XDG_CONFIG_HOME/bash/include" ]]; then
+    for __include_file in "$XDG_CONFIG_HOME"/bash/include/*.bash; do
+        source_if_exists "$__include_file"
+    done
+    unset __include_file
+fi
+
+# Completion (bash-completion@2 also lazy-loads completions that Homebrew
+# formulae install, e.g. gh, git, brew).
+if [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]]; then
+    source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+    # Do not expand ~ into the home directory on tab completion; see
+    # https://superuser.com/questions/95653
+    _expand() {
+        return 0
+    }
+    __expand_tilde_by_ref() {
+        return 0
+    }
+fi
+
+# fzf key bindings (Ctrl-R, Ctrl-T, Alt-C) and completion, with the
+# Catppuccin theme shared with zsh.
+if command -v fzf &> /dev/null; then
+    source_if_exists "$XDG_CONFIG_HOME/zsh/themes/catppuccin-fzf-macchiato.sh"
+    eval "$(fzf --bash)"
+fi
+
+# broot's `br` launcher.
+source_if_exists "$XDG_CONFIG_HOME/broot/launcher/bash/br"
+
+# WezTerm shell integration (cwd reporting, semantic zones, user vars). It
+# bundles bash-preexec, so it must be sourced before starship, mise, and
+# zoxide, which then register their hooks through it.
+{{- if eq .chezmoi.os "darwin" }}
+source_if_exists "/Applications/WezTerm.app/Contents/Resources/wezterm.sh"
+{{- else }}
+source_if_exists "/etc/profile.d/wezterm.sh"
+{{- end }}
+
+# Append each command to the history file as soon as it runs, so concurrent
+# shells share history (zsh's INC_APPEND_HISTORY_TIME).
+PROMPT_COMMAND="history -a${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+
+if command -v starship &> /dev/null; then
+    eval "$(starship init bash)"
+fi
+
+# Full mise activation: hooks that switch tool versions and env vars when
+# changing directories.
+if command -v mise &> /dev/null; then
+    eval "$(mise activate bash)"
+fi
+
+# zoxide wants to be initialized last.
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init bash)"
+fi
