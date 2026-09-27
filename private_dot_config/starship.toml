@@ -1,0 +1,117 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+# Starship prompt, used by bash (zsh still uses powerlevel10k: zsh/p10k.zsh).
+#
+# Mirrors the p10k layout: two lines, colored segments with rounded caps, the
+# context segments right-aligned on the first line, and a ❯ prompt char on the
+# second. bash does not support starship's `right_format`, so `$fill` pads the
+# first line and pushes the remaining segments to the right edge instead.
+#
+# Colors are ANSI names, so they come from the terminal's Catppuccin Macchiato
+# palette, exactly like p10k's numbered colors (white=7, blue=4, green=2, ...).
+#
+# Nerd Font glyphs are TOML \u escapes: E0B6/E0B4 round caps, E0B0 arrow.
+
+add_newline = true
+
+format = """
+[\uE0B6](fg:white)\
+$os\
+[\uE0B0](fg:white bg:blue)\
+$directory\
+[\uE0B0](fg:blue)\
+$git_branch\
+$git_status\
+$fill\
+$status\
+$cmd_duration\
+$jobs\
+$direnv\
+$python\
+$aws\
+$username\
+$hostname\
+$line_break\
+$character"""
+
+[fill]
+symbol = "─"
+style = "bright-black"
+
+[os]
+disabled = false
+style = "fg:black bg:white"
+format = "[$symbol ]($style)"
+
+[os.symbols]
+Macos = "\uF179"
+Linux = "\uF17C"
+
+[directory]
+style = "fg:black bg:blue"
+read_only = " \uF023"
+read_only_style = "fg:red bg:blue"
+format = "[ $path]($style)[$read_only]($read_only_style)[ ]($style)"
+truncation_length = 8
+truncate_to_repo = false
+truncation_symbol = "…/"
+
+[git_branch]
+format = " [\uE0B6](fg:green)[\uF126 $branch](fg:black bg:green)[\uE0B4](fg:green)"
+
+# Shown as a separate yellow segment only when the work tree is not clean
+# (p10k turns the whole git segment yellow instead).
+[git_status]
+format = "( [\uE0B6](fg:yellow)[$all_status$ahead_behind](fg:black bg:yellow)[\uE0B4](fg:yellow))"
+conflicted = "~$count "
+ahead = "⇡$count "
+behind = "⇣$count "
+diverged = "⇕⇡$ahead_count⇣$behind_count "
+untracked = "?$count "
+stashed = "*$count "
+modified = "!$count "
+staged = "+$count "
+renamed = "»$count "
+deleted = "✘$count "
+
+# Right-aligned segments. Each is a self-contained rounded pill because any
+# subset of them may be absent.
+
+[status]
+disabled = false
+format = " [\uE0B6](fg:red)[✘ $status](fg:yellow bg:red)[\uE0B4](fg:red)"
+
+[cmd_duration]
+min_time = 3000
+format = " [\uE0B6](fg:yellow)[$duration \uF252](fg:black bg:yellow)[\uE0B4](fg:yellow)"
+
+[jobs]
+symbol = "\uF013"
+format = " [\uE0B6](fg:black)[$symbol](fg:cyan bg:black)[\uE0B4](fg:black)"
+
+[direnv]
+disabled = false
+format = " [\uE0B6](fg:black)[$loaded/$allowed](fg:yellow bg:black)[\uE0B4](fg:black)"
+
+# Only when a virtualenv is active (like p10k's virtualenv segment), not in
+# every directory that contains Python files.
+[python]
+detect_extensions = []
+detect_files = []
+detect_folders = []
+format = "( [\uE0B6](fg:blue)[\uE73C $virtualenv](fg:black bg:blue)[\uE0B4](fg:blue))"
+
+[aws]
+format = " [\uE0B6](fg:red)[\uF270 $profile( $region)](fg:white bg:red)[\uE0B4](fg:red)"
+
+# user@host appears only as root or over SSH, like p10k's context segment.
+[username]
+style_user = "fg:yellow bg:black"
+style_root = "fg:red bg:black"
+format = " [\uE0B6](fg:black)[$user]($style)[\uE0B4](fg:black)"
+
+[hostname]
+format = " [\uE0B6](fg:black)[@$hostname](fg:yellow bg:black)[\uE0B4](fg:black)"
+
+[gcloud]
+disabled = true

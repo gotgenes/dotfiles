@@ -1,50 +1,24 @@
-source "$HOME/.bash_common"
+# Login bash: a terminal tab running bash, `bash -l`, `bash -l -c ...`.
+# macOS's /etc/profile has already run path_helper by now, so PATH entries
+# prepended here stay in front (see ~/.config/bash/paths.bash).
+#
+# Docker Desktop may append a `~/.docker/bin` PATH line to this file; it is
+# redundant (paths.bash adds that dir) and safe to discard on `chezmoi apply`.
 
-# Set the number of lines to be recorded in the history
-export HISTSIZE=100000
+source "$HOME/.config/shell/env.sh"
+source "$XDG_CONFIG_HOME/bash/paths.bash"
 
-# Remove duplicate lines in the history, and ignore any lines that begin
-# with a space. See bash(1) for more options.
-export HISTCONTROL=erasedups:ignorespace
-
-# Use Neovim as the default editor.
-export EDITOR="nvim"
-
-# HOMEBREW
-# Prioritize /usr/local/bin for Homebrew
-export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/usr\/local\/bin/ {next} {print}' | sed 's/:*$//')
-export PATH="/usr/local/bin:${PATH}"
-
-
-# Bash completion
-export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
-
-
-# Local installations
-LOCAL_DIR="$HOME/.local"
-# Local executables
-export PATH="$LOCAL_DIR/bin:$PATH"
-
-source_if_exists "$NVM_DIR/bash_completion"
-
-# Custom Python interactive session configuration.
-export PYTHONSTARTUP="$HOME/.pythonrc"
-
-# Poetry
-export PATH="$HOME/.poetry/bin:$PATH"
-
-# pyenv
-if command -v pyenv &> /dev/null; then
-    eval "$(pyenv init --path)"
-fi
-
-# rvm
-export PATH="$PATH:$HOME/.rvm/bin"
-source_if_exists "$HOME/.rvm/scripts/rvm"
-
-source_if_exists "$HOME/.iterm2_shell_integration.bash"
-
-# include .bashrc if it exists
-if [ -f ~/.bashrc ]; then
-    source ~/.bashrc
+if [[ $- == *i* ]]; then
+    # Interactive setup (prompt, completion, `mise activate`, ...) lives in
+    # .bashrc, which login shells do not read on their own.
+    source "$HOME/.bashrc"
+else
+    # Non-interactive login shells get no `mise activate` hooks: resolve tools
+    # through mise's shims and apply mise.toml env vars as defaults.
+    __mise_shims="${MISE_DATA_DIR:-$XDG_DATA_HOME/mise}/shims"
+    if [[ -d "$__mise_shims" ]]; then
+        export PATH="$__mise_shims:$PATH"
+    fi
+    unset __mise_shims
+    source "$XDG_CONFIG_HOME/bash/mise_env.bash"
 fi
