@@ -1,0 +1,74 @@
+# Read by EVERY zsh: interactive or not, login or not (e.g. `zsh -c`).
+# ~/.zshenv sets XDG_CONFIG_HOME and ZDOTDIR, then sources this file.
+
+# Env vars shared with bash (XDG, EDITOR, HOMEBREW_*, INFOPATH, GOPATH, ...).
+source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/env.sh"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Homebrew zsh completions: the fpath half of `brew shellenv`. The unique
+# attribute makes this idempotent, so nested shells do not pile up copies.
+# FPATH is exported (as `brew shellenv` does) so child zsh processes inherit it.
+typeset -U fpath
+fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
+export FPATH
+
+# PATH is only built for login shells. Login shells (WezTerm tabs, OpenCode's
+# `zsh -l -c`) start from the bare system PATH, and /etc/zprofile's path_helper
+# then demotes anything prepended here behind the system paths, so .zshrc
+# sources paths.zsh again afterwards. Non-login shells (e.g. `zsh -c` from an
+# editor or agent) inherit an already-correct PATH from their parent and must
+# keep it verbatim; re-prepending would demote ~/.local/bin wrappers or
+# project-local bin dirs the parent put first.
+if [[ -o login ]]; then
+    source "$ZDOTDIR/paths.zsh"
+fi
+
+# mise for non-interactive shells (e.g. OpenCode's `zsh -l -c`, which sources
+# only this file before its command). Interactive shells get full activation
+# in .zshrc instead.
+#
+# We parse `mise env` output instead of eval'ing it directly for two reasons:
+#   1. Env vars (e.g., AWS_PROFILE) are applied as defaults — inherited values
+#      from inline overrides like `AWS_PROFILE=repone-admin <cmd>` take
+#      precedence. `mise hook-env` can't do this; it unconditionally overwrites.
+#   2. Only mise-specific PATH entries are prepended, preserving paths.zsh
+#      ordering (e.g., ~/.local/bin before /opt/homebrew/bin). Both
+#      `mise hook-env` and `mise activate --shims` prepend /opt/homebrew/bin,
+#      which demotes ~/.local/bin wrapper scripts.
+# PATH entries are only added for login shells, per the PATH rule above.
+#
+# hook-env's internal state vars (__MISE_DIFF, __MISE_SESSION) are unnecessary
+# for one-shot non-interactive shells.
+#
+# bash has an equivalent for Pi in ~/.config/bash/mise_env.bash.
+if [[ ! -o interactive ]]; then
+    () {
+        # Fall back to the Homebrew path in case the inherited PATH is bare.
+        local mise_bin=${commands[mise]:-$HOMEBREW_PREFIX/bin/mise}
+        [[ -x $mise_bin ]] || return
+
+        local line rest var raw entry
+        local -a mise_paths
+        while IFS= read -r line; do
+            if [[ $line == "export PATH="* ]]; then
+                [[ -o login ]] || continue
+                # Keep only mise-managed entries (installs/ dirs).
+                raw=${${line#export PATH=}//\'/}
+                for entry in "${(@s/:/)raw}"; do
+                    [[ $entry == */mise/* ]] && mise_paths+=("$entry")
+                done
+                # Shims as a catch-all for tools not in this directory's config.
+                entry="${MISE_DATA_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/mise}/shims"
+                [[ -d $entry ]] && mise_paths+=("$entry")
+                (( ${#mise_paths} )) && export PATH="${(j/:/)mise_paths}:$PATH"
+            elif [[ $line == "export "* ]]; then
+                # Export only if not already set, so mise.toml values act as
+                # defaults that inherited values and inline overrides supersede.
+                rest=${line#export }
+                var=${rest%%=*}
+                [[ -z ${(P)var+x} ]] && eval "export $rest"
+            fi
+        done < <("$mise_bin" env -s zsh 2>/dev/null)
+    }
+fi
