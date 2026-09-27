@@ -19,7 +19,10 @@ chezmoi/
 │   │   ├── lua/config/      # Options, keymaps, lazy.nvim bootstrap
 │   │   │   └── plugins/     # Extracted plugin configuration modules
 │   │   └── ftplugin/        # Filetype-specific settings (25+ languages)
+│   ├── shell/               # Env vars and aliases shared by zsh and bash
 │   ├── zsh/                 # Zsh configuration (zinit, p10k)
+│   ├── bash/                # Bash PATH setup and Pi's mise env prefix
+│   ├── starship.toml        # Starship prompt (bash)
 │   ├── git/                 # Git config, global ignore, attributes
 │   ├── wezterm/             # WezTerm terminal configuration
 │   ├── kitty/               # Kitty terminal configuration
@@ -163,7 +166,9 @@ Use LuaLS `---@type` annotations where they aid clarity:
 
 - Double-quote all variable expansions: `"$HOME/.config"`, `"$1"`
 - Use `if command -v somecmd &> /dev/null; then` for command existence checks
-- Use `source_if_exists` helper function for safe file sourcing (defined in `dot_bash_common`)
+- Use `source_if_exists` helper function for safe file sourcing in bash (defined in `dot_bash_common`)
+- Files in `private_dot_config/shell/` are sourced by **both** zsh and bash: restrict them to syntax both treat identically (plain `export`, `case`, `[ ]`, `command -v`; no arrays, `[[ ]]`, `(( ))`, or `$+commands`) and check with `zsh -n`, `bash -n`, and `shellcheck -s sh` on the rendered file
+- Keep `private_dot_config/bash/paths.bash` bash 3.2 compatible (no associative arrays), since `/bin/bash` is 3.2
 - 4-space indentation inside functions
 - Comments on their own line above the code they describe, not inline
 
@@ -233,27 +238,41 @@ To recover: `git add` the modified files and create a **new** `git commit` (do n
   It is guarded to macOS via `.chezmoiignore`, since Linux already has GNU `date`.
   Do **not** add `coreutils`' `libexec/gnubin` to PATH — that shadows every BSD coreutil at once and breaks scripts written against macOS flags.
   Add further per-tool symlinks only when a concrete need appears; `gsed` and `gstat` in particular are risky to shadow.
-  Note that the `date` shim does not apply in a bare login non-interactive shell (`zsh -l -c` without sourcing `.zshrc`), where `path_helper` demotes `~/.local/bin` behind `/bin`; pi and OpenCode are both unaffected (see "Agent shell invocation models").
-- **Aliases do not work for agent shells.** pi runs `zsh -c`, which sources only `.zshenv`, so anything defined in `.zshrc` — including every alias — is invisible.
+  Note that the `date` shim does not apply in a bare login non-interactive zsh (`zsh -l -c` without sourcing `.zshrc`), where `/etc/zprofile`'s `path_helper` demotes `~/.local/bin` behind `/bin`; pi and OpenCode are both unaffected (see "Agent shell invocation models").
+- **Aliases do not work for agent shells.** pi runs `bash -c`, which reads no startup files at all, so anything defined in `.bashrc`/`.zshrc` — including every alias — is invisible.
+  Aliases live in `private_dot_config/shell/aliases.sh.tmpl`, shared by interactive zsh and bash.
   Aliases also only expand in command position, so they never help when a tool is invoked via `xargs`, a `Makefile`, or a nested script.
   To make a command available to agents, put an executable or symlink in `~/.local/bin` (i.e. `dot_local/bin/`) instead of aliasing it.
-- **Shell PATH ordering** relies on a deliberate sequence across multiple files:
-  - `.zshenv`: `brew shellenv` sets `HOMEBREW_PREFIX` and adds homebrew to PATH; `paths.zsh` prepends `~/.local/bin`, `GOPATH/bin`, and `~/.docker/bin`. For non-interactive shells only (`[[ ! -o interactive ]]`): `mise env` output is parsed to prepend mise-specific paths (installs/ and shims/) to PATH and apply env vars as defaults (see "mise env vars in non-interactive shells" below). `mise activate --shims` is avoided because it also prepends `/opt/homebrew/bin`, which demotes `~/.local/bin` wrapper scripts. Interactive shells skip mise here entirely — they get full activation in `.zshrc`.
-  - `/etc/zprofile` (macOS system file, login shells only): `path_helper` reorders PATH, demoting user-added entries behind system paths. Because `.zshenv` skips mise for interactive shells, there are no mise entries for `path_helper` to demote.
-  - `.zshrc`: `paths.zsh` is sourced again to re-prepend user paths after `path_helper`'s reordering; `mise activate zsh` installs interactive `precmd`/`chpwd` hooks and prepends tool paths via its built-in `_mise_hook`.
+- **zsh and bash are kept at parity** (same env vars, same PATH order, same mise behavior), verified by diffing `env` from a fresh login shell of each.
+  zsh is the everyday interactive shell (p10k prompt); bash is Pi's command shell and an occasional interactive shell (starship prompt, `private_dot_config/starship.toml`).
+  See the "Shell startup and mise integration" section of `README.md` for diagrams.
+- **Shared env vars** live in `private_dot_config/shell/env.sh.tmpl` (`~/.config/shell/env.sh`), sourced by `.zshenv`, `.bash_profile`, and (for shells started with a bare environment) `.bashrc`.
+  Add new env vars there, not to a per-shell file, so the shells cannot drift.
+  It also replaces `brew shellenv`: `HOMEBREW_*` are exported statically (templated per OS) and `INFOPATH` is added idempotently.
+  `brew shellenv` cost a ~25ms subprocess in every shell and prepended to `INFOPATH`/`FPATH` unconditionally, so each nested shell added another copy.
+- **Shell PATH ordering** follows one rule: login shells build PATH; non-login shells inherit it verbatim.
+  A non-login `zsh -c`/`bash -c` inherits an already-correct PATH from its parent; re-prepending would demote `~/.local/bin`/`scripts/bin` wrappers the parent put first.
+  - zsh, `.zshenv`: sources `paths.zsh` (prepends `~/.local/bin`, `GOPATH/bin`, homebrew, `~/.docker/bin`) only for login shells (`[[ -o login ]]`), and adds homebrew's `site-functions` to a unique (`typeset -U`) `fpath`.
+  - zsh, `/etc/zprofile` (macOS, login shells only): `path_helper` reorders PATH, demoting user-added entries behind system paths.
+    `brew shellenv` no longer calls `path_helper`; this is the only place it runs for zsh.
+  - zsh, `.zshrc`: `paths.zsh` is sourced again to undo `path_helper`'s reordering; `mise activate zsh` installs `precmd`/`chpwd` hooks and prepends tool paths via its built-in `_mise_hook`.
   - `paths.zsh` uses `typeset -aU path` for deduplication then `typeset +U path` to remove the permanent unique constraint — without this, zsh silently blocks re-prepending entries that already exist elsewhere in PATH, which prevented mise tools from being moved back to the front after `path_helper` demoted them.
-  - The homebrew lines in `paths.zsh` look redundant with `brew shellenv` but are required: `path_helper` demotes them for login shells, and the `.zshrc` re-source restores the correct order.
-  - **Non-login shells inherit PATH verbatim:** `.zshenv` captures `$PATH` at the very top (before `brew shellenv`, `paths.zsh`, and the mise block) and restores it at the end for non-login shells (`[[ ! -o login ]]`). The re-prepends only need to run for login shells, where `brew shellenv`'s `path_helper` (and `/etc/zprofile`'s) reorder PATH; a plain `zsh -c` (e.g. pi spawning a bash tool command) inherits an already-correct PATH from its parent and must keep it untouched, otherwise `~/.local/bin`/`scripts/bin` wrappers are demoted and the mise shims dir is injected ahead of them. Exported env vars (`HOMEBREW_PREFIX`, `FPATH`, `GOPATH`, mise defaults) are left intact.
-- **mise env vars in non-interactive shells:** `.zshenv` uses `mise env` (not `mise hook-env`) for non-interactive shells, applying env vars from `mise.toml` as defaults only — if a var is already set in the inherited environment, the inherited value is preserved.
-  This matters for OpenCode and other tools that spawn `zsh -c` subprocesses: inline overrides like `AWS_PROFILE=repone-admin <cmd>` work correctly because the inherited value takes precedence over the `mise.toml` default.
-  `mise hook-env` cannot be used here because it unconditionally exports env vars (it does `unset VAR` then `export VAR=value`), which clobbers any inherited value.
-  Interactive shells are unaffected — `mise activate zsh` in `.zshrc` uses `precmd` hooks that run after each command, so inline overrides naturally work.
-- **Agent shell invocation models:** AI coding agents spawn each bash tool command as a new zsh process (the user's shell, not bash), but invoke it differently.
+  - The homebrew lines in `paths.zsh`/`paths.bash` are required even though `/etc/paths.d/homebrew` lists `/opt/homebrew/bin`: `path_helper` puts it after `/usr/bin`, so e.g. `/usr/bin/git` would shadow Homebrew's.
+  - bash, `/etc/profile` (macOS, login shells only): runs `path_helper` **before** `~/.bash_profile`, so bash needs only one pass.
+  - bash, `.bash_profile`: sources `env.sh` and `bash/paths.bash` (same order as `paths.zsh`, deduplicated), then `.bashrc` if interactive; non-interactive login shells instead get the mise shims dir and `mise_env.bash`.
+  - bash, `.bashrc`: interactive only; sets up env/PATH only if `HOMEBREW_PREFIX` is unset (bare environment), otherwise inherits; runs `mise activate bash`.
+- **mise env vars in non-interactive shells** are applied from `mise env` output as defaults only — if a var is already set in the inherited environment, the inherited value is preserved, so inline overrides like `AWS_PROFILE=repone-admin <cmd>` work.
+  zsh does this in `.zshenv` for every non-interactive shell (mise PATH entries are added only for login shells); bash does it in `private_dot_config/bash/mise_env.bash`, sourced via Pi's `shellCommandPrefix` and by `.bash_profile` for `bash -l -c`.
+  `mise hook-env` cannot be used because it unconditionally exports env vars (it does `unset VAR` then `export VAR=value`), which clobbers any inherited value; it and `mise activate --shims` also prepend `/opt/homebrew/bin`, demoting `~/.local/bin` wrappers.
+  Interactive shells are unaffected — `mise activate` uses prompt hooks that run after each command, so inline overrides naturally work.
+- **Agent shell invocation models:** AI coding agents spawn each shell tool command as a new process, but invoke it differently.
   OpenCode uses `zsh -l -c <script>` (login, non-interactive) and manually sources `~/.zshenv` and `$ZDOTDIR/.zshrc` inside the script; as a login shell it passes through `path_helper`, so the `paths.zsh` re-prepends apply and mise tools are set up.
-  pi uses a plain `zsh -c <command>` (non-login, non-interactive), sourcing only `.zshenv`, and relies on the non-login PATH restore (see "Shell PATH ordering") to keep its inherited PATH verbatim.
+  pi uses `bash -c <command>` (non-login, non-interactive; `shellPath` in `~/.pi/agent/settings.json`, which is not managed by chezmoi), inheriting pi's environment.
+  `bash -c` reads no startup files, so PATH stays verbatim; pi's `shellCommandPrefix` (`source ~/.config/bash/mise_env.bash`) is pasted above every command (tool calls and `!` commands) to apply the cwd's `mise.toml` env vars as defaults.
+  mise tools resolve through the mise shims dir already in the inherited PATH.
   Each command runs in a fresh shell, which means:
-  - **No persistent state between commands.** `export VAR=value` in one command does not carry over to the next — each starts fresh from `.zshenv`.
-  - **Inline env var overrides work** (after the `.zshenv` fix above) because the inherited value takes precedence over mise defaults.
+  - **No persistent state between commands.** `export VAR=value` in one command does not carry over to the next.
+  - **Inline env var overrides work** because the inherited value takes precedence over mise defaults.
   - **To override an env var for a single command,** use the inline prefix: `AWS_PROFILE=repone-admin aws sts get-caller-identity`.
   - **To override for a chain of commands in one invocation,** use `export` at the start: `export AWS_PROFILE=repone-admin && aws sts get-caller-identity && cdk diff`.
 
