@@ -171,7 +171,8 @@ zinit ice \
 zinit light zdharma-continuum/null
 
 
-source "$ZDOTDIR/aliases.zsh"
+# Aliases shared with bash.
+source "$XDG_CONFIG_HOME/shell/aliases.sh"
 
 # Files in $ZDOTDIR/include allows host-specific configurations.
 # For example, these may be files not suitable to be tracked by version control.
