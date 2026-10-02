@@ -91,6 +91,7 @@ local my_config = {
   hide_tab_bar_if_only_one_tab = true,
   send_composed_key_when_left_alt_is_pressed = true,
   send_composed_key_when_right_alt_is_pressed = false,
+  enable_kitty_keyboard = true,
   keys = {
     {
       key = 'o',
