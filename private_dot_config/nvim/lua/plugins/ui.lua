@@ -130,82 +130,21 @@ return {
   },
   {
     "petertriho/nvim-scrollbar",
-    dependencies = {
-      {
-        "kevinhwang91/nvim-hlslens",
-        keys = {
-          {
-            "n",
-            function()
-              if vim.v.searchforward == 1 then
-                vim.cmd.normal({ "nzv", bang = true })
-              else
-                vim.cmd.normal({ "Nzv", bang = true })
-              end
-              require("hlslens").start()
-            end,
-            remap = false,
-            desc = "Next search result",
-          },
-          {
-            "N",
-            function()
-              if vim.v.searchforward == 1 then
-                vim.cmd.normal({ "Nzv", bang = true })
-              else
-                vim.cmd.normal({ "nzv", bang = true })
-              end
-              require("hlslens").start()
-            end,
-            remap = false,
-            desc = "Next search result",
-          },
-          {
-            "*",
-            [[*<Cmd>lua require('hlslens').start()<CR>]],
-          },
-          {
-            "#",
-            [[#<Cmd>lua require('hlslens').start()<CR>]],
-          },
-          {
-            "g*",
-            [[g*<Cmd>lua require('hlslens').start()<CR>]],
-          },
-          {
-            "g#",
-            [[g#<Cmd>lua require('hlslens').start()<CR>]],
-          },
-        },
-      },
-    },
+    dependencies = { "lewis6991/gitsigns.nvim" },
     opts = {
-      handle = {
-        highlight = "ColorColumn",
-      },
-      handlers = {
+      providers = {
         cursor = true,
         diagnostic = true,
         gitsigns = true,
         search = true,
       },
-    },
-    config = function(_, opts)
-      require("scrollbar").setup(opts)
-    end,
-    event = { "BufReadPost", "BufNewFile" },
-    keys = {
-      {
-        "<Esc>",
-        function()
-          vim.cmd("noh")
-          require("scrollbar.handlers.search").nohlsearch()
-          local key = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
-          vim.cmd.normal({ key, bang = true })
-        end,
-        desc = "Escape and clear hlsearch",
+      scrollbar = {
+        thumb = {
+          highlight = "ColorColumn",
+        },
       },
     },
+    event = { "BufReadPost", "BufNewFile" },
   },
   {
     "sphamba/smear-cursor.nvim",
